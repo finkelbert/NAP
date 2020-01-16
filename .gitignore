@@ -1,3 +1,11 @@
+# Preview files
+*.html
+*.pdf
+*.tex
+
+# log file
+*.log
+
 # Large analysis files
 *.RDS
 
