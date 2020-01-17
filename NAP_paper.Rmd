@@ -528,7 +528,7 @@ In contrast, the top-down route is based on linguistic experience and superficia
 
 ```{r prepare-mat-per, include=FALSE}
 # 60 x length of the audio file binned each 10 ms; 60 frequency bins with 10 ms for each column 
-dir_mats <- "txt_matrices/AA/"
+dir_mats <- "data_tables/APPd_txt_matrices/AA/"
 files_mat <- list.files(path=dir_mats, pattern="*.txt",full.names=TRUE)
 
 #creates a dataframe with 3 columns, the name of the syllable, syl, the time point, t, and the periodic energy, p
@@ -556,13 +556,13 @@ per_df_full <-  per_df %>%  group_by(syl,speaker) %>%
 # 
 # ```{r prepare-seg, include=FALSE}
 
-dir_seg <- "praat_seg//ToR/AA"
+dir_seg <- "data_tables/praat_seg/AA/"
 files_praat <- list.files(path=dir_seg, pattern="*.txt",full.names=T)
 seg_df <- map_dfr(files_praat, function(f){  
 #this is like a loop, it takes each file inside the f and does the following:
 
-
-    filename <- str_match(f,"/([^/]*?)_(.*?)_(.*?)\\.")
+    # filename <- str_match(f,"/([^/]*?)_(.*?)_(.*?)\\.")
+    filename <- str_match(f,"//(.*?)_(.*?)_(.*?)\\.")
     seg <- read_tsv(f, col_types =cols(
                           rowLabel = col_character(),
                           tmin = col_double(),
@@ -1138,7 +1138,7 @@ read_list_opensesame <- function(list_files, speaker = "AA", scores_tbl= scores)
 
 ```{r, include=FALSE}
 
-opensesame_pilot <- "data_tables/pilot"
+opensesame_pilot <- "data_tables/exploratry_results"
 
 files_pilot <-
     c(list.files(path=paste0(opensesame_pilot,"/list1"), pattern="*.csv",full.names = TRUE),
@@ -1264,7 +1264,7 @@ list(data = data, models = list(NAP_bu = NAP_bu, null = null, SSP=SSP, SSP_obs =
 <!-- real data -->
 
 ```{r, include=FALSE}
-opensesame_german <- "data_tables/german_exp"
+opensesame_german <- "data_tables/confirmatory_results"
 
 files_german <-
     list.files(path=opensesame_german,pattern="*.csv",full.names = TRUE)
@@ -1456,7 +1456,7 @@ library(ggplot2)
 pie_theme <- theme_minimal() + theme(axis.title.x = element_blank(), axis.title.y = element_blank(), panel.border = element_blank(), panel.grid=element_blank(), axis.ticks = element_blank(), plot.title=element_text(size=14, face="bold"))
 
 ## pilot
-subjects_pilot <- read.csv("subjects_pilot.csv") #%>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
+subjects_pilot <- read.csv("data_tables/subjects/subjects_pilot.csv") #%>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
 
 ggplot(subjects_pilot, aes(x="",y="",fill=subject_age)) +
   geom_bar(width = 1,stat = "identity") +
@@ -1472,7 +1472,7 @@ pilot_N <- length(subjects_pilot$subject_nr)
 pilot_male <- length(which(subjects_pilot$subject_gender=="male"))
 
 ## main
-subjects_main <- read.csv("subjects_main.csv") #%>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
+subjects_main <- read.csv("data_tables/subjects/subjects_main.csv") #%>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
 
 ggplot(subjects_main, aes(x="",y="",fill=subject_age)) + 
   geom_bar(width = 1,stat = "identity") + 
