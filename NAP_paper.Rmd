@@ -1093,7 +1093,7 @@ syl_t <- filter(syl_info) %>%
     group_by(NAP_bu, syl, speaker) %>%
     summarize(tmin = min(t))
 
-other_scores <- read_tsv(file="CCal_model_predictions_fix.tsv", 
+other_scores <- read_tsv(file="data_tables/CCal_model_predictions_fix.tsv", 
                            col_types = cols(
                                syl = col_character(),
                                SSP = col_integer(),
@@ -1138,7 +1138,7 @@ read_list_opensesame <- function(list_files, speaker = "AA", scores_tbl= scores)
 
 ```{r, include=FALSE}
 
-opensesame_pilot <- "data/pilot"
+opensesame_pilot <- "data_tables/pilot"
 
 files_pilot <-
     c(list.files(path=paste0(opensesame_pilot,"/list1"), pattern="*.csv",full.names = TRUE),
@@ -1243,18 +1243,18 @@ list(data = data, models = list(NAP_bu = NAP_bu, null = null, SSP=SSP, SSP_obs =
 
 ```{r, mpilot, include=FALSE}
 
- if(file.exists("m_pilot.RDS")){
-     m_pilot <- readRDS("m_pilot.RDS")
+ if(file.exists("data_tables/RDS/m_pilot.RDS")){
+     m_pilot <- readRDS("data_tables/RDS/m_pilot.RDS")
  } else {
      m_pilot <- run_brms(data_pilot)
-     saveRDS(m_pilot, file = "m_pilot.RDS")
+     saveRDS(m_pilot, file = "data_tables/RDS/m_pilot.RDS")
  }
- if(file.exists("kfold_pilot.RDS")){
+ if(file.exists("data_tables/RDS/kfold_pilot.RDS")){
      
-     kfold_pilot <- readRDS("kfold_pilot.RDS")
+     kfold_pilot <- readRDS("data_tables/RDS/kfold_pilot.RDS")
  } else {
      kfold_pilot <- map(m_pilot$models, kfold, folds = "stratified", group = "subj", K = 10)
-     saveRDS(kfold_pilot, file = "kfold_pilot.RDS")
+     saveRDS(kfold_pilot, file = "data_tables/RDS/kfold_pilot.RDS")
  }
 
 ## loo::compare(x=kfold_pilot)
@@ -1264,7 +1264,7 @@ list(data = data, models = list(NAP_bu = NAP_bu, null = null, SSP=SSP, SSP_obs =
 <!-- real data -->
 
 ```{r, include=FALSE}
-opensesame_german <- "data/german_exp"
+opensesame_german <- "data_tables/german_exp"
 
 files_german <-
     list.files(path=opensesame_german,pattern="*.csv",full.names = TRUE)
@@ -1301,24 +1301,24 @@ data_german <- data_german %>% filter(!subj %in% bad_subj)
 
 ```{r brms-models, include=FALSE}
 
-if(file.exists("m_german.RDS")){
-    m_german <- readRDS("m_german.RDS")
+if(file.exists("data_tables/RDS/m_german.RDS")){
+    m_german <- readRDS("data_tables/RDS//m_german.RDS")
  } else {
      m_german <- run_brms(data_german, iter=4000, warmup=2000)
-     saveRDS(m_german, file = "m_german.RDS")
+     saveRDS(m_german, file = "data_tables/RDS//m_german.RDS")
  }
 # 
 ```
 ```{r loo-models, include=FALSE}
-if(file.exists("loo_german.RDS")){
-    loo_german <- readRDS("loo_german.RDS")
-    kfold_german <- readRDS("kfold_german.RDS")
+if(file.exists("data_tables/RDS/loo_german.RDS")){
+    loo_german <- readRDS("data_tables/RDS/loo_german.RDS")
+    kfold_german <- readRDS("data_tables/RDS/kfold_german.RDS")
 } else {
      loo_german <- map(m_german$models, loo, pointwise = TRUE)
-     saveRDS(loo_german, file = "loo_german.RDS")
+     saveRDS(loo_german, file = "data_tables/RDS/loo_german.RDS")
      
      kfold_german <- map(m_german$models, kfold, folds = "stratified", group = "subj", K = 15)
-     saveRDS(kfold_german, file = "kfold_german.RDS")
+     saveRDS(kfold_german, file = "data_tables/RDS/kfold_german.RDS")
     }
 ```
 
@@ -1333,8 +1333,8 @@ if(file.exists("loo_german.RDS")){
 
 ## loo::loo_model_weights(x=loo_german)
 ## compare(loo_german$NAP_td, loo_german$SSP_obs)
-## if(file.exists("weights.RDS")){
-##     weights <- readRDS("weights.RDS")
+## if(file.exists("data_tables/RDS/weights.RDS")){
+##     weights <- readRDS("data_tables/RDS/weights.RDS")
 ## } else {
     ## weights <-loo_model_weights(,kfold_german$MSD_obs)
 
@@ -1342,7 +1342,7 @@ if(file.exists("loo_german.RDS")){
     ## wxx <- loo::stacking_weights(xx)
     ## names(wxx) <-  colnames(xx)
 
-    ## saveRDS(weights, file = "weights.RDS")
+    ## saveRDS(weights, file = "data_tables/RDS/weights.RDS")
 ## }
 ```
 ```{r loo-proc, include=FALSE}
