@@ -40,7 +40,7 @@ abstract: |
 keywords          : "Sonority; Periodic energy; Bayesian data analysis; Bottom-up and Top-down cognitive processes; Phonetics--Phonology interface"
 wordcount         : "X"
 
-bibliography      : ["r-references.bib", "methods.bib", "phon.bib", "phon_sk.bib"]
+bibliography      : ["bibs/r-references.bib", "bibs/methods.bib", "bibs/phon.bib", "bibs/phon_sk.bib"]
 
 floatsintext      : no
 figurelist        : no
@@ -653,7 +653,7 @@ monosyl_info <- mutate(group_by(monosyl_info, syl),
 
 (ref:nap-ccv) Schematic depictions of competition scenarios with symbolic CCV structures (left) and with a continuous energy curve, exemplified with the onset cluster *npV* (right). We estimate the competition potential of CCV structures in discrete terms as the difference between *C*~1~ (the first consonant, in blue) and the non-adjacent vowel (*V*, in purple) whereby the vowel is expected to win the competition (connected to the nucleus with a solid arrow) and *C*~1~ is expected to lose (connected to the nucleus with a dashed arrow). In continuous terms, sonority is measured as the integral of duration and amplitude (i.e., the area under the curve), which we consider as a *mass*. As illustrated in the onset cluster *npV* (right), the mass of the nasal /n/ at the beginning of the syllable (the blue area under the curve) is smaller than the mass of the non-adjacent vowel (the purple area under the curve), yet big enough to substantially compete with the vowel for the nucleus.
 ```{r nap-ccv, fig.cap = "(ref:nap-ccv)", fig.show='hold', out.width = c('50%', '50%'), fig.align = 'center'}
-knitr::include_graphics(rep(c("NAP_CCV.png","NAP_npV.png")))
+knitr::include_graphics(rep(c("extrenal_figures/NAP_CCV.png","extrenal_figures/NAP_npV.png")))
 ```
 
 #   Model implementation {#sec:modelimp}
