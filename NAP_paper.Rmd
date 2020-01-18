@@ -1401,14 +1401,14 @@ data_RT <- data_german_s %>%
 ```{r predacc, eval = FALSE, results="hold", include=FALSE}
 
 #-   
-   data_german_s %>% ggplot(aes(x = NAP_bu, y= elpd_NAP_bu - elpd_null) ) +
-    ##geom_jitter(width = 2, height=0,alpha=.1) +
-     geom_hex(bins=50) +
-     scale_fill_gradientn(colours = c("skyblue","darkblue")) +
-    geom_text_repel(data= data_g_summary, aes(label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "blue", size =5)+
-    geom_hline(yintercept = 0, linetype ="dashed")+
-    theme(panel.background = element_blank(), axis.text.y = element_text(size = 6)) +
-    coord_cartesian(ylim=c(-3,3))
+   # data_german_s %>% ggplot(aes(x = NAP_bu, y= elpd_NAP_bu - elpd_null) ) +
+   #  ##geom_jitter(width = 2, height=0,alpha=.1) +
+   #   geom_hex(bins=50) +
+   #   scale_fill_gradientn(colours = c("skyblue","darkblue")) +
+   #  geom_text_repel(data= data_g_summary, aes(label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "blue", size =5)+
+   #  geom_hline(yintercept = 0, linetype ="dashed")+
+   #  theme(panel.background = element_blank(), axis.text.y = element_text(size = 6)) +
+   #  coord_cartesian(ylim=c(-3,3))
 
    ## data_german_s %>% ggplot(aes(x = NAP_bu, y= elpd_NAP_bu - elpd_SSP_obs) ) +
    ##  ##geom_jitter(width = 2, height=0,alpha=.1) +
@@ -1781,7 +1781,7 @@ These results may be taken to suggest that the distinctive high-frequency aperio
 
 ```{r resultsmodels, results = "asis"}
 
-comparison <- loo::compare(x=kfold_german)
+comparison <- loo::loo_compare(x=kfold_german)
 ll_matrix <- map2_dfc(kfold_german, names(kfold_german), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
 weights <- loo::stacking_weights(ll_matrix)
 names(weights) <- names(kfold_german)
@@ -1808,7 +1808,7 @@ Model averaging via stacking of predictive distributions (model *weights*) revea
 ```{r resultsmodelsohnenaptd, results="asis", collapse=FALSE}
 ## NAPbu vs. trad
 kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td")]
-comparison <- loo::compare(x=kfold_classic)
+comparison <- loo::loo_compare(x=kfold_classic)
 ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
 weights <- loo::stacking_weights(ll_matrix)
 names(weights) <- names(kfold_classic)
@@ -1830,7 +1830,7 @@ comparison%>%
 ```{r resultsmodelsohnenapbu, results="asis"}
 ## NAPtd vs. trad
 kfold_ordinal <- kfold_german[!names(kfold_german) %in% c("NAP_bu")]
-comparison <- loo::compare(x=kfold_ordinal)
+comparison <- loo::loo_compare(x=kfold_ordinal)
 ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
 weights <- loo::stacking_weights(ll_matrix)
 names(weights) <- names(kfold_ordinal)
@@ -1858,7 +1858,7 @@ Tables \@ref(tab:resultsmodelsohnenaptd)--\@ref(tab:resultsmodelsohnenapbu) also
 ```{r resultsmodelsohnenap, results="asis"}
 ## trad vs. trad
 kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_bu","NAP_td")]
-comparison <- loo::compare(x=kfold_classic)
+comparison <- loo::loo_compare(x=kfold_classic)
 ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
 weights <- loo::stacking_weights(ll_matrix)
 names(weights) <- names(kfold_classic)
