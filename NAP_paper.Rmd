@@ -1607,7 +1607,7 @@ predictions$null %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
-    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.5) +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
     scale_x_discrete("Stimuli", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
@@ -1634,7 +1634,7 @@ predictions$SSP_obs %>%
    { ggplot(., aes(x = SSP_obs, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.5) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
     xlab(bquote(italic(SSP[col])~scores)) + ylab("Response time (log scale)") +
         ylim(600,1200) +
         coord_trans(y="log") +
@@ -1655,7 +1655,7 @@ predictions$SSP %>%
    { ggplot(., aes(x = SSP, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.5, alpha = .7) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(SSP[exp])~scores)) +
        ylab("Response time (log scale)") +
         ylim(600,1200) +
@@ -1677,7 +1677,7 @@ predictions$MSD_obs %>%
    { ggplot(., aes(x = MSD_obs, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.5, alpha = .7) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[col])~scores)) + ylab("Response time (log scale)") +
         ylim(600,1200) + 
         coord_trans(y="log") +
@@ -1697,7 +1697,7 @@ predictions$MSD %>%
    { ggplot(., aes(x = MSD, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.5, alpha = .7) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[exp])~scores)) + ylab("Response time (log scale)") +
         ylim(600,1200) + 
         coord_trans(y="log") +
@@ -1734,7 +1734,7 @@ predictions$NAP_td %>%
   { ggplot(., aes(x = NAP_td, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.5)+
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
   xlab(bquote(italic(NAP[td])~scores)) + ylab("Response time (log scale)") +
       ylim(600,1200) + 
       coord_trans(y="log") +
@@ -1759,7 +1759,7 @@ predictions$NAP_bu %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
-    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.5) +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
     scale_x_discrete(bquote(italic(NAP[bu])~scores), breaks=NULL) +
     ylab("Response time (log scale)") +
@@ -1906,7 +1906,7 @@ predictions$SSP_obs %>%
    { ggplot(., aes(x = SSP_obs, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     #geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.5) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1) +
     xlab(bquote(italic(SSP[col]))) + ylab("Response time (log scale)") +
         ylim(600,1200) +
         coord_trans(y="log") +
@@ -1923,7 +1923,7 @@ predictions$MSD_obs %>%
    { ggplot(., aes(x = MSD_obs, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     #geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.5, alpha = .7) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
     xlab(bquote(italic(MSD[col]))) + ylab("Response time (log scale)") +
         ylim(600,1200) + 
         coord_trans(y="log") +
@@ -1940,7 +1940,7 @@ predictions$SSP %>%
    { ggplot(., aes(x = SSP, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     #geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.5, alpha = .7) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
     xlab(bquote(italic(SSP[exp]))) +
        ylab("Response time (log scale)") +
         ylim(600,1200) +
@@ -1958,7 +1958,7 @@ predictions$MSD %>%
    { ggplot(., aes(x = MSD, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     #geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.5, alpha = .7) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
     xlab(bquote(italic(MSD[exp]))) + ylab("Response time (log scale)") +
         ylim(600,1200) + 
         coord_trans(y="log") +
@@ -1974,7 +1974,7 @@ predictions$NAP_td %>%
   { ggplot(., aes(x = NAP_td, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
     # geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.5)+
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =1)+
   xlab(bquote(italic(NAP[td]))) + ylab("Response time (log scale)") +
       ylim(600,1200) + 
       coord_trans(y="log") +
@@ -1987,7 +1987,7 @@ predictions$NAP_bu %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
-    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.5) +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1) +
     # geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
     scale_x_discrete(bquote(italic(NAP[bu])), breaks=NULL) +
     ylab("Response time (log scale)") +
