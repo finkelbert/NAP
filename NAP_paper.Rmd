@@ -215,12 +215,12 @@ slopes_plot <- function(df) {
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
   geom_text(data=tibble(seg_token="sonority fall",y=8.75,x=6),
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
-  geom_point() +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
-    scale_linetype_manual(values=c("solid","dashed","solid","dashed")) +
+  scale_linetype_manual(values=c("solid","solid","solid","solid")) +
   scale_color_manual(values=c("red","grey","red","grey")) +
+  geom_point(color="black", size=1) +
   theme(legend.position = "none", axis.line.y = element_blank(), panel.grid = element_blank(), panel.background = element_blank(), axis.ticks = element_blank()) + 
   coord_cartesian(xlim=c(0.2,7.5))
 }
@@ -258,12 +258,12 @@ slopes_plot <- function(df) {
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
   geom_text(data=tibble(seg_token="shallow rise",y=9.25,x=6),
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
-  geom_point() +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
-    scale_linetype_manual(values=c("solid","dashed","solid","dashed")) +
+  scale_linetype_manual(values=c("solid","solid","solid","solid")) +
   scale_color_manual(values=c("red","grey","red","grey")) +
+  geom_point(color="black", size=1) +
   theme(legend.position = "none", axis.line.y = element_blank(), panel.grid = element_blank(), panel.background = element_blank(), axis.ticks = element_blank()) + 
   coord_cartesian(xlim=c(0.2,7.5))
 }
@@ -320,12 +320,12 @@ slopes_plot <- function(df) {
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
   geom_text(data=tibble(seg_token="low rise",y=9.25,x=6),
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
-  geom_point() +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
-    scale_linetype_manual(values=c("solid","dashed","solid","dashed")) +
+  scale_linetype_manual(values=c("solid","solid","solid","solid")) +
   scale_color_manual(values=c("red","grey","red","grey")) +
+  geom_point(color="black", size=1) +
   theme(legend.position = "none", axis.line.y = element_blank(), panel.grid = element_blank(), panel.background = element_blank(), axis.ticks = element_blank()) + 
   coord_cartesian(xlim=c(0.2,7.5))
 }
@@ -376,12 +376,12 @@ slopes_plot <- function(df) {
   #           aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
   # geom_text(data=tibble(seg_token="col (collapsed) hierarchy",y=9,x=6),
   #           aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
-  geom_point() +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
-    scale_linetype_manual(values=c("solid","dashed","solid","dashed")) +
+  scale_linetype_manual(values=c("solid","solid","solid","solid")) +
   scale_color_manual(values=c("red","grey","red","grey")) +
+  geom_point(color="black", size=1) +
   theme(legend.position = "none", axis.line.y = element_blank(), panel.grid = element_blank(), panel.background = element_blank(), axis.ticks = element_blank()) + 
   coord_cartesian(xlim=c(0.2,7.5))
 }
@@ -419,12 +419,12 @@ slopes_plot <- function(df) {
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
   geom_text(data=tibble(seg_token="low plateau",y=9.25,x=6),
             aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
-  geom_point() +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
-    scale_linetype_manual(values=c("solid","dashed","solid","dashed")) +
+  scale_linetype_manual(values=c("solid","solid","solid","solid")) +
   scale_color_manual(values=c("red","grey","red","grey")) +
+  geom_point(color="black", size=1) +
   theme(legend.position = "none", axis.line.y = element_blank(), panel.grid = element_blank(), panel.background = element_blank(), axis.ticks = element_blank()) + 
   coord_cartesian(xlim=c(0.2,7.5))
 }
@@ -861,12 +861,12 @@ slopes_plot <- function(df) {
             aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
   geom_text(data=tibble(seg_token=seg_token,y=0,x=2:13),
             aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
-  geom_point() +
   geom_line() +
   scale_x_continuous("",breaks=2:13, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
-    scale_linetype_manual(values=c("solid","dashed","solid","dashed","solid","dashed","solid","dashed")) +
+  scale_linetype_manual(values=c("solid","solid","solid","solid","solid","solid","solid","solid")) +
   scale_color_manual(values=c("red","grey","red","grey","red","grey","red","grey")) +
+  geom_point(color="black", size=1) +
   theme(legend.position = "none", axis.line.y = element_blank(), panel.grid = element_blank(), panel.background = element_blank(), axis.ticks = element_blank()) + 
   coord_cartesian(xlim=c(0.6,13.5))
 }
@@ -1893,12 +1893,8 @@ The success relative to the traditional model fits (discussed in subsection \@re
 (ii) onset rises like /ml/, nasal plateaus (/nm/ and /mn/) and onset falls like /lm/ pattern together as relatively ill-formed in NAP<!-- (third column from left in Figure \@ref(fig:NAPtdFit)) -->, correctly predicting the data, whereby sonorant-initial plateaus and rises do not pattern with (better-formed) obstruent-initial plateaus and rises.
 
 (ref:SonFitAll) Combined sonority models fit (small reduced versions, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. 
-#```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.5,.5,.5,.5,.5,.5), fig.show="hold"}
 ```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.5,.5,.5,.5,.5,.5), fig.show="hold", fig.align = "default"}
-# , fig.align='center', fig.ncol=2
-# ```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, out.width=c('40%','40%','40%','40%'), out.height=c('70%','70%','70%','70%'), fig.align='center', fig.show="hold"}
-# ```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, fig.width=c(3,3,3,3), fig.asp=c(.4,.4,.4,.4), fig.show="hold"}
-# ```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, fig.width=8, fig.asp=.4}
+# fig.ncol=2
 
 predictions$SSP_obs %>%
   left_join(data_RT) %>%
