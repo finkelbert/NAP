@@ -1429,7 +1429,7 @@ In contrast,  *NAP~bu~* is modeled with a continuous predictor which is assumed 
 We evaluate the models in three different ways: (i) estimation, (ii) descriptive adequacy, and (iii) model comparison.
 
 ### (i) Estimation {-}
-We report mean estimates and 95\% quantile-based Bayesian credible intervals. A 95\% Bayesian credible interval has the following interpretation: it is an interval containing the true value with 95% probability [see, for example, @Jaynes1976; @MoreyEtAl2015]. 
+We report mean estimates and 95\% quantile-based Bayesian credible intervals. A 95\% Bayesian credible interval has the following interpretation: it is an interval containing the true value with 95% probability given the data and the model [see, for example, @Jaynes1976; @MoreyEtAl2015]. 
 
 
 ### (ii) Descriptive adequacy {-}
