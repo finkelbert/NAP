@@ -1144,8 +1144,14 @@ files_pilot <-
     c(list.files(path=paste0(opensesame_pilot,"/list1"), pattern="*.csv",full.names = TRUE),
       list.files(path=paste0(opensesame_pilot,"/list2"), pattern="*.csv",full.names = TRUE))
 
-data_pilot <- read_list_opensesame(files_pilot, speaker="AA") %>%
+data_pilot_all <- read_list_opensesame(files_pilot, speaker="AA")
+
+data_pilot <- data_pilot_all %>%
     filter(corrRT > 100)
+
+N_below_100_pilot <- data_pilot_all %>%
+    filter(corrRT < 100)
+#0
 
 # Sanity checks
 N_trials_pilot <- 58
@@ -1269,8 +1275,13 @@ opensesame_german <- "data_tables/confirmatory_results"
 files_german <-
     list.files(path=opensesame_german,pattern="*.csv",full.names = TRUE)
 
-data_german <- read_list_opensesame(files_german, speaker="AA") %>%
+data_german_all <- read_list_opensesame(files_german, speaker="AA")
+
+data_german <- data_german_all %>%
     filter(corrRT > 100)
+
+N_below_100 <- data_german_all %>%
+    filter(corrRT < 100)
 
 ## Sanity checks
 N_trials_german <- 232 
