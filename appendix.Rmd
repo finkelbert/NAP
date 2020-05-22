@@ -1,0 +1,45 @@
+## Complete output of the Bayesian models
+
+The complete results of the exploratory (Experiment 1) and confirmatory models (Experiment 2) are presented in Tables \@ref(tab:exploratory-NAPbu)-\@ref(tab:confirmatory-NAPtd). 
+
+Notice that the parameters are not entirely comparable accross models: (i) The intercept, $\alpha$, represents the mean log-RT of the first category for the ordinal models, but it is the grand mean for the  continuous model, $NAP_{bu}$. (ii) The size of the effect of well-formedness, $\beta$, represents the distance between two adjacent categories had they been equidistant for the ordinal models but it is the increase in log-scale for one unit in the well-formedness scale for the continuous model, $NAP_{bu}$.  (iii) The parameter vector, $\zeta$, (present only in ordinal models) represents the normalized distances between consecutive predictor categories, so that the distance between the first and last category is $1$. (iv) For all models, the variance components are comparable: $\sigma$ represents the scale of the log-normal likelihood (or standard deviation of the distribution on the log scale), $\sigma_\alpha$ and $\sigma_\beta$ represent the by-participant adjustment to the intercept and slope respectively, and $\rho_{\alpha,\beta}$ represents the correlation between by-participant intercept and slope. 
+
+For each parameter, `Bulk ESS`
+and `Tail ESS` are effective sample size measures, and `Rhat` is the potential
+scale reduction factor on split chains (at convergence, `Rhat`= 1, and `ESS` $> 10\%$ of post-warmup samples $= 8000$).
+
+```{r}
+
+model_names <- c("NAP_bu" = "NAP_{bu}", "null"="Null", "SSP"="SSP_{exp}", "SSP_obs" = "SSP_{col}", "MSD" = "MSD_{exp}", "MSD_obs" = "MSD_{col}", "NAP_td" = "NAP_{td}")
+
+model_tab <- function(models, type) {
+   imap_chr(models, ~ {
+  label = paste0("\\label{tab:",type,"-",str_remove(.y,"_"),"}")
+  .x %>% {rbind(summary(.)$fixed,
+                 summary(.)$mo,
+                summary(.)$spec_pars,
+             summary(.)$random$subj)} %>%
+    round(2) %>%
+  as_tibble(rownames= "Parameter") %>%
+    mutate_at(vars(ends_with("ESS")), as.integer) %>%
+  select(-Est.Error) %>%
+    rename_all(~ str_replace_all(., "%","\\\\%")) %>% 
+        rename_all(~ str_replace_all(., "_"," ")) %>% 
+  mutate(Parameter = case_when(Parameter=="Intercept" ~ "$\\hat\\alpha$",
+                          str_detect(Parameter,".*?\\[.\\]") ~ 
+str_replace_all(Parameter,c(".*?\\[" = "$\\\\hat\\\\zeta_{","\\]" = "}$" )),
+Parameter=="sigma" ~ "$\\sigma$",
+Parameter =="sd(Intercept)" ~"$\\hat\\sigma_{\\alpha}$",
+str_detect(Parameter,"sd.*?") ~"$\\hat\\sigma_{\\beta}$",
+str_detect(Parameter, "cor.*?") ~ "$\\hat\\rho_{\\alpha,\\beta}$",
+                          TRUE ~ "$\\hat\\beta$")) %>%
+  papaja::apa_table(escape= FALSE,
+                     caption = paste0("Results from the ",type," model examining the results of the $",model_names[.y],"$ model. ",label= label, note= "See the Appendix for the interpretation of the parameters and column names."))}
+) %>% 
+  paste(collapse = "\n")
+}
+
+knitr::raw_latex(model_tab(m_pilot$models,"exploratory"))
+knitr::raw_latex(model_tab(m_german$models,"confirmatory"))
+
+```

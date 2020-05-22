@@ -41,7 +41,8 @@ keywords          : "Sonority; Periodic energy; Bayesian data analysis; Bottom-u
 wordcount         : "X"
 
 bibliography      : ["bibs/r-references.bib", "bibs/methods.bib", "bibs/phon.bib", "bibs/phon_sk.bib"]
-
+appendix:
+  - "./appendix.Rmd"
 floatsintext      : no
 figurelist        : no
 tablelist         : no
@@ -1173,72 +1174,57 @@ run_brms <- function(data, chains = 4, iter = 3000, warmup=1000){
     data <- data %>% filter(type=="CCal", response ==1) %>%
         mutate_at(c("SSP","SSP_obs","MSD","MSD_obs","NAP_td"), ~ factor(., ordered = TRUE)) %>%
         mutate(sNAP_bu = NAP_bu -.5)
+null_priors <- c(prior(normal(6, 2), class = Intercept),
+                         prior(normal(.5, .2), class = sigma))
+effect_priors <-  c(null_priors, prior(normal(0,1), class = b),
+                    prior(normal(0,1), class = sd),
+                    prior(lkj(2), class = cor))
 
     message("NAP_bu...")
     NAP_bu <- brm(corrRT ~ 1 +  sNAP_bu + (NAP_bu|subj), data=data,
-               prior = c(prior(normal(0,10), class = Intercept),
-                         prior(normal(0,1), class = b),
-                         prior(normal(0,1), class = sd),
-                         prior(normal(0,1), class = sigma)),
+               prior = effect_priors,
                family =  lognormal(), 
                control = list(adapt_delta=.999,max_treedepth =12),
                chains =chains, iter =iter, warmup = warmup)
 
     message("null...")
     null <- brm(corrRT ~ 1 + (1|subj), data=data,
-               prior = c(prior(normal(0,10), class = Intercept),
-                         prior(normal(0,1), class = sd),
-                         prior(normal(0,1), class = sigma)),
+               prior = null_priors,
                family =  lognormal(), 
                control = list(adapt_delta=.999,max_treedepth =12),
     chains =chains, iter =iter, warmup = warmup)
 
 message("SSP...")
     SSP <- brm(corrRT ~ 1 +  mo(SSP) +(mo(SSP)|subj), data=data,
-               prior = c(prior(normal(0,10), class = Intercept),
-                         prior(normal(0,1), class = b),
-                         prior(normal(0,1), class = sd),
-                         prior(normal(0,1), class = sigma)),
+               prior = effect_priors,
                family =  lognormal(), 
                control = list(adapt_delta=.999,max_treedepth =12),
 chains =chains, iter =iter, warmup = warmup)
 
 message("SSP_obs...")
     SSP_obs <- brm(corrRT ~ 1 +  mo(SSP_obs) +(mo(SSP_obs)|subj), data=data,
-               prior = c(prior(normal(0,10), class = Intercept),
-                         prior(normal(0,1), class = b),
-                         prior(normal(0,1), class = sd),
-                         prior(normal(0,1), class = sigma)),
+               prior = effect_priors,
                family =  lognormal(), 
                control = list(adapt_delta=.999,max_treedepth =12),
 chains =chains, iter =iter, warmup = warmup)
 
 message("MSD...")
     MSD <- brm(corrRT ~ 1 +  mo(MSD) +(mo(MSD)|subj), data=data,
-               prior = c(prior(normal(0,10), class = Intercept),
-                         prior(normal(0,1), class = b),
-                         prior(normal(0,1), class = sd),
-                         prior(normal(0,1), class = sigma)),
+               prior = effect_priors,
                family =  lognormal(), 
                control = list(adapt_delta=.999,max_treedepth =12),
 chains =chains, iter =iter, warmup = warmup)
 
 message("MSD_obs...")
     MSD_obs <- brm(corrRT ~ 1 +  mo(MSD_obs) +(mo(MSD_obs)|subj), data=data,
-                   prior = c(prior(normal(0,10), class = Intercept),
-                             prior(normal(0,1), class = b),
-                             prior(normal(0,1), class = sd),
-                             prior(normal(0,1), class = sigma)),
+                   prior = effect_priors,
                    family =  lognormal(), 
-               control = list(adapt_delta=.999,max_treedepth =12),
+               control = list(adapt_delta=.9995,max_treedepth =12),
 chains =chains, iter =iter, warmup = warmup)
 
 message("NAP_td...")
     NAP_td <- brm(corrRT ~ 1 +  mo(NAP_td) +(mo(NAP_td)|subj), data=data,
-               prior = c(prior(normal(0,10), class = Intercept),
-                         prior(normal(0,1), class = b),
-                         prior(normal(0,1), class = sd),
-                         prior(normal(0,1), class = sigma)),
+               prior = effect_priors,
                family =  lognormal(), 
                control = list(adapt_delta=.999,max_treedepth =12),
 chains =chains, iter =iter, warmup = warmup)
@@ -1550,6 +1536,24 @@ For all the models, the well-formedness score shows a clear effect on response t
 * For *NAP~td~*: `r est_NAP_td_pil`.
 * For *NAP~bu~*: `r est_NAP_bu_pil`.
 
+```{r}
+scores <- data_pilot %>% filter(!is.na(NAP_bu)) %>% 
+  distinct(stimulus, NAP_bu) %>% 
+  arrange(NAP_bu)
+
+lpal_nap <- scores %>% filter(stimulus == "lpal") %>% 
+  pull(NAP_bu) %>% round(0)
+lkal_nap <- scores %>% filter(stimulus == "lkal") %>% 
+  pull(NAP_bu)%>% round(0)
+spal_nap <- scores %>% filter(stimulus == "spal") %>% 
+  pull(NAP_bu)%>% round(0)
+
+```
+
+Notice that the posterior of the effect of well-formedness, $\hat\beta$, is not comparable accross models. For the ordinal models, it represents the distance between two adjacent categories had they been equidistant, or in other words, $\hat\beta$ multiplied by the number of categories minus one represents the increase in log-scale between the first and the last category. This means that it is highly affected by the number of categories. For the continuous model, $NAP_{bu}$, $\beta$ represents, the increase in log-scale for one unit in the well-formedness scale. To make it concrete, between, /lpal/ and /lkal/ there are `r lkal_nap -lpal_nap` unit (`r lkal_nap` and `r lpal_nap` respectively); and between /lkal/ and /spal/ there are `r spal_nap  -lkal_nap` unit (since their NAP scores are `r spal_nap` and `r lkal_nap` respectively). However, for all the models, $\hat\beta$ is negative  indicating that well-formedness is associated with faster responses. See the Appendix for the complete output of the models.
+
+
+
 <!-- ####  Descriptive adequacy {#sec:posterior1} -->
 <!-- create new log(rt) based on the estimates of the model, and we compare the actual log(rt) vs the distribution of "predicted" values. -->
 <!-- only misfit is informative -->
@@ -1602,6 +1606,8 @@ For all the models, the well-formedness score shows a clear effect on response t
 * For *MSD~exp~*: `r est_MSD_exp`.
 * For *NAP~td~*: `r est_NAP_td`.
 * For *NAP~bu~*: `r est_NAP_bu`.
+
+See section \@ref(sec:results1) for the interpretation of $\hat\beta$, and the Appendix for the complete output of the models. 
 
 ####  Descriptive adequacy {#sec:posterior2}
 
