@@ -6,7 +6,7 @@ Notice that the parameters are not entirely comparable accross models: (i) The i
 
 For each parameter, `Bulk ESS`
 and `Tail ESS` are effective sample size measures, and `Rhat` is the potential
-scale reduction factor on split chains (at convergence, `Rhat`= 1, and `ESS` $> 10\%$ of post-warmup samples $= 8000$).
+scale reduction factor on split chains (at convergence, `Rhat`= 1, and `ESS` $> 10\%$ of post-warmup samples $=1200$).
 
 ```{r}
 

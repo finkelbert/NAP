@@ -1245,7 +1245,7 @@ list(data = data, models = list(NAP_bu = NAP_bu, null = null, SSP=SSP, SSP_obs =
      
      kfold_pilot <- readRDS("data_tables/RDS/kfold_pilot.RDS")
  } else {
-     kfold_pilot <- map(m_pilot$models, kfold, folds = "stratified", group = "subj", K = 10)
+     kfold_pilot <- map(m_pilot$models, kfold, folds = "stratified", group = "subj", K = 15)
      saveRDS(kfold_pilot, file = "data_tables/RDS/kfold_pilot.RDS")
  }
 
@@ -1307,13 +1307,9 @@ if(file.exists("data_tables/RDS/m_german.RDS")){
 # 
 ```
 ```{r loo-models, include=FALSE}
-if(file.exists("data_tables/RDS/loo_german.RDS")){
-    loo_german <- readRDS("data_tables/RDS/loo_german.RDS")
+if(file.exists("data_tables/RDS/kfold_german.RDS")){
     kfold_german <- readRDS("data_tables/RDS/kfold_german.RDS")
 } else {
-     loo_german <- map(m_german$models, loo, pointwise = TRUE)
-     saveRDS(loo_german, file = "data_tables/RDS/loo_german.RDS")
-     
      kfold_german <- map(m_german$models, kfold, folds = "stratified", group = "subj", K = 15)
      saveRDS(kfold_german, file = "data_tables/RDS/kfold_german.RDS")
     }
@@ -1417,7 +1413,7 @@ data_RT <- data_german_s %>%
 
 ```
 
-We use a Bayesian data analysis approach implemented in the probabilistic programming language  *Stan* [@Stan2018] using the model wrapper package *brms* [@R-brms_a; @R-brms_b] in *R* [@R-base].^[The complete list of *R* packages that we used is:  `r cite_r("bibs/r-references.bib")`.] An important motivation for using the Bayesian approach is that it    is easy to fit fully hierarchical models with the so-called "maximal random effect structure", which provide the most conservative estimates of uncertainty [@SchielzethForstmeier2009]. In all our models, we use regularizing priors, which we detail below. These priors are minimally informative and have the objective of yielding stable inferences [@chung2013weakly; @gelman2008weakly; @GelmanEtAl2017]. @NicenboimVasishth2016 and @VasishthEtAl2017EDAPS discuss the Bayesian approach in detail in the context of psycholinguistic and phonetic sciences research. We fit the models with four chains and 3000 iterations each, of which half were the burn-in or warm-up phase. In order to assess convergence, we verify that there are no divergent transitions, that all the $\hat{R}$  (the between- to within-chain variances) are close to one,  that the number of effective sample size are at least 10\% of the number of post-warmup samples, and  we visually inspect the chains.
+We use a Bayesian data analysis approach implemented in the probabilistic programming language  *Stan* [@Stan2018] using the model wrapper package *brms* [@R-brms_a; @R-brms_b] in *R* [@R-base].^[The complete list of *R* packages that we used is:  `r cite_r("bibs/r-references.bib")`.] An important motivation for using the Bayesian approach is that it    is easy to fit fully hierarchical models with the so-called "maximal random effect structure", which provide the most conservative estimates of uncertainty [@SchielzethForstmeier2009]. In all our models, we use regularizing priors, which we detail below. These priors are minimally informative and have the objective of yielding stable inferences [@chung2013weakly; @gelman2008weakly; @GelmanEtAl2017]. @NicenboimVasishth2016 and @VasishthEtAl2017EDAPS discuss the Bayesian approach in detail in the context of psycholinguistic and phonetic sciences research. We fit the models with four chains and 4000 iterations each, of which 1000 iterations were the burn-in or warm-up phase. In order to assess convergence, we verify that there are no divergent transitions, that all the $\hat{R}$  (the between- to within-chain variances) are close to one,  that the number of effective sample size are at least 10\% of the number of post-warmup samples, and  we visually inspect the chains.
 
 For the statistical models, we take into account that the traditional sonority models and the top-down version of NAP (i.e., *SSP~col~* , *SSP~exp~*, *MSD~col~*, *MSD~exp~*, and *NAP~td~*) are ordinal models, while the bottom-up version of NAP (*NAP~bu~*) is a continuous model. The ordinal models predict that certain groups of onset clusters will be better or worse-formed than other group depending on an ordinal score, but they do  not assume that the score will be equidistant with respect to its effect on the response variable, log-transformed response times. For this reason, the discrete scores of these models are assumed to have a monotonic effect on the log-response time in our task, that is, having a monotonically increasing or decreasing relationship with the log-response time, while  the distance between groups are estimated from the data [@burknerModelingMonotonicEffects2018]. For these models, we assume that all the differences between adjacent categories were a-priori the same, that is, the prior for the distance between scores is a uniform Dirichlet distribution.
 
@@ -2205,4 +2201,9 @@ r_refs(file = "bibs/r-references.bib")
 <div id = "refs"></div>
 \endgroup
 
+
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+render_appendix('./appendix.Rmd')
+```
 
