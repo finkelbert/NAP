@@ -1843,6 +1843,53 @@ comparison%>%
 
      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
 ```
+
+```{r resultsmodelsohnenaptd2, results="asis", collapse=FALSE}
+## NAPbu vs. trad 2
+kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td", "SSP_obs")]
+comparison <- loo::loo_compare(x=kfold_classic)
+ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_classic)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+
+    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+
+     apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
+```
+
+```{r resultsmodelsohnenaptd3, results="asis", collapse=FALSE}
+## NAPbu vs. trad 3
+kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td", "SSP_obs", "MSD_obs")]
+comparison <- loo::loo_compare(x=kfold_classic)
+ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_classic)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+
+    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+
+     apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
+```
+
 ```{r resultsmodelsohnenapbu, results="asis"}
 ## NAPtd vs. trad
 kfold_ordinal <- kfold_german[!names(kfold_german) %in% c("NAP_bu")]
@@ -1893,6 +1940,57 @@ comparison%>%
 
      apa_table(escape = FALSE, caption ="Traditional models comparison (without NAP)",note= NULL)
 ```
+
+```{r resultsnapmodels, results = "asis"}
+
+## NAPbu vs. NAPtd
+kfold_classic <- kfold_german[!names(kfold_german) %in% c("SSP_obs", "MSD_obs", "SSP", "MSD")]
+comparison <- loo::loo_compare(x=kfold_classic)
+ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_classic)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+
+    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+
+     apa_table(escape = FALSE, caption ="$NAP_{bu}$ and $NAP_{td}$ comparison",note= NULL)
+
+```
+
+```{r resultstopthreemodels, results = "asis"}
+
+## NAPbu vs. NAPtd vs. SSPcol
+kfold_classic <- kfold_german[!names(kfold_german) %in% c("MSD_obs", "SSP", "MSD")]
+comparison <- loo::loo_compare(x=kfold_classic)
+ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_classic)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+
+    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+
+     apa_table(escape = FALSE, caption ="$NAP_{bu}$, $NAP_{td}$ and $SSP_{col}$ comparison",note= NULL)
+
+```
+
 Finally, we ran the model comparison without any of the NAP models, observing the results for the four traditional models (Tables \@ref(tab:resultsmodelsohnenap)). *MSD~exp~* leads among the traditional models we tested, but this lead is only conclusive with regards to *SSP~exp~*, where the absolute size of the *Difference in elpd* values is more than three times the *Difference SE* (-18.78 vs. 5.58). The individual contribution of the models to maximizing their combined predictive accuracy gives 44% weight to *MSD~exp~* and 43% weight the the two models that used the *col* hierarchy, *SSP~col~*  (25%) and *MSD~col~* (18%), in line with our analysis of the traditional models fit in subsection \@ref(sec:traditionalModelfit).
 
 ### Discussion {#sec:discussion2}
@@ -2013,6 +2111,117 @@ predictions$NAP_bu %>%
     ggtitle(bquote(italic(NAP[bu])~fit))
 
 ```
+
+
+<!-- 4LabPhon start -->
+(ref:SonFitLabPhon) Combined sonority models fit (small reduced versions, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. 
+```{r SonFitLabPhon,fig.cap = "(ref:SonFitLabPhon)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.5,.5,.5,.5,.5,.5), fig.show="hold", fig.align = "default"}
+# fig.ncol=2
+
+predictions$SSP_obs %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(SSP_obs)) %>%
+    arrange(SSP_obs) %>%
+    mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
+    #geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1) +
+    xlab(bquote(italic(SSP[col]))) + ylab("Response time (log scale)") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text.x = element_text(size = 8, family = "Times"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
+        ggtitle(bquote(italic(SSP[col])~fit))}
+
+predictions$MSD_obs %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(MSD_obs)) %>%
+    arrange(MSD_obs) %>%
+    mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
+    #geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
+    xlab(bquote(italic(MSD[col]))) + ylab("Response time (log scale)") +
+        ylim(600,1200) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text.x = element_text(size = 8, family = "Times"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
+        ggtitle(bquote(italic(MSD[col])~fit))}
+
+predictions$SSP %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(SSP)) %>%
+    arrange(SSP) %>%
+    mutate(SSP = factor(SSP, levels= unique(SSP)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
+    #geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
+    xlab(bquote(italic(SSP[exp]))) +
+       ylab("Response time (log scale)") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text.x = element_text(size = 8, family = "Times"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
+        ggtitle(bquote(italic(SSP[exp])~fit))}
+
+predictions$MSD %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(MSD)) %>%
+    arrange(MSD) %>%
+    mutate(MSD = factor(MSD, levels= unique(MSD)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
+    #geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
+    xlab(bquote(italic(MSD[exp]))) + ylab("Response time (log scale)") +
+        ylim(600,1200) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text.x = element_text(size = 8, family = "Times"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
+        ggtitle(bquote(italic(MSD[exp])~fit))}
+
+predictions$NAP_bu %>% 
+  mutate(NAP= round(NAP_bu,7)) %>%
+    bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
+    arrange(NAP) %>%
+    ggplot(aes(x = factor(NAP), y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1) +
+    # geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
+    scale_x_discrete(bquote(italic(NAP[bu])), breaks=NULL) +
+    ylab("Response time (log scale)") +
+    ylim(600,1200) + 
+    coord_trans(y="log") +
+    theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
+    ggtitle(bquote(italic(NAP[bu])~fit))
+
+predictions$null %>%
+  mutate(NAP= round(NAP_bu,7)) %>%
+    # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
+    bind_rows(tibble(pred = seq(30,220,200)))  %>%
+    arrange(NAP) %>%
+    ggplot(aes(x = factor(NAP), y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue") +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
+    # geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "S", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
+    scale_x_discrete(bquote(Null~model), breaks=NULL) +
+    # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
+    # ylab("Response time (log scale)") +
+    ylim(600,1200) + 
+    coord_trans(y="log") +
+    theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
+    # ggtitle("Null model fit")
+    ggtitle(bquote(Null~model~fit))
+
+```
+<!-- 4LabPhon end -->
 
 ####		Sonority distance  {#sec:distance}
 The notion of sonority distance is crucial to MSD-based models, and it also plays a major role in NAP models, although with different assumptions and consequent implications than the MSD implies. In both cases, the results of the experiment seem to only weakly support the different distance hypotheses put forward by the MSD and by our NAP models. 
