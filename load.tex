@@ -4,5 +4,10 @@
 \usepackage{regexpatch}
 % \usepackage{times}
 \usepackage{tipa}
+% \usepackage{fontspec}
+% \defaultfontfeatures{Mapping=tex-text}
+% \setmainfont{Charis SIL}
+% \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Charis SIL}
+% \setmonofont[Scale=MatchLowercase]{Andale Mono}
 \makeatletter
 \xpatchcmd{\@todo}{\setkeys{todonotes}{#1}}{\setkeys{todonotes}{inline,#1}}{}{}
