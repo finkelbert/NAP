@@ -27,7 +27,7 @@ model_tab <- function(models, type) {
   mutate(Parameter = case_when(Parameter=="Intercept" ~ "$\\hat\\alpha$",
                           str_detect(Parameter,".*?\\[.\\]") ~ 
 str_replace_all(Parameter,c(".*?\\[" = "$\\\\hat\\\\zeta_{","\\]" = "}$" )),
-Parameter=="sigma" ~ "$\\sigma$",
+Parameter=="sigma" ~ "$\\hat\\sigma$",
 Parameter =="sd(Intercept)" ~"$\\hat\\sigma_{\\alpha}$",
 str_detect(Parameter,"sd.*?") ~"$\\hat\\sigma_{\\beta}$",
 str_detect(Parameter, "cor.*?") ~ "$\\hat\\rho_{\\alpha,\\beta}$",
