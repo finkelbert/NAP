@@ -94,7 +94,7 @@ library(tidyr)
 library(loo)
 library(brms)
 library(ggrepel)
-#library(linguisticsdown)
+# library(linguisticsdown)
 # library(extrafont)
 ```
 
@@ -195,7 +195,7 @@ Sonority index values, that indicate their ranking on the sonority hierarchy, ca
 The most basic and widely used sonority-based pribciple that derives phonotactic predictions in terms of syllabic well-formedness is the *Sonority Sequencing Principle* (SSP). The SSP is a simple yet powerful generalization about phonotactics that has been evidently useful in countless theoretical accounts. It identifies three distinct types of slopes---*rises*, *falls*, and *plateaus*---such that sequences of segments should rise in sonority from the consonant(s) in the syllabic onset to the syllable's nucleus (most often a vowel) and fall from the nucleus to the consonant(s) in the syllabic coda. In this paper we focus on syllable-initial onset consonant clusters that precede a vowel, whereby a rising sonority slope (e.g., *plV*) is considered well-formed and a falling sonority slope (e.g., *lpV*) is considered ill-formed (see Figure \@ref(fig:slopes-pl-lp)). Sonority plateaus (e.g., *pkV*) fare in between, giving way to various interpretations, depending on the language and analysis, such that plateaus may pattern as ill- or well-formed [e.g., @bat1996selecting], although they are generally interpreted as denoting a third mid-level of well-formedness, as we will treat them here.
 
 (ref:slopes-pl-lp) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *lpV*. The red line denotes the sonority slope of the onset cluster (i.e., the two onset consonants), while the grey line denotes the slope between the second consonant and the vowel at the nucleus position (always a rise in these cases). The angle of the red lines reflects the well-formed rising sonority slope of the onset cluster in *plV* and the ill-formed falling sonority slope of the onset cluster in *lpv*.
-```{r slopes-pl-lp, fig.cap = "(ref:slopes-pl-lp)", fig.asp = .45, out.width = '100%'}
+```{r slopes-pl-lp, fig.cap = "(ref:slopes-pl-lp)", fig.asp = .45, out.width = '100%', dev="cairo_pdf"}
 seg_type = c("Vowels","Glides","Liquids","Nasals","Voiced Fricatives","Voiced Stop", "Voiceless Fricatives","Voiceless Stops")
 seg_token = c("p","l","V","l","p","V") 
 slopes_plot <- function(df) {
@@ -204,19 +204,19 @@ slopes_plot <- function(df) {
   geom_segment(aes(x=0, xend=7.5, y=-1, yend=-1), color="grey", size=.2, alpha=.5, linetype = "solid") +
   geom_segment(aes(x=4.5, xend=4.5, y=-.5, yend=8.5), color="black", size=.2, alpha=.2, linetype = "dotted") +
   geom_text(data=tibble(seg_token=seg_type,y=8:1,x=0.2),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token=seg_token,y=0,x=2:7),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="Sonority slopes: different types",y=10.75,x=4.5),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="well-formed",y=9.5,x=3),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL", fontface = "italic") +
   geom_text(data=tibble(seg_token="onset rise",y=8.75,x=3),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="ill-formed",y=9.5,x=6),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL", fontface = "italic") +
   geom_text(data=tibble(seg_token="onset fall",y=8.75,x=6),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
@@ -241,7 +241,7 @@ tribble(~x , ~y, ~line,
 The *Minimum Sonority Distance* [MSD; @steriade1982greek; @selkirk1984majorsk] is a well-known elaboration on the preferred angle of sonority slopes compared to basic applications of the SSP, given that the SSP makes no distinction between different angles of rising or falling slopes. The MSD was designed to prefer onset rises with steep slopes over onset rises with shallow slopes, under the assumption that consonantal sequences in the onset are preferred with a larger sonority distance between them. For instance, *plV* has a steeper rise compared to *bnV* and it is therefore better-formed according to the MSD (see Figure \@ref(fig:slopes-pl-bn)).[^cf-sdp] 
 
 (ref:slopes-pl-bn) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *bnV* (the red solid line denotes the sonority slope of the onset clusters). The angle of the red lines reflects a steeper rise for *plV* (left) compared with *bnV* (right), due to the larger sonority distance between the consonants in *plV*.
-```{r slopes-pl-bn, fig.cap = "(ref:slopes-pl-bn)", fig.asp = .4, out.width = '100%'}
+```{r slopes-pl-bn, fig.cap = "(ref:slopes-pl-bn)", fig.asp = .4, out.width = '100%', dev="cairo_pdf"}
 seg_type = c("Vowels","Glides","Liquids","Nasals","Voiced Fricatives","Voiced Stop", "Voiceless Fricatives","Voiceless Stops")
 seg_token = c("p","l","V","b","n","V") 
 slopes_plot <- function(df) {
@@ -250,15 +250,15 @@ slopes_plot <- function(df) {
   geom_segment(aes(x=0, xend=7.5, y=-1, yend=-1), color="grey", size=.2, alpha=.5, linetype = "solid") +
   geom_segment(aes(x=4.5, xend=4.5, y=-.5, yend=8.5), color="black", size=.2, alpha=.2, linetype = "dotted") +
   geom_text(data=tibble(seg_token=seg_type,y=8:1,x=0.2),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token=seg_token,y=0,x=2:7),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="Sonority rises: different slopes",y=10.75,x=4.5),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="steep rise",y=9.25,x=3),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="shallow rise",y=9.25,x=6),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
@@ -292,7 +292,7 @@ We return to /s/-stop clusters in the general discussion (Subsection \@ref(sec:d
 <!-- experiments (section \@ref(sec:experiments)), and we propose a full account of /s/-stop clusters, which illustrates the division of labor between sonority and other phonotactic principles in the general discussion (Subsection \@ref(sec:division)). -->
 
 (ref:slopes-sp-sp) Schematic depiction of the two potential sonority slopes of the /s/-stop cluster *spV*. The red solid line that denotes the sonority slope of the consonantal clusters is falling when applied with the expanded sonority hierarchy *exp* (left), and it is a plateau when applied with the collapsed sonority hierarchy *col* (right).
-```{r slopes-sp-sp, fig.cap = "(ref:slopes-sp-sp)", fig.asp = .4, out.width = '100%'}
+```{r slopes-sp-sp, fig.cap = "(ref:slopes-sp-sp)", fig.asp = .4, out.width = '100%', dev="cairo_pdf"}
 #seg_type = c("Vowels","Glides","Liquids","Nasals","Vcd. Frics.","Vcd. Stop", "Vcls. Frics.","Vcls. Stops")
 seg_token = c("s","p","V","s","p","V") 
 slopes_plot <- function(df) {
@@ -301,25 +301,25 @@ slopes_plot <- function(df) {
   geom_segment(aes(x=0, xend=7.5, y=-1, yend=-1), color="grey", size=.2, alpha=.5, linetype = "solid") +
   geom_segment(aes(x=4.5, xend=4.5, y=-.5, yend=8.5), color="black", size=.2, alpha=.2, linetype = "dotted") +
   geom_text(data=tibble(seg_token=seg_type,y=8:1,x=0.2),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token=seg_token,y=0,x=2:7),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="Obstruents",y=1,x=4.7),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times", angle=90) +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL", angle=90) +
   geom_text(data=tibble(seg_token="Fricative-stop clusters: different hierarchies",y=10.75,x=4.5),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="exp (expanded)",y=9.75,x=3),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL", fontface = "italic") +
   geom_text(data=tibble(seg_token="onset fall",y=8.75,x=3),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="col (collapsed)",y=9.75,x=6),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL", fontface = "italic") +
   geom_text(data=tibble(seg_token="onset plateau",y=8.75,x=6),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   # geom_text(data=tibble(seg_token="exp (expanded) hierarchy",y=9,x=3),
-  #           aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
+  #           aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL", fontface = "italic") +
   # geom_text(data=tibble(seg_token="col (collapsed) hierarchy",y=9,x=6),
-  #           aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times", fontface = "italic") +
+  #           aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL", fontface = "italic") +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
@@ -348,7 +348,7 @@ Different sonority plateaus have the same flat angle in sonority terms, yet they
 <!-- @maddieson2013syllable -->
 
 (ref:slopes-nm-sf) Schematic depiction of the sonority slopes of two sonority plateaus, *nmV* and *sfV*. The red solid line which denotes the sonority slope of the onset clusters is higher for *nmV* (left) than for *sfV* (right) due to the higher intercept (i.e., starting point) of /n/ compared to /s/. This difference is not accounted for by traditional sequencing principles.
-```{r slopes-nm-sf, fig.cap = "(ref:slopes-nm-sf)", fig.asp = .4, out.width = '100%'}
+```{r slopes-nm-sf, fig.cap = "(ref:slopes-nm-sf)", fig.asp = .4, out.width = '100%', dev="cairo_pdf"}
 #seg_type = c("Vowels","Glides","Liquids","Nasals","Vcd. Frics.","Vcd. Stop", "Vcls. Frics.","Vcls. Stops")
 seg_token = c("n","m","V","s","f","V") 
 slopes_plot <- function(df) {
@@ -357,15 +357,15 @@ slopes_plot <- function(df) {
   geom_segment(aes(x=0, xend=7.5, y=-1, yend=-1), color="grey", size=.2, alpha=.5, linetype = "solid") +
   geom_segment(aes(x=4.5, xend=4.5, y=-.5, yend=8.5), color="black", size=.2, alpha=.2, linetype = "dotted") +
   geom_text(data=tibble(seg_token=seg_type,y=8:1,x=0.2),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token=seg_token,y=0,x=2:7),
-            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="Sonority plateaus: different intercepts",y=10.75,x=4.5),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="high plateau",y=9.25,x=3),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_text(data=tibble(seg_token="low plateau",y=9.25,x=6),
-            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Times") +
+            aes(label=seg_token,x=x,y=y, hjust=0.5),inherit.aes = FALSE, size=4, family = "Charis SIL") +
   geom_line() +
   scale_x_continuous("",breaks=2:7, labels=NULL) + 
   scale_y_continuous("",breaks=1:8, labels=NULL) +
@@ -736,7 +736,7 @@ This can be summarized with the formula in \@ref(eq:naptdeq), see examples in Ta
 ## The bottom-up NAP model {#sec:napbu}
 
 (ref:com-4examples-1) Smoothed periodic energy curve (black) of the four syllables from the experimental stimuli---*lpal*, *nmal*, *vlal*, and *smal*. Red vertical line denotes the center of periodic mass of the entire syllable (*CoM~syllable~*), blue vertical line denotes the center of periodic mass of the left portion (*CoM~onset~*). Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). The distance between the two CoM landmarks is indicative of the energy displacement away from the syllabic center, reflecting the nucleus competition potential within the syllable.
-```{r com-4examples-1, fig.cap = "(ref:com-4examples-1)", fig.width=7, fig.asp=.6, warning=FALSE}
+```{r com-4examples-1, fig.cap = "(ref:com-4examples-1)", fig.width=7, fig.asp=.6, warning=FALSE, dev="cairo_pdf"}
 # CoM_ons <-  expression(CoM[ons])# %>% as_label()
 monosyl_examp_1 <- filter(monosyl_info,
                           syl %in% c("smal","vlal","nmal","lpal"))
@@ -750,17 +750,17 @@ monosyl_examp_1_plot <-
   #
   geom_segment(aes(x=x_com_ons, xend=x_com_ons, y=-1, yend=13), color="royalblue1", size=1.7, alpha=.7, linetype = "solid", lineend = "round") +
   geom_segment(aes(x=x_com_syl, xend=x_com_syl, y=-1, yend=13),color="red", size=1.7, alpha=.6, linetype = "solid", lineend = "round") +
-  # geom_text(aes(x=com_onset, y=15, label=deparse(CoM_ons)), nudge_x = -20, color="royalblue2", alpha=1, size=3, family = "Times", check_overlap=T, na.rm = T) +
-  geom_text(aes(x=com_onset,y=15,label="CoM:onset"), nudge_x = -30, color="royalblue2", alpha=1, size=3, family = "Times", check_overlap=T, na.rm = T) +
-  geom_text(aes(x=x_com_syl,y=15,label="CoM:syllable"), nudge_x = 30, color="red", alpha=.9, size=3, family = "Times", check_overlap=T, na.rm = T) +
+  # geom_text(aes(x=com_onset, y=15, label=deparse(CoM_ons)), nudge_x = -20, color="royalblue2", alpha=1, size=3, family = "Charis SIL", check_overlap=T, na.rm = T) +
+  geom_text(aes(x=com_onset,y=15,label="CoM:onset"), nudge_x = -30, color="royalblue2", alpha=1, size=3, family = "Charis SIL", check_overlap=T, na.rm = T) +
+  geom_text(aes(x=x_com_syl,y=15,label="CoM:syllable"), nudge_x = 30, color="red", alpha=.9, size=3, family = "Charis SIL", check_overlap=T, na.rm = T) +
   geom_segment(aes(x=x_com_syl, xend=com_onset, y=-.75, yend=-.75), color="black", size=.5, alpha=1, linetype = "solid", arrow = arrow(length = unit(0.04, "npc"))) +
-  geom_text(aes(x=(x_com_syl+com_onset)/2,y=-2.5,label=paste0(round(NAP_bu)," ms")), size=3, family = "Times", check_overlap=T) + 
+  geom_text(aes(x=(x_com_syl+com_onset)/2,y=-2.5,label=paste0(round(NAP_bu)," ms")), size=3, family = "Charis SIL", check_overlap=T) + 
   #
   geom_segment(aes(x=pos_end, xend=pos_end, y=0, yend=19), color="grey", size=.5, alpha=.2, linetype = "dotted") +
-  geom_text(aes(x=pos_mid,y=18,label=text), size=6, family = "Times", check_overlap=T) + 
+  geom_text(aes(x=pos_mid,y=18,label=text), size=6, family = "Charis SIL", check_overlap=T) + 
   #
   facet_wrap(~syl, ncol=2) +
-  theme(panel.background = element_blank(), axis.title = element_text(size = 12, family="Times"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8, family="Times"), strip.text = element_blank())
+  theme(panel.background = element_blank(), axis.title = element_text(size = 12, family="Charis SIL"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8, family="Charis SIL"), strip.text = element_blank())
 print(monosyl_examp_1_plot)
 ```
 
@@ -919,7 +919,7 @@ The full set of predictions for the 29 experimental targets is presented for all
 (ref:com-monosyl) Well-formedness scores in the continuous *NAP~bu~* model shown in terms of the distance betweeen the center of mass of the entire syllable, *CoM~syllable~* (red vertical lines), and the center of mass of the left portion, *CoM~onset~* (blue vertical lines), whereby the periodic energy curve is shown with a black line. Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). Items are oredered by score (better-formed given smaller distance), from left-to-right and from top-to-bottom.
 <!-- Well-formedness scores for the 29 experimental items using the continuous *NAP~bu~* model. 
 Smoothed periodic energy curves in black, red vertical lines denote the center of periodic mass of the entire syllable (*CoM~syllable~*), and blue vertical lines denote the center of periodic mass of the left portion (from the beginning up to the red line; *CoM~onset~*). Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). Distance between *CoM~syllable~* and *CoM~onset~* decreases from left-to-right and from top-to-bottom, reflecting weaker competition scores, i.e., predictions for better-formed clusters.  -->
-```{r com-monosyl, fig.cap = "(ref:com-monosyl)", fig.width=7, fig.asp=.8, warning=FALSE}
+```{r com-monosyl, fig.cap = "(ref:com-monosyl)", fig.width=7, fig.asp=.8, warning=FALSE, dev="cairo_pdf"}
 # pdf.options(encoding = 'ISOLatin2')
 ordered_syl_abs <- unique(monosyl_info[order(monosyl_info$NAP_bu),]$syl)
 monosyl_info$syl <- factor(monosyl_info$syl, levels=ordered_syl_abs)
@@ -932,15 +932,15 @@ monosyl_plot_abs <-
   geom_segment(aes(x=x_com_syl, xend=x_com_syl, y=-2, yend=13),color="red", size=1.5, alpha=.6, linetype = "solid", lineend = "round") +
   geom_segment(aes(x=x_com_syl, xend=com_onset, y=-2, yend=-2), color="black", size=.5, alpha=1, linetype = "solid", arrow = arrow(length = unit(0.07, "npc"))) +
   # geom_text(aes(x=(x_com_syl+com_onset)/2, y=-5, label=paste0(round(NAP_bu)," ms")), size=3, check_overlap=T) + 
-  geom_text(aes(x=(x_com_syl+com_onset)/2, y=-5, label=paste0(round(NAP_bu)," ms")), size=3, family = "Times", check_overlap=T) +
+  geom_text(aes(x=(x_com_syl+com_onset)/2, y=-5, label=paste0(round(NAP_bu)," ms")), size=3, family = "Charis SIL", check_overlap=T) +
   #
   geom_segment(aes(x=pos_end, xend=pos_end, y=0, yend=20), color="grey", size=.5, alpha=.2, linetype = "dotted") +
   # geom_text(aes(x=pos_mid,y=17.5,label=text), size=5, check_overlap=T) +
-  geom_text(aes(x=pos_mid,y=17.5,label=text), size=5, family = "Times", check_overlap=T) + #family = "Charis SIL",
+  geom_text(aes(x=pos_mid,y=17.5,label=text), size=5, family = "Charis SIL", check_overlap=T) + #family = "Charis SIL",
   #
   facet_wrap(~syl, ncol=5) +
-  theme(text = element_text(family = "Times"), panel.background = element_blank(), axis.title = element_text(size = 12), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8), strip.text = element_blank())
-  # theme(panel.background = element_blank(), axis.title = element_text(size = 12, family="Times"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8, family="Times"), strip.text = element_blank())
+  theme(text = element_text(family = "Charis SIL"), panel.background = element_blank(), axis.title = element_text(size = 12), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8), strip.text = element_blank())
+  # theme(panel.background = element_blank(), axis.title = element_text(size = 12, family="sans"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8, family="sans"), strip.text = element_blank())
 print(monosyl_plot_abs)
 
 ```
@@ -1437,7 +1437,7 @@ The null model is shown in Figure \@ref(fig:NullFit) as a baseline. The slight d
 The model fit of the six sonority models is shown in Figures \@ref(fig:SSPcolFit)--\@ref(fig:NAPbuFit). The plots in these figures present the dispersion of the average response time results, depicted as red points for related CC clusters, vis-à-vis each models' predictions in the form of distributions, depicted with blue violins. The order of the stimuli, from left to right, follows from the models' scores such that predictions for better-formed clusters appear further to the right. 
 
 (ref:NullFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes).
-```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.4}
+```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"}
 predictions$null %>%
   mutate(NAP= round(NAP_bu,7)) %>%
     # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
@@ -1446,20 +1446,20 @@ predictions$null %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
-    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5) + #family="Charis SIL", 
+    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) + 
     scale_x_discrete("Stimuli", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
     ylab("Response time (log scale)") +
     ylim(600,1200) + 
     coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Times"), axis.title = element_text(size=12, family = "Times"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Times"))
+    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
     # ggtitle("Null model fit")
 ```
 
 #### Traditional sonority models fit {#sec:traditionalModelfit}
 
 (ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness.
-```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.4}
+```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
 
 predictions$SSP_obs %>%
   left_join(data_RT) %>%
@@ -1470,17 +1470,17 @@ predictions$SSP_obs %>%
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = SSP_obs, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
     xlab(bquote(italic(SSP[col])~scores)) + ylab("Response time (log scale)") +
         ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Times"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Times"), plot.title = element_text(size=14, family = "Times"))# +
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# +
         # ggtitle(bquote(italic(SSP[col])~fit))
    }
 ```
 (ref:SSPexpFit) *SSP~exp~* model fit (plot details are same as above).
-```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.4}
+```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
 
 predictions$SSP %>%
   left_join(data_RT) %>%
@@ -1491,18 +1491,18 @@ predictions$SSP %>%
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = SSP, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(SSP[exp])~scores)) +
        ylab("Response time (log scale)") +
         ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Times"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Times"), plot.title = element_text(size=14, family = "Times")) #+
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(SSP[exp])~fit))
      }
 ```
 (ref:MSDcolFit) *MSD~col~* model fit (plot details are same as above).
-```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.4}
+```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
 
 predictions$MSD_obs %>%
   left_join(data_RT) %>%
@@ -1513,17 +1513,17 @@ predictions$MSD_obs %>%
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = MSD_obs, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[col])~scores)) + ylab("Response time (log scale)") +
         ylim(600,1200) + 
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Times"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Times"), plot.title = element_text(size=14, family = "Times")) #+
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(MSD[col])~fit))
      }
 ```
 (ref:MSDexpFit) *MSD~exp~* model fit (plot details are same as above).
-```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.4}
+```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
 
 predictions$MSD %>%
   left_join(data_RT) %>%
@@ -1534,12 +1534,12 @@ predictions$MSD %>%
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = MSD, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[exp])~scores)) + ylab("Response time (log scale)") +
         ylim(600,1200) + 
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Times"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Times"), plot.title = element_text(size=14, family = "Times")) #+
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(MSD[exp])~fit))
         }
 ```
@@ -1562,7 +1562,7 @@ To conclude, an observation of the model fit of the four traditional sonority mo
 #### NAP~td~ model fit {#sec:NAPtdModelfit}
 
 (ref:NAPtdFit) *NAP~td~* model fit (plot details are same as above).
-```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.4}
+```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
 
 predictions$NAP_td %>% 
   left_join(data_RT) %>%
@@ -1572,12 +1572,12 @@ predictions$NAP_td %>%
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
   { ggplot(., aes(x = NAP_td, y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Times") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
   xlab(bquote(italic(NAP[td])~scores)) + ylab("Response time (log scale)") +
       ylim(600,1200) + 
       coord_trans(y="log") +
-      theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Times"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Times"), plot.title = element_text(size=14, family = "Times")) #+
+      theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
       # ggtitle(bquote(italic(NAP[td])~fit))
   }
 
@@ -1591,7 +1591,7 @@ However, *NAP~td~* appears to exhibit some redundancy, as suggested by the large
 #### NAP~bu~ model fit {#sec:NAPbuModelfit}
 
 (ref:NAPbuFit) *NAP~bu~* model fit (plot details are same as above).
-```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.4}
+```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"}
 
 predictions$NAP_bu %>% 
   mutate(NAP= round(NAP_bu,7)) %>%
@@ -1600,12 +1600,12 @@ predictions$NAP_bu %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
-    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
+    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") +
     scale_x_discrete(bquote(italic(NAP[bu])~scores), breaks=NULL) +
     ylab("Response time (log scale)") +
     ylim(600,1200) + 
     coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Times"), axis.title = element_text(size=12, family = "Times"), plot.title = element_text(size=14, family = "Times")) #+
+    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
     # ggtitle(bquote(italic(NAP[bu])~fit))
 ```
 
@@ -1906,18 +1906,20 @@ The following list summarizes concerns that were taken into consideration when c
 
 Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker (the first author) in a sound attenuated booth at the phonetics laboratory of the University of Cologne. Speech was recorded via head-mounted headset condenser microphone (AKG C420), capturing mono digital files at a resolution of 44.1kHz sample-rate and 24 bit depth with a Metric Halo MIO 2882 audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with Goodhertz Good Dither dithering to be used in the perception task running on OpenSesame 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the APP Detector (see Subsection \@ref(sec:obtaining)) was also downgraded in sample-rate to 16kHz. Finally all audio takes, at all resolutions, were normalized to the same RMS target of -20dBFS.
 
-To record the stimuli, the combined 87 word-like tokens were embedded within carrier sentences, appearing in a non-final position with 
+To record the stimuli, the combined 87 word-like tokens were embedded within carrier sentences, appearing in a non-final position with
 default declarative intonation
 <!-- broad-focus intonation  -->
-in order to maintain consistent prosody. Carrier sentences were also designed to minimize potential effects of resyllabification as well as co-articulation by controlling the segmental makeup immediately preceding and following target words, see example in (\@ref(ex:sentence)) (the full list of Hebrew sentences used in this study are availale at the OSF repository, see link in the opening of Section \@ref(sec:experiments)). 
+in order to maintain consistent prosody. Carrier sentences were also designed to minimize potential effects of resyllabification as well as co-articulation by controlling the segmental makeup immediately preceding and following target words
+<!-- , see example in (\@ref(ex:sentence))  -->
+(the full list of Hebrew sentences used in this study are availale at the OSF repository, see link in the opening of Section \@ref(sec:experiments)).
 
-\begin{exe} 
-\ex /ze maʁ.giʃ CCal ka.ʁe.ga/ (ʼit feels (like) CCal at the momentʼ) \label{ex:sentence} 
-\end{exe} 
+<!-- \begin{exe} -->
+<!-- \ex /ze maʁ.giʃ CCal ka.ʁe.ga/ (ʼit feels (like) CCal at the momentʼ) \label{ex:sentence} -->
+<!-- \end{exe} -->
 
 ## Obtaining periodic energy data {#sec:obtaining}
 
-We extract continuous measurements of periodic energy from acoustic signals using the *APP Detector*, a computer code that was introduced in @deshmukh2003detectionsk and developed in subsequent publications [@deshmukh2005use; @vishnubhotla2007detection], with the ability to measure the spectral distribution of periodic energy from digital audio files with a 16kHz sample-rate, effectively measuring periodic energy up to 8kHz [consider that our pitch perception range is limited to periods up to approximately 4kHz, reflecting a ceiling effect of the phase-locking of neural firing rates; @wever1937perception; @attneave1971pitch; @pressnitzer2001lower; @moore2013anintro 46]. We export the periodic energy data from the APP Detector's analysis into R [@R-base], for further data manipulation, visualization, modelling, and statistics. 
+We extract continuous measurements of periodic energy from acoustic signals using the *APP Detector*, a computer code that was introduced in @deshmukh2003detectionsk and developed in subsequent publications [@deshmukh2005use; @vishnubhotla2007detection], with the ability to measure the spectral distribution of periodic energy from digital audio files with a 16kHz sample-rate, effectively measuring periodic energy up to 8kHz [consider that our pitch perception range is limited to periods up to approximately 4kHz, reflecting a ceiling effect of the phase-locking of neural firing rates; @wever1937perception; @attneave1971pitch; @pressnitzer2001lower; @moore2013anintro 46]. We export the periodic energy data from the APP Detector's analysis into R [@R-base], for further data manipulation, visualization, modelling, and statistics.
 
 We sum over the different frequencies that the APP Detector measures to obtain a time series  with the sum of periodic energy over different frequencies at 10 ms intervals.
 We fit a smoothed curve to the periodic energy time series, to eliminate small-scale fluctuations in the curve's trajectory, and, finally, the sum of periodic energy is log transformed, where it is divided by a value that reflects the threshold of effective voicing periodicity, thus setting a meaningful zero for the periodic energy floor (we apply Tukey's Running Median Smoothing "3RS3R" to the periodic energy data. The threshold of the log transform is calculated as the maximal value obtained for voiceless portions in the set).
@@ -1927,7 +1929,7 @@ The periodic energy curve is fitted with Local Polynomial Regression Fitting (*l
 
 ## Perception task details {#sec:ptask}
 
-Recall that the experiments were designed as a forced-choice 2-alternative perception task, where we collected accuracy and response time information. 
+Recall that the experiments were designed as a forced-choice 2-alternative perception task, where we collected accuracy and response time information.
 <!-- Since all stimuli share the form /CCal/ where the rime *al* is predictable (this becomes clear to participants during the training session),  -->
 We determined the zero time for valid response times at the the mid point of transition from *C*~2~ to /a/, individually for each one of the 87 stimuli (given that all stimuli share the rime *al*, which is fully predictable in the context of the experiment, in contrast to the preceding material, which is unpredictable). We used manual segmentation to determine this point for each target. We then excluded response times shorter than 100ms (i.e., 100ms after the mid point of transition from *C*~2~ to /a/) as too fast to be considered as valid. This led to no exclusions from Experiment 1 and to only one observation being excluded from Experiment 2.
 
@@ -2012,10 +2014,10 @@ r_refs(file = "bibs/r-references.bib")
 \endgroup
 
 
-
 ```{r echo = FALSE, results = 'asis', cache = FALSE}
-render_appendix('./appendix.Rmd')
+papaja::render_appendix('./appendix.Rmd')
 ```
+
 
 ```{r echo = FALSE, results = 'asis', cache = FALSE}
 papaja::render_appendix('./appendix.Rmd')
