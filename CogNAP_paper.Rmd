@@ -18,9 +18,6 @@ affiliation:
     institution   : "Department of Linguistics, University of Potsdam"
 
 authornote: |
-  Acknowledgement.
-  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
-  Enter author note here.
 
 abstract: |
   *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and evidently useful as a predictor of phonotactics (i.e., the propensity of different consonants and vowels to combine via concatenation).
@@ -68,6 +65,9 @@ keep_tex: yes
 <!-- --- -->
 <!-- title             : "The double life of the Nucleus Attraction Principle: Modelling sonority with complementary symbol-based and signal-based models" -->
 <!-- shorttitle        : "The double life of the Nucleus Attraction Principle" -->
+  <!-- Acknowledgement. -->
+  <!-- Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line. -->
+  <!-- Enter author note here. -->
 
 
 ```{r setup, include = FALSE}
@@ -469,7 +469,7 @@ The impressionistic descriptions of NAP, as provided in this section, are implem
 
 NAP essentially models a bottom-up process, describing the parsing of the stream of speech into syllables as the end of a process that starts in perception.
 This is so because NAP is designed to agree with physical rules and cognitive processing relating to our capacity to process pitch in communicative contexts.
-However, in order to model the top-down contribution of sonority to the well-formedness of syllables, our NAP model should be also able to operate on abstract symbolic entities, like consonants and vowels. Therefore, the mechanisms that should be available to symbol-based processes need to qualitatively differ from the dynamic models that are available to bottom-up signal-based processes
+However, in order to model the top-down contribution of sonority to the well-formedness of syllables, our NAP model should be also able to operate on abstract symbolic entities, like consonants and vowels. The mechanisms that should be available to symbol-based processes need to qualitatively differ from the dynamic models that are available to bottom-up signal-based processes
 <!-- the dynamic modes of bottom-up continuous signals  -->
 and instead be based on the distributional probability of recognized symbols, given their history in the system.
 
@@ -1845,7 +1845,7 @@ A simplified generalization that may illustrate this state of affairs in symboli
 Our experimental results provide strong support for our synergy of proposals, including our choice of sonority's perceptual basis and acoustic correlate, the incorporation of continuous entities and dynamic procedures in phonological models, and the dual-route modeling strategy that accounts for both top-down and bottom-up inferences with separate compatible machinery. The following subsections discuss two important implications that are borne out of our interpretation of the results: 
 (i) in the following subsection (\@ref(sec:dichotomies)) we discuss the complementarity of discrete and continuous modes in cognitive modeling, suggesting that the top-down--bottom-up distinction exhibits a better fit with the discrete--continuous dichotomy than the classic phonetics--phonology dichotomy;
 <!-- (\@ref(sec:division)) we discuss a potential phonotactic division of labor, demonstrated with a more holistic account of /s/-stop clusters; -->
-(ii) in Subsection \@ref(sec:dichotomies) we discuss a potential phonotactic division of labor, demonstrated with a more holistic account of /s/-stop clusters.
+(ii) in Subsection \@ref(sec:division) we discuss a potential phonotactic division of labor, demonstrated with a more holistic account of /s/-stop clusters.
 <!-- \@ref(sec:dichotomies) we discuss the complementarity of discrete and continuous modes in cognitive modeling, suggesting that the top-down--bottom-up distinction exhibits a better fit with the discrete--continuous dichotomy than the classic phonetics--phonology dichotomy.  -->
 
 ##		Reshuffling dichotomies  {#sec:dichotomies}
@@ -1858,7 +1858,7 @@ representations [see @case1995evaluation; @gafos2006dynamics; @lancia2013interac
 These categorical representations are the learned symbols of the system in abstract terms, readily equated with co-activation of neural populations in the brain in physical terms [see, e.g., @friederici2011brain; @mesgarani2014phonetic; @tang2017intonational].
 Once learned and established, symbols can feed top-down inferences that play a role alongside bottom-up inferences in perception [see e.g., @connor2004visual; @pinto2013bottom; @shuai2014temporal].
 
-@tuller1994nonlinear, @gafos2006dynamics, @gafosbenus2006dynamics, and @roessig2019dynamics serve as good examples for the useful application of attractor landscape models in order to link linguistic categorical reflexes with continuous variables. They show that the incorporation of continuity in phonology is not only possible but also advantageous for our understanding of the nature of discrete categories. 
+@tuller1994nonlinear, @gafos2006dynamics, @gafosbenus2006dynamics, and @roessig2019dynamics serve as good examples for the useful application of *attractor landscape* models in order to link linguistic categorical reflexes with continuous variables. They show that the incorporation of continuity in phonology is not only possible but also advantageous for our understanding of the nature of discrete categories, as they tend to be manifested in fuzzy distributions given multiple (redundant) cues and individual differences. 
 It is therefore the case that previous work has already convincingly shown that a phonetics--phonology dichotomy does not fit well with a classic continuous--discrete dichotomy, as we have good reasons to incorporate continuous entities alongside discrete units within phonology.
 
 In essence, works like those in @tuller1994nonlinear, @gafos2006dynamics, @gafosbenus2006dynamics and @roessig2019dynamics present a single model that incorporates continuous and symbolic aspects via the unifying mathematics of attractor landspaes. This is a necessary component in a system where continuous and symbolic entities are assumed to interact, modeling the manner in which the two types of entities can relate to each other. However, this cannot be an exhaustive description of a language system as it lacks the ability to explain the states of the system within which interactions occur (e.g., it cannot explain or predict the shape and behaviour of the attrctor landscape or address the limitations on dynamic events that the system can reliably detect).
@@ -1873,8 +1873,11 @@ Our task here is therefore different, yet related and complementary from a holis
 In this paper we model the effects of processes that respond to signal-based continuous stimuli as bottom-up processes, and we separately model the effects of processes that are initiated by symbol-based discrete units, which we consider as top-down. 
 <!-- It is therefore the case that previous work has already convincingly shown that a phonetics--phonology dichotomy does not fit well with a classic continuous--discrete dichotomy, as we have good reasons to incorporate continuous entities alongside discrete units within phonology. -->
 Our work claims that the continuous--discrete dichotomy in phonology should be linked to the bottom-up--top-down dichotomy, such that both of these two distinct processes can *coexist* in a single language system.
-Bottom-up routes in perception are based on continuous stimuli and they are functional, in the sense that they adhere to the laws of physics and to the limitations of the sensorimotor system of the agents. In contrast, top-down inferences in perception are based on the history of symbolic representations that speakers can learn from experience. 
-This learning ability has its own universal functional limitations but the learned links between the dynamic and symbolic modes are largely arbitrary as they rely on the superficial history presented by a given language system.
+It is therefore important to highlight the difference between them.
+Bottom-up routes in perception are based on continuous stimuli and they are functional, in the sense that they adhere to the laws of physics and to the limitations of the sensorimotor system of the agents. 
+Bottom-up processes that seem to systematically characteraize language processing may be taken to imply an evolutionary benefit that they embody with respect to reliable communication.
+In contrast, top-down inferences in perception are based on the history of symbolic representations that speakers can learn from experience. 
+This learning ability has its own universal functional limitations (e.g., memory-related capacities) but the learned links between the dynamic and symbolic modes are largely arbitrary as they rely on the superficial history presented by a given language system.
 These symbols and their probabilistic distributions are constantly updated, reflecting knowledge about the distribution of categorically analyzable units of speech.
 
 In this study we modeled the notion of sonority and its contribution to linguistic sound systems with the assumption that the two different routes---bottom-up and top-down---are both active when speech inferences take place. Our bottom-up model uses continuous data (periodic energy), dynamic principles (competition), and functional motivation (syllables carry pitch information) to model sonority. Our top-down model is based on generalizations over the discrete segmental units in the system and their distribution given bottom-up sonority restrictions (note that our top-down model is not a true statistical learner for reasons that we explain in Subsection \@ref(sec:complementary)). 
