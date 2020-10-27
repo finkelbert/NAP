@@ -7,13 +7,14 @@
 *.html
 *.pdf
 NAP_paper.tex
-appendix.tex
+appendix*.tex
 CogNAP_paper.tex
 
 # Temporary alternative files
 NAP_paper.Rmd
 NAP_paper_4LabPhon.Rmd
 NAP_paper_4LabPhon.tex
+appendix_c*
 
 # log file
 *.log
