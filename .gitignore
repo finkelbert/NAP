@@ -1,6 +1,7 @@
 # Binary files
 *.png
 *.jpg
+*.mellel
 
 # Preview files
 *.html
