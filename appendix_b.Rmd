@@ -35,7 +35,7 @@ str_detect(Parameter,"sd.*?") ~"$\\hat\\sigma_{\\beta}$",
 str_detect(Parameter, "cor.*?") ~ "$\\hat\\rho_{\\alpha,\\beta}$",
                           TRUE ~ "$\\hat\\beta$")) %>%
   papaja::apa_table(escape= FALSE,
-                     caption = paste0("Results from the ",type," model examining the results of the $",model_names[.y],"$ model. ",label= label, note= "See the Appendix for the interpretation of the parameters and column names."))}
+                     caption = paste0("Results from the ",type," model examining the results of the $",model_names[.y],"$ model. ",label= label, note= "See text for the interpretation of the parameters and column names."))}
 ) %>% 
   paste(collapse = "\n")
 }

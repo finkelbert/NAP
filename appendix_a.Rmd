@@ -48,4 +48,8 @@ We determined the zero time for valid response times at the the mid point of tra
 Participants were seated in a quiet room in front of a laptop computer (a MacBook Air 13-inch, Early 2014) running the experiment on OpenSesame 3.1.9 [@mathot2012opensesame], where they listened to the stimuli through a set of closed headphones (Sennhieser HD 201), fed directly from the laptop's internal audio interface. After verifying that participants share a standard understanding of the notion of the syllable with a few German examples of words with one and two syllables (*See*, *Spaß*, *Quark*, and *Angst* vs. *Schu-le*, *Kin-der*, *Bre-zel*, *Pflau-men*), they were instructed to listen to nonce words in an "unknown" foreign language (the use of a speaker with a Hebrew accent in the stimuli that were presented to German listeners was intended to further support a "foreign" type of perception). Participants were instructed to respond quickly and accurately on whether they hear one or two syllables by clicking '1' or '2' on the computer keyboard (participants used their left index finger to choose '1' and their right index finger to choose '2').<!-- [^cf-indexfinger]  -->
 A training session of ten trials preceded the experimental trials, allowing the participants to familiarize with the task, and allowing the experimenter to adjust listening volume and monitor potential problems and misunderstandings regarding the task.
 
+## Supplementary data  {-}
+<!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at https://tinyurl.com/y3l4avap.  -->
+Supplementary data to this article can be found online on *Open Science Framework* (OSF) at <https://tinyurl.com/y3l4avap>.
+
 ## References {-}

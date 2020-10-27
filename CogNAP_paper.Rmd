@@ -20,7 +20,7 @@ affiliation:
     institution   : "Department of Linguistics, University of Potsdam"
 
 authornote: |
-  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were available during the review process and remain available on OSF project “NAP model” at https://osf.io/y477r/.
+  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were available during the review process and remain available on OSF project “NAP model” at https://tinyurl.com/y3l4avap/.
 
 abstract: |
   *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and evidently useful as a predictor of phonotactics (i.e., the propensity of different consonants and vowels to combine via concatenation).
@@ -119,9 +119,11 @@ While the phonetic basis of sonority hierarchies remains controversial, phonolog
 
 Most common phonological sonority hierarchies group segment types into classes that primarily reflect the standard *manners of articulation* in traditional phonology. The distinct categories commonly used include *stops*, *fricatives*, *nasals*, *liquids*, *glides*, and *vowels*, often with additional distinctions such as voicing and vowel height.[^cf-liquid] Although there are many different proposals for sonority hierarchies [@parker2002quantifying found more than 100 distinct sonority hierarchies in the literature], a very basic hierarchy that seems to reach a considerable consensus, and is often cited in relation to Clements's [-@clements1990role] seminal paper is given in (\@ref(ex:scale)).
 
+<!-- ```{=latex} -->
 \begin{exe} 
 \ex Obstruents $<$ Nasals $<$ Liquids $<$ Glides $<$ Vowels  \label{ex:scale} 
 \end{exe} 
+<!-- ``` -->
 
 The ordering of different speech sounds along the sonority hierarchy is assumed to be universal,
 in line with the common assumption that sonority has a phonetic basis in perception and/or articulation, yet the patterning of segmental classes as distinct groups along the scale is considered to be language-specific, i.e., based on phonological categorization. 
@@ -1885,7 +1887,7 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 
 # CRediT authorship contribution statement {-}
-**Aviad Albert**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **Bruno Nicenboim**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization. 
+**AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization. 
 
 # Acknowledgements {-}
 This work was supported by the DAAD (German Academic Exchange Service), SFB 1252 "Prominence in Language", a.r.t.e.s. Graduate School for the Humanities Cologne and the University of Cologne.
