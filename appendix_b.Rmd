@@ -1,3 +1,5 @@
+\label{appendix:b}
+
 ## Complete output of the Bayesian models  {-}
 The complete results of the exploratory (Experiment 1) and confirmatory models (Experiment 2) are presented in Tables \@ref(tab:exploratory-NAPbu)-\@ref(tab:confirmatory-NAPtd). 
 
