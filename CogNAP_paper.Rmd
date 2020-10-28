@@ -1,5 +1,5 @@
 ---
-title             : "The double life of language systems: Modelling sonority with complementary symbol- and signal-based models"
+title             : "The double life of language systems: Modelling sonority with complementary symbol and signal based models"
 shorttitle        : "Modelling sonority with complementary models"
 
 author: 
@@ -758,7 +758,6 @@ In what follows we present two experiments: (i) an exploratory study with 12 sub
 [see @nicenboim2018exploratorysk on dividing up experimental endeavors into exploratory and confirmatory studies].
 In both cases, informed consent from the participants was obtained before each experimental session. The experiment complied with the June 1964 Declaration of Helsinki (carried out by the World Medical Association and entitled “Ethical Principles for Medical Research Involving Human Subjects”), as last revised.[^cf-helsinki] 
 
-[^cf-helsinki]: In accordance with German NSF (DFG) guidelines, for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice).
 <!-- Note that all the media and original code that was used in this study are available at the following link on *Open Science Framework*: https://tinyurl.com/y3l4avap. -->
 <!-- (anonymized link): https://tinyurl.com/y4gvobyp  -->
 
@@ -1890,7 +1889,8 @@ Lastly, this study also provides compelling motivations and strong evidence that
 **AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization. 
 
 # Acknowledgements {-}
-This work was supported by the DAAD (German Academic Exchange Service), SFB 1252 "Prominence in Language", a.r.t.e.s. Graduate School for the Humanities Cologne and the University of Cologne.
+This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language".
+<!-- This work was supported by the DAAD (German Academic Exchange Service), SFB 1252 "Prominence in Language", a.r.t.e.s. Graduate School for the Humanities Cologne and the University of Cologne. -->
 
 <!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at https://tinyurl.com/y3l4avap.  -->
 <!-- https://tinyurl.com/y4gvobyp. -->
@@ -1939,6 +1939,8 @@ This work was supported by the DAAD (German Academic Exchange Service), SFB 1252
 [^cf-angle]: A slightly similar calculation can be found in Fullwood's [-@fullwood2014perceptual] *Sonority Angle*, although on different grounds, for different purposes, and with different outcomes.
 
 <!-- [^cf-peak]: Note that peak measurements can be advantageous in that they tend to appear at the center of segmental units [minima in consonants and maxima in vowels; see @parker2008sound], overcoming some of the problems related to segmentation, given that peaks are less affected by determination of segmental boundaries. -->
+
+[^cf-helsinki]: In accordance with German Research Foundation (DFG) guidelines, for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice).
 
 [^cf-plateaufall]: Depending on whether fricatives are considered higher or similar in sonority to stops, clusters of the type fricative-stop may be considered as either an onset fall or an onset plateau.
 
