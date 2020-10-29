@@ -21,6 +21,7 @@ affiliation:
 
 authornote: |
   Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were available during the review process and remain available on OSF project “NAP model” at https://tinyurl.com/y3l4avap/.
+  Declarations of interest: none.
 
 abstract: |
   *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and evidently useful as a predictor of phonotactics (i.e., the propensity of different consonants and vowels to combine via concatenation).
