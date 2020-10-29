@@ -436,8 +436,11 @@ This is so because NAP is designed to agree with physical rules and cognitive pr
 However, in order to model the top-down contribution of sonority to the well-formedness of syllables, our NAP model should be also able to operate on abstract symbolic entities, like consonants and vowels. The mechanisms that should be available to symbol-based processes need to qualitatively differ from the dynamic models that are available to bottom-up signal-based processes
 and instead be based on the distributional probability of recognized symbols, given their history in the system.
 
-The above description of top-down inferences, which are detached from the functional aspects of the bottom-up route, echo models of the language user as a *statistical learner*
-and, more specifically, they are very much in line with models of *phonotactic learners*.[^cf-phonlearn]
+The above description of top-down inferences, which are detached from the functional aspects of the bottom-up route, echo models of the language user as a *statistical learner* [see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing]
+and, more specifically, they are very much in line with models of *phonotactic learners* [see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @jarosz2017inputsk; @mayer2019phonotactic].
+<!-- [^cf-phonlearn] -->
+<!-- [^cf-phonlearn]: For *statistical learners* in general see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. For *phonotactic learners* see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @futrell2017generative; @jarosz2017inputsk; @mayer2019phonotactic; @mirea2019usingsk. -->
+
 That said, in this paper we do not explore the statistical nature of top-down inferences. Instead, we operationalize the rationale behind NAP with symbolic machinery to present what we refer to as the top-down model of NAP. 
 We interpret the results of the discrete operations in the symbolic version of NAP as a good estimation of symbol-based top-down statistical inferences, guided by the rationale of NAP. This choice allows us to present a top-down model with a stronger explanatory value as it uses a similar architecture to that of standard sonority principles, helping to elucidate NAP's core ideas with familiar vocabulary (see Subsection \@ref(sec:naptdmodel)). 
 
@@ -580,7 +583,7 @@ In order to compare the different proposals, we consider four types of tradition
 For the traditional models we use the two types of sonority hierarchies that we presented in Subsection \@ref(sec:hierarchies), where the class of obstruents is either *collapsed* (*col*) into a single level or *expanded* (*exp*) to include distinctions between voiced and voiceless obstruents, and between stops and fricatives. 
 We apply both hierarchies on each of the two variants of traditional sonority principles, the Sonority Sequencing Principle (SSP) and the Minimum Sonority Distance (MSD). 
 The four traditional sonority models we discuss are therefore a combination of a sonority principle (SSP or MSD) and a sonority hierarchy (*col* or *exp*). Accordingly, they bear the notation *SSP~col~* , *SSP~exp~*, *MSD~col~*, and *MSD~exp~*.
-In our two NAP models we use periodic energy as the correlate of sonority, and we apply it either continuously (bottom-up model) or categorically (top-down model). We refer to these two NAP models with the notation *NAP~td~* for the top-down model and *NAP~bu~* for the bottom-up one.
+In our two NAP models we use periodic energy as the correlate of sonority, and we apply it either continuously with acoustics (bottom-up model), or in a discrete manner using symbols (top-down model). We refer to these two NAP models with the notation *NAP~td~* for the top-down model and *NAP~bu~* for the bottom-up one.
 
 To demonstrate the different sonority models we focus in this paper on complex onset clusters of the general form CCV, where *C* denotes a consonant and *V* denotes a vowel. While traditional sonority models look at the sonority slope of the onset cluster to determine well-formedness of CCV syllables, NAP-based models apply the notion of *competition* to determine well-formedness.
 In the following subsections we elaborate on our methods for obtaining well-formedness scores. We start with the ordinal scores obtained from the four traditional sonority models (Subsection \@ref(sec:traditionalmodels)), and the symbolic NAP model, *NAP~td~* (Subsection \@ref(sec:naptdmodel)). We then present the implementation of the continuous model, *NAP~bu~* in Subsection \@ref(sec:napbu).
@@ -814,7 +817,10 @@ See Appendix \@ref(appendix:a) for a list of considerations and criteria that we
 \end{center}
 \end{table}
 
-Table \@ref(tab:targetlist) presents 29 CC sequence types that reflect 16 different combinations of classes (16 unique cells in Table \@ref(tab:targetlist), excluding differences in place of articulation), of which 7-8 are considered onset falls, 3-4 are considered onset plateaus (11 total), and 5 are considered onset rises.[^cf-plateaufall] Of the 29 different clusters, only 3 clusters regularly occur in German words, /ʃp, ʃm, fl/, 6 clusters are attested to some degree in German loanwords, /sp, sf, sm, vl, zv, ml/,[^cf-source], and one cluster, /ʃf/, may be considered as similar to German licit clusters with a voiced obstruent following a voiceless one (i.e., /ʃv/ and /t͡sv/). 
+Table \@ref(tab:targetlist) presents 29 CC sequence types that reflect 16 different combinations of classes (16 unique cells in Table \@ref(tab:targetlist), excluding differences in place of articulation), of which 7-8 are considered onset falls, 3-4 are considered onset plateaus (11 total), and 5 are considered onset rises.[^cf-plateaufall] Of the 29 different clusters, only 3 clusters regularly occur in German words, /ʃp, ʃm, fl/, 6 clusters are attested to some degree in German loanwords, /sp, sf, sm, vl, zv, ml/
+<!-- ,[^cf-source],  -->
+[@van2012sonority],
+and one cluster, /ʃf/, may be considered as similar to German licit clusters with a voiced obstruent following a voiceless one (i.e., /ʃv/ and /t͡sv/). 
 Thus, the experimental set contains 19 cluster types that are unattested in German words. These unattested CC types appear in 13 of the 16 unique combinations, excluding the three rising sonority clusters with a liquid in *C*~2~, /fl, vl, ml/, that are all attested in German complex onsets to some degree (yet only marginally so in the case of /vl/ and /ml/).
 
 The different CC sequences were embedded within a /CCal/ word-like frame, with the recurring *-al* rime. These /CCal/ tokens were produced with a single vowel, intended to yield monosyllabic items. We also prepared two disyllabic counterparts for each CC type---one with an epenthetic vowel, /CəCal/, and another with a prothetic vowel, /əCCal/ (with or without an initial glottal stop).[^cf-hebschwa] We thus obtained 29 single-vowel target types and 58 associated bi-vocalic filler types.
@@ -1219,7 +1225,7 @@ For model comparison, we examine the out-of-sample predictive accuracy of the di
 ## Experiment 1: Exploratory study {#sec:experiment1}
 
 Given the various novelties in our proposal, the methodologies for data collection, data extraction, and model implementation were first tested on a small body of real data that we collected before finalizing our methodologies (namely model implementations in Subsection \@ref(sec:modelimp) and the various procedural details in 
-Appendix \@ref(appendix:a).
+Appendix \@ref(appendix:a)).
 <!-- Section \@ref(sec:methods).  -->
 We used this exploratory study to test our methodologies and to explore the possibilities for properly estimating nucleus competition in each of the NAP models. 
 
@@ -1918,7 +1924,7 @@ This work was supported by the DAAD (German Academic Exchange Service) and SFB 1
 [^cf-perception]: This view of sonority is explicitly perceptual. However, it does not contradict and it should be considered as complementary to syllabic descriptions from an articulatory point of view, such as timing coordination and phase relations that characterize syllabic organization in Articulatory Phonology (@browman1992articulatory; @macneilage1998frame; @goldstein2007syllablesk; @hermes2013phonologysk; @gafos2014stochastic).
 
 <!-- [^cf-statlearn]: See, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. -->
-[^cf-phonlearn]: For *statistical learners* in general see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. For *phonotactic learners* see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @futrell2017generative; @jarosz2017inputsk; @mayer2019phonotactic; @mirea2019usingsk.
+<!-- [^cf-phonlearn]: For *statistical learners* in general see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. For *phonotactic learners* see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @futrell2017generative; @jarosz2017inputsk; @mayer2019phonotactic; @mirea2019usingsk. -->
 
 <!-- [^cf-stress]: It is important to note that weight sensitivity is not a universal process, as stress assignment patterns vary from language to language, and not all languages even have stress to begin with. However, it is one of the naturally occurring stress assignment patterns that many unrelated languages exhibit, e.g., Arabic, Tibetan (Lhasa), Wolof, Finnish, and Latin [see @goedemans2013weight; and @gordon2006syllableweight 23 for more exhaustive lists]. -->
 
@@ -1936,15 +1942,16 @@ This work was supported by the DAAD (German Academic Exchange Service) and SFB 1
 
 [^cf-reconciliation]: The symbolic sonority hierarchy in NAP reconciles perceptual and articulatory approaches to sonority by modelling their mutual contribution to enhancing pitch intelligibility (or periodic energy mass in acoustic terms). This hierarchy is similar to a few proposals for sonority hierarchies that combined levels of voicing/periodicity with degree of vocal tract opening [e.g., @lass1988phonology; @miller2012sonority; and @sharma2018significance]. Such hierarchies may be also seen as compatible with source-filter models of speech [e.g., @fant2000source], where the source controls voicing and the filter controls opening.
 
-[^cf-angle]: A slightly similar calculation can be found in Fullwood's [-@fullwood2014perceptual] *Sonority Angle*, although on different grounds, for different purposes, and with different outcomes.
+[^cf-angle]: A slightly similar calculation can be found in Fullwood's [-@fullwood2014perceptual] *Sonority Angle*.
+<!-- , although on different grounds, for different purposes, and with different outcomes. -->
 
 <!-- [^cf-peak]: Note that peak measurements can be advantageous in that they tend to appear at the center of segmental units [minima in consonants and maxima in vowels; see @parker2008sound], overcoming some of the problems related to segmentation, given that peaks are less affected by determination of segmental boundaries. -->
 
-[^cf-helsinki]: In accordance with German Research Foundation (DFG) guidelines, for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice).
+[^cf-helsinki]: In accordance with German Research Foundation (DFG) guidelines for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice).
 
 [^cf-plateaufall]: Depending on whether fricatives are considered higher or similar in sonority to stops, clusters of the type fricative-stop may be considered as either an onset fall or an onset plateau.
 
-[^cf-source]: Based primarily on @van2012sonority.
+<!-- [^cf-source]: Based primarily on @van2012sonority. -->
 
 [^cf-hebschwa]: The schwa in this case is produced as a weak (unstressed) /e/ vowel from the 5-vowel inventory of Modern Hebrew.
 
