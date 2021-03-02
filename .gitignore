@@ -6,7 +6,7 @@
 *.html
 *.pdf
 appendix*.tex
-CogNAP_paper.tex
+*NAP_paper.tex
 
 # Temporary alternative files
 nonshared/
