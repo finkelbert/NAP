@@ -3,25 +3,13 @@ title             : "The double life of language systems: Modelling sonority wit
 shorttitle        : "Modelling sonority with complementary models"
 
 author: 
-  - name          : "Aviad Albert"
-    affiliation   : "1"
-    corresponding : yes    # Define only one corresponding author
-    address       : "Department of Linguistics---Phonetics, University of Cologne, Herbert-Lewin-Straße 6, 50931 Cologne, Germany"
-    email         : "a.albert@uni-koeln.de"
-  - name          : "Bruno Nicenboim"
-    affiliation   : "2,3"
+  - name          : "Anonymous"
 
 affiliation:
-  - id            : "1"
-    institution   : "Department of Linguistics---Phonetics, University of Cologne"
-  - id            : "2"
-    institution   : "Department of Cognitive Science and Artificial Intelligence, Tilburg University"
-  - id            : "3"
-    institution   : "Department of Linguistics, University of Potsdam"
+  - institution   : "Affiliation"
 
 authornote: |
-  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were available during the review process and remain available on OSF project “NAP model” at https://tinyurl.com/y3l4avap/.
-  Declarations of interest: none.
+  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were made available during the review process and will remain available (see anonymized link: https://tinyurl.com/5jxmjntx).
 
 abstract: |
   *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and evidently useful as a predictor of phonotactics (i.e., the propensity of different consonants and vowels to combine via concatenation).
@@ -1375,7 +1363,8 @@ est_NAP_bu <- results_txt(m_german$models$NAP_bu, "sNAP_bu")
 
 ```
 
-#### Estimation {#sec:estimation2}
+### (i) Estimation {-}
+<!-- #### Estimation {#sec:estimation2} -->
 
 For all the models, the well-formedness score shows a clear effect on response times, with lower scores yielding longer log-transformed response times:
 
@@ -1388,7 +1377,8 @@ For all the models, the well-formedness score shows a clear effect on response t
 
 See section \@ref(sec:results1) for the interpretation of $\hat\beta$, and Appendix \@ref(appendix:b) for the complete output of the models. 
 
-####  Descriptive adequacy {#sec:posterior2}
+### (ii) Descriptive adequacy {-}
+<!-- ####  Descriptive adequacy {#sec:posterior2} -->
 
 The null model is shown in Figure \@ref(fig:NullFit) as a baseline. The slight differences in predictions for different clusters are due to individual differences in the accuracy. Recall that  we subset the response times conditional on the monosyllabic response ('1') to the forced-choice task. This means that when participants gave more monosyllabic answers for a specific  cluster, their adjusted intercept will have a greater influence on the predictions of the model for that cluster. In addition, clusters with fewer monosyllabic responses show more variability in their predictions (e.g., /lf/ vs. /fl/).
 
@@ -1414,7 +1404,8 @@ predictions$null %>%
     # ggtitle("Null model fit")
 ```
 
-#### Traditional sonority models fit {#sec:traditionalModelfit}
+### (ii.a) Traditional sonority models fit {-}
+<!-- #### Traditional sonority models fit {#sec:traditionalModelfit} -->
 
 (ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness.
 ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
@@ -1517,7 +1508,8 @@ In contrast, the MSD models present multiple levels of well-formedness for onset
 
 To conclude, an observation of the model fit of the four traditional sonority models brings up a mixed picture: the *col* hierarchy (*SSP/MSD~col~*) appears to result in a better fit with onset falls and plateaus, while *MSD~exp~* seems to have the best fit with onset rises. The advantage of *col* with respect to onset falls and plateaus is related to the treatment of voiceless fricative-stop clusters as better-formed (onset plateau rather than of onset fall). The advantage of *MSD~exp~* with respect to onset rises is related to its ability to separate the voiceless-initial from the voiced-initial onset rises, such that voiceless-initial rises are better-formed. These selective and partial advantages, as we detail next, are built-in into the logic of the NAP models.
 
-#### NAP~td~ model fit {#sec:NAPtdModelfit}
+### (ii.b) NAP~td~ model fit {-}
+<!-- #### NAP~td~ model fit {#sec:NAPtdModelfit} -->
 
 (ref:NAPtdFit) *NAP~td~* model fit (plot details are same as above).
 ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
@@ -1546,7 +1538,8 @@ A comparison with Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) shows that 
 
 However, *NAP~td~* appears to exhibit some redundancy, as suggested by the large degree of overlap between some of the predictive distributions of the model. This is apparent from the overlap between violins in the two right-most columns (3, 5) as well as the three left-most columns (-1, 0, 1) in Figure \@ref(fig:NAPtdFit).
 
-#### NAP~bu~ model fit {#sec:NAPbuModelfit}
+### (ii.c) NAP~bu~ model fit {-}
+<!-- #### NAP~bu~ model fit {#sec:NAPbuModelfit} -->
 
 (ref:NAPbuFit) *NAP~bu~* model fit (plot details are same as above).
 ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"}
@@ -1568,7 +1561,13 @@ predictions$NAP_bu %>%
 ```
 
 *NAP~bu~* is different from all the other models in that it presents scores that are specific to each token in a continuous rather than ordinal scale (i.e., the distances between scores in the model are also predicted). See Figure \@ref(fig:NAPbuFit) where the expected negative correlation between response time and well-formedness appears to generally hold for both the predictions and the data of the model fit of *NAP~bu~*.
-Our criteria for goodness of fit based on the plots (see opening Subsection \@ref(sec:traditionalModelfit)) are not all valid when evaluating *NAP~bu~* since we have no classes and no vertical dispersion of data (points) within levels, and since the horizontal overlap of predictions (violins) between levels requires different interpretation. However, the criterion for inclusion of data within the model's predictions naturally also holds for the *NAP~bu~* fit, which fails to include the data for the nasal plateaus /nm/ and /mn/ within their respective predictive distribution (a failure that is shared by the traditional models; Subsection \@ref(sec:traditionalModelfit)). Furthermore, *NAP~bu~* also fails to include the /z/-initial clusters---/zm/ and /zv/---within their respective predictive distribution.
+Our criteria for goodness of fit based on the plots (see opening Subsection 
+\@ref(sec:results2)) (iia)
+<!-- \@ref(sec:traditionalModelfit))  -->
+are not all valid when evaluating *NAP~bu~* since we have no classes and no vertical dispersion of data (points) within levels, and since the horizontal overlap of predictions (violins) between levels requires different interpretation. However, the criterion for inclusion of data within the model's predictions naturally also holds for the *NAP~bu~* fit, which fails to include the data for the nasal plateaus /nm/ and /mn/ within their respective predictive distribution (a failure that is shared by the traditional models; Subsection 
+\@ref(sec:results2)) (iia).
+<!-- \@ref(sec:traditionalModelfit)).  -->
+Furthermore, *NAP~bu~* also fails to include the /z/-initial clusters---/zm/ and /zv/---within their respective predictive distribution.
 
 (ref:SonFitAll) Combined sonority models fit (small reduced versions, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. 
 ```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.5,.5,.5,.5,.5,.5), fig.show="hold", fig.align = "default"}
@@ -1681,7 +1680,8 @@ The failures in the fit of the *NAP~bu~* model can be split into two types:
 (ii) syllables beginning with a voiced sibilant---*zval* and *zmal*---which received results that pattern with faster responses, reflecting well-formedness underestimation by the model. 
 These results may be taken to suggest that the distinctive high-frequency aperiodic energy of sibilants has a top-down repeller effect on the nucleus, despite additional periodic energy, while nasals, that can attract the nucleus in German (syllabic nasals occur in German), have a top-down attraction effect on the nucleus.[^cf-td]  
 
-#### Model comparison {#sec:ModelComparison2}
+### (iii) Model comparison {-}
+<!-- #### Model comparison {#sec:ModelComparison2} -->
 
 While the model fits give us an insight into the behavior of each model with respect to the data, they are not well-suited to compare the different models against a consistent criterion. To do that, we run out-of-sample predictions using cross-validation to test each model's ability to predict unseen items.
 Results of the model comparisons (see Table \@ref(tab:resultsmodels)) reveal a very clear advantage of *NAP~td~*
@@ -1716,7 +1716,10 @@ The right-most column in Table \@ref(tab:resultsmodels), *weight*, shows model a
 *NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%.
 All the other traditional models together contribute only 11% to this picture.
 
-Model weights can be informative with respect to complementarity vs. redundancy because the ability to contribute to the maximized score entails some uniqueness. This can explain why the two *exp*-based models, *SSP/MSD~exp~*, did not contribute at all with zero weight. Looking at the model fits in Subsection \@ref(sec:posterior2), it stands to reason that the main apparent advantage of the *exp* sonority hierarchy over the *col* sonority hierarchy in predicting onset rises is already subsumed by *NAP~td~*'s predictions, such that *SSP/MSD~exp~* had no unique contribution to add when stacked alongside superior *SSP/MSD~col~* and *NAP~td~* together.
+Model weights can be informative with respect to complementarity vs. redundancy because the ability to contribute to the maximized score entails some uniqueness. This can explain why the two *exp*-based models, *SSP/MSD~exp~*, did not contribute at all with zero weight. Looking at the model fits in Subsection 
+\@ref(sec:results2) (ii), 
+<!-- \@ref(sec:posterior2),  -->
+it stands to reason that the main apparent advantage of the *exp* sonority hierarchy over the *col* sonority hierarchy in predicting onset rises is already subsumed by *NAP~td~*'s predictions, such that *SSP/MSD~exp~* had no unique contribution to add when stacked alongside superior *SSP/MSD~col~* and *NAP~td~* together.
 
 The fact that the highest ranked NAP model in this comparison, *NAP~td~*, did not completely neutralize the contribution of *NAP~bu~* is telling, especially given that *NAP~td~* subsumed more of the traditional models, although it is more similar to *NAP~bu~* in principle. This is evident from Table \@ref(tab:resultsmodelsohnenapbu), in which we took *NAP~bu~* out of the equation, resulting in 88% contribution by *NAP~td~* and only 3%  contribution by *SSP~col~*.
 
@@ -1818,7 +1821,9 @@ This learning ability has its own universal functional limitations (e.g., memory
 These symbols and their probabilistic distributions are constantly updated, reflecting knowledge about the distribution of categorically analyzable units of speech.
 
 In this study we modeled the notion of sonority and its contribution to linguistic sound systems with the assumption that the two different routes---bottom-up and top-down---are both active when speech inferences take place. Our bottom-up model uses continuous data (periodic energy), dynamic principles (competition), and functional motivation (syllables carry pitch information) to model sonority. Our top-down model is based on generalizations over the discrete segmental units in the system and their distribution given bottom-up sonority restrictions (note that our top-down model is not a true statistical learner for reasons that we explain in Subsection \@ref(sec:complementary)). 
-The results of model stacking based on our experimental data (see Table \@ref(tab:modelstacking)) support this move, showing that the combined contribution of the two NAP models is relatively complementary (65% + 14%), and, when taken together, they make 79% of the combined contribution of all the six sonority models to a maximized elpd score, reflecting the combined ability of the models to predict unseen forms (see Subsection \@ref(sec:ModelComparison2)).
+The results of model stacking based on our experimental data (see Table \@ref(tab:modelstacking)) support this move, showing that the combined contribution of the two NAP models is relatively complementary (65% + 14%), and, when taken together, they make 79% of the combined contribution of all the six sonority models to a maximized elpd score, reflecting the combined ability of the models to predict unseen forms (see Subsection 
+\@ref(sec:results2)) (iii).
+<!-- \@ref(sec:ModelComparison2)). -->
 
 ##		Phonotactic division of labor: A holistic account of /s/-stop clusters {#sec:division}
 
@@ -1841,7 +1846,9 @@ Furthermore, our dual-route strategy to modeling (see Subsection \@ref(sec:dicho
 Lastly, this study also provides compelling motivations and strong evidence that support our proposal to link the notion of sonority with periodic energy in the acoustic signal. This proposal entails that the role of periodic energy is of great importance to linguistic analysis of speech, beyond the scope of the current proposal---a partial list of relevant topics includes:
 (i) acoustic descriptions of prosodic *weight* and prosodic *prominence* in terms of periodic energy mass;
 (ii) automatic syllabification procedures based on the smoothed fluctuation rates of the periodic energy curve [useful for a myriad of tasks, including speech rhythmicity studies; see, e.g., @galves2002sonoritysk; @tilsen2013speech; @rasanen2018pre; @lin2020hit], and;
-(iii) improved visualization and analysis of pitch contours in intonation research based on the interaction of the periodic energy and the F0 trajectories [see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy].
+(iii) improved visualization and analysis of pitch contours in intonation research based on the interaction of the periodic energy and the F0 trajectories 
+(see Anonymous 2018; Anonymous 2019; and Anonymous 2020 for continuous visualization and quantification procedures in intonational phonology using periodic energy).
+<!-- [see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy]. -->
 
 <!-- # Methods {#sec:methods} -->
 
@@ -1892,15 +1899,15 @@ Lastly, this study also provides compelling motivations and strong evidence that
 <!-- A training session of ten trials preceded the experimental trials, allowing the participants to familiarize with the task, and allowing the experimenter to adjust listening volume and monitor potential problems and misunderstandings regarding the task. -->
 
 
-# CRediT authorship contribution statement {-}
-**AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization. 
+<!-- # CRediT authorship contribution statement {-} -->
+<!-- **AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization.  -->
 
-# Acknowledgements {-}
-This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language".
-<!-- This work was supported by the DAAD (German Academic Exchange Service), SFB 1252 "Prominence in Language", a.r.t.e.s. Graduate School for the Humanities Cologne and the University of Cologne. -->
+<!-- # Acknowledgements {-} -->
+<!-- This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language". -->
 
-<!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at https://tinyurl.com/y3l4avap.  -->
-<!-- https://tinyurl.com/y4gvobyp. -->
+<!-- # Note {-} -->
+<!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at -->
+<!-- https://tinyurl.com/5jxmjntx -->
 
 <!-- footnotes -->
 

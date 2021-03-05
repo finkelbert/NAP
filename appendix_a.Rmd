@@ -49,7 +49,6 @@ Participants were seated in a quiet room in front of a laptop computer (a MacBoo
 A training session of ten trials preceded the experimental trials, allowing the participants to familiarize with the task, and allowing the experimenter to adjust listening volume and monitor potential problems and misunderstandings regarding the task.
 
 ## Supplementary data  {-}
-<!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at https://tinyurl.com/y3l4avap.  -->
-Supplementary data to this article can be found online on *Open Science Framework* (OSF) at <https://tinyurl.com/y3l4avap>.
+Supplementary data to this article can be found online on *Open Science Framework* (OSF) at <https://tinyurl.com/5jxmjntx>.
 
 ## References {-}
