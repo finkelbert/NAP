@@ -12,19 +12,17 @@ authornote: |
   Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were made available during the review process and will remain available (see anonymized link: https://tinyurl.com/5jxmjntx).
 
 abstract: |
-  *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and evidently useful as a predictor of phonotactics (i.e., the propensity of different consonants and vowels to combine via concatenation).
-  Although widely-accepted, sonority lacks a clear basis in speech articulation or perception, and traditional sonority principles exhibit gaps in empirical coverage, while they are also not designed to be compatible with general cognitive capacities.
-  <!-- while being incompatible with general cognitive capacities. -->
-  Against the backdrop of traditional sonority accounts, which have been exclusively based on discrete and symbolic machinery to model sonority, we propose an incorporation of symbol-based and signal-based models to adequately account for sonority with two complementary models.
-  We claim that sonority is primarily a perceptual phenomenon related to the strength and quality of pitch perception, postulating a universal drive to optimize syllables as pitch-bearing units. We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we provide a novel principle that can account for syllabic well-formedness based on principles of competition in real-time; the *Nucleus Attraction Principle* (NAP).
-  We present two perception experiments that test our two NAP-based models against four traditional sonority models and we use a Bayesian data analysis approach to test and compare the different sonority models. We show that our two NAP models retain the highest degree of complementarity while one of them is clearly superior to all the other models we tested.
-  We interpret the results as providing strong support for our proposals: 
-  (i) the designation of periodic energy as sonority's correlate;
-  (ii) the incorporation of continuity in phonological models, and;
-  (iii) the dual-model strategy that separates and integrates symbol-based top-down processes and signal-based bottom-up processes.
-
+  *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and evidently useful as a predictor of phonotactics.
+  Although widely-accepted, sonority lacks a clear basis in speech articulation or perception, and traditional sonority principles, which were not designed to be compatible with cognitive capacities, exhibit systematic gaps in empirical coverage. Traditional sonority models have been exclusively based on discrete and symbolic machinery.
+  Against this backdrop, we propose an incorporation of symbol-based and signal-based models to adequately account for sonority with two complementary models.
+  We claim that sonority is primarily a perceptual phenomenon related to pitch, driving the optimization of syllables as pitch-bearing units. We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we provide a novel principle that can account for syllabic well-formedness, the *Nucleus Attraction Principle* (NAP).
+  We present two perception experiments that test our two NAP-based models against four traditional sonority models and we use a Bayesian data analysis approach to test and compare them. We show that our two NAP models retain the highest degree of complementarity while one of them is superior to all the other models we tested. 
+  We interpret the results as providing strong support for our proposals:
+  (i) the designation of periodic energy as sonority's correlate; 
+  (ii) the incorporation of continuity in phonological models, and; 
+  (iii) the dual- model strategy that separates and integrates symbol-based top-down processes and signal-based bottom-up processes.
   
-keywords          : "Sonority; Periodic energy; Bayesian data analysis; Phonetics--Phonology interface"
+keywords          : "Sonority; Periodic energy; Bayesian data analysis; Phonetics and Phonology"
 wordcount         : "X"
 
 bibliography      : ["bibs/r-references.bib", "bibs/methods.bib", "bibs/phon.bib", "bibs/phon_sk.bib"]
