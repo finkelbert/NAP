@@ -441,7 +441,8 @@ In contrast, the top-down route is based on linguistic experience and superficia
 
 ```{r prepare-mat-per, include=FALSE}
 # 60 x length of the audio file binned each 10 ms; 60 frequency bins with 10 ms for each column 
-dir_mats <- "data_tables/APPd_txt_matrices/AA/"
+dir_mats <- c("data_tables/APPd_txt_matrices/AA/",
+              "data_tables/APPd_txt_matrices/HN/")
 files_mat <- list.files(path=dir_mats, pattern="*.txt",full.names=TRUE)
 
 #creates a dataframe with 3 columns, the name of the syllable, syl, the time point, t, and the periodic energy, p
@@ -462,14 +463,16 @@ per_df <- map_dfr(files_mat, function(f){
 })
 # Periodic energy at every time point
 per_df_full <-  per_df %>%  group_by(syl,speaker) %>% 
-                mutate(smooth_per = smooth(per,"3RS3R")) 
+                mutate(smooth_per = unclass(smooth(per,"3RS3R"))) 
 #head(per_df_full)
 
 # ```
 # 
 # ```{r prepare-seg, include=FALSE}
 
-dir_seg <- "data_tables/praat_seg/AA/"
+dir_seg <- c("data_tables/praat_seg/AA/",
+             "data_tables/praat_seg/HN/")
+
 files_praat <- list.files(path=dir_seg, pattern="*.txt",full.names=T)
 seg_df <- map_dfr(files_praat, function(f){  
 #this is like a loop, it takes each file inside the f and does the following:
@@ -487,7 +490,7 @@ seg_df <- map_dfr(files_praat, function(f){
                text = str_extract_all(syl, ".")[[1]],
                position=row_number(),
                t = map2(tmin,tmax, ~ round(seq(.x,.y,.01)*1000))               ) %>%
-        tidyr::unnest() %>%
+        tidyr::unnest(cols = c(t)) %>%
         select(-tmin, -tmax)
 })
 
@@ -887,8 +890,9 @@ print(monosyl_plot_abs)
 
 ```
 
-```{r, include=FALSE}
+```{r, include=FALSE, message = FALSE}
 syl_t <- filter(syl_info) %>%
+  # Aviad: no idea why we are subsetting by "a"
     filter(text=="a" ) %>%
     group_by(NAP_bu, syl, speaker) %>%
     summarize(tmin = min(t))
@@ -1771,6 +1775,146 @@ comparison%>%
 
      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
 ```
+
+
+### Hebrew study
+
+> NEW
+
+```{r, include=FALSE}
+opensesame_hebrew <- "data_tables/confirmatory_results_Heb"
+
+files_hebrew <-
+    list.files(path=opensesame_hebrew,pattern="*.csv",full.names = TRUE)
+
+data_hebrew_all <- read_list_opensesame(files_hebrew, speaker="HN")
+
+data_hebrew <- data_hebrew_all %>%
+    filter(corrRT > 100)
+
+N_below_100 <- data_hebrew_all %>%
+    filter(corrRT < 100)
+
+## Sanity checks
+
+data_hebrew %>% group_by(type,correct) %>% summarize(mean(corrRT))
+
+subj_accuracy <- summarize(group_by(data_hebrew,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
+subj_accuracy %>% group_by(nchar) %>% summarize(mean(accuracy))
+
+bad_subj <- subj_accuracy %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
+    filter(acc < .75)
+
+mono_acc <- subj_accuracy %>% filter(nchar==4)
+bi_acc <- subj_accuracy %>% filter(nchar==5)
+bi_acc_excluded <- subj_accuracy %>% filter(nchar==5) %>% filter(accuracy > .74)
+
+mean_mono_acc <- mean(mono_acc$accuracy)
+mean_bi_acc <- mean(bi_acc$accuracy)
+mean_bi_acc_excluded <- mean(bi_acc_excluded$accuracy)
+
+# NO bad subject!
+
+data_hebrew <- data_hebrew %>% filter(!subj %in% bad_subj)
+
+```
+
+```{r brms-models, include=FALSE}
+
+if(file.exists("data_tables/RDS/m_hebrew.RDS")){
+    m_hebrew <- readRDS("data_tables/RDS//m_hebrew.RDS")
+ } else {
+     m_hebrew <- run_brms(data_hebrew, iter=4000, warmup=2000)
+     saveRDS(m_hebrew, file = "data_tables/RDS//m_hebrew.RDS")
+ }
+# 
+```
+```{r loo-models, include=FALSE}
+if(file.exists("data_tables/RDS/kfold_hebrew.RDS")){
+    kfold_hebrew <- readRDS("data_tables/RDS/kfold_hebrew.RDS")
+} else {
+     kfold_hebrew <- map(m_hebrew$models, kfold, folds = "stratified", group = "subj", K = 15)
+     saveRDS(kfold_hebrew, file = "data_tables/RDS/kfold_hebrew.RDS")
+    }
+```
+
+```{r weigths-models, include=FALSE}
+    
+## ## loo::compare(x=loo_pilot)
+## loo::compare(x=kfold_german)
+## loo::compare(x=kfold_german[-1])
+## loo::compare(x=kfold_german[-1][-6])
+## loo::compare(x=kfold_german[c("MSD_obs","SSP_obs","null")])
+
+
+## loo::loo_model_weights(x=loo_german)
+## compare(loo_german$NAP_td, loo_german$SSP_obs)
+## if(file.exists("data_tables/RDS/weights.RDS")){
+##     weights <- readRDS("data_tables/RDS/weights.RDS")
+## } else {
+    ## weights <-loo_model_weights(,kfold_german$MSD_obs)
+
+        ## xx <- ll_matrix[,c(2,3,4,5,6)]
+    ## wxx <- loo::stacking_weights(xx)
+    ## names(wxx) <-  colnames(xx)
+
+    ## saveRDS(weights, file = "data_tables/RDS/weights.RDS")
+## }
+```
+```{r loo-proc, include=FALSE}
+## w_a <- model_weights(m_german$models$MSD,
+##                    m_german$models$MSD_obs,
+##                    m_german$models$SSP,
+##                   ##  m_german$models$SSP_obs,
+##                   ## m_german$models$NAP_bu,
+##                   ## m_german$models$NAP_td,
+##                   ## m_german$models$null,
+##                    weights = "loo")
+
+
+data_german_s <- m_german$data
+
+
+## loos <- loo_german %>% map_dfc( ~
+##     .x$pointwise[,"elpd_loo"]
+##     ) %>% {setNames(.,paste0("elpd_",colnames(.)))}
+
+## data_german_s <-  data_german_s %>% bind_cols(loos)
+
+
+## data_g_summary <- data_german_s %>%
+##     group_by(stimulus, NAP_bu, NAP_td) %>%
+##     summarize_at(vars(starts_with("elpd")), mean)
+
+
+## loo_model_weights(loo_german)
+
+predictions <- m_german$models %>% map(~
+                     predict(.x,summary=FALSE) %>%
+                     array_branch(margin = 1) %>%
+                     map_dfr( ~ {
+                         data_german_s %>%
+                             mutate(pred= .x) %>%
+                             group_by(stimulus, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+                             summarize(pred = mean(pred))
+                     } )
+                 )
+
+```
+
+```{r fitplots, eval =TRUE, warning=FALSE, include=FALSE}
+data_RT <- data_german_s %>%
+    mutate(NAP = round(NAP_bu,7)) %>%
+    group_by(stimulus,NAP, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+    summarize(corrRT = mean(corrRT))  %>%
+    ## summarize(corrRT = mean(log(corrRT * 1000)))  %>%
+    bind_rows(tibble(NAP = seq(30,220,10)))  %>%
+#    bind_rows(tibble(NAP = seq(0.367355,.4825569,0.01))) %>%
+    filter(!is.na(stimulus))
+    
+```
+
+
 
 ### Discussion of confirmatory study {#sec:discussion2}
 
