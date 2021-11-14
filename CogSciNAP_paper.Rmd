@@ -1838,82 +1838,28 @@ if(file.exists("data_tables/RDS/kfold_hebrew.RDS")){
     }
 ```
 
-```{r weigths-models, include=FALSE}
+
+```{r resultsmodels, results = "asis"}
+
+comparison <- loo::loo_compare(x=kfold_hebrew)
+ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_hebrew)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
     
-## ## loo::compare(x=loo_pilot)
-## loo::compare(x=kfold_german)
-## loo::compare(x=kfold_german[-1])
-## loo::compare(x=kfold_german[-1][-6])
-## loo::compare(x=kfold_german[c("MSD_obs","SSP_obs","null")])
-
-
-## loo::loo_model_weights(x=loo_german)
-## compare(loo_german$NAP_td, loo_german$SSP_obs)
-## if(file.exists("data_tables/RDS/weights.RDS")){
-##     weights <- readRDS("data_tables/RDS/weights.RDS")
-## } else {
-    ## weights <-loo_model_weights(,kfold_german$MSD_obs)
-
-        ## xx <- ll_matrix[,c(2,3,4,5,6)]
-    ## wxx <- loo::stacking_weights(xx)
-    ## names(wxx) <-  colnames(xx)
-
-    ## saveRDS(weights, file = "data_tables/RDS/weights.RDS")
-## }
+    select(model, elpd = elpd_kfold, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff)%>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+ 
+     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.")
 ```
-```{r loo-proc, include=FALSE}
-## w_a <- model_weights(m_german$models$MSD,
-##                    m_german$models$MSD_obs,
-##                    m_german$models$SSP,
-##                   ##  m_german$models$SSP_obs,
-##                   ## m_german$models$NAP_bu,
-##                   ## m_german$models$NAP_td,
-##                   ## m_german$models$null,
-##                    weights = "loo")
-
-
-data_german_s <- m_german$data
-
-
-## loos <- loo_german %>% map_dfc( ~
-##     .x$pointwise[,"elpd_loo"]
-##     ) %>% {setNames(.,paste0("elpd_",colnames(.)))}
-
-## data_german_s <-  data_german_s %>% bind_cols(loos)
-
-
-## data_g_summary <- data_german_s %>%
-##     group_by(stimulus, NAP_bu, NAP_td) %>%
-##     summarize_at(vars(starts_with("elpd")), mean)
-
-
-## loo_model_weights(loo_german)
-
-predictions <- m_german$models %>% map(~
-                     predict(.x,summary=FALSE) %>%
-                     array_branch(margin = 1) %>%
-                     map_dfr( ~ {
-                         data_german_s %>%
-                             mutate(pred= .x) %>%
-                             group_by(stimulus, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
-                             summarize(pred = mean(pred))
-                     } )
-                 )
-
-```
-
-```{r fitplots, eval =TRUE, warning=FALSE, include=FALSE}
-data_RT <- data_german_s %>%
-    mutate(NAP = round(NAP_bu,7)) %>%
-    group_by(stimulus,NAP, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
-    summarize(corrRT = mean(corrRT))  %>%
-    ## summarize(corrRT = mean(log(corrRT * 1000)))  %>%
-    bind_rows(tibble(NAP = seq(30,220,10)))  %>%
-#    bind_rows(tibble(NAP = seq(0.367355,.4825569,0.01))) %>%
-    filter(!is.na(stimulus))
-    
-```
-
 
 
 ### Discussion of confirmatory study {#sec:discussion2}
