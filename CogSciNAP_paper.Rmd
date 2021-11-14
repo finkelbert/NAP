@@ -1819,7 +1819,7 @@ data_hebrew <- data_hebrew %>% filter(!subj %in% bad_subj)
 saveRDS(data_hebrew, "data_hebrew.RDS")
 ```
 
-```{r brms-models, include=FALSE}
+```{r brms-models-heb, include=FALSE}
 
 if(file.exists("data_tables/RDS/m_hebrew.RDS")){
     m_hebrew <- readRDS("data_tables/RDS//m_hebrew.RDS")
@@ -1829,7 +1829,7 @@ if(file.exists("data_tables/RDS/m_hebrew.RDS")){
  }
 # 
 ```
-```{r loo-models, include=FALSE}
+```{r loo-models-heb, include=FALSE}
 if(file.exists("data_tables/RDS/kfold_hebrew.RDS")){
     kfold_hebrew <- readRDS("data_tables/RDS/kfold_hebrew.RDS")
 } else {
