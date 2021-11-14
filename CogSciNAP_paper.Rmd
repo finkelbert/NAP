@@ -1816,7 +1816,7 @@ mean_bi_acc_excluded <- mean(bi_acc_excluded$accuracy)
 # NO bad subject!
 
 data_hebrew <- data_hebrew %>% filter(!subj %in% bad_subj)
-
+saveRDS(data_hebrew, "data_hebrew.RDS")
 ```
 
 ```{r brms-models, include=FALSE}
@@ -1839,7 +1839,17 @@ if(file.exists("data_tables/RDS/kfold_hebrew.RDS")){
 ```
 
 
-```{r resultsmodels, results = "asis"}
+
+```{r}
+est_SSP_exp <- results_txt(m_hebrew$models$SSP, "moSSP")
+est_MSD_exp <- results_txt(m_hebrew$models$MSD, "moMSD")
+est_SSP_col <- results_txt(m_hebrew$models$SSP_obs, "moSSP_obs")
+est_MSD_col <- results_txt(m_hebrew$models$MSD_obs, "moMSD_obs")
+est_NAP_td <- results_txt(m_hebrew$models$NAP_td, "moNAP_td")
+est_NAP_bu <- results_txt(m_hebrew$models$NAP_bu, "sNAP_bu")
+```
+
+```{r resultsmodelshebrew, results = "asis"}
 
 comparison <- loo::loo_compare(x=kfold_hebrew)
 ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
