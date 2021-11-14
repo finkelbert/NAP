@@ -1816,7 +1816,7 @@ mean_bi_acc_excluded <- mean(bi_acc_excluded$accuracy)
 # NO bad subject!
 
 data_hebrew <- data_hebrew %>% filter(!subj %in% bad_subj)
-saveRDS(data_hebrew, "data_hebrew.RDS")
+# saveRDS(data_hebrew, "data_hebrew.RDS")
 ```
 
 ```{r brms-models-heb, include=FALSE}
