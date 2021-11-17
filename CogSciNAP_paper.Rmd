@@ -907,7 +907,7 @@ other_scores <- read_tsv(file="data_tables/CCal_model_predictions_fix.tsv",
                                NAP_td = col_integer()
                            ))
 
-scores <- left_join(syl_t, other_scores) %>% ungroup() %>%
+scores_full <- left_join(syl_t, other_scores) %>% ungroup() %>%
     mutate(NAP_bu = ifelse(nchar(syl)<5,NAP_bu,NA_real_))
 ```
 
@@ -915,7 +915,7 @@ scores <- left_join(syl_t, other_scores) %>% ungroup() %>%
 
 ```{r, include=FALSE}
 
-read_list_opensesame <- function(list_files, speaker = "AA", scores_tbl= scores){
+read_list_opensesame <- function(list_files, speaker = "AA", scores_tbl= scores_full){
 
     GLIDES <- c("wlal","wnal","wzal","wsal","wtal","jmal","jval","jfal","jpal",               "welal","wenal","wezal","wesal","wetal","jemal","jeval","jefal","jepal")
 
@@ -2091,3 +2091,13 @@ papaja::render_appendix('./appendix_a.Rmd')
 ```{r echo = FALSE, results = 'asis', cache = FALSE}
 papaja::render_appendix('./appendix_b.Rmd')
 ```
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('./appendix_a.Rmd')
+```
+
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('./appendix_b.Rmd')
+```
+
