@@ -1841,13 +1841,22 @@ if(file.exists("data_tables/RDS/kfold_hebrew.RDS")){
 
 
 ```{r}
-est_SSP_exp <- results_txt(m_hebrew$models$SSP, "moSSP")
-est_MSD_exp <- results_txt(m_hebrew$models$MSD, "moMSD")
-est_SSP_col <- results_txt(m_hebrew$models$SSP_obs, "moSSP_obs")
-est_MSD_col <- results_txt(m_hebrew$models$MSD_obs, "moMSD_obs")
-est_NAP_td <- results_txt(m_hebrew$models$NAP_td, "moNAP_td")
-est_NAP_bu <- results_txt(m_hebrew$models$NAP_bu, "sNAP_bu")
+estHeb_SSP_exp <- results_txt(m_hebrew$models$SSP, "moSSP")
+estHeb_MSD_exp <- results_txt(m_hebrew$models$MSD, "moMSD")
+estHeb_SSP_col <- results_txt(m_hebrew$models$SSP_obs, "moSSP_obs")
+estHeb_MSD_col <- results_txt(m_hebrew$models$MSD_obs, "moMSD_obs")
+estHeb_NAP_td <- results_txt(m_hebrew$models$NAP_td, "moNAP_td")
+estHeb_NAP_bu <- results_txt(m_hebrew$models$NAP_bu, "sNAP_bu")
 ```
+
+
+* For *SSP~col~*: `r estHeb_SSP_col`.
+* For *SSP~exp~*: `r estHeb_SSP_exp`.
+* For *MSD~col~*: `r estHeb_MSD_col`.
+* For *MSD~exp~*: `r estHeb_MSD_exp`.
+* For *NAP~td~*: `r estHeb_NAP_td`.
+* For *NAP~bu~*: `r estHeb_NAP_bu`.
+
 
 ```{r resultsmodelshebrew, results = "asis"}
 
@@ -1871,6 +1880,108 @@ comparison%>%
      apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.")
 ```
 
+```{r resultsmodelsohnenapbu_heb, results="asis"}
+## NAPtd vs. trad
+kfold_ordinal <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_bu")]
+comparison <- loo::loo_compare(x=kfold_ordinal)
+ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_ordinal)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+
+    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+
+     apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL)
+```
+
+```{r resultsmodelsohnenaptd_heb, results="asis", collapse=FALSE}
+## NAPbu vs. trad
+kfold_classic <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_td")]
+comparison <- loo::loo_compare(x=kfold_classic)
+ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
+weights <- loo::stacking_weights(ll_matrix)
+names(weights) <- names(kfold_classic)
+
+comparison%>%
+    {bind_cols(model = rownames(.), as_tibble(.))} %>%
+    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
+           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+
+    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
+    left_join(weights %>% tibble::enframe() %>%
+              setNames(c("model", "weight")) %>%
+              arrange(-weight) %>%
+              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
+        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+
+     apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
+```
+
+
+
+```{r loo-proc_heb, include=FALSE}
+
+data_hebrew_s <- m_hebrew$data
+
+
+predictions_heb <- m_hebrew$models %>% map(~
+                     predict(.x,summary=FALSE) %>%
+                     array_branch(margin = 1) %>%
+                     map_dfr( ~ {
+                         data_hebrew_s %>%
+                             mutate(pred= .x) %>%
+                             group_by(stimulus, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+                             summarize(pred = mean(pred))
+                     } )
+                 )
+
+```
+
+```{r fitplots_heb, eval =TRUE, warning=FALSE, include=FALSE}
+
+data_RT_heb <- data_hebrew_s %>%
+    mutate(NAP = round(NAP_bu,7)) %>%
+    group_by(stimulus,NAP, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+    summarize(corrRT = mean(corrRT))  %>%
+    ## summarize(corrRT = mean(log(corrRT * 1000)))  %>%
+    bind_rows(tibble(NAP = seq(30,220,10)))  %>%
+#    bind_rows(tibble(NAP = seq(0.367355,.4825569,0.01))) %>%
+    filter(!is.na(stimulus))
+    
+```
+
+(ref:NullHebFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes).
+```{r NullHebFit,fig.cap = "(ref:NullHebFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"}
+predictions_heb$null %>%
+  mutate(NAP= round(NAP_bu,7)) %>%
+    # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
+    bind_rows(tibble(pred = seq(30,220,200)))  %>%
+    arrange(NAP) %>%
+    ggplot(aes(x = factor(NAP), y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
+    geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) + 
+    scale_x_discrete("Stimuli", breaks=NULL) +
+    # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
+    ylab("Response time (log scale)") +
+    ylim(600,1200) + 
+    coord_trans(y="log") +
+    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
+    # ggtitle("Null model fit")
+```
+
+
+
+---
 
 ### Discussion of confirmatory study {#sec:discussion2}
 
