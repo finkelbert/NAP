@@ -1934,7 +1934,7 @@ data_hebrew_s <- m_hebrew$data
 
 
 predictions_heb <- m_hebrew$models %>% map(~
-                     predict(.x,summary=FALSE) %>%
+                     predict(.x,summary=FALSE,ndraws = 2000)  %>%
                      array_branch(margin = 1) %>%
                      map_dfr( ~ {
                          data_hebrew_s %>%
