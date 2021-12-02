@@ -863,14 +863,13 @@ The full set of predictions for the 29 experimental targets is presented for all
 \end{table}
 
 (ref:com-monosyl) Well-formedness scores in the continuous *NAP~bu~* model shown in terms of the distance betweeen the center of mass of the entire syllable, *CoM~syllable~* (red vertical lines), and the center of mass of the left portion, *CoM~onset~* (blue vertical lines), whereby the periodic energy curve is shown with a black line. Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). Items are oredered by score (better-formed given smaller distance), from left-to-right and from top-to-bottom.
-
 ```{r com-monosyl, fig.cap = "(ref:com-monosyl)", fig.width=7, fig.asp=.8, warning=FALSE, dev="cairo_pdf"}
 # pdf.options(encoding = 'ISOLatin2')
 ordered_syl_abs <- unique(monosyl_info[order(monosyl_info$NAP_bu),]$syl)
 monosyl_info$syl <- factor(monosyl_info$syl, levels=ordered_syl_abs)
 monosyl_plot_abs <- 
   ggplot(monosyl_info, aes(x=t)) + ylim(-5.5,20) +
-  xlab("time (ms)") + ylab("Periodic energy (relative scale)") +
+  xlab("Time (ms)") + ylab("Periodic energy (relative scale)") +
   geom_line(aes(y=smog_per), color="black", alpha=1, size=1) +
   #
   geom_segment(aes(x=x_com_ons, xend=x_com_ons, y=-2, yend=13), color="royalblue1", size=1.5, alpha=.7, linetype = "solid", lineend = "round") +
@@ -1781,6 +1780,66 @@ comparison%>%
 
 > NEW
 
+```{r monosylHN, include=FALSE}
+
+monosyl_info_HN <- filter(syl_info,
+                       nchar(as.character(syl))==4,
+                       speaker == "HN")
+
+monosyl_info_HN$text[which(monosyl_info_HN$text=="c")] <- "ʃ"
+# monosyl_info_HN$text[which(monosyl_info_HN$text=="c")] <- "U+0283"
+# monosyl_info_HN$text[which(monosyl_info_HN$text=="c")] <- "\textesh"
+
+
+monosyl_info_HN$syl <- as.factor(monosyl_info_HN$syl)
+monosyl_info_HN <- mutate(group_by(monosyl_info_HN,syl),
+                       ##  loess smoothing
+                       smog_per = predict(loess(log_per~t, data=monosyl_info_HN$syl, span=0.19, degree = 1, na.rm=T)))
+
+### change negatives to 0
+monosyl_info_HN$smog_per[(monosyl_info_HN$smog_per<0)]=0
+
+monosyl_info_HN <- mutate(group_by(monosyl_info_HN, syl, position),
+                       pos_mid = round(mean(t),-1),
+                       pos_end = ifelse(position<4, max(t), NA))
+
+monosyl_info_HN <- mutate(group_by(monosyl_info_HN, syl),
+                       ylim_com_ons = ifelse(t==round(com_onset,-1)&t<lead(t), smog_per, NA),
+                       ylim_com_syl = ifelse(t==round(com_syl,-1)&t<lead(t), smog_per, NA),
+                       x_com_ons = ifelse(t==round(com_onset,-1)&t<lead(t), com_onset, NA),
+                       x_com_syl = ifelse(t==round(com_syl,-1)&t<lead(t), com_syl, NA))
+
+```
+
+
+(ref:com-monosylHeb) Well-formedness scores in the continuous *NAP~bu~* model shown in terms of the distance betweeen the center of mass of the entire syllable, *CoM~syllable~* (red vertical lines), and the center of mass of the left portion, *CoM~onset~* (blue vertical lines), whereby the periodic energy curve is shown with a black line. Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). Items are oredered by score (better-formed given smaller distance), from left-to-right and from top-to-bottom.
+```{r com-monosylHeb, fig.cap = "(ref:com-monosylHeb)", fig.width=7, fig.asp=.8, warning=FALSE, dev="cairo_pdf"}
+# pdf.options(encoding = 'ISOLatin2')
+ordered_syl_abs <- unique(monosyl_info_HN[order(monosyl_info_HN$NAP_bu),]$syl)
+monosyl_info_HN$syl <- factor(monosyl_info_HN$syl, levels=ordered_syl_abs)
+monosyl_plot_abs <- 
+  ggplot(monosyl_info_HN, aes(x=t)) + ylim(-5.5,20) +
+  xlab("Time (ms)") + ylab("Periodic energy (relative scale)") +
+  geom_line(aes(y=smog_per), color="black", alpha=1, size=1) +
+  #
+  geom_segment(aes(x=x_com_ons, xend=x_com_ons, y=-2, yend=13), color="royalblue1", size=1.5, alpha=.7, linetype = "solid", lineend = "round") +
+  geom_segment(aes(x=x_com_syl, xend=x_com_syl, y=-2, yend=13),color="red", size=1.5, alpha=.6, linetype = "solid", lineend = "round") +
+  geom_segment(aes(x=x_com_syl, xend=com_onset, y=-2, yend=-2), color="black", size=.5, alpha=1, linetype = "solid", arrow = arrow(length = unit(0.07, "npc"))) +
+  # geom_text(aes(x=(x_com_syl+com_onset)/2, y=-5, label=paste0(round(NAP_bu)," ms")), size=3, check_overlap=T) + 
+  geom_text(aes(x=(x_com_syl+com_onset)/2, y=-5, label=paste0(round(NAP_bu)," ms")), size=3, family = "Charis SIL", check_overlap=T) +
+  #
+  geom_segment(aes(x=pos_end, xend=pos_end, y=0, yend=20), color="grey", size=.5, alpha=.2, linetype = "dotted") +
+  # geom_text(aes(x=pos_mid,y=17.5,label=text), size=5, check_overlap=T) +
+  geom_text(aes(x=pos_mid,y=17.5,label=text), size=5, family = "Charis SIL", check_overlap=T) + #family = "Charis SIL",
+  #
+  facet_wrap(~syl, ncol=5) +
+  theme(text = element_text(family = "Charis SIL"), panel.background = element_blank(), axis.title = element_text(size = 12), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8), strip.text = element_blank())
+  # theme(panel.background = element_blank(), axis.title = element_text(size = 12, family="sans"), axis.text.y = element_blank(), axis.ticks = element_blank(), axis.text.x = element_text(size = 8, family="sans"), strip.text = element_blank())
+print(monosyl_plot_abs)
+
+```
+
+
 ```{r, include=FALSE}
 opensesame_hebrew <- "data_tables/confirmatory_results_Heb"
 
@@ -1972,13 +2031,139 @@ predictions_heb$null %>%
     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) + 
     scale_x_discrete("Stimuli", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
-    ylab("Response time (log scale)") +
+    ylab("log RT (Hebrew)") +
     ylim(600,1200) + 
     coord_trans(y="log") +
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
     # ggtitle("Null model fit")
 ```
 
+(ref:SSPcolHebFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness.
+```{r SSPcolHebFit,fig.cap = "(ref:SSPcolHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
+
+predictions_heb$SSP_obs %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(SSP_obs)) %>%
+    arrange(SSP_obs) %>%
+    mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
+    xlab(bquote(italic(SSP[col])~scores)) + ylab("log RT (Hebrew)") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# +
+        # ggtitle(bquote(italic(SSP[col])~fit))
+   }
+```
+(ref:SSPexpHebFit) *SSP~exp~* model fit (plot details are same as above).
+```{r SSPexpHebFit,fig.cap = "(ref:SSPexpHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
+
+predictions_heb$SSP %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(SSP)) %>%
+    arrange(SSP) %>%
+    mutate(SSP = factor(SSP, levels= unique(SSP)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
+    xlab(bquote(italic(SSP[exp])~scores)) +
+       ylab("log RT (Hebrew)") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        # ggtitle(bquote(italic(SSP[exp])~fit))
+     }
+```
+(ref:MSDcolHebFit) *MSD~col~* model fit (plot details are same as above).
+```{r MSDcolHebFit,fig.cap = "(ref:MSDcolHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
+
+predictions_heb$MSD_obs %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(MSD_obs)) %>%
+    arrange(MSD_obs) %>%
+    mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
+    xlab(bquote(italic(MSD[col])~scores)) + ylab("log RT (Hebrew)") +
+        ylim(600,1200) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        # ggtitle(bquote(italic(MSD[col])~fit))
+     }
+```
+(ref:MSDexpHebFit) *MSD~exp~* model fit (plot details are same as above).
+```{r MSDexpHebFit,fig.cap = "(ref:MSDexpHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
+
+predictions_heb$MSD %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(MSD)) %>%
+    arrange(MSD) %>%
+    mutate(MSD = factor(MSD, levels= unique(MSD)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
+    xlab(bquote(italic(MSD[exp])~scores)) + ylab("log RT (Hebrew)") +
+        ylim(600,1200) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        # ggtitle(bquote(italic(MSD[exp])~fit))
+        }
+```
+
+(ref:NAPtdHebFit) *NAP~td~* model fit (plot details are same as above).
+```{r NAPtdHebFit,fig.cap = "(ref:NAPtdHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
+
+predictions_heb$NAP_td %>% 
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+    arrange(NAP_td) %>%
+    mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+  { ggplot(., aes(x = NAP_td, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") +
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
+  xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") +
+      ylim(600,1200) + 
+      coord_trans(y="log") +
+      theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+      # ggtitle(bquote(italic(NAP[td])~fit))
+  }
+
+```
+
+(ref:NAPbuHebFit) *NAP~bu~* model fit (plot details are same as above).
+```{r NAPbuHebFit,fig.cap = "(ref:NAPbuHebFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"}
+
+predictions_heb$NAP_bu %>% 
+  mutate(NAP= round(NAP_bu,7)) %>%
+    bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
+    arrange(NAP) %>%
+    ggplot(aes(x = factor(NAP), y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
+    geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") +
+    scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) +
+    ylab("log RT (Hebrew)") +
+    ylim(600,1200) + 
+    coord_trans(y="log") +
+    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+    # ggtitle(bquote(italic(NAP[bu])~fit))
+```
 
 
 ---
