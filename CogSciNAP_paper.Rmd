@@ -72,6 +72,7 @@ library(tidyr)
 library(loo)
 library(brms)
 library(ggrepel)
+options(dplyr.summarise.inform = FALSE)
 ```
 
 # Introduction
@@ -2163,6 +2164,65 @@ predictions_heb$NAP_bu %>%
     coord_trans(y="log") +
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
     # ggtitle(bquote(italic(NAP[bu])~fit))
+```
+
+
+
+
+
+```{r }
+
+
+# BN:  this takes a relatively long time, I store it the first time:
+if(file.exists("data_tables/RDS/predictions_heb_by_subj.RDS")){
+    predictions_heb_by_subj <- readRDS("data_tables/RDS//predictions_heb_by_subj.RDS")
+ } else {
+   predictions_heb_by_subj <- m_hebrew$models %>% map(~
+                     predict(.x,summary=FALSE,ndraws = 2000)  %>%
+                     array_branch(margin = 1) %>%
+                     map_dfr( ~ {
+                         data_hebrew_s %>%
+                             mutate(pred= .x) %>%
+                         # BN: the difference with the previous code is that
+                         # I group by subj as well
+                         # you can remove the stimulus maybe
+                             group_by(subj, stimulus, NAP_bu, SSP, SSP_obs, MSD, MSD_obs , NAP_td) %>%
+                             summarize(pred = mean(pred))
+                     } )
+                 )
+     saveRDS(predictions_heb_by_subj, file = "data_tables/RDS//predictions_heb_by_subj.RDS")
+ }
+
+
+data_RT_heb_by_subj <- data_hebrew_s %>%
+    mutate(NAP = round(NAP_bu,7)) %>%
+  #BN: I do the same here
+    group_by(subj, stimulus,NAP, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+    summarize(corrRT = mean(corrRT))  %>%
+    bind_rows(tibble(NAP = seq(30,220,10)))  %>%
+    filter(!is.na(stimulus))
+    
+#BN:  this plots SSP_obs, you can adapt it
+predictions_heb_by_subj$SSP_obs %>%
+  left_join(data_RT_heb_by_subj) %>%
+    ungroup() %>%
+  filter(!is.na(SSP_obs)) %>%
+  #BN:  there are too many subjects to show all of them together:
+    filter(as.numeric(subj) < 10 ) %>%
+    arrange(SSP_obs) %>%
+    mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
+    xlab(bquote(italic(SSP[col])~scores)) + ylab("log RT (Hebrew)") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) +
+       #BN:  I arrange them by subj
+        facet_wrap(~ subj)
+   }
 ```
 
 
