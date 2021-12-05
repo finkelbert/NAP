@@ -75,20 +75,56 @@ library(ggrepel)
 ```
 
 # Introduction
-The study of the sound system of human languages has been one of the longest-standing intersections of symbol-based categorical analyses on the one hand, and signal-based continuous descriptions on the other. These two different types of analysis stand at the core of the distinction many researchers make between *phonetics* and *phonology*, where the former addresses continuous and measurable aspects of the speech signal (e.g., articulation, perception and acoustics), while the latter addresses categorical aspects of the speech signal using discrete and symbolic units (e.g., consonants, vowels, and syllables).
 
-The following study proposes an incorporation of symbol-based and signal-based models to adequately account for the notion of *sonority*, which has played a pivotal role in the vast linguistic literature on syllables, most often invoked as a powerful tool to predict phonotactics, i.e., the propensity of different consonants and vowels to combine via concatenation.
+<!-- ## tmp {-} -->
+The following work models the contribution of *sonority* to phonology in a manner that attempts to be compatible with general auditory perception and cognition, as well as with lingustic theory. This is in contrast to many of the traditional formal principles in linguistic theory that do not tend to specify how they interact with general systems of human capacity, such as auditory perception or sensorimotor control. Traditional linguistic principles are mostly generalizations that explain linguistic typologies as they have been depicted in symbolic writing systems. 
 
-We claim that sonority is primarily a perceptual phenomenon related to the strength and quality of pitch perception, postulating a universal drive to optimize syllables as pitch-bearing units (see Section \@ref(sec:dynamic)). We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we provide a novel principle that can account for syllabic well-formedness based on general principles of competition in real-time; the *Nucleus Attraction Principle* (NAP).
+The prevailing sonority-related principles such as the *Sonority Sequencing Principle* (SSP) and its derivatives are, indeed, generalizations of the latter type.
+Our novel proposals in this study achieve a better empirical coverage compared to different versions of the SSP that we test in a set of perception tasks, while, at the same time, provide a more comprehensive explanation than common formal linguistic principles to the notion of sonority in phonology and phonetics.
 
-We implement NAP with two complementary models (see Section \@ref(sec:modelimp)): (i) a bottom-up model that accepts continuous information and links it to predicted categorical responses, and; (ii) a top-down model that is based on discrete segments---consonants and vowels---and their potential distribution within syllables. In suggesting two different models for a single phenomenon we follow the pioneering works of Howard Pattee [see @pattee2012lawssk] rather than the more commonly assumed *Occam’s razor*,
-which requires theories to be as simple as possible, thus creating a strong preference for a single model over two different models in explaining a certain phenomenon.
-In contrast, Pattee views the link between continuous dynamic modes on the one hand, and discrete symbolic modes on the other hand, as a crucial characteristic of all language systems, yet he argues further that no single model can adequately describe both the continuous and discrete modes of the system, as they are not reducible to a single mathematical representation.
+We assume here that a proper model of speech perception involves a bottom-up route and a related, yet separate, top-down route. While both inference routes are able to select between discrete alternatives as the goal of their process, they arrive there in two very different ways: bottom-up processes are based on continuous events and top-down processes are based on existing sets of discrete symbolic entities. In that sense, top-down models are more reminiscent of traditional formal principles in phonology, that, more often than not, cover processes that start and end with discrete symbols.
 
-In section \@ref(sec:experiments) we present two perception experiments---exploratory and confirmatory---that we designed in order to test our two NAP-based models (applying NAP with bottom-up and top-down approaches) against four traditional sonority models, considering two types of common sonority hierarchies (with and without distinctions between obstruents), and two types of common sonority principles---the *Sonority Sequencing Principle* (SSP) and the *Minimum Sonority Distance* (MSD).
-We use a Bayesian data analysis approach to test and compare the six different sonority models. Whereas all the different models are found to be capable of predicting the experimental results to some extent, the symbolic top-down version of NAP is shown to be superior and appears to exhibit the highest degree of complementarity with the bottom-up model of NAP.
+As two complementary inference routes, the top-down and bottom-up modes should not be considered equal. The bottom-up route is the source of learned linguistic distinctions, it is functionally motivated by the laws of physics and the limitations of the perceptual and cognitive systems of the communicating agents. In contrast, the top-down route is based on linguistic experience and superficial inferences that reflect the history of the symbols in the system (i.e., the distributional probabilities of recurring patterns). In other words, top-down inferences reflect functionally motivated behaviors only indirectly, as the outcome of learning the superficial expressions of functionally-motivated (bottom-up) dynamics.
 
-Our synergy of proposals has many advantages over traditional sonority accounts, including methodological aspects, theoretical perspectives, and, most importantly, a better empirical coverage. In Subsection \@ref(sec:discussion2) we interpret the results of the main confirmatory experiment and in Section \@ref(sec:genDiscussion) we address some relevant implications, 
+Sonority in our account is strongly related to pitch perception and the major role of pitch in  all language systems, whether it's lexical *tone* in tone languages or the post-lexical *tunes* of intonation systems in all the known human languages. We claim that sonority is related to the strength and quality of pitch perception, serving as a measure of *pitch intelligibility* that acts as a universal drive to optimize the pitch-bearing ability of syllabic units (see Section \@ref(sec:dynamic)). 
+
+We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we propose a novel principle that accounts for syllabic well-formedness based on general principles of competition in real-time, the *Nucleus Attraction Principle* (NAP). We implement NAP with two complementary models (see Section \@ref(sec:modelimp)): (i) a bottom-up model that directly analyzes continuous acoustic signals; and (ii) a top-down model that is based on discrete segments such as consonants and vowels. 
+
+<!-- We claim that sonority is primarily a perceptual phenomenon related to the strength and quality of pitch perception, postulating a universal drive to optimize syllables as pitch-bearing units (see Section \@ref(sec:dynamic)). We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we provide a novel principle that can account for syllabic well-formedness based on general principles of competition in real-time; the *Nucleus Attraction Principle* (NAP). -->
+
+<!-- --- -->
+
+<!-- The study of the sound system of human languages has been one of the longest-standing intersections of symbol-based categorical analyses on the one hand, and signal-based continuous descriptions on the other. These two different types of analysis stand at the core of the distinction many researchers make between *phonetics* and *phonology*, where the former addresses continuous and measurable aspects of the speech signal (e.g., articulation, perception and acoustics), while the latter addresses categorical aspects of the speech signal using discrete and symbolic units (e.g., consonants, vowels, and syllables). -->
+
+<!-- The following study proposes an incorporation of symbol-based and signal-based models to adequately account for the notion of *sonority*, which has played a pivotal role in the vast linguistic literature on syllables, most often invoked as a powerful tool to predict phonotactics, i.e., the propensity of different consonants and vowels to combine via concatenation. -->
+
+<!-- We claim that sonority is primarily a perceptual phenomenon related to the strength and quality of pitch perception, postulating a universal drive to optimize syllables as pitch-bearing units (see Section \@ref(sec:dynamic)). We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we provide a novel principle that can account for syllabic well-formedness based on general principles of competition in real-time; the *Nucleus Attraction Principle* (NAP). -->
+
+<!-- We implement NAP with two complementary models (see Section \@ref(sec:modelimp)): (i) a bottom-up model that directly analyzes continuous acoustic signals; and (ii) a top-down model that is based on discrete segments---consonants and vowels.  -->
+
+<!-- accepts continuous information  -->
+<!-- which selects between categorical alternatives; -->
+<!-- and links it to predicted categorical responses,  -->
+<!-- and (ii) a top-down model that is based on discrete segments---consonants and vowels---and their potential distribution within syllables.  -->
+
+
+<!-- In suggesting two different models for a single phenomenon we follow the pioneering works of Howard Pattee [see @pattee2012lawssk] rather than the more commonly assumed *Occam’s razor*, -->
+<!-- which requires theories to be as simple as possible, thus creating a strong preference for a single model over two different models in explaining a certain phenomenon. -->
+<!-- In contrast, Pattee views the link between continuous dynamic modes on the one hand, and discrete symbolic modes on the other hand, as a crucial characteristic of all language systems, yet he argues further that no single model can adequately describe both the continuous and discrete modes of the system, as they are not reducible to a single mathematical representation. -->
+
+<!-- In section \@ref(sec:experiments)  -->
+We present
+a series of syllable count tasks in Section \@ref(sec:experiments), 
+<!-- perception experiments that we  -->
+designed in order to test our two NAP-based models (applying NAP with bottom-up and top-down approaches) against four traditional sonority models, considering two types of common sonority hierarchies together with two types of common sonority principles---the *Sonority Sequencing Principle* (SSP) and the *Minimum Sonority Distance* (MSD).
+We use a Bayesian data analysis approach to test and compare the six different sonority models. Whereas all the different models are found to be capable of predicting the experimental results to a good extent, the symbolic top-down version of NAP is shown to be the superior model. The bottom-up model of NAP comes in second alongside a few of the traditional models. Interestingly, some of the results suggest a relatively high degree of complementarity between the two NAP models, even though they represent a the same principle. This is a desirable result for our framework, which advocates the need for two complementary models, both dynamic and symbolic.
+
+
+<!-- although they reflect the same  -->
+
+<!-- and appears to exhibit the highest degree of complementarity with the bottom-up model of NAP, which itself comes in second alongside certain traditional models. -->
+
+Our synergy of proposals has many advantages over traditional sonority accounts, including methodological aspects, theoretical perspectives, and, essentially, a better empirical coverage. In Subsection \@ref(sec:discussion2) we interpret the results of the main confirmatory experiments and in Section \@ref(sec:genDiscussion) we address some relevant implications, 
 where we discuss the usefulness of the top-down vs. bottom-up distinction instead of the common use of the phonology--phonetics dichotomy to express the distinction between discrete and continuous aspects of linguistic sound systems (Subsection \@ref(sec:dichotomies)).
 We also discuss the division of labor between sonority and other phonotactic factors, demonstrated with a holistic account of the phenomenon of /s/-stop clusters (Subsection \@ref(sec:division)), before we present our concluisons in Section \@ref(sec:conclusions). 
 <!-- and we provide the technical details on the procedures used in the experiments in Section \@ref(sec:methods). -->
@@ -97,18 +133,22 @@ In the remainder of this Introduction, we briefly present the relevant backgroun
 
 ## Sonority hierarchies {#sec:hierarchies}
 
-A sonority hierarchy is a single scale on which all consonant and vowel types can be ranked relative to each other.
+A sonority hierarchy is a single scale on which all consonants and vowels can be ranked relative to each other.
 <!-- [^cf-strength] -->
-Such hierarchies can be traced back centuries, and concepts akin to sonority hierarchies can be found already in the pioneering works of early Sanskrit grammarians.[^cf-sanskrit] 
+<!-- Such hierarchies can be traced back centuries, and concepts akin to sonority hierarchies can be found already in the pioneering works of early Sanskrit grammarians.[^cf-sanskrit]  -->
 Early versions of current sonority hierarchies often date back to @sievers1893grundzugesk; @jespersen1899fonetik; and @whitney1865relation, while @ohala1992alternatives even goes as far back as @debrosses1765traite.
 
-While the phonetic basis of sonority hierarchies remains controversial, phonological sonority hierarchies have been primarily based on repeated observations that revealed systematic behaviors of segmental distribution and syllabic organization within and across languages. The general consensus regarding the phonological sonority hierarchy thus stems from attested cross-linguistic phonotactic behaviors of different segmental classes, such as, for instance, the relatively high frequency of stop-liquid sequences in the onset of complex syllables (e.g., /kl/ in the English word ***cl**ean*) and the rarity of the opposite liquid-stop sequences at such onset positions, but not at the mirror-image coda position of syllables (e.g., /lk/ in the English word *mi**lk***). See examples in @zwicky1972notesk; @selkirk1984majorsk; @parker2002quantifying; @jany2007universal, and see @ohala1992alternatives for related criticism regarding the circularity that results from determining sonority hierarchies according to attested behavior without another independent (phonetic) variable.
+While the phonetic basis of sonority hierarchies remains controversial, phonological sonority hierarchies have been primarily based on repeated observations that revealed systematic behaviors of segmental distribution and syllabic organization within and across languages. The general consensus regarding the phonological sonority hierarchy thus stems from attested cross-linguistic phonotactic behaviors of different segmental classes, such as, for instance, the relatively high frequency of stop-liquid sequences in the onset of complex syllables (e.g., /kl/ in the English word ***cl**ean*) and the rarity of the opposite liquid-stop sequences at such onset positions, but not at the mirror-image coda position of syllables (e.g., /lk/ in the English word *mi**lk***). 
 
-Most common phonological sonority hierarchies group segment types into classes that primarily reflect the standard *manners of articulation* in traditional phonology. The distinct categories commonly used include *stops*, *fricatives*, *nasals*, *liquids*, *glides*, and *vowels*, often with additional distinctions such as voicing and vowel height.[^cf-liquid] Although there are many different proposals for sonority hierarchies [@parker2002quantifying found more than 100 distinct sonority hierarchies in the literature], a very basic hierarchy that seems to reach a considerable consensus, and is often cited in relation to Clements's [-@clements1990role] seminal paper is given in (\@ref(ex:scale)).
+<!-- See examples in @zwicky1972notesk; @selkirk1984majorsk; @parker2002quantifying; @jany2007universal, and see @ohala1992alternatives for related criticism regarding the circularity that results from determining sonority hierarchies according to attested behavior without another independent (phonetic) variable. -->
+
+Most common phonological sonority hierarchies group segment types into classes that primarily reflect the standard *manners of articulation* in traditional phonology. The distinct categories commonly used include *stops*, *fricatives*, *nasals*, *liquids*, *glides*, and *vowels*, often with additional distinctions such as voicing and vowel height.[^cf-liquid] 
+
+Although there are many different proposals for sonority hierarchies [@parker2002quantifying found more than 100 distinct sonority hierarchies in the literature], a very basic hierarchy that seems to reach a considerable consensus, and is often cited in relation to Clements's [-@clements1990role] seminal paper is given in (\@ref(ex:scale)).
 
 <!-- ```{=latex} -->
 \begin{exe} 
-\ex Obstruents $<$ Nasals $<$ Liquids $<$ Glides $<$ Vowels  \label{ex:scale} 
+\ex *Obstruents* $<$ *Nasals* $<$ *Liquids* $<$ *Glides* $<$ *Vowels*  \label{ex:scale} 
 \end{exe} 
 <!-- ``` -->
 
