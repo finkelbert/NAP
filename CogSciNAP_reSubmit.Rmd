@@ -963,10 +963,10 @@ summarize(group_by(data_pilot,subj,type),N=n()) %>% ungroup %>% distinct(type, N
 
 data_pilot %>% group_by(type,correct) %>% summarize(mean(corrRT))
 
-subj_accuracy <- summarize(group_by(data_pilot,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
-subj_accuracy %>% group_by(nchar) %>% summarize(mean(accuracy))
+subj_accuracyPilot <- summarize(group_by(data_pilot,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
+subj_accuracyPilot %>% group_by(nchar) %>% summarize(mean(accuracy))
 
-bad_subj <- subj_accuracy %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
+bad_subj <- subj_accuracyPilot %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
     filter(acc < .75)
 ```
 
@@ -1078,15 +1078,15 @@ summarize(group_by(data_german,subj,type),N=n()) %>% ungroup %>% distinct(type, 
 
 data_german %>% group_by(type,correct) %>% summarize(mean(corrRT))
 
-subj_accuracy <- summarize(group_by(data_german,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
-subj_accuracy %>% group_by(nchar) %>% summarize(mean(accuracy))
+subj_accuracyGer <- summarize(group_by(data_german,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
+subj_accuracyGer %>% group_by(nchar) %>% summarize(mean(accuracy))
 
-bad_subj <- subj_accuracy %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
+bad_subj <- subj_accuracyGer %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
     filter(acc < .75)
 
-mono_acc <- subj_accuracy %>% filter(nchar==4)
-bi_acc <- subj_accuracy %>% filter(nchar==5)
-bi_acc_excluded <- subj_accuracy %>% filter(nchar==5) %>% filter(accuracy > .74)
+mono_acc <- subj_accuracyGer %>% filter(nchar==4)
+bi_acc <- subj_accuracyGer %>% filter(nchar==5)
+bi_acc_excluded <- subj_accuracyGer %>% filter(nchar==5) %>% filter(accuracy > .74)
 
 mean_mono_acc <- mean(mono_acc$accuracy)
 mean_bi_acc <- mean(bi_acc$accuracy)
@@ -1399,7 +1399,7 @@ predictions$null %>%
     scale_x_discrete("Stimuli", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
     ylab("Response time (log scale)") +
-    ylim(600,1200) + 
+    ylim(600,1300) + 
     coord_trans(y="log") +
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
     # ggtitle("Null model fit")
@@ -1423,7 +1423,7 @@ predictions$SSP_obs %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
     xlab(bquote(italic(SSP[col])~scores)) + ylab("Response time (log scale)") +
-        ylim(600,1200) +
+        ylim(600,1300) +
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# +
         # ggtitle(bquote(italic(SSP[col])~fit))
@@ -1445,7 +1445,7 @@ predictions$SSP %>%
     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(SSP[exp])~scores)) +
        ylab("Response time (log scale)") +
-        ylim(600,1200) +
+        ylim(600,1300) +
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(SSP[exp])~fit))
@@ -1466,7 +1466,7 @@ predictions$MSD_obs %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[col])~scores)) + ylab("Response time (log scale)") +
-        ylim(600,1200) + 
+        ylim(600,1300) + 
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(MSD[col])~fit))
@@ -1487,7 +1487,7 @@ predictions$MSD %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[exp])~scores)) + ylab("Response time (log scale)") +
-        ylim(600,1200) + 
+        ylim(600,1300) + 
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(MSD[exp])~fit))
@@ -1526,7 +1526,7 @@ predictions$NAP_td %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
   xlab(bquote(italic(NAP[td])~scores)) + ylab("Response time (log scale)") +
-      ylim(600,1200) + 
+      ylim(600,1300) + 
       coord_trans(y="log") +
       theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
       # ggtitle(bquote(italic(NAP[td])~fit))
@@ -1555,7 +1555,7 @@ predictions$NAP_bu %>%
     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") +
     scale_x_discrete(bquote(italic(NAP[bu])~scores), breaks=NULL) +
     ylab("Response time (log scale)") +
-    ylim(600,1200) + 
+    ylim(600,1300) +
     coord_trans(y="log") +
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
     # ggtitle(bquote(italic(NAP[bu])~fit))
@@ -1776,6 +1776,426 @@ comparison%>%
 ```
 
 
+<!-- ### bySubjectGerman -->
+
+```{r bySubjectPlanGer, warning=FALSE}
+
+# BN:  this takes a relatively long time, I store it the first time:
+if(file.exists("data_tables/RDS/predictions_ger_by_subj.RDS")){
+    predictions_ger_by_subj <- readRDS("data_tables/RDS//predictions_ger_by_subj.RDS")
+ } else {
+   predictions_ger_by_subj <- m_german$models %>% map(~
+                     predict(.x,summary=FALSE,ndraws = 2000)  %>%
+                     array_branch(margin = 1) %>%
+                     map_dfr( ~ {
+                         data_german_s %>%
+                             mutate(pred= .x) %>%
+                         # BN: the difference with the previous code is that
+                         # I group by subj as well
+                         # you can remove the stimulus maybe
+                             group_by(subj, stimulus, NAP_bu, SSP, SSP_obs, MSD, MSD_obs , NAP_td) %>%
+                             summarize(pred = mean(pred))
+                     } )
+                 )
+     saveRDS(predictions_ger_by_subj, file = "data_tables/RDS//predictions_ger_by_subj.RDS")
+ }
+
+
+data_RT_ger_by_subj <- data_german_s %>%
+    mutate(NAP = round(NAP_bu,7)) %>%
+  #BN: I do the same here
+    group_by(subj, stimulus,NAP, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+    summarize(corrRT = mean(corrRT))  %>%
+    bind_rows(tibble(NAP = seq(30,220,10)))  %>%
+    filter(!is.na(stimulus))
+
+```
+
+
+<!-- ```{r bySubjectGerNAPbu1,fig.cap = "(ref:bySubjectGerNAPbu1)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- predictions_ger_by_subj$NAP_bu %>%  -->
+<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
+<!--     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
+<!--     filter(as.numeric(subj) < 5) %>% -->
+<!--     arrange(NAP) %>% -->
+<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_point(data= data_RT_ger_by_subj, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
+<!--     geom_text_repel(data= data_RT_ger_by_subj, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") + -->
+<!--     scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) + -->
+<!--     ylab("log RT (Hebrew)") + -->
+<!--     ylim(600,1200) +  -->
+<!--     coord_trans(y="log") + -->
+<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + facet_wrap(~ subj, ncol = 1) -->
+
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer1,fig.cap = "(ref:bySubjectGer1)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) < 6) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer2,fig.cap = "(ref:bySubjectGer2)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 5 & as.numeric(subj) < 10) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubjectGer3,fig.cap = "(ref:bySubjectGer3)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 9 & as.numeric(subj) < 14) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubjectGer4,fig.cap = "(ref:bySubjectGer4)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 13 & as.numeric(subj) < 18) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer5,fig.cap = "(ref:bySubjectGer5)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 17 & as.numeric(subj) < 22) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer6,fig.cap = "(ref:bySubjectGer6)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 21 & as.numeric(subj) < 26) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer7,fig.cap = "(ref:bySubjectGer7)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 25 & as.numeric(subj) < 30) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer8,fig.cap = "(ref:bySubjectGer8)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 29 & as.numeric(subj) < 34) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer9,fig.cap = "(ref:bySubjectGer9)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 33 & as.numeric(subj) < 38) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer10,fig.cap = "(ref:bySubjectGer10)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 37 & as.numeric(subj) < 42) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer11,fig.cap = "(ref:bySubjectGer11)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 41 & as.numeric(subj) < 46) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer12,fig.cap = "(ref:bySubjectGer12)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 45 & as.numeric(subj) < 50) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubjectGer13,fig.cap = "(ref:bySubjectGer13)", warning=FALSE, fig.asp=0.7, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_ger_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_ger_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 49) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (German)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+
+
 ### Hebrew study
 
 > NEW
@@ -1858,15 +2278,15 @@ N_below_100 <- data_hebrew_all %>%
 
 data_hebrew %>% group_by(type,correct) %>% summarize(mean(corrRT))
 
-subj_accuracy <- summarize(group_by(data_hebrew,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
-subj_accuracy %>% group_by(nchar) %>% summarize(mean(accuracy))
+subj_accuracyHeb <- summarize(group_by(data_hebrew,subj,nchar = nchar(stimulus)),n(),accuracy = mean(correct))
+subj_accuracyHeb %>% group_by(nchar) %>% summarize(mean(accuracy))
 
-bad_subj <- subj_accuracy %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
+bad_subj <- subj_accuracyHeb %>% filter(nchar==5) %>% summarize(acc=mean(accuracy)) %>%
     filter(acc < .75)
 
-mono_acc <- subj_accuracy %>% filter(nchar==4)
-bi_acc <- subj_accuracy %>% filter(nchar==5)
-bi_acc_excluded <- subj_accuracy %>% filter(nchar==5) %>% filter(accuracy > .74)
+mono_acc <- subj_accuracyHeb %>% filter(nchar==4)
+bi_acc <- subj_accuracyHeb %>% filter(nchar==5)
+bi_acc_excluded <- subj_accuracyHeb %>% filter(nchar==5) %>% filter(accuracy > .74)
 
 mean_mono_acc <- mean(mono_acc$accuracy)
 mean_bi_acc <- mean(bi_acc$accuracy)
@@ -2032,7 +2452,7 @@ predictions_heb$null %>%
     scale_x_discrete("Stimuli", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
     ylab("log RT (Hebrew)") +
-    ylim(600,1200) + 
+    ylim(600,1300) +
     coord_trans(y="log") +
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
     # ggtitle("Null model fit")
@@ -2053,7 +2473,7 @@ predictions_heb$SSP_obs %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
     xlab(bquote(italic(SSP[col])~scores)) + ylab("log RT (Hebrew)") +
-        ylim(600,1200) +
+        ylim(600,1300) +
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# +
         # ggtitle(bquote(italic(SSP[col])~fit))
@@ -2075,12 +2495,13 @@ predictions_heb$SSP %>%
     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(SSP[exp])~scores)) +
        ylab("log RT (Hebrew)") +
-        ylim(600,1200) +
+        ylim(600,1300) +
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(SSP[exp])~fit))
      }
 ```
+
 (ref:MSDcolHebFit) *MSD~col~* model fit (plot details are same as above).
 ```{r MSDcolHebFit,fig.cap = "(ref:MSDcolHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"}
 
@@ -2096,7 +2517,7 @@ predictions_heb$MSD_obs %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[col])~scores)) + ylab("log RT (Hebrew)") +
-        ylim(600,1200) + 
+        ylim(600,1300) + 
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(MSD[col])~fit))
@@ -2117,7 +2538,7 @@ predictions_heb$MSD %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
     xlab(bquote(italic(MSD[exp])~scores)) + ylab("log RT (Hebrew)") +
-        ylim(600,1200) + 
+        ylim(600,1300) + 
         coord_trans(y="log") +
         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
         # ggtitle(bquote(italic(MSD[exp])~fit))
@@ -2138,7 +2559,7 @@ predictions_heb$NAP_td %>%
     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") +
     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
   xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") +
-      ylim(600,1200) + 
+      ylim(600,1300) + 
       coord_trans(y="log") +
       theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
       # ggtitle(bquote(italic(NAP[td])~fit))
@@ -2159,11 +2580,312 @@ predictions_heb$NAP_bu %>%
     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") +
     scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) +
     ylab("log RT (Hebrew)") +
-    ylim(600,1200) + 
+    ylim(600,1300) + 
     coord_trans(y="log") +
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
     # ggtitle(bquote(italic(NAP[bu])~fit))
 ```
+
+
+### bySubjectHebrew
+
+```{r bySubjectPlanHeb, warning=FALSE}
+
+# BN:  this takes a relatively long time, I store it the first time:
+if(file.exists("data_tables/RDS/predictions_heb_by_subj.RDS")){
+    predictions_heb_by_subj <- readRDS("data_tables/RDS//predictions_heb_by_subj.RDS")
+ } else {
+   predictions_heb_by_subj <- m_hebrew$models %>% map(~
+                     predict(.x,summary=FALSE,ndraws = 2000)  %>%
+                     array_branch(margin = 1) %>%
+                     map_dfr( ~ {
+                         data_hebrew_s %>%
+                             mutate(pred= .x) %>%
+                         # BN: the difference with the previous code is that
+                         # I group by subj as well
+                         # you can remove the stimulus maybe
+                             group_by(subj, stimulus, NAP_bu, SSP, SSP_obs, MSD, MSD_obs , NAP_td) %>%
+                             summarize(pred = mean(pred))
+                     } )
+                 )
+     saveRDS(predictions_heb_by_subj, file = "data_tables/RDS//predictions_heb_by_subj.RDS")
+ }
+
+
+data_RT_heb_by_subj <- data_hebrew_s %>%
+    mutate(NAP = round(NAP_bu,7)) %>%
+  #BN: I do the same here
+    group_by(subj, stimulus,NAP, NAP_bu , SSP, SSP_obs , MSD , MSD_obs , NAP_td) %>%
+    summarize(corrRT = mean(corrRT))  %>%
+    bind_rows(tibble(NAP = seq(30,220,10)))  %>%
+    filter(!is.na(stimulus))
+
+```
+
+
+<!-- ```{r bySubjectNAPbu1,fig.cap = "(ref:bySubjectNAPbu1)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- predictions_heb_by_subj$NAP_bu %>%  -->
+<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
+<!--     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
+<!--     filter(as.numeric(subj) < 5) %>% -->
+<!--     arrange(NAP) %>% -->
+<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_point(data= data_RT_heb_by_subj, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
+<!--     geom_text_repel(data= data_RT_heb_by_subj, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") + -->
+<!--     scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) + -->
+<!--     ylab("log RT (Hebrew)") + -->
+<!--     ylim(600,1200) +  -->
+<!--     coord_trans(y="log") + -->
+<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + facet_wrap(~ subj, ncol = 1) -->
+
+
+<!-- ``` -->
+
+
+<!-- ```{r bySubject1,fig.cap = "(ref:bySubject1)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     filter(as.numeric(subj) < 5) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td))#, -->
+<!--            # stimulus = factor(stimulus, levels = unique(stimulus)) -->
+<!--            ) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject2,fig.cap = "(ref:bySubject2)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 4 & as.numeric(subj) < 9) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject3,fig.cap = "(ref:bySubject3)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 8 & as.numeric(subj) < 13) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject4,fig.cap = "(ref:bySubject4)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 12 & as.numeric(subj) < 17) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject5, fig.cap = "(ref:bySubject5)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 16 & as.numeric(subj) < 21) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject6,fig.cap = "(ref:bySubject6)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 20 & as.numeric(subj) < 25) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject7,fig.cap = "(ref:bySubject7)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 24 & as.numeric(subj) < 30) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject8,fig.cap = "(ref:bySubject8)", warning=FALSE, fig.asp=1.3, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 29 & as.numeric(subj) < 34) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
+
+<!-- ```{r bySubject9,fig.cap = "(ref:bySubject9)", warning=FALSE, fig.asp=0.4, dev="cairo_pdf"} -->
+
+<!-- #BN:  this plots NAP_td, you can adapt it -->
+<!-- predictions_heb_by_subj$NAP_td %>% -->
+<!--   left_join(data_RT_heb_by_subj) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(NAP_td)) %>% -->
+<!--   #BN:  there are too many subjects to show all of them together: -->
+<!--     # filter(as.numeric(subj) == 1 ) %>% -->
+<!--     filter(as.numeric(subj) > 33) %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =4, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =0.2) + -->
+<!--     xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
+<!--         # ylim(600,1200) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) + -->
+<!--        #BN:  I arrange them by subj -->
+<!--         facet_wrap(~ subj, ncol = 1) -->
+<!--    } -->
+
+<!-- ``` -->
 
 
 ---
