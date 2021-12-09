@@ -6,12 +6,15 @@
 <!-- {#sec:considerationlist} -->
 The following list summarizes concerns that were taken into consideration when constructing the stimulus set (see the full set in Table \@ref(tab:targetlist)):
 
-*	For the class of liquids we consider only the lateral /l/, disregarding the sub-class of rhotics that are phonetically varied and inconsistent across different languages. We therefore present no liquid plateau in the experimental set.
+* Glides were excluded from the experimental set due to their complex status, which is dependent on both structure and theory: a glide in the nucleus is considered a vowel, while a glide immediately adjacent to a nuclear vowel may be analyzed as a vowel in the nucleus, or as a consonant in the onset or coda positions, depending on language and analysis (namely, this depends on whether the language is considered to have *diphthong* or not, in itself not always a simple determination). Furthermore, clusters with glides in C~1~ are predicted to be ill-formed in all the models we consider, while clusters with glides in C~2~ are predicted to be well-formed in all of them. We do not expect them to be very informative with respect to our comparison.
 
-*	We use the alveolar /s/ for the class of voiceless sibilants (voiceless coronal fricatives). In *C*~1~ positions we also use the post-alveolar /ʃ/ to monitor language-specific effects that may appear due to restrictions in German, in which /ʃC/ onset clusters can be licit, while /sC/ onset clusters occur only marginally in loanwords.
-<!-- should not be allowed. -->
+*	For the class of liquids, only the lateral /l/ is used, disregarding the sub-class of *rhotics* that are phonetically very varied and highly inconsistent between different languages in terms of phonetic detail. This is also true for the liquids of two languages used in this study, Hebrew and German, that use a similar /l/ and more varied rhotics.
 
-*	We use stops only in *C*~2~ position. We avoid stops in *C*~1~ position since it is also the phrase-initial position of the stimuli, which is practically devoid of acoustic cues for the closure phase of the stop. Furthermore, we use only voiceless stops in order to keep the amount of stimuli reasonably low.
+*	The alveolar /s/ is used for the class of voiceless sibilants (voiceless coronal fricatives). In C~1~ positions, the post-alveolar /ʃ/ is also used to control for potential language-specific effects that may appear due to specific restrictions on /s/. For example, in German /ʃC/ onset clusters can be licit, while /sC/ onset clusters occur only marginally in loanwords.
+
+*	Stops are used only in C~2~ position, and only voiceless stops are used in order to keep the size of the stimulus set reasonably small. Stops in C~1~ position are avoided since as the phrase-initial position in the stimulus, it is practically devoid of acoustic cues for the closure phase of the stop [see @barry1984place], such that only the final transient burst serves as the acoustic trace of the stop in such clusters. Furthermore, note that all the stop-initial clusters (with the exclusion of *stop-stop* plateaus) are generally well-formed according to all the sonority models tested here, such that their informative *value* in this comparison is smaller than their *cost* in terms of the size of the stimulus set.
+
+* The set includes one instance of a dorsal consonant, /k/, which appears instead of the coronal /t/ as an alternative to a labial-coronal cluster, which would have required a labial liquid. Instead, the *coronal-dorsal* cluster /lk/ is used to retain the same direction of a labial-coronal cluster---both are front-to-back in terms of places of articulation. There are no other dorsals in the set (i.e., no fricative, nasal or liquid dorsal), as these tend to be relatively more marked and less consistent between languages.
 
 * We use one instance of the dorsal consonant /k/ instead of the coronal /t/ as an alternative to a labial-coronal cluster with a liquid in *C*~1~, thus retaining the same direction of a labial-coronal cluster (i.e., both labial-coronal and coronal-dorsal are front-to-back in terms of their places of articulation). We do not use other dorsals for fricative, nasal or liquid consonants, as these tend to be relatively more marked and more inconsistent between languages.
 
@@ -19,16 +22,17 @@ The following list summarizes concerns that were taken into consideration when c
 
 ## Audio recordings {-}
 <!-- {#sec:audio} -->
-Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker (the first author) in a sound attenuated booth at the phonetics laboratory of the University of Cologne. Speech was recorded via head-mounted headset condenser microphone (AKG C420), capturing mono digital files at a resolution of 44.1kHz sample-rate and 24 bit depth with a Metric Halo MIO 2882 audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with Goodhertz Good Dither dithering to be used in the perception task running on OpenSesame 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the APP Detector (see Subsection \@ref(sec:obtaining)) was also downgraded in sample-rate to 16kHz. Finally all audio takes, at all resolutions, were normalized to the same RMS target of -20dBFS.
+Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker, AA (the first author), and a phonetically trained native German speaker, HN, in a sound attenuated booth at the phonetics laboratory of the University of Cologne. Speech was recorded via head-mounted headset condenser microphone (AKG C420), capturing mono digital files at a resolution of 44.1kHz sample-rate and 24 bit depth with a Metric Halo MIO 2882 audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with Goodhertz Good Dither dithering to be used in the perception task running on OpenSesame 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the APP Detector (see Subsection \@ref(sec:obtaining)) was also downgraded in sample-rate to 16kHz. Finally all audio takes, at all resolutions, were normalized to the same RMS target of -20dBFS.
 
 \begin{exe}
-\ex \textbf{/ze maʁˈgiʃ \emph{CCal} kaˈʁe.ga/} (ʼit feels (like) \emph{CCal} at the momentʼ) \label{ex:sentence}
+\ex \textbf{/ze maʁˈgiʃ \emph{CCal} kaˈʁe.ga/} (Hebrew: ʼit feels (like) \emph{CCal} at the momentʼ) \label{ex:sentence1}
+\ex \textbf{er muss \emph{CCal} kaufen} (German: ʼhe must buy \emph{CCal}ʼ) \label{ex:sentence2}
 \end{exe}
 
 To record the stimuli, the combined 87 word-like tokens were embedded within carrier sentences, appearing in a non-final position with
 default declarative intonation
-in order to maintain consistent prosody. Carrier sentences were also designed to minimize potential effects of resyllabification as well as co-articulation by controlling the segmental makeup immediately preceding and following target words, see example in (\@ref(ex:sentence))
-(the original sentence elicitation lists are available at the OSF repository in mixed Hebrew and phonemic transcripts in the form of slide presentations, see link in the opening of Section \@ref(sec:experiments)).
+in order to maintain consistent prosody. Carrier sentences were also designed to minimize potential effects of resyllabification as well as co-articulation by controlling the segmental makeup immediately preceding and following target words, see examples in (\@ref(ex:sentence1)-\@ref(ex:sentence2))
+(the original sentence elicitation lists are available at the OSF repository in mixed Hebrew and phonemic transcripts in the form of the slide presentations that was used in this self-paced task, see link in the opening of Section \@ref(sec:experiments)).
 
 ## Obtaining periodic energy data {-}
 <!-- {#sec:obtaining} -->
