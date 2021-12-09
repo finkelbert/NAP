@@ -717,7 +717,7 @@ Sequencing principles can be understood as a mapping scheme between the ranks of
 Modern formulations of such principles, which use the ordinal sonority hierarchy to generalize over the phonotactics of consonantal sequences in terms of *sonority slopes* were developed mainly throughout the seventies and eighties of the twentieth century in seminal works such as @hooper1976introduction; @steriade1982greek; @selkirk1984majorsk; @harris1983syllable; @mohanan1986theory, and @clements1990role.
 <!-- [^cf-sequencingclassics] -->
 
-(ref:slopes-pl-lp) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *lpV*. The red line denotes the sonority slope of the onset cluster (i.e., the two onset consonants), while the grey line denotes the slope between the second consonant and the vowel at the nucleus position (always a rise in these cases). The angle of the red lines reflects the well-formed rising sonority slope of the onset cluster in *plV* and the ill-formed falling sonority slope of the onset cluster in *lpv*. Image taken from @@@.
+(ref:slopes-pl-lp) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *lpV*. The red line denotes the sonority slope of the onset cluster (i.e., the two onset consonants), while the grey line denotes the slope between the second consonant and the vowel at the nucleus position (always a rise in these cases). The angle of the red lines reflects the well-formed rising sonority slope of the onset cluster in *plV* and the ill-formed falling sonority slope of the onset cluster in *lpv*. Image taken from Anonymous (in press).
 ```{r slopes-pl-lp, fig.cap = "(ref:slopes-pl-lp)", fig.asp = .45, out.width = '100%', dev="cairo_pdf"}
 seg_type = c("Vowels","Glides","Liquids","Nasals","Voiced Fricatives","Voiced Stop", "Voiceless Fricatives","Voiceless Stops")
 seg_token = c("p","l","V","l","p","V") 
@@ -766,7 +766,7 @@ In this paper we focus on syllable-initial onset consonant clusters that precede
 
 The *Minimum Sonority Distance* [MSD; @steriade1982greek; @selkirk1984majorsk] is a well-known elaboration on the preferred angle of sonority slopes compared to basic applications of the SSP, given that the SSP makes no distinction between different angles of rising or falling slopes. The MSD was designed to prefer onset rises with steep slopes over onset rises with shallow slopes, under the assumption that consonantal sequences in the onset are preferred with a larger sonority distance between them. For instance, *plV* has a steeper rise compared to *bnV* and it is therefore better-formed according to the MSD (see Figure \@ref(fig:slopes-pl-bn)).[^cf-sdp] 
 
-(ref:slopes-pl-bn) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *bnV* (the red solid line denotes the sonority slope of the onset clusters). The angle of the red lines reflects a steeper rise for *plV* (left) compared with *bnV* (right), due to the larger sonority distance between the consonants in *plV*. Image taken from @@@.
+(ref:slopes-pl-bn) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *bnV* (the red solid line denotes the sonority slope of the onset clusters). The angle of the red lines reflects a steeper rise for *plV* (left) compared with *bnV* (right), due to the larger sonority distance between the consonants in *plV*. Image taken from Anonymous (in press).
 ```{r slopes-pl-bn, fig.cap = "(ref:slopes-pl-bn)", fig.asp = .4, out.width = '100%', dev="cairo_pdf"}
 seg_type = c("Vowels","Glides","Liquids","Nasals","Voiced Fricatives","Voiced Stop", "Voiceless Fricatives","Voiceless Stops")
 seg_token = c("p","l","V","b","n","V") 
@@ -920,7 +920,7 @@ Nucleus competition, much like sonority slopes, has a limited impact on syllable
 
 ###     Schematic NAP sketches {#sec:NAPsketch}
 
-(ref:nap-depictions) Schematic depictions of competition scenarios with symbolic CCV structures. The nucleus competition can be understood as the competition between the blue and the purple areas under the sonority curve. The two examples at the top row---*plV* and *lpV*---suggest replication of successful traditional predictions, while the three examples at the bottom row---*spV*, *sfV* and *nmV*---suggest a divergence from inherent failures of SSP-type models (see text for more details). Image taken from @@@.
+(ref:nap-depictions) Schematic depictions of competition scenarios with symbolic CCV structures. The nucleus competition can be understood as the competition between the blue and the purple areas under the sonority curve. The two examples at the top row---*plV* and *lpV*---suggest replication of successful traditional predictions, while the three examples at the bottom row---*spV*, *sfV* and *nmV*---suggest a divergence from inherent failures of SSP-type models (see text for more details). Image taken from Anonymous (in press).
 ```{r nap-depictions, fig.cap = "(ref:nap-depictions)", out.width = '100%', fig.align = 'center'}
 
 knitr::include_graphics(rep(c("extrenal_figures/napComb150.png")))
@@ -1108,7 +1108,6 @@ The top-down NAP model allows scores within a range that goes from -$\mathit{3}$
 ###   The Bottom-Up Dynamic NAP Model {#sec:napbu}
 
 There are various ways to calculate an estimation of the nucleus competition potential within syllables based on the periodic energy data of the acoustic signal. The method that we present here has the advantage of not relying on segmental landmarks that are categorical abstractions of the type that is assumed in the top-down model---they are not supposed to be available in the bottom-up route.
-<!-- See Chapter \@ref(sec:lingMod) and especially Section \@ref(sec:risenfall) for more on the problems related to the assumption of discrete segments in continuous signals of speech. -->
 
 (ref:com-4examples-1) Smoothed periodic energy curve (black) of the four syllables from the experimental stimuli---*lpal*, *nmal*, *vlal*, and *smal*. Red vertical line denotes the center of periodic mass of the entire syllable (*CoM~syllable~*), blue vertical line denotes the center of periodic mass of the left portion (*CoM~onset~*). Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). The distance between the two CoM landmarks is indicative of the energy displacement away from the syllabic center, reflecting the nucleus competition potential within the syllable (see details on this measurement in Subsection \@ref(sec:obtaining))
 ```{r com-4examples-1, fig.cap = "(ref:com-4examples-1)", fig.width=7, fig.asp=.6, warning=FALSE, dev="cairo_pdf"}
@@ -1346,7 +1345,6 @@ print(monosyl_plot_abs)
 
 ```
 
-<!-- --- -->
 
 <!-- participantsStuff -->
 
@@ -1426,8 +1424,6 @@ The exploratory study was administered in two versions, each with half of the fi
 <!-- [^cf-pilot]  -->
 The two different versions were evenly split between participants (each version was presented to six participants).
 
-<!-- The results of this exploratory study are presented below with the finalized parameters that we also applied to the confirmatory study that follows (Subsection \@ref(sec:experiment2)). Due to the small sample size and exploratory nature of the study, we present only the estimation values of Experiment 1, without going into the descriptive adequacy of the models, and without analysis of model comparison.  -->
-
 ####  Participants (Experiment 1)
 
 The exploratory study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Technische Hochschule Köln, who volunteered to participate in the study. The experiment was administered in a quiet room at the institute's facility in Cologne. The mean age of participants in the exploratory study was 25 (21--30).
@@ -1438,19 +1434,16 @@ Experiments 2 and 3 are the main confirmatory studies conducted after finalizing
 
 The difference between Experiment 2 and 3 concerns the native language of the subjects, and, as a consequence, the stimulus set in use. Experiment 2 tested German speaking subjects on stimulus set AA (Hebrew speaker), while Experiment 3 tested Hebrew speaking subjects on stimulus set HN (German speaker).
 
-####  Participants (Experiment 2)
+####  Participants: Experiment 2
 
 Fifty-one native German speakers (29 female, 19 male, and 3 "other") participated in Experiment 2, of which 48 were monolingual (the 3 bilingual speakers had Polish, Low German, and Hebrew as their heritage language). The vast majority (30 out of 51) were between the ages 19-29. Eight participants were between 30-39, and 11 participants were between 40-59 years old. There were also two younger participants, between 13 and 18 years old. The vast majority (49 of 51 participants) were right-handed. Of the 51 participants, 34 were students at the University of Cologne who took part in the experiment at the sound attenuated booth of the phonetics laboratory. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation. 
 
 We excluded the responses from one participant who failed in our participant inclusion criterion requiring accuracy of at least 75% with bi-vocalic fillers. The bi-vocalic fillers of the forms /CəCal/ and /əCCal/ link correct responses to the disyllabic choice ("2"), and we expect relatively few monosyllabic choices ("1") in response to stimuli with two separate vowels. 
 Indeed, the overall average accuracy of all the 51 participants, when responding to bi-vocalic filler stimuli, was 96%. The excluded participant achieved a much lower accuracy score for bi-vocalic fillers, nearing chance-level with 65%.
 
-<!-- ### Designing Experiment 3  -->
+####  Participants: Experiment 3
 
-<!-- The design of Experiment 3 was similar to Experiment 2, only here the subjects were native Hebrew speakers, listening to stinlus set HN, featuring recordings of a native German speaker. -->
-
-####  Participants (Experiment 3)
-
+TBA.
 
 ## Data analysis {#sec:datanlysis}
 
@@ -1472,23 +1465,6 @@ We use posterior predictive checking to examine the descriptive adequacy or "fit
 
 ### (iii) Model comparison {-}
 For model comparison, we examine the out-of-sample predictive accuracy of the different models using k-fold (k=15) cross validation stratified by subjects.^[Pareto smoothed importance sampling approximation to leave-one-out cross validation  [implemented in the package `loo`; @vehtariPracticalBayesianModel2017; @vehtariParetoSmoothedImportance2015] failed to yield stable estimates.] Cross validation evaluates the different models with respect to their predictive accuracy, that is, how well the models generalize to new data.
-
-
-<!-- ## Experiment 1: Exploratory pilot study (Experiment 1) {#sec:experiment1} -->
-
-<!-- Given the various novelties in our proposal, the methodologies for data collection, data extraction, and model implementation were first tested on a small body of real data that we collected before finalizing our methodologies (namely model implementations in Subsection \@ref(sec:modelimp) and the various procedural details in  -->
-<!-- Appendix \@ref(appendix:a)). -->
-<!-- We used this exploratory study to test our methodologies and to explore the possibilities for properly estimating nucleus competition in each of the NAP models.  -->
-
-<!-- The exploratory study was administered in two versions, each with half of the fillers and all of the targets in one block, yielding a total of 58 data points per subject (29 fillers + 29 targets, no repetitions).[^cf-pilot] The two different versions were evenly split between participants (each version was presented to six participants). -->
-
-<!-- The results of this exploratory study are presented below with the finalized parameters that we also applied to the confirmatory study that follows (Subsection \@ref(sec:experiment2)). Due to the small sample size and exploratory nature of the study, we present only the estimation values of Experiment 1, without going into the descriptive adequacy of the models, and without analysis of model comparison.  -->
-
-<!-- ###		Participants {#sec:participants1} -->
-
-<!-- The exploratory study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Technische Hochschule Köln, who volunteered to participate in the study. The experiment was administered in a quiet room at the institute's facility in Cologne. The mean age of participants in the exploratory study was 25 (21--30). -->
-
-<!-- ### Experiment 1: Estimation {#sec:results1} -->
 
 ##  Results: Estimations
 
@@ -1586,45 +1562,13 @@ For all the models, the well-formedness score shows a clear effect on response t
 
 Notice that the posterior of the effect of well-formedness, $\hat\beta$, is not comparable across models. For the ordinal models, it represents the distance between two adjacent categories had they been equidistant, or in other words, $\hat\beta$ multiplied by the number of categories minus one represents the increase in log-scale between the first and the last category. This means that it is highly affected by the number of categories. For the continuous bottom-up model, $NAP_{bu}$, $\beta$ represents, the increase in log-scale for one unit in the well-formedness scale. To make it concrete, between, /lpal/ and /lkal/ there are `r lkal_nap -lpal_nap` units (`r lkal_nap` and `r lpal_nap` respectively); and between /lkal/ and /spal/ there are `r spal_nap  -lkal_nap` units (since their NAP scores are `r spal_nap` and `r lkal_nap` respectively). However, for all the models, $\hat\beta$ is negative, indicating that well-formedness is associated with faster responses. See Appendix \@ref(appendix:b) for the complete output of the models.
 
-<!-- ### Discussion of exploratory study {#sec:discussion1} -->
 The results shown here reflect the final state of the models in the exploratory stage, which is the same as the state of the models in the confirmatory stage. Importantly, the results of the confirmatory studies, Experiments 2-3, which are statistically much more robust, remain consistent with those of Experiment 1, which had a relatively small number of observations. As such, Experiment 1 was not designed to distinguish between the models and it will not be shown here further in the presentation of the results. 
-
-
-<!-- Note that the exploratory study, Experiment 1,  -->
-<!-- which was administered while the various parameters of the models were still undergoing development and change, was not designed to distinguish between the models, as it had a relatively small number of observations -->
-<!-- was not designed to distinguish between the models, as it had a relatively small number of observations  -->
-<!-- and it was administered while the various parameters of the models were still undergoing development and change.  -->
-
-<!-- The exploratory study was used to fine-tune and settle on our techniques and to finalize our models, with emphasis on our two novel NAP-based models. -->
-<!-- The final versions of all the models in the exploratory study, which are presented here, did not fail in the estimation results, suggesting that they are all well-suited for the confirmatory task. Importantly, the results of the following confirmatory studies (Experiments 2-3), which are statistically much more robust, remain consistent with those of Experiment 1. -->
-
-<!-- ## Experiment 2: Confirmatory study {#sec:experiment2} -->
-
-<!-- Experiment 2 was the main confirmatory study conducted after finalizing our hypotheses and methodologies with the data from Experiment 1. Each experimental block in Experiment 2 consisted of two repetitions of the target words (2 $\times$ 29 $=$ 58) and one trial of each filler word (1 $\times$ 58). The experiment consisted of two blocks with randomized trials, generating altogether four repetitions of the target words (4 $\times$ 29 $=$ 116) and two repetitions of the filler words (2 $\times$ 58 $=$ 116), yielding a total of 232 data points per subject.  -->
-
-<!-- ### Participants {#sec:participants2} -->
-
-<!-- Fifty-one native German speakers (29 female, 19 male, and 3 "other") participated in the experiment, of which 48 were monolingual (the 3 bilingual speakers had Polish, Low German, and Hebrew as their heritage language). The vast majority (30 out of 51) were between the ages 19-29. Eight participants were between 30-39, and 11 participants were between 40-59 years old. There were also two younger participants, between 13 and 18 years old. The vast majority (49 of 51 participants) were right-handed. Of the 51 participants, 34 were students at the University of Cologne who took part in the experiment at the sound attenuated booth of the phonetics laboratory. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation.  -->
-
-<!-- We excluded the responses from one participant who failed in our participant inclusion criterion requiring accuracy of at least 75% with bi-vocalic fillers. The bi-vocalic fillers of the forms /CəCal/ and /əCCal/ link correct responses to the disyllabic choice ("2"), and we expect relatively few monosyllabic choices ("1") in response to stimuli with two separate vowels.  -->
-<!-- Indeed, the overall average accuracy of all the 51 participants, when responding to bi-vocalic filler stimuli, was 96%. The excluded participant achieved a much lower accuracy score for bi-vocalic fillers, nearing chance-level with 65%. -->
-
-<!-- ### Experiment 2: Estimation {#sec:results2} -->
-
-<!-- ### (i) Estimation {-} -->
-<!-- #### Estimation {#sec:estimation2} -->
-
-<!-- For all the models, the well-formedness score shows a clear effect on response times, with lower scores yielding longer log-transformed response times: -->
-
-<!-- See section \@ref(sec:results1) for the interpretation of $\hat\beta$, and Appendix \@ref(appendix:b) for the complete output of the models.  -->
 
 ##  Results: Descriptive adequacy
 
 <!-- ### Experiment 2: Descriptive adequacy -->
-
 <!-- ### (ii) Descriptive adequacy {-} -->
 <!-- ####  Descriptive adequacy {#sec:posterior2} -->
-
 ### Null models
 
 The null models are shown in Figure \@ref(fig:NullFit) as baselines in the respective experiments. The slight differences in predictions for different clusters are due to individual differences in the accuracy. Recall that  we subset the response times conditional on the monosyllabic response ('1') to the forced-choice task. This means that when participants gave more monosyllabic answers for a specific  cluster, their adjusted intercept will have a greater influence on the predictions of the model for that cluster. In addition, clusters with fewer monosyllabic responses show more variability in their predictions (e.g., /lf/ vs. /fl/).
@@ -1667,32 +1611,10 @@ predictions_heb$null %>%
     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
     # ggtitle("Null model fit")
 
-
 ```
 
-<!-- (ref:NullFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes). -->
-<!-- ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"} -->
-<!-- predictions$null %>% -->
-<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
-<!--     # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
-<!--     bind_rows(tibble(pred = seq(30,220,200)))  %>% -->
-<!--     arrange(NAP) %>% -->
-<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
-<!--     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) +  -->
-<!--     scale_x_discrete("Stimuli", breaks=NULL) + -->
-<!--     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) + -->
-<!--     ylab("Response time (log scale)") + -->
-<!--     ylim(600,1300) +  -->
-<!--     coord_trans(y="log") + -->
-<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL")) -->
-<!--     # ggtitle("Null model fit") -->
-
-<!-- ``` -->
-
 <!-- ### (ii.a) Traditional sonority models fit {-} -->
-### SSP models {#sec:traditionalModelfit}
+### SSP and MSD models {#sec:traditionalModelfit}
 
 (ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness.
 ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
@@ -1734,29 +1656,6 @@ predictions_heb$SSP_obs %>%
    }
 
 ```
-
-<!-- (ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. -->
-<!-- ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions$SSP_obs %>% -->
-<!--   left_join(data_RT) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(SSP_obs)) %>% -->
-<!--     arrange(SSP_obs) %>% -->
-<!--     mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = SSP_obs, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) + -->
-<!--     xlab(bquote(italic(SSP[col])~scores)) + ylab("Response time (log scale)") + -->
-<!--         ylim(600,1300) + -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# + -->
-<!--         # ggtitle(bquote(italic(SSP[col])~fit)) -->
-<!--    } -->
-<!-- ``` -->
-
 
 (ref:SSPexpFit) *SSP~exp~* model fit (plot details are same as above).
 ```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
@@ -1801,30 +1700,7 @@ predictions_heb$SSP %>%
 
 ```
 
-<!-- (ref:SSPexpFit) *SSP~exp~* model fit (plot details are same as above). -->
-<!-- ```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions$SSP %>% -->
-<!--   left_join(data_RT) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(SSP)) %>% -->
-<!--     arrange(SSP) %>% -->
-<!--     mutate(SSP = factor(SSP, levels= unique(SSP)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = SSP, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
-<!--     xlab(bquote(italic(SSP[exp])~scores)) + -->
-<!--        ylab("Response time (log scale)") + -->
-<!--         ylim(600,1300) + -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--         # ggtitle(bquote(italic(SSP[exp])~fit)) -->
-<!--      } -->
-<!-- ``` -->
-
-### MSD models {#sec:MSDModelfit}
+<!-- ### MSD models {#sec:MSDModelfit} -->
 
 (ref:MSDcolFit) *MSD~col~* model fit (plot details are same as above).
 ```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
@@ -1867,29 +1743,6 @@ predictions_heb$MSD_obs %>%
 
 ```
 
-<!-- (ref:MSDcolFit) *MSD~col~* model fit (plot details are same as above). -->
-<!-- ```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions$MSD_obs %>% -->
-<!--   left_join(data_RT) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(MSD_obs)) %>% -->
-<!--     arrange(MSD_obs) %>% -->
-<!--     mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = MSD_obs, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
-<!--     xlab(bquote(italic(MSD[col])~scores)) + ylab("Response time (log scale)") + -->
-<!--         ylim(600,1300) +  -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--         # ggtitle(bquote(italic(MSD[col])~fit)) -->
-<!--      } -->
-<!-- ``` -->
-
-
 (ref:MSDexpFit) *MSD~exp~* model fit (plot details are same as above).
 ```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
@@ -1931,27 +1784,6 @@ predictions_heb$MSD %>%
 
 ```
 
-<!-- (ref:MSDexpFit) *MSD~exp~* model fit (plot details are same as above). -->
-<!-- ```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions$MSD %>% -->
-<!--   left_join(data_RT) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(MSD)) %>% -->
-<!--     arrange(MSD) %>% -->
-<!--     mutate(MSD = factor(MSD, levels= unique(MSD)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = MSD, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
-<!--     xlab(bquote(italic(MSD[exp])~scores)) + ylab("Response time (log scale)") + -->
-<!--         ylim(600,1300) +  -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--         # ggtitle(bquote(italic(MSD[exp])~fit)) -->
-<!--         } -->
-<!-- ``` -->
 
 We consider a good fit in the case of the ordinal models to be roughly characterized by the following three criteria:
 (i) the data is contained within the predictions, i.e., the red points appear within the respective violins;
@@ -2010,28 +1842,6 @@ predictions_heb$NAP_td %>%
 
 ```
 
-<!-- (ref:NAPtdFit) *NAP~td~* model fit (plot details are same as above). -->
-<!-- ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions$NAP_td %>%  -->
-<!--   left_join(data_RT) %>% -->
-<!--     ungroup() %>% -->
-<!--     arrange(NAP_td) %>% -->
-<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--   { ggplot(., aes(x = NAP_td, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+ -->
-<!--   xlab(bquote(italic(NAP[td])~scores)) + ylab("Response time (log scale)") + -->
-<!--       ylim(600,1300) +  -->
-<!--       coord_trans(y="log") + -->
-<!--       theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--       # ggtitle(bquote(italic(NAP[td])~fit)) -->
-<!--   } -->
-
-<!-- ``` -->
-
 Although *NAP~td~* is an ordinal model like all the traditional sonority models, it follows a different rationale (see Subsection \@ref(sec:naptdmodel)), whereby the distinct categories of the model estimate nucleus competition to reflect well-formedness. Figure \@ref(fig:NAPtdFit) shows that *NAP~td~* succeeds in containing all the data (points) within the respective predictions (blue violins). 
 A comparison with Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) shows that *NAP~td~* is the only model to achieve this.
 
@@ -2039,7 +1849,6 @@ However, *NAP~td~* appears to exhibit some redundancy, as suggested by the large
 
 <!-- ### (ii.c) NAP~bu~ model fit {-} -->
 <!-- ### NAP~bu~ models {#sec:NAPbuModelfit} -->
-
 (ref:NAPbuFit) *NAP~bu~* model fit (plot details are same as above).
 ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
@@ -2074,25 +1883,6 @@ predictions_heb$NAP_bu %>%
     # ggtitle(bquote(italic(NAP[bu])~fit))
 
 ```
-
-<!-- (ref:NAPbuFit) *NAP~bu~* model fit (plot details are same as above). -->
-<!-- ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions$NAP_bu %>%  -->
-<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
-<!--     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
-<!--     arrange(NAP) %>% -->
-<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
-<!--     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") + -->
-<!--     scale_x_discrete(bquote(italic(NAP[bu])~scores), breaks=NULL) + -->
-<!--     ylab("Response time (log scale)") + -->
-<!--     ylim(600,1300) + -->
-<!--     coord_trans(y="log") + -->
-<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--     # ggtitle(bquote(italic(NAP[bu])~fit)) -->
-<!-- ``` -->
 
 *NAP~bu~* is different from all the other models in that it presents scores that are specific to each token in a continuous rather than ordinal scale (i.e., the distances between scores in the model are also predicted). See Figure \@ref(fig:NAPbuFit) where the expected negative correlation between response time and well-formedness appears to generally hold for both the predictions and the data of the model fit of *NAP~bu~*.
 Our criteria for goodness of fit based on the plots (see opening Subsection 
@@ -2214,165 +2004,8 @@ The failures in the fit of the *NAP~bu~* model can be split into two types:
 (ii) syllables beginning with a voiced sibilant---*zval* and *zmal*---which received results that pattern with faster responses, reflecting well-formedness underestimation by the model. 
 These results may be taken to suggest that the distinctive high-frequency aperiodic energy of sibilants has a top-down repeller effect on the nucleus, despite additional periodic energy, while nasals, that can attract the nucleus in German (syllabic nasals occur in German), have a top-down attraction effect on the nucleus.[^cf-td]  
 
-
-<!-- ### Experiment 3: Descriptive adequacy -->
-
-
-<!-- (ref:NullHebFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes). -->
-<!-- ```{r NullHebFit,fig.cap = "(ref:NullHebFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"} -->
-<!-- predictions_heb$null %>% -->
-<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
-<!--     # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
-<!--     bind_rows(tibble(pred = seq(30,220,200)))  %>% -->
-<!--     arrange(NAP) %>% -->
-<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
-<!--     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) +  -->
-<!--     scale_x_discrete("Stimuli", breaks=NULL) + -->
-<!--     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) + -->
-<!--     ylab("log RT (Hebrew)") + -->
-<!--     ylim(600,1300) + -->
-<!--     coord_trans(y="log") + -->
-<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL")) -->
-<!--     # ggtitle("Null model fit") -->
-<!-- ``` -->
-
-<!-- (ref:SSPcolHebFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. -->
-<!-- ```{r SSPcolHebFit,fig.cap = "(ref:SSPcolHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions_heb$SSP_obs %>% -->
-<!--   left_join(data_RT_heb) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(SSP_obs)) %>% -->
-<!--     arrange(SSP_obs) %>% -->
-<!--     mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = SSP_obs, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) + -->
-<!--     xlab(bquote(italic(SSP[col])~scores)) + ylab("log RT (Hebrew)") + -->
-<!--         ylim(600,1300) + -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# + -->
-<!--         # ggtitle(bquote(italic(SSP[col])~fit)) -->
-<!--    } -->
-<!-- ``` -->
-<!-- (ref:SSPexpHebFit) *SSP~exp~* model fit (plot details are same as above). -->
-<!-- ```{r SSPexpHebFit,fig.cap = "(ref:SSPexpHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions_heb$SSP %>% -->
-<!--   left_join(data_RT_heb) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(SSP)) %>% -->
-<!--     arrange(SSP) %>% -->
-<!--     mutate(SSP = factor(SSP, levels= unique(SSP)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = SSP, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
-<!--     xlab(bquote(italic(SSP[exp])~scores)) + -->
-<!--        ylab("log RT (Hebrew)") + -->
-<!--         ylim(600,1300) + -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--         # ggtitle(bquote(italic(SSP[exp])~fit)) -->
-<!--      } -->
-<!-- ``` -->
-
-<!-- (ref:MSDcolHebFit) *MSD~col~* model fit (plot details are same as above). -->
-<!-- ```{r MSDcolHebFit,fig.cap = "(ref:MSDcolHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions_heb$MSD_obs %>% -->
-<!--   left_join(data_RT_heb) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(MSD_obs)) %>% -->
-<!--     arrange(MSD_obs) %>% -->
-<!--     mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = MSD_obs, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
-<!--     xlab(bquote(italic(MSD[col])~scores)) + ylab("log RT (Hebrew)") + -->
-<!--         ylim(600,1300) +  -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--         # ggtitle(bquote(italic(MSD[col])~fit)) -->
-<!--      } -->
-<!-- ``` -->
-<!-- (ref:MSDexpHebFit) *MSD~exp~* model fit (plot details are same as above). -->
-<!-- ```{r MSDexpHebFit,fig.cap = "(ref:MSDexpHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions_heb$MSD %>% -->
-<!--   left_join(data_RT_heb) %>% -->
-<!--     ungroup() %>% -->
-<!--   filter(!is.na(MSD)) %>% -->
-<!--     arrange(MSD) %>% -->
-<!--     mutate(MSD = factor(MSD, levels= unique(MSD)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--    { ggplot(., aes(x = MSD, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
-<!--     xlab(bquote(italic(MSD[exp])~scores)) + ylab("log RT (Hebrew)") + -->
-<!--         ylim(600,1300) +  -->
-<!--         coord_trans(y="log") + -->
-<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--         # ggtitle(bquote(italic(MSD[exp])~fit)) -->
-<!--         } -->
-<!-- ``` -->
-
-<!-- (ref:NAPtdHebFit) *NAP~td~* model fit (plot details are same as above). -->
-<!-- ```{r NAPtdHebFit,fig.cap = "(ref:NAPtdHebFit)", warning=FALSE, fig.width=8, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions_heb$NAP_td %>%  -->
-<!--   left_join(data_RT_heb) %>% -->
-<!--     ungroup() %>% -->
-<!--     arrange(NAP_td) %>% -->
-<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
-<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
-<!--   { ggplot(., aes(x = NAP_td, y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") + -->
-<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+ -->
-<!--   xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Hebrew)") + -->
-<!--       ylim(600,1300) +  -->
-<!--       coord_trans(y="log") + -->
-<!--       theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--       # ggtitle(bquote(italic(NAP[td])~fit)) -->
-<!--   } -->
-
-<!-- ``` -->
-
-<!-- (ref:NAPbuHebFit) *NAP~bu~* model fit (plot details are same as above). -->
-<!-- ```{r NAPbuHebFit,fig.cap = "(ref:NAPbuHebFit)", warning=FALSE, fig.width=7, fig.asp=.4, dev="cairo_pdf"} -->
-
-<!-- predictions_heb$NAP_bu %>%  -->
-<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
-<!--     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
-<!--     arrange(NAP) %>% -->
-<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
-<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
-<!--     geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
-<!--     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") + -->
-<!--     scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) + -->
-<!--     ylab("log RT (Hebrew)") + -->
-<!--     ylim(600,1300) +  -->
-<!--     coord_trans(y="log") + -->
-<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
-<!--     # ggtitle(bquote(italic(NAP[bu])~fit)) -->
-<!-- ``` -->
-
-
-
-
 ##  Results: Model comparison
-
 <!-- ### Experiment 2: Model comparison -->
-
 <!-- ### (iii) Model comparison {-} -->
 <!-- #### Model comparison {#sec:ModelComparison2} -->
 
@@ -2422,7 +2055,7 @@ comparison%>%
               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
  
-     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 3)",note= "(plot details are same as above).")
+     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 3)",note= "(details are same as above).")
 
 
 ```
@@ -2439,155 +2072,127 @@ it stands to reason that the main apparent advantage of the *exp* sonority hiera
 The fact that the highest ranked NAP model in this comparison, *NAP~td~*, did not completely neutralize the contribution of *NAP~bu~* is telling, especially given that *NAP~td~* subsumed more of the traditional models, although it is more similar to *NAP~bu~* in principle. This is evident from Table \@ref(tab:resultsmodelsohnenapbu), in which we took *NAP~bu~* out of the equation, resulting in 88% contribution by *NAP~td~* and only 3%  contribution by *SSP~col~*.
 
 
-```{r resultsmodelsohnenapbu, results="asis"}
-## NAPtd vs. trad
-kfold_ordinal <- kfold_german[!names(kfold_german) %in% c("NAP_bu")]
-comparison <- loo::loo_compare(x=kfold_ordinal)
-ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
-weights <- loo::stacking_weights(ll_matrix)
-names(weights) <- names(kfold_ordinal)
+<!-- ```{r resultsmodelsohnenapbu, results="asis"} -->
+<!-- ## NAPtd vs. trad -->
+<!-- kfold_ordinal <- kfold_german[!names(kfold_german) %in% c("NAP_bu")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_ordinal) -->
+<!-- ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_ordinal) -->
 
-comparison%>%
-    {bind_cols(model = rownames(.), as_tibble(.))} %>%
-    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
-           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
 
-    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
-    left_join(weights %>% tibble::enframe() %>%
-              setNames(c("model", "weight")) %>%
-              arrange(-weight) %>%
-              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
-        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
 
-     apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL)
-```
+<!--      apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
 
-Note that when we take *NAP~td~* out of the equation, as in Table \@ref(tab:resultsmodelsohnenaptd), the relative contribution of *NAP~bu~* rises to 50%, with *SSP~col~* rising to 47%. Again, this suggests that the contribution of *NAP~bu~* remains robust and complementary with respect to all the symbol-based models, including the one that is based on the same principle, *NAP~td~*. 
+<!-- Note that when we take *NAP~td~* out of the equation, as in Table \@ref(tab:resultsmodelsohnenaptd), the relative contribution of *NAP~bu~* rises to 50%, with *SSP~col~* rising to 47%. Again, this suggests that the contribution of *NAP~bu~* remains robust and complementary with respect to all the symbol-based models, including the one that is based on the same principle, *NAP~td~*.  -->
 
-Lastly, recall that the two NAP models are assumed to be active at the same time, as they were not conceived as competing models, but as two complementary models. When taken together, the combined contribution of the two NAP models in Table \@ref(tab:resultsmodels) covers almost 80% of the maximized elpd score.
+<!-- Lastly, recall that the two NAP models are assumed to be active at the same time, as they were not conceived as competing models, but as two complementary models. When taken together, the combined contribution of the two NAP models in Table \@ref(tab:resultsmodels) covers almost 80% of the maximized elpd score. -->
 
-```{r resultsmodelsohnenaptd, results="asis", collapse=FALSE}
-## NAPbu vs. trad
-kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td")]
-comparison <- loo::loo_compare(x=kfold_classic)
-ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
-weights <- loo::stacking_weights(ll_matrix)
-names(weights) <- names(kfold_classic)
+<!-- ```{r resultsmodelsohnenaptd, results="asis", collapse=FALSE} -->
+<!-- ## NAPbu vs. trad -->
+<!-- kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_classic) -->
+<!-- ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_classic) -->
 
-comparison%>%
-    {bind_cols(model = rownames(.), as_tibble(.))} %>%
-    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
-           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
 
-    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
-    left_join(weights %>% tibble::enframe() %>%
-              setNames(c("model", "weight")) %>%
-              arrange(-weight) %>%
-              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
-        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
 
-     apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
-```
-
-<!-- ### Hebrew study -->
-
-<!-- > NEW -->
-
-<!-- ### Experiment 3: Model comparison -->
-
-
-
-
-
-<!-- ```{r} -->
-<!-- estHeb_SSP_exp <- results_txt(m_hebrew$models$SSP, "moSSP") -->
-<!-- estHeb_MSD_exp <- results_txt(m_hebrew$models$MSD, "moMSD") -->
-<!-- estHeb_SSP_col <- results_txt(m_hebrew$models$SSP_obs, "moSSP_obs") -->
-<!-- estHeb_MSD_col <- results_txt(m_hebrew$models$MSD_obs, "moMSD_obs") -->
-<!-- estHeb_NAP_td <- results_txt(m_hebrew$models$NAP_td, "moNAP_td") -->
-<!-- estHeb_NAP_bu <- results_txt(m_hebrew$models$NAP_bu, "sNAP_bu") -->
+<!--      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL) -->
 <!-- ``` -->
 
 
-<!-- * For *SSP~col~*: `r estHeb_SSP_col`. -->
-<!-- * For *SSP~exp~*: `r estHeb_SSP_exp`. -->
-<!-- * For *MSD~col~*: `r estHeb_MSD_col`. -->
-<!-- * For *MSD~exp~*: `r estHeb_MSD_exp`. -->
-<!-- * For *NAP~td~*: `r estHeb_NAP_td`. -->
-<!-- * For *NAP~bu~*: `r estHeb_NAP_bu`. -->
+<!-- ```{r resultsmodelshebrew, results = "asis"} -->
+
+<!-- comparison <- loo::loo_compare(x=kfold_hebrew) -->
+<!-- ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_hebrew) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, elpd = elpd_kfold, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff)%>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.") -->
+<!-- ``` -->
+
+<!-- ```{r resultsmodelsohnenapbu_heb, results="asis"} -->
+<!-- ## NAPtd vs. trad -->
+<!-- kfold_ordinal <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_bu")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_ordinal) -->
+<!-- ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_ordinal) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
+
+<!-- ```{r resultsmodelsohnenaptd_heb, results="asis", collapse=FALSE} -->
+<!-- ## NAPbu vs. trad -->
+<!-- kfold_classic <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_td")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_classic) -->
+<!-- ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_classic) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
 
 
-```{r resultsmodelshebrew, results = "asis"}
-
-comparison <- loo::loo_compare(x=kfold_hebrew)
-ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
-weights <- loo::stacking_weights(ll_matrix)
-names(weights) <- names(kfold_hebrew)
-
-comparison%>%
-    {bind_cols(model = rownames(.), as_tibble(.))} %>%
-    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
-           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
-    
-    select(model, elpd = elpd_kfold, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff)%>%
-    left_join(weights %>% tibble::enframe() %>%
-              setNames(c("model", "weight")) %>%
-              arrange(-weight) %>%
-              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
-        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
- 
-     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.")
-```
-
-```{r resultsmodelsohnenapbu_heb, results="asis"}
-## NAPtd vs. trad
-kfold_ordinal <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_bu")]
-comparison <- loo::loo_compare(x=kfold_ordinal)
-ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
-weights <- loo::stacking_weights(ll_matrix)
-names(weights) <- names(kfold_ordinal)
-
-comparison%>%
-    {bind_cols(model = rownames(.), as_tibble(.))} %>%
-    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
-           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
-
-    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
-    left_join(weights %>% tibble::enframe() %>%
-              setNames(c("model", "weight")) %>%
-              arrange(-weight) %>%
-              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
-        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
-
-     apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL)
-```
-
-```{r resultsmodelsohnenaptd_heb, results="asis", collapse=FALSE}
-## NAPbu vs. trad
-kfold_classic <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_td")]
-comparison <- loo::loo_compare(x=kfold_classic)
-ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
-weights <- loo::stacking_weights(ll_matrix)
-names(weights) <- names(kfold_classic)
-
-comparison%>%
-    {bind_cols(model = rownames(.), as_tibble(.))} %>%
-    mutate(elpd_kfold = round(elpd_kfold) %>% as.character,
-           elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>%
-
-    select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>%
-    left_join(weights %>% tibble::enframe() %>%
-              setNames(c("model", "weight")) %>%
-              arrange(-weight) %>%
-              mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
-        mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
-
-     apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL)
-```
-
-
-<!-- ### Discussion of confirmatory study {#sec:discussion2} -->
-### Discussion 
+### Discussion {#sec:discussion2} 
 
 The results of the confirmatory study (Experiment 2) can be summarized as follows: 
 (i) all of the sonority models we tested are capable of explaining the response time data for different consonant clusters to some extent; 
@@ -2663,54 +2268,7 @@ Lastly, this study also provides compelling motivations and strong evidence that
 (see Anonymous 2018; Anonymous 2019; and Anonymous 2020 for continuous visualization and quantification procedures in intonational phonology using periodic energy).
 <!-- [see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy]. -->
 
-<!-- # Methods {#sec:methods} -->
-
-<!-- ## Stimulus list considerations {#sec:considerationlist} -->
-
-<!-- The following list summarizes concerns that were taken into consideration when constructing the stimulus set (see the full set in Table \@ref(tab:targetlist)): -->
-
-<!-- *	For the class of liquids we consider only the lateral /l/, disregarding the sub-class of rhotics that are phonetically varied and inconsistent across different languages. We therefore present no liquid plateau in the experimental set. -->
-
-<!-- *	We use the alveolar /s/ for the class of voiceless sibilants (voiceless coronal fricatives). In *C*~1~ positions we also use the post-alveolar /ʃ/ to monitor language-specific effects that may appear due to restrictions in German, in which /ʃC/ onset clusters can be licit, while /sC/ onset clusters occur only marginally in loanwords. -->
-<!-- <!-- should not be allowed. --> 
-
-<!-- *	We use stops only in *C*~2~ position. We avoid stops in *C*~1~ position since it is also the phrase-initial position of the stimuli, which is practically devoid of acoustic cues for the closure phase of the stop. Furthermore, we use only voiceless stops in order to keep the amount of stimuli reasonably low. -->
-
-<!-- * We use one instance of the dorsal consonant /k/ instead of the coronal /t/ as an alternative to a labial-coronal cluster with a liquid in *C*~1~, thus retaining the same direction of a labial-coronal cluster (i.e., both labial-coronal and coronal-dorsal are front-to-back in terms of their places of articulation). We do not use other dorsals for fricative, nasal or liquid consonants, as these tend to be relatively more marked and more inconsistent between languages. -->
-
-<!-- *	Lastly, we avoid sequences of obstruents that differ in voicing due to the cross-linguistic tendency of obstruent clusters to agree in voicing [see, e.g., @cho1990typology], although note that German allows /ʃv/ and /t͡sv/ clusters while banning /ʃf/. -->
-
-<!-- ## Audio recordings {#sec:audio} -->
-
-<!-- Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker (the first author) in a sound attenuated booth at the phonetics laboratory of the University of Cologne. Speech was recorded via head-mounted headset condenser microphone (AKG C420), capturing mono digital files at a resolution of 44.1kHz sample-rate and 24 bit depth with a Metric Halo MIO 2882 audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with Goodhertz Good Dither dithering to be used in the perception task running on OpenSesame 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the APP Detector (see Subsection \@ref(sec:obtaining)) was also downgraded in sample-rate to 16kHz. Finally all audio takes, at all resolutions, were normalized to the same RMS target of -20dBFS. -->
-
-<!-- \begin{exe} -->
-<!-- \ex \textbf{/ze maʁˈgiʃ \emph{CCal} kaˈʁe.ga/} (ʼit feels (like) \emph{CCal} at the momentʼ) \label{ex:sentence} -->
-<!-- \end{exe} -->
-
-<!-- To record the stimuli, the combined 87 word-like tokens were embedded within carrier sentences, appearing in a non-final position with -->
-<!-- default declarative intonation -->
-<!-- in order to maintain consistent prosody. Carrier sentences were also designed to minimize potential effects of resyllabification as well as co-articulation by controlling the segmental makeup immediately preceding and following target words, see example in (\@ref(ex:sentence)) -->
-<!-- (the original sentence elicitation lists are available at the OSF repository in mixed Hebrew and phonemic transcripts in the form of slide presentations, see link in the opening of Section \@ref(sec:experiments)). -->
-
-<!-- ## Obtaining periodic energy data {#sec:obtaining} -->
-
-<!-- We extract continuous measurements of periodic energy from acoustic signals using the *APP Detector*, a computer code that was introduced in @deshmukh2003detectionsk and developed in subsequent publications [@deshmukh2005use; @vishnubhotla2007detection], with the ability to measure the spectral distribution of periodic energy from digital audio files with a 16kHz sample-rate, effectively measuring periodic energy up to 8kHz [consider that our pitch perception range is limited to periods up to approximately 4kHz, reflecting a ceiling effect of the phase-locking of neural firing rates; @wever1937perception; @attneave1971pitch; @pressnitzer2001lower; @moore2013anintro 46]. We export the periodic energy data from the APP Detector's analysis into R [@R-base], for further data manipulation, visualization, modelling, and statistics. -->
-
-<!-- We sum over the different frequencies that the APP Detector measures to obtain a time series  with the sum of periodic energy over different frequencies at 10 ms intervals. -->
-<!-- We fit a smoothed curve to the periodic energy time series, to eliminate small-scale fluctuations in the curve's trajectory, and, finally, the sum of periodic energy is log transformed, where it is divided by a value that reflects the threshold of effective voicing periodicity, thus setting a meaningful zero for the periodic energy floor (we apply Tukey's Running Median Smoothing "3RS3R" to the periodic energy data. The threshold of the log transform is calculated as the maximal value obtained for voiceless portions in the set). -->
-<!-- <!-- [^cf-smog] --> 
-
-<!-- The periodic energy curve is fitted with Local Polynomial Regression Fitting (*loess*) in the figures. This is only used for visual clarity---all the data points and calculations are based on the periodic energy curve before this smoothing and after initial smoothing and log transform (as detailed above). -->
-
-<!-- ## Perception task details {#sec:ptask} -->
-
-<!-- Recall that the experiments were designed as a forced-choice 2-alternative perception task, where we collected accuracy and response time information. -->
-<!-- We determined the zero time for valid response times at the the mid point of transition from *C*~2~ to /a/, individually for each one of the 87 stimuli (given that all stimuli share the rime *al*, which is fully predictable in the context of the experiment, in contrast to the preceding material, which is unpredictable). We used manual segmentation to determine this point for each target. We then excluded response times shorter than 100ms (i.e., 100ms after the mid point of transition from *C*~2~ to /a/) as too fast to be considered as valid. This led to no exclusions from Experiment 1 and to only one observation being excluded from Experiment 2. -->
-
-<!-- Participants were seated in a quiet room in front of a laptop computer (a MacBook Air 13-inch, Early 2014) running the experiment on OpenSesame 3.1.9 [@mathot2012opensesame], where they listened to the stimuli through a set of closed headphones (Sennhieser HD 201), fed directly from the laptop's internal audio interface. After verifying that participants share a standard understanding of the notion of the syllable with a few German examples of words with one and two syllables (*See*, *Spaß*, *Quark*, and *Angst* vs. *Schu-le*, *Kin-der*, *Bre-zel*, *Pflau-men*), they were instructed to listen to nonce words in an "unknown" foreign language (the use of a speaker with a Hebrew accent in the stimuli that were presented to German listeners was intended to further support a "foreign" type of perception). Participants were instructed to respond quickly and accurately on whether they hear one or two syllables by clicking '1' or '2' on the computer keyboard (participants used their left index finger to choose '1' and their right index finger to choose '2').<!-- [^cf-indexfinger]  --> 
-<!-- A training session of ten trials preceded the experimental trials, allowing the participants to familiarize with the task, and allowing the experimenter to adjust listening volume and monitor potential problems and misunderstandings regarding the task. -->
-
+<!-- --- -->
 
 <!-- # CRediT authorship contribution statement {-} -->
 <!-- **AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization.  -->
@@ -2726,7 +2284,7 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 <!-- [^cf-strength]: Note that a related notion of *strength hierarchies* makes similar distinctions, yet in the opposite direction (stronger = less sonorant). Strength hierarchies are mostly evoked in relation with lenition processes rather than syllabic phenomena.  -->
 
-[^cf-sanskrit]: @Donegan1978onthenatural notes that Pāṇini and the Sanskrit grammarians used the term svara to imply some kind of harmonic musical quality which applies mainly to vowels. @parker2002quantifying [p. 58] notes further that the Sanskrit grammarians observed natural classes for speech sounds that are "grouped according to their degree of 'opening' (vivāra)".
+<!-- [^cf-sanskrit]: @Donegan1978onthenatural notes that Pāṇini and the Sanskrit grammarians used the term svara to imply some kind of harmonic musical quality which applies mainly to vowels. @parker2002quantifying [p. 58] notes further that the Sanskrit grammarians observed natural classes for speech sounds that are "grouped according to their degree of 'opening' (vivāra)". -->
 
 [^cf-liquid]: The group of *liquids* is the most loosely defined, as it includes both *lateral approximants* (namely /l/) and various types of rhotics such as *trills* (/r,ʀ,ʁ/), *taps* (namely /ɾ/), and alveolar and retroflex *approximants* (/ɹ,ɻ/). 
 <!-- In this paper we only consider the lateral approximant /l/ as the relatively more stable and common token of this varied liquid type. -->
@@ -2737,13 +2295,13 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 [^cf-sdp]: The *Sonority Dispersion Principle* [SDP; @clements1990role; @clements1992sonority] is a slightly different yet related principle that prefers onset rises with large distance and equal dispersion of sonority index values across the consonantal sequence and the following vowel. The results of the SDP are highly contingent on the given sonority hierarchy and it is not very clear how to apply the SDP with onset sonority falls [among other problems listed in @parker2002quantifying 22--24]. 
 
-[^cf-nobasis]: There are also perspectives, such as @foley1977foundations, @rice1992onderiving, and @harris2006phonology [see @blaho2008syntax for an overview], where an abstract definition of sonority is not grounded in the nature of the speech signal, and is therefore not expected/required to have a phonetic basis.
+<!-- [^cf-nobasis]: There are also perspectives, such as @foley1977foundations, @rice1992onderiving, and @harris2006phonology [see @blaho2008syntax for an overview], where an abstract definition of sonority is not grounded in the nature of the speech signal, and is therefore not expected/required to have a phonetic basis. -->
 
 [^cf-list]: A partial list of some prominent examples includes @sigurd1955rank; @jakobson1956fundamentals; @chomsky1968spesk; @foley1972rule; @ladefoged1971preliminaries; @allen1973accentsk; @fujimura1975syllable; @Donegan1978onthenatural; @ultan1978typological; @price1980sonority; @lindblom1983production; @anderson1986suprasegmental; @vennemann1988preferencesk; @levitt1991syllable; @pierrehumbert1992lenition; @fujimura1997acoustic; @stemberger1997handbook; @boersma1998functional; @zhang2001effects; @howe2004harmonic; @clements2009does; @sharma2018significance.
 
 [^cf-mora]: Moras are used to represent quantitative differences between light and heavy syllables (weight sensitivity), such that light syllables contain one mora while heavier syllables contain two (and sometimes even three) moras [see @hyman1984atheory; @mccarthy1990footsk; @hayes1989compensatory; @ito1989prosodic; @zec1995sonority; @zec2003prosodic].
 
-[^cf-perception]: This view of sonority is explicitly perceptual. However, it does not contradict and it should be considered as complementary to syllabic descriptions from an articulatory point of view, such as timing coordination and phase relations that characterize syllabic organization in Articulatory Phonology (@browman1992articulatory; @macneilage1998frame; @goldstein2007syllablesk; @hermes2013phonologysk; @gafos2014stochastic).
+<!-- [^cf-perception]: This view of sonority is explicitly perceptual. However, it does not contradict and it should be considered as complementary to syllabic descriptions from an articulatory point of view, such as timing coordination and phase relations that characterize syllabic organization in Articulatory Phonology (@browman1992articulatory; @macneilage1998frame; @goldstein2007syllablesk; @hermes2013phonologysk; @gafos2014stochastic). -->
 
 <!-- [^cf-statlearn]: See, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. -->
 <!-- [^cf-phonlearn]: For *statistical learners* in general see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. For *phonotactic learners* see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @futrell2017generative; @jarosz2017inputsk; @mayer2019phonotactic; @mirea2019usingsk. -->
@@ -2762,9 +2320,9 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 <!-- [^cf-hierarchynotes]: Note that the addition of the articulatory contact distinction to the sonority hierarchy in *NAP~td~* does not have any implications on the following predictions of the model. It is also worth noting that some rhotics, which are traditionally considered liquids, may in fact belong with the vocoid consonants (e.g., most of the English rhotics). However, we excluded rhotics from this study. -->
 
-[^cf-reconciliation]: The symbolic sonority hierarchy in NAP reconciles perceptual and articulatory approaches to sonority by modelling their mutual contribution to enhancing pitch intelligibility (or periodic energy mass in acoustic terms). This hierarchy is similar to a few proposals for sonority hierarchies that combined levels of voicing/periodicity with degree of vocal tract opening [e.g., @lass1988phonology; @miller2012sonority; and @sharma2018significance]. Such hierarchies may be also seen as compatible with source-filter models of speech [e.g., @fant2000source], where the source controls voicing and the filter controls opening.
+<!-- [^cf-reconciliation]: The symbolic sonority hierarchy in NAP reconciles perceptual and articulatory approaches to sonority by modelling their mutual contribution to enhancing pitch intelligibility (or periodic energy mass in acoustic terms). This hierarchy is similar to a few proposals for sonority hierarchies that combined levels of voicing/periodicity with degree of vocal tract opening [e.g., @lass1988phonology; @miller2012sonority; and @sharma2018significance]. Such hierarchies may be also seen as compatible with source-filter models of speech [e.g., @fant2000source], where the source controls voicing and the filter controls opening. -->
 
-[^cf-angle]: A slightly similar calculation can be found in Fullwood's [-@fullwood2014perceptual] *Sonority Angle*.
+<!-- [^cf-angle]: A slightly similar calculation can be found in Fullwood's [-@fullwood2014perceptual] *Sonority Angle*. -->
 <!-- , although on different grounds, for different purposes, and with different outcomes. -->
 
 <!-- [^cf-peak]: Note that peak measurements can be advantageous in that they tend to appear at the center of segmental units [minima in consonants and maxima in vowels; see @parker2008sound], overcoming some of the problems related to segmentation, given that peaks are less affected by determination of segmental boundaries. -->
@@ -2775,7 +2333,7 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 <!-- [^cf-source]: Based primarily on @van2012sonority. -->
 
-[^cf-hebschwa]: The schwa in this case is produced as a weak (unstressed) /e/ vowel from the 5-vowel inventory of Modern Hebrew.
+<!-- [^cf-hebschwa]: The schwa in this case is produced as a weak (unstressed) /e/ vowel from the 5-vowel inventory of Modern Hebrew. -->
 
 <!-- [^cf-indexfinger]: Participants used their left index finger to choose '1' and their right index finger to choose '2', using ‘F' and ‘J' buttons respectively. The respective buttons were covered with salient red-on-white ‘1' and ‘2' stickers (the rest of the laptop's keys are all white-on-black by design). -->
 
