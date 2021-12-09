@@ -1954,6 +1954,126 @@ predictions_heb_by_subj$NAP_td %>%
 ```
 
 
+<!-- ```{r resultsmodelsohnenapbu, results="asis"} -->
+<!-- ## NAPtd vs. trad -->
+<!-- kfold_ordinal <- kfold_german[!names(kfold_german) %in% c("NAP_bu")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_ordinal) -->
+<!-- ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_ordinal) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
+
+<!-- Note that when we take *NAP~td~* out of the equation, as in Table \@ref(tab:resultsmodelsohnenaptd), the relative contribution of *NAP~bu~* rises to 50%, with *SSP~col~* rising to 47%. Again, this suggests that the contribution of *NAP~bu~* remains robust and complementary with respect to all the symbol-based models, including the one that is based on the same principle, *NAP~td~*.  -->
+
+<!-- Lastly, recall that the two NAP models are assumed to be active at the same time, as they were not conceived as competing models, but as two complementary models. When taken together, the combined contribution of the two NAP models in Table \@ref(tab:resultsmodels) covers almost 80% of the maximized elpd score. -->
+
+<!-- ```{r resultsmodelsohnenaptd, results="asis", collapse=FALSE} -->
+<!-- ## NAPbu vs. trad -->
+<!-- kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_classic) -->
+<!-- ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_classic) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
+
+
+<!-- ```{r resultsmodelshebrew, results = "asis"} -->
+
+<!-- comparison <- loo::loo_compare(x=kfold_hebrew) -->
+<!-- ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_hebrew) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, elpd = elpd_kfold, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff)%>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.") -->
+<!-- ``` -->
+
+<!-- ```{r resultsmodelsohnenapbu_heb, results="asis"} -->
+<!-- ## NAPtd vs. trad -->
+<!-- kfold_ordinal <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_bu")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_ordinal) -->
+<!-- ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_ordinal) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
+
+<!-- ```{r resultsmodelsohnenaptd_heb, results="asis", collapse=FALSE} -->
+<!-- ## NAPbu vs. trad -->
+<!-- kfold_classic <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_td")] -->
+<!-- comparison <- loo::loo_compare(x=kfold_classic) -->
+<!-- ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
+<!-- weights <- loo::stacking_weights(ll_matrix) -->
+<!-- names(weights) <- names(kfold_classic) -->
+
+<!-- comparison%>% -->
+<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
+<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
+<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
+
+<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
+<!--     left_join(weights %>% tibble::enframe() %>% -->
+<!--               setNames(c("model", "weight")) %>% -->
+<!--               arrange(-weight) %>% -->
+<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
+<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
+
+<!--      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL) -->
+<!-- ``` -->
+
+
 
 \begingroup
 \setlength{\parindent}{-0.5in}
