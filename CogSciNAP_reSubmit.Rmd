@@ -2072,126 +2072,6 @@ it stands to reason that the main apparent advantage of the *exp* sonority hiera
 The fact that the highest ranked NAP model in this comparison, *NAP~td~*, did not completely neutralize the contribution of *NAP~bu~* is telling, especially given that *NAP~td~* subsumed more of the traditional models, although it is more similar to *NAP~bu~* in principle. This is evident from Table \@ref(tab:resultsmodelsohnenapbu), in which we took *NAP~bu~* out of the equation, resulting in 88% contribution by *NAP~td~* and only 3%  contribution by *SSP~col~*.
 
 
-<!-- ```{r resultsmodelsohnenapbu, results="asis"} -->
-<!-- ## NAPtd vs. trad -->
-<!-- kfold_ordinal <- kfold_german[!names(kfold_german) %in% c("NAP_bu")] -->
-<!-- comparison <- loo::loo_compare(x=kfold_ordinal) -->
-<!-- ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
-<!-- weights <- loo::stacking_weights(ll_matrix) -->
-<!-- names(weights) <- names(kfold_ordinal) -->
-
-<!-- comparison%>% -->
-<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
-<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
-<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
-
-<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
-<!--     left_join(weights %>% tibble::enframe() %>% -->
-<!--               setNames(c("model", "weight")) %>% -->
-<!--               arrange(-weight) %>% -->
-<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
-<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
-
-<!--      apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL) -->
-<!-- ``` -->
-
-<!-- Note that when we take *NAP~td~* out of the equation, as in Table \@ref(tab:resultsmodelsohnenaptd), the relative contribution of *NAP~bu~* rises to 50%, with *SSP~col~* rising to 47%. Again, this suggests that the contribution of *NAP~bu~* remains robust and complementary with respect to all the symbol-based models, including the one that is based on the same principle, *NAP~td~*.  -->
-
-<!-- Lastly, recall that the two NAP models are assumed to be active at the same time, as they were not conceived as competing models, but as two complementary models. When taken together, the combined contribution of the two NAP models in Table \@ref(tab:resultsmodels) covers almost 80% of the maximized elpd score. -->
-
-<!-- ```{r resultsmodelsohnenaptd, results="asis", collapse=FALSE} -->
-<!-- ## NAPbu vs. trad -->
-<!-- kfold_classic <- kfold_german[!names(kfold_german) %in% c("NAP_td")] -->
-<!-- comparison <- loo::loo_compare(x=kfold_classic) -->
-<!-- ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
-<!-- weights <- loo::stacking_weights(ll_matrix) -->
-<!-- names(weights) <- names(kfold_classic) -->
-
-<!-- comparison%>% -->
-<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
-<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
-<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
-
-<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
-<!--     left_join(weights %>% tibble::enframe() %>% -->
-<!--               setNames(c("model", "weight")) %>% -->
-<!--               arrange(-weight) %>% -->
-<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
-<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
-
-<!--      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL) -->
-<!-- ``` -->
-
-
-<!-- ```{r resultsmodelshebrew, results = "asis"} -->
-
-<!-- comparison <- loo::loo_compare(x=kfold_hebrew) -->
-<!-- ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
-<!-- weights <- loo::stacking_weights(ll_matrix) -->
-<!-- names(weights) <- names(kfold_hebrew) -->
-
-<!-- comparison%>% -->
-<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
-<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
-<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
-
-<!--     select(model, elpd = elpd_kfold, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff)%>% -->
-<!--     left_join(weights %>% tibble::enframe() %>% -->
-<!--               setNames(c("model", "weight")) %>% -->
-<!--               arrange(-weight) %>% -->
-<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
-<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
-
-<!--      apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.") -->
-<!-- ``` -->
-
-<!-- ```{r resultsmodelsohnenapbu_heb, results="asis"} -->
-<!-- ## NAPtd vs. trad -->
-<!-- kfold_ordinal <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_bu")] -->
-<!-- comparison <- loo::loo_compare(x=kfold_ordinal) -->
-<!-- ll_matrix <- map2_dfc(kfold_ordinal, names(kfold_ordinal), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
-<!-- weights <- loo::stacking_weights(ll_matrix) -->
-<!-- names(weights) <- names(kfold_ordinal) -->
-
-<!-- comparison%>% -->
-<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
-<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
-<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
-
-<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
-<!--     left_join(weights %>% tibble::enframe() %>% -->
-<!--               setNames(c("model", "weight")) %>% -->
-<!--               arrange(-weight) %>% -->
-<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
-<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
-
-<!--      apa_table(escape = FALSE, caption ="$NAP_{td}$ and traditional models comparison",note= NULL) -->
-<!-- ``` -->
-
-<!-- ```{r resultsmodelsohnenaptd_heb, results="asis", collapse=FALSE} -->
-<!-- ## NAPbu vs. trad -->
-<!-- kfold_classic <- kfold_hebrew[!names(kfold_hebrew) %in% c("NAP_td")] -->
-<!-- comparison <- loo::loo_compare(x=kfold_classic) -->
-<!-- ll_matrix <- map2_dfc(kfold_classic, names(kfold_classic), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix() -->
-<!-- weights <- loo::stacking_weights(ll_matrix) -->
-<!-- names(weights) <- names(kfold_classic) -->
-
-<!-- comparison%>% -->
-<!--     {bind_cols(model = rownames(.), as_tibble(.))} %>% -->
-<!--     mutate(elpd_kfold = round(elpd_kfold) %>% as.character, -->
-<!--            elpd_diff = as.numeric(elpd_diff), se_diff = as.numeric(se_diff)) %>% -->
-
-<!--     select(model, `Difference in elpd`=elpd_diff ,`Difference SE` = se_diff) %>% -->
-<!--     left_join(weights %>% tibble::enframe() %>% -->
-<!--               setNames(c("model", "weight")) %>% -->
-<!--               arrange(-weight) %>% -->
-<!--               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>% -->
-<!--         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>% -->
-
-<!--      apa_table(escape = FALSE, caption ="$NAP_{bu}$ and traditional models comparison",note= NULL) -->
-<!-- ``` -->
-
-
 ### Discussion {#sec:discussion2} 
 
 The results of the confirmatory study (Experiment 2) can be summarized as follows: 
@@ -2282,62 +2162,18 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 <!-- footnotes -->
 
-<!-- [^cf-strength]: Note that a related notion of *strength hierarchies* makes similar distinctions, yet in the opposite direction (stronger = less sonorant). Strength hierarchies are mostly evoked in relation with lenition processes rather than syllabic phenomena.  -->
-
-<!-- [^cf-sanskrit]: @Donegan1978onthenatural notes that Pāṇini and the Sanskrit grammarians used the term svara to imply some kind of harmonic musical quality which applies mainly to vowels. @parker2002quantifying [p. 58] notes further that the Sanskrit grammarians observed natural classes for speech sounds that are "grouped according to their degree of 'opening' (vivāra)". -->
-
 [^cf-liquid]: The group of *liquids* is the most loosely defined, as it includes both *lateral approximants* (namely /l/) and various types of rhotics such as *trills* (/r,ʀ,ʁ/), *taps* (namely /ɾ/), and alveolar and retroflex *approximants* (/ɹ,ɻ/). 
 <!-- In this paper we only consider the lateral approximant /l/ as the relatively more stable and common token of this varied liquid type. -->
 
-<!-- [^cf-vowels]: The class of vowels is often also divided into (in rising sonority order) high, mid, and low vowels [sometimes also with distinctions between central and peripheral vowels; see @gordon2012sonority], but these distinctions will be irrelevant in the context of this paper. -->
-
-<!-- [^cf-sequencingclassics]: Prominent examples include @zwicky1972notesk; @hankamer1974sonority; @hooper1976introduction; @kiparsky1979metrical; @lowenstamm1981maximal; @steriade1982greek; @cairns1982markedness; @selkirk1984majorsk; @harris1983syllable; @mohanan1986theory, and @clements1990role. -->
-
 [^cf-sdp]: The *Sonority Dispersion Principle* [SDP; @clements1990role; @clements1992sonority] is a slightly different yet related principle that prefers onset rises with large distance and equal dispersion of sonority index values across the consonantal sequence and the following vowel. The results of the SDP are highly contingent on the given sonority hierarchy and it is not very clear how to apply the SDP with onset sonority falls [among other problems listed in @parker2002quantifying 22--24]. 
-
-<!-- [^cf-nobasis]: There are also perspectives, such as @foley1977foundations, @rice1992onderiving, and @harris2006phonology [see @blaho2008syntax for an overview], where an abstract definition of sonority is not grounded in the nature of the speech signal, and is therefore not expected/required to have a phonetic basis. -->
 
 [^cf-list]: A partial list of some prominent examples includes @sigurd1955rank; @jakobson1956fundamentals; @chomsky1968spesk; @foley1972rule; @ladefoged1971preliminaries; @allen1973accentsk; @fujimura1975syllable; @Donegan1978onthenatural; @ultan1978typological; @price1980sonority; @lindblom1983production; @anderson1986suprasegmental; @vennemann1988preferencesk; @levitt1991syllable; @pierrehumbert1992lenition; @fujimura1997acoustic; @stemberger1997handbook; @boersma1998functional; @zhang2001effects; @howe2004harmonic; @clements2009does; @sharma2018significance.
 
 [^cf-mora]: Moras are used to represent quantitative differences between light and heavy syllables (weight sensitivity), such that light syllables contain one mora while heavier syllables contain two (and sometimes even three) moras [see @hyman1984atheory; @mccarthy1990footsk; @hayes1989compensatory; @ito1989prosodic; @zec1995sonority; @zec2003prosodic].
 
-<!-- [^cf-perception]: This view of sonority is explicitly perceptual. However, it does not contradict and it should be considered as complementary to syllabic descriptions from an articulatory point of view, such as timing coordination and phase relations that characterize syllabic organization in Articulatory Phonology (@browman1992articulatory; @macneilage1998frame; @goldstein2007syllablesk; @hermes2013phonologysk; @gafos2014stochastic). -->
-
-<!-- [^cf-statlearn]: See, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. -->
-<!-- [^cf-phonlearn]: For *statistical learners* in general see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing; @roettger2019evidential. For *phonotactic learners* see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @futrell2017generative; @jarosz2017inputsk; @mayer2019phonotactic; @mirea2019usingsk. -->
-
-<!-- [^cf-stress]: It is important to note that weight sensitivity is not a universal process, as stress assignment patterns vary from language to language, and not all languages even have stress to begin with. However, it is one of the naturally occurring stress assignment patterns that many unrelated languages exhibit, e.g., Arabic, Tibetan (Lhasa), Wolof, Finnish, and Latin [see @goedemans2013weight; and @gordon2006syllableweight 23 for more exhaustive lists]. -->
-
-<!-- [^cf-glides]: We expect only vocoids to be able to compete for the nucleus from this vowel-adjacent *C*~2~ position. Note that a vocoid in V position is considered a vowel while in C position it would be commonly considered a glide. To avoid such circular definitions, we completely excluded glides from this study. -->
-
-<!-- [^cf-10]: There is, in fact, a more intricate text-tune interaction that can also lead to local "heaviness" of stressed syllables (i.e., on-line prosodic enhancements of nuclei) in order to accommodate certain tonal events in post-lexical intonation via extended duration and/or increased acoustic energy [@roettger2019tune]. -->
-
-<!-- [^cf-smog]: We apply Tukey's (Running Median) Smoothing "3RS3R" to the periodic energy data. The threshold of the log transform is calculated as the maximal value obtained for voiceless portions in the set, less than 5% of the scale before transformation. -->
-
-<!-- [^cf-loess]: The periodic energy curve is fitted with Local Polynomial Regression Fitting (*loess*) in the figures. This is only used for visual clarity---all the data points and calculations are based on the periodic energy curve before this smoothing and after initial smoothing and log transform (see details in Subsection \@ref(sec:obtaining)). -->
-
-<!-- [^cf-expconf]: See @nicenboim2018exploratorysk on dividing up experimental endeavors into exploratory and confirmatory studies. -->
-
-<!-- [^cf-hierarchynotes]: Note that the addition of the articulatory contact distinction to the sonority hierarchy in *NAP~td~* does not have any implications on the following predictions of the model. It is also worth noting that some rhotics, which are traditionally considered liquids, may in fact belong with the vocoid consonants (e.g., most of the English rhotics). However, we excluded rhotics from this study. -->
-
-<!-- [^cf-reconciliation]: The symbolic sonority hierarchy in NAP reconciles perceptual and articulatory approaches to sonority by modelling their mutual contribution to enhancing pitch intelligibility (or periodic energy mass in acoustic terms). This hierarchy is similar to a few proposals for sonority hierarchies that combined levels of voicing/periodicity with degree of vocal tract opening [e.g., @lass1988phonology; @miller2012sonority; and @sharma2018significance]. Such hierarchies may be also seen as compatible with source-filter models of speech [e.g., @fant2000source], where the source controls voicing and the filter controls opening. -->
-
-<!-- [^cf-angle]: A slightly similar calculation can be found in Fullwood's [-@fullwood2014perceptual] *Sonority Angle*. -->
-<!-- , although on different grounds, for different purposes, and with different outcomes. -->
-
-<!-- [^cf-peak]: Note that peak measurements can be advantageous in that they tend to appear at the center of segmental units [minima in consonants and maxima in vowels; see @parker2008sound], overcoming some of the problems related to segmentation, given that peaks are less affected by determination of segmental boundaries. -->
-
 [^cf-helsinki]: Informed consent from the participants was obtained before each experimental session. The experiment complied with the June 1964 Declaration of Helsinki (carried out by the World Medical Association and entitled “Ethical Principles for Medical Research Involving Human Subjects”), as last revised. In accordance with German Research Foundation (DFG) guidelines for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice).
 
 [^cf-plateaufall]: Depending on whether fricatives are considered higher or similar in sonority to stops, clusters of the type fricative-stop may be considered as either an onset fall or an onset plateau.
-
-<!-- [^cf-source]: Based primarily on @van2012sonority. -->
-
-<!-- [^cf-hebschwa]: The schwa in this case is produced as a weak (unstressed) /e/ vowel from the 5-vowel inventory of Modern Hebrew. -->
-
-<!-- [^cf-indexfinger]: Participants used their left index finger to choose '1' and their right index finger to choose '2', using ‘F' and ‘J' buttons respectively. The respective buttons were covered with salient red-on-white ‘1' and ‘2' stickers (the rest of the laptop's keys are all white-on-black by design). -->
-
-<!-- [^cf-pilot]: The exploratory study included also nine clusters with glides, which we later discarded from our confirmatory studies. The actual number of data points per subject in Experiment 1 was therefore higher, with 76 data points per subject (adding nine targets and nine fillers that we excluded from this analysis). -->
 
 [^cf-sstop]: The term */s/-stop cluster* is used here to refer to voiceless sequences of a sibilant, namely /s/ or /ʃ/, that precedes an oral stop, e.g., /p,t,k/.
 
