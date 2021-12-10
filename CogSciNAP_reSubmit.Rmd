@@ -1576,22 +1576,28 @@ The null models are shown in Figure \@ref(fig:NullFit) as baselines in the respe
 The model fit of the six sonority models is shown in Figures \@ref(fig:SSPcolFit)--\@ref(fig:NAPbuFit). The plots in these figures present the dispersion of the average response time results, depicted as red points for related CC clusters, vis-à-vis each models' predictions in the form of distributions, depicted with blue violins. The order of the stimuli, from left to right, follows from the models' scores such that predictions for better-formed clusters appear further to the right. 
 
 (ref:NullFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes).
-```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 predictions$null %>%
   mutate(NAP= round(NAP_bu,7)) %>%
     # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
     bind_rows(tibble(pred = seq(30,220,200)))  %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
-    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) + 
-    scale_x_discrete("Stimuli", breaks=NULL) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .5, size =.8) +
+    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) + 
+    scale_x_discrete("Stimuli (Experiment 2)", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
-    ylab("log RT (Exp. 2)") +
-    # ylim(600,1300) + 
+    ylab("Response Time") +
+    ylim(600,1200) +
     coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.text.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), axis.title.x = element_blank(), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
+  theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
     # ggtitle("Null model fit")
 
 predictions_heb$null %>%
@@ -1600,24 +1606,68 @@ predictions_heb$null %>%
     bind_rows(tibble(pred = seq(30,220,200)))  %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
-    geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) + 
-    scale_x_discrete("Stimuli", breaks=NULL) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .5, size =.8) +
+    geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) + 
+    scale_x_discrete("Stimuli (Experiment 3)", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
-    ylab("log RT (Exp. 3)") +
-    # ylim(600,1300) +
+    ylab("RT (Experiment 3)") +
+    ylim(600,1200) +
     coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL"))
-    # ggtitle("Null model fit")
+  theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
+
 
 ```
+
+<!-- (ref:NullFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes). -->
+<!-- ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+<!-- predictions$null %>% -->
+<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
+<!--     # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
+<!--     bind_rows(tibble(pred = seq(30,220,200)))  %>% -->
+<!--     arrange(NAP) %>% -->
+<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
+<!--     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) +  -->
+<!--     scale_x_discrete("Stimuli", breaks=NULL) + -->
+<!--     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) + -->
+<!--     ylab("RT (Experiment 2)") + -->
+<!--     # ylim(600,1300) +  -->
+<!--     coord_trans(y="log") + -->
+<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.text.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), axis.title.x = element_blank(), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL")) -->
+<!--     # ggtitle("Null model fit") -->
+
+<!-- predictions_heb$null %>% -->
+<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
+<!--     # bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
+<!--     bind_rows(tibble(pred = seq(30,220,200)))  %>% -->
+<!--     arrange(NAP) %>% -->
+<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
+<!--     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL", min.segment.length=.5) +  -->
+<!--     scale_x_discrete("Stimuli", breaks=NULL) + -->
+<!--     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) + -->
+<!--     ylab("RT (Experiment 3)") + -->
+<!--     # ylim(600,1300) + -->
+<!--     coord_trans(y="log") + -->
+<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_blank()) #plot.title = element_text(size=14, family = "Charis SIL")) -->
+<!--     # ggtitle("Null model fit") -->
+
+<!-- ``` -->
 
 <!-- ### (ii.a) Traditional sonority models fit {-} -->
 ### SSP and MSD models {#sec:traditionalModelfit}
 
 (ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness.
-```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$SSP_obs %>%
   left_join(data_RT) %>%
@@ -1627,13 +1677,18 @@ predictions$SSP_obs %>%
     mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = SSP_obs, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
-    xlab(bquote(italic(SSP[col])~scores)) + ylab("log RT (Exp. 2)") +
-        # ylim(600,1300) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .5, size =.8) +
+    xlab(bquote(italic(SSP[col])~scores~(Experiment~2))) + ylab("Response Time") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# +
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(SSP[col])~fit))
    }
 
@@ -1645,20 +1700,68 @@ predictions_heb$SSP_obs %>%
     mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = SSP_obs, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) +
-    xlab(bquote(italic(SSP[col])~scores)) + ylab("log RT (Exp. 3)") +
-        # ylim(600,1300) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .5, size =.8) +
+    xlab(bquote(italic(SSP[col])~scores~(Experiment~3))) + ylab("RT (Experiment 3)") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# +
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(SSP[col])~fit))
    }
 
 ```
 
-(ref:SSPexpFit) *SSP~exp~* model fit (plot details are same as above).
-```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+<!-- (ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. -->
+<!-- ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"} -->
+<!-- # ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+
+<!-- predictions$SSP_obs %>% -->
+<!--   left_join(data_RT) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(SSP_obs)) %>% -->
+<!--     arrange(SSP_obs) %>% -->
+<!--     mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = SSP_obs, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) + -->
+<!--     xlab(bquote(italic(SSP[col])~scores)) + ylab("RT (Experiment 2)") + -->
+<!--         # ylim(600,1300) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# + -->
+<!--         # ggtitle(bquote(italic(SSP[col])~fit)) -->
+<!--    } -->
+
+<!-- predictions_heb$SSP_obs %>% -->
+<!--   left_join(data_RT_heb) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(SSP_obs)) %>% -->
+<!--     arrange(SSP_obs) %>% -->
+<!--     mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = SSP_obs, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1.2) + -->
+<!--     xlab(bquote(italic(SSP[col])~scores)) + ylab("RT (Experiment 3)") + -->
+<!--         # ylim(600,1300) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL"))# + -->
+<!--         # ggtitle(bquote(italic(SSP[col])~fit)) -->
+<!--    } -->
+
+<!-- ``` -->
+
+(ref:SSPexpFit) *SSP~exp~* model fit (plot details are the same as above).
+```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$SSP %>%
   left_join(data_RT) %>%
@@ -1668,14 +1771,19 @@ predictions$SSP %>%
     mutate(SSP = factor(SSP, levels= unique(SSP)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = SSP, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
-    xlab(bquote(italic(SSP[exp])~scores)) +
-       ylab("log RT (Exp. 2)") +
-        # ylim(600,1300) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(SSP[exp])~scores~(Experiment~2))) +
+       ylab("Response Times") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(SSP[exp])~fit))
    }
 
@@ -1687,23 +1795,72 @@ predictions_heb$SSP %>%
     mutate(SSP = factor(SSP, levels= unique(SSP)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = SSP, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
-    xlab(bquote(italic(SSP[exp])~scores)) +
-       ylab("log RT (Exp. 3)") +
-        # ylim(600,1300) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(SSP[exp])~scores~(Experiment~3))) +
+       ylab("RT ") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(SSP[exp])~fit))
    }
 
 ```
 
+<!-- (ref:SSPexpFit) *SSP~exp~* model fit (plot details are the same as above). -->
+<!-- ```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+
+<!-- predictions$SSP %>% -->
+<!--   left_join(data_RT) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(SSP)) %>% -->
+<!--     arrange(SSP) %>% -->
+<!--     mutate(SSP = factor(SSP, levels= unique(SSP)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = SSP, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
+<!--     xlab(bquote(italic(SSP[exp])~scores)) + -->
+<!--        ylab("RT (Experiment 2)") + -->
+<!--         # ylim(600,1300) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--         # ggtitle(bquote(italic(SSP[exp])~fit)) -->
+<!--    } -->
+
+<!-- predictions_heb$SSP %>% -->
+<!--   left_join(data_RT_heb) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(SSP)) %>% -->
+<!--     arrange(SSP) %>% -->
+<!--     mutate(SSP = factor(SSP, levels= unique(SSP)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = SSP, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
+<!--     xlab(bquote(italic(SSP[exp])~scores)) + -->
+<!--        ylab("RT (Experiment 3)") + -->
+<!--         # ylim(600,1300) + -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--         # ggtitle(bquote(italic(SSP[exp])~fit)) -->
+<!--    } -->
+
+<!-- ``` -->
+
 <!-- ### MSD models {#sec:MSDModelfit} -->
 
-(ref:MSDcolFit) *MSD~col~* model fit (plot details are same as above).
-```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+(ref:MSDcolFit) *MSD~col~* model fit (plot details are the same as above).
+```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$MSD_obs %>%
   left_join(data_RT) %>%
@@ -1713,13 +1870,18 @@ predictions$MSD_obs %>%
     mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = MSD_obs, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
-    xlab(bquote(italic(MSD[col])~scores)) + ylab("log RT (Exp. 2)") +
-        # ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(MSD[col])~scores~(Experiment~2))) + ylab("Response Ttime") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(MSD[col])~fit))
    }
 
@@ -1731,20 +1893,67 @@ predictions_heb$MSD_obs %>%
     mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = MSD_obs, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
-    xlab(bquote(italic(MSD[col])~scores)) + ylab("log RT (Exp. 3)") +
-        # ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(MSD[col])~scores~(Experiment~3))) + ylab("RT") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(MSD[col])~fit))
    }
 
 ```
 
-(ref:MSDexpFit) *MSD~exp~* model fit (plot details are same as above).
-```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+<!-- (ref:MSDcolFit) *MSD~col~* model fit (plot details are the same as above). -->
+<!-- ```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+
+<!-- predictions$MSD_obs %>% -->
+<!--   left_join(data_RT) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(MSD_obs)) %>% -->
+<!--     arrange(MSD_obs) %>% -->
+<!--     mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = MSD_obs, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
+<!--     xlab(bquote(italic(MSD[col])~scores)) + ylab("RT (Experiment 2)") + -->
+<!--         # ylim(600,1300) +  -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--         # ggtitle(bquote(italic(MSD[col])~fit)) -->
+<!--    } -->
+
+<!-- predictions_heb$MSD_obs %>% -->
+<!--   left_join(data_RT_heb) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(MSD_obs)) %>% -->
+<!--     arrange(MSD_obs) %>% -->
+<!--     mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = MSD_obs, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
+<!--     xlab(bquote(italic(MSD[col])~scores)) + ylab("RT (Experiment 3)") + -->
+<!--         # ylim(600,1300) +  -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--         # ggtitle(bquote(italic(MSD[col])~fit)) -->
+<!--    } -->
+
+<!-- ``` -->
+
+(ref:MSDexpFit) *MSD~exp~* model fit (plot details are the same as above).
+```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$MSD %>%
   left_join(data_RT) %>%
@@ -1754,13 +1963,18 @@ predictions$MSD %>%
     mutate(MSD = factor(MSD, levels= unique(MSD)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = MSD, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
-    xlab(bquote(italic(MSD[exp])~scores)) + ylab("log RT (Exp. 2)") +
-        # ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(MSD[exp])~scores~(Experiment~2))) + ylab("Response Time") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(MSD[exp])~fit))
    }
 
@@ -1772,17 +1986,63 @@ predictions_heb$MSD %>%
     mutate(MSD = factor(MSD, levels= unique(MSD)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
    { ggplot(., aes(x = MSD, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) +
-    xlab(bquote(italic(MSD[exp])~scores)) + ylab("log RT (Exp. 3)") +
-        # ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(MSD[exp])~scores~(Experiment~3))) + ylab("RT") +
+        ylim(600,1200) +
         coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
         # ggtitle(bquote(italic(MSD[exp])~fit))
    }
 
 ```
+
+<!-- (ref:MSDexpFit) *MSD~exp~* model fit (plot details are the same as above). -->
+<!-- ```{r MSDexpFit,fig.cap = "(ref:MSDexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+
+<!-- predictions$MSD %>% -->
+<!--   left_join(data_RT) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(MSD)) %>% -->
+<!--     arrange(MSD) %>% -->
+<!--     mutate(MSD = factor(MSD, levels= unique(MSD)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = MSD, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
+<!--     xlab(bquote(italic(MSD[exp])~scores)) + ylab("RT (Experiment 2)") + -->
+<!--         # ylim(600,1300) +  -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--         # ggtitle(bquote(italic(MSD[exp])~fit)) -->
+<!--    } -->
+
+<!-- predictions_heb$MSD %>% -->
+<!--   left_join(data_RT_heb) %>% -->
+<!--     ungroup() %>% -->
+<!--   filter(!is.na(MSD)) %>% -->
+<!--     arrange(MSD) %>% -->
+<!--     mutate(MSD = factor(MSD, levels= unique(MSD)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--    { ggplot(., aes(x = MSD, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1.2, alpha = .7) + -->
+<!--     xlab(bquote(italic(MSD[exp])~scores~(Experiment~3))) + ylab("RT") + -->
+<!--         # ylim(600,1300) +  -->
+<!--         coord_trans(y="log") + -->
+<!--         theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--         # ggtitle(bquote(italic(MSD[exp])~fit)) -->
+<!--    } -->
+
+<!-- ``` -->
 
 
 We consider a good fit in the case of the ordinal models to be roughly characterized by the following three criteria:
@@ -1803,8 +2063,9 @@ To conclude, an observation of the model fit of the four traditional sonority mo
 <!-- ### (ii.b) NAP~td~ model fit {-} -->
 ### NAP models {#sec:NAPtdModelfit}
 
-(ref:NAPtdFit) *NAP~td~* model fit (plot details are same as above).
-```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+(ref:NAPtdFit) *NAP~td~* model fit (plot details are the same as above).
+```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$NAP_td %>% 
   left_join(data_RT) %>%
@@ -1813,13 +2074,18 @@ predictions$NAP_td %>%
     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
   { ggplot(., aes(x = NAP_td, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
-  xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Exp. 2)") +
-      # ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha=.5, size =.8)+
+  xlab(bquote(italic(NAP[td])~scores~(Experiment~2))) + ylab("Response Time") +
+      ylim(600,1200) +
       coord_trans(y="log") +
-      theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
       # ggtitle(bquote(italic(NAP[td])~fit))
   }
 
@@ -1830,17 +2096,61 @@ predictions_heb$NAP_td %>%
     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)),
            stimulus = factor(stimulus, levels = unique(stimulus))) %>%
   { ggplot(., aes(x = NAP_td, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") +
-    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+
-  xlab(bquote(italic(NAP[td])~scores)) + ylab("log RT (Exp. 3)") +
-      # ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha=.5, size =.8)+
+  xlab(bquote(italic(NAP[td])~scores~(Experiment~3))) + ylab("RT") +
+      ylim(600,1200) +
       coord_trans(y="log") +
-      theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
       # ggtitle(bquote(italic(NAP[td])~fit))
   }
 
 ```
+
+<!-- (ref:NAPtdFit) *NAP~td~* model fit (plot details are the same as above). -->
+<!-- ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+
+<!-- predictions$NAP_td %>%  -->
+<!--   left_join(data_RT) %>% -->
+<!--     ungroup() %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--   { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+ -->
+<!--   xlab(bquote(italic(NAP[td])~scores)) + ylab("RT (Experiment 2)") + -->
+<!--       # ylim(600,1300) +  -->
+<!--       coord_trans(y="log") + -->
+<!--       theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--       # ggtitle(bquote(italic(NAP[td])~fit)) -->
+<!--   } -->
+
+<!-- predictions_heb$NAP_td %>%  -->
+<!--   left_join(data_RT_heb) %>% -->
+<!--     ungroup() %>% -->
+<!--     arrange(NAP_td) %>% -->
+<!--     mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)), -->
+<!--            stimulus = factor(stimulus, levels = unique(stimulus))) %>% -->
+<!--   { ggplot(., aes(x = NAP_td, y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Charis SIL") + -->
+<!--     geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", size =1.2)+ -->
+<!--   xlab(bquote(italic(NAP[td])~scores)) + ylab("RT (Experiment 3)") + -->
+<!--       # ylim(600,1300) +  -->
+<!--       coord_trans(y="log") + -->
+<!--       theme(panel.background = element_blank(), axis.text = element_text(size = 10, family = "Charis SIL"), axis.ticks.x = element_blank(), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--       # ggtitle(bquote(italic(NAP[td])~fit)) -->
+<!--   } -->
+
+<!-- ``` -->
 
 Although *NAP~td~* is an ordinal model like all the traditional sonority models, it follows a different rationale (see Subsection \@ref(sec:naptdmodel)), whereby the distinct categories of the model estimate nucleus competition to reflect well-formedness. Figure \@ref(fig:NAPtdFit) shows that *NAP~td~* succeeds in containing all the data (points) within the respective predictions (blue violins). 
 A comparison with Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) shows that *NAP~td~* is the only model to achieve this.
@@ -1849,22 +2159,28 @@ However, *NAP~td~* appears to exhibit some redundancy, as suggested by the large
 
 <!-- ### (ii.c) NAP~bu~ model fit {-} -->
 <!-- ### NAP~bu~ models {#sec:NAPbuModelfit} -->
-(ref:NAPbuFit) *NAP~bu~* model fit (plot details are same as above).
-```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
+(ref:NAPbuFit) *NAP~bu~* model fit (plot details are the same as above).
+```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
+# ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$NAP_bu %>% 
   mutate(NAP= round(NAP_bu,7)) %>%
     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
-    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") +
-    scale_x_discrete(bquote(italic(NAP[bu])~scores~(AA~set)), breaks=NULL) +
-    ylab("log RT (Exp. 2)") +
-    # ylim(600,1300) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .5, size =.8) +
+    geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    scale_x_discrete(bquote(italic(NAP[bu])~scores~(AA~set:~Experiment~2)), breaks=NULL) +
+    ylab("Response Time") +
+    ylim(600,1200) +
     coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title.x = element_blank(), axis.title.y = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_text(size=8, family = "Charis SIL"), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_text(size=10, family = "Charis SIL"), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
     # ggtitle(bquote(italic(NAP[bu])~fit))
 
 predictions_heb$NAP_bu %>% 
@@ -1872,17 +2188,57 @@ predictions_heb$NAP_bu %>%
     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
     arrange(NAP) %>%
     ggplot(aes(x = factor(NAP), y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) +
-    geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") +
-    scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) +
-    ylab("log RT (Exp. 3)") +
-    ylim(600,1300) + 
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .5, size =.8) +
+    geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) +
+    scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set:~Experiment~3)), breaks=NULL) +
+    ylab("RT (Experiment 3)") +
+    ylim(600,1200) +
     coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+
+        theme(panel.background = element_blank(), 
+              axis.text.x = element_text(size=9, family = "Charis SIL"), 
+              axis.text.y = element_blank(), 
+              axis.title.x = element_text(size=11, family = "Charis SIL"), 
+              axis.title.y = element_blank(), 
+              axis.ticks.x = element_blank(), plot.title = element_blank())
     # ggtitle(bquote(italic(NAP[bu])~fit))
 
 ```
+
+<!-- (ref:NAPbuFit) *NAP~bu~* model fit (plot details are the same as above). -->
+<!-- ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"} -->
+
+<!-- predictions$NAP_bu %>%  -->
+<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
+<!--     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
+<!--     arrange(NAP) %>% -->
+<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
+<!--     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") + -->
+<!--     scale_x_discrete(bquote(italic(NAP[bu])~scores~(AA~set)), breaks=NULL) + -->
+<!--     ylab("RT (Experiment 2)") + -->
+<!--     # ylim(600,1300) + -->
+<!--     coord_trans(y="log") + -->
+<!--     theme(panel.background = element_blank(), axis.text.x = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--     # ggtitle(bquote(italic(NAP[bu])~fit)) -->
+
+<!-- predictions_heb$NAP_bu %>%  -->
+<!--   mutate(NAP= round(NAP_bu,7)) %>% -->
+<!--     bind_rows(tibble(NAP = seq(-220,-30,1)))  %>% -->
+<!--     arrange(NAP) %>% -->
+<!--     ggplot(aes(x = factor(NAP), y= pred) ) + -->
+<!--     geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") + -->
+<!--     geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1.2) + -->
+<!--     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Charis SIL") + -->
+<!--     scale_x_discrete(bquote(italic(NAP[bu])~scores~(HN~set)), breaks=NULL) + -->
+<!--     ylab("RT (Experiment 3)") + -->
+<!--     # ylim(600,1300) +  -->
+<!--     coord_trans(y="log") + -->
+<!--     theme(panel.background = element_blank(), axis.text.y = element_text(size = 10, family = "Charis SIL"), axis.title = element_text(size=12, family = "Charis SIL"), plot.title = element_text(size=14, family = "Charis SIL")) #+ -->
+<!--     # ggtitle(bquote(italic(NAP[bu])~fit)) -->
+
+<!-- ``` -->
 
 *NAP~bu~* is different from all the other models in that it presents scores that are specific to each token in a continuous rather than ordinal scale (i.e., the distances between scores in the model are also predicted). See Figure \@ref(fig:NAPbuFit) where the expected negative correlation between response time and well-formedness appears to generally hold for both the predictions and the data of the model fit of *NAP~bu~*.
 Our criteria for goodness of fit based on the plots (see opening Subsection 
@@ -1893,111 +2249,8 @@ are not all valid when evaluating *NAP~bu~* since we have no classes and no vert
 <!-- \@ref(sec:traditionalModelfit)).  -->
 Furthermore, *NAP~bu~* also fails to include the /z/-initial clusters---/zm/ and /zv/---within their respective predictive distribution.
 
-(ref:SonFitAll) Combined sonority models fit (small reduced versions, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. 
-```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.5,.5,.5,.5,.5,.5), fig.show="hold", fig.align = "default"}
-# fig.ncol=2
 
-predictions$SSP_obs %>%
-  left_join(data_RT) %>%
-    ungroup() %>%
-  filter(!is.na(SSP_obs)) %>%
-    arrange(SSP_obs) %>%
-    mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
-           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
-   { ggplot(., aes(x = SSP_obs, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    #geom_text_repel(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .7, size =1) +
-    xlab(bquote(italic(SSP[col]))) + ylab("Response time (log scale)") +
-        ylim(600,1200) +
-        coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
-        ggtitle(bquote(italic(SSP[col])~fit))}
 
-predictions$MSD_obs %>%
-  left_join(data_RT) %>%
-    ungroup() %>%
-  filter(!is.na(MSD_obs)) %>%
-    arrange(MSD_obs) %>%
-    mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
-           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
-   { ggplot(., aes(x = MSD_obs, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    #geom_text_repel(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
-    xlab(bquote(italic(MSD[col]))) + ylab("Response time (log scale)") +
-        ylim(600,1200) + 
-        coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
-        ggtitle(bquote(italic(MSD[col])~fit))}
-
-predictions$SSP %>%
-  left_join(data_RT) %>%
-    ungroup() %>%
-  filter(!is.na(SSP)) %>%
-    arrange(SSP) %>%
-    mutate(SSP = factor(SSP, levels= unique(SSP)),
-           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
-   { ggplot(., aes(x = SSP, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    #geom_text_repel(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
-    xlab(bquote(italic(SSP[exp]))) +
-       ylab("Response time (log scale)") +
-        ylim(600,1200) +
-        coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
-        ggtitle(bquote(italic(SSP[exp])~fit))}
-
-predictions$MSD %>%
-  left_join(data_RT) %>%
-    ungroup() %>%
-  filter(!is.na(MSD)) %>%
-    arrange(MSD) %>%
-    mutate(MSD = factor(MSD, levels= unique(MSD)),
-           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
-   { ggplot(., aes(x = MSD, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    #geom_text_repel(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =1, alpha = .7) +
-    xlab(bquote(italic(MSD[exp]))) + ylab("Response time (log scale)") +
-        ylim(600,1200) + 
-        coord_trans(y="log") +
-        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
-        ggtitle(bquote(italic(MSD[exp])~fit))}
-
-predictions$NAP_td %>% 
-  left_join(data_RT) %>%
-    ungroup() %>%
-    arrange(NAP_td) %>%
-    mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)),
-           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
-  { ggplot(., aes(x = NAP_td, y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    # geom_text_repel(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT, label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", size =5, family="Times") +
-    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .7, size =1)+
-  xlab(bquote(italic(NAP[td]))) + ylab("Response time (log scale)") +
-      ylim(600,1200) + 
-      coord_trans(y="log") +
-      theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
-      ggtitle(bquote(italic(NAP[td])~fit))}
-
-predictions$NAP_bu %>% 
-  mutate(NAP= round(NAP_bu,7)) %>%
-    bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
-    arrange(NAP) %>%
-    ggplot(aes(x = factor(NAP), y= pred) ) +
-    geom_violin(draw_quantiles = TRUE, alpha=.8, colour = "cornflowerblue", fill = "azure2") +
-    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =1) +
-    # geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP),label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = .9, size =5, min.segment.length=.5, family="Times") +
-    scale_x_discrete(bquote(italic(NAP[bu])), breaks=NULL) +
-    ylab("Response time (log scale)") +
-    ylim(600,1200) + 
-    coord_trans(y="log") +
-    theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) +
-    ggtitle(bquote(italic(NAP[bu])~fit))
-
-```
 
 The failures in the fit of the *NAP~bu~* model can be split into two types:
 (i) nasal-initial clusters---*nval*, *nmal*, and *mnal*---which received results on a par with the slowest responses in the data, reflecting an overestimation of well-formedness by the model, and;
@@ -2010,6 +2263,9 @@ These results may be taken to suggest that the distinctive high-frequency aperio
 <!-- #### Model comparison {#sec:ModelComparison2} -->
 
 While the model fits give us an insight into the behavior of each model with respect to the data, they are not well-suited to compare the different models against a consistent criterion. To do that, we run out-of-sample predictions using cross-validation to test each model's ability to predict unseen items.
+
+### Experiment 2
+
 Results of the model comparisons (see Table \@ref(tab:resultsmodels)) reveal a very clear advantage of *NAP~td~*
 over all the other models. 
 The difference in elpd scores from the next three models---*SSP/MSD~col~* and *NAP~bu~*---is around -90, which is about 6 times larger in absolute terms than the difference in standard errors of these three models, which is about 15. This is interpreted as a very robust lead for *NAP~td~*. 
@@ -2037,6 +2293,125 @@ comparison%>%
  
      apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 2)",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.")
 
+```
+
+(ref:SonFitAll) Experiment 2: Combined sonority models fit (small reduced versions, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. 
+```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.4,.4,.4,.4,.4,.4), fig.show="hold", fig.align = "default"}
+
+predictions$SSP_obs %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(SSP_obs)) %>%
+    arrange(SSP_obs) %>%
+    mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha = .5, size =.8) +
+    xlab(bquote(italic(SSP[col]))) + ylab("Response Time") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), 
+              axis.text.y = element_text(size=8, family = "Times"), 
+              axis.text.x = element_blank(), 
+              axis.title.y = element_text(size=9, family = "Times"), 
+              axis.title.x = element_text(size=11, family = "Times"), 
+              axis.ticks = element_blank(), plot.title = element_blank())
+   }
+
+
+predictions$MSD_obs %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(MSD_obs)) %>%
+    arrange(MSD_obs) %>%
+    mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(MSD[col]))) + ylab("Response Time") +
+        ylim(600,1200) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) 
+     }
+
+predictions$SSP %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(SSP)) %>%
+    arrange(SSP) %>%
+    mutate(SSP = factor(SSP, levels= unique(SSP)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(SSP[exp]))) +
+       ylab("Response Time") +
+        ylim(600,1200) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), 
+              axis.text.y = element_text(size=8, family = "Times"), 
+              axis.text.x = element_blank(), 
+              axis.title.y = element_text(size=9, family = "Times"), 
+              axis.title.x = element_text(size=11, family = "Times"), 
+              axis.ticks = element_blank(), plot.title = element_blank())
+     }
+
+predictions$MSD %>%
+  left_join(data_RT) %>%
+    ungroup() %>%
+  filter(!is.na(MSD)) %>%
+    arrange(MSD) %>%
+    mutate(MSD = factor(MSD, levels= unique(MSD)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =.8, alpha = .5) +
+    xlab(bquote(italic(MSD[exp]))) + ylab("Response Time") +
+        ylim(600,1200) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank())
+     }
+
+predictions$NAP_td %>% 
+  left_join(data_RT) %>%
+    ungroup() %>%
+    arrange(NAP_td) %>%
+    mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+  { ggplot(., aes(x = NAP_td, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha = .5, size =.8)+
+  xlab(bquote(italic(NAP[td]))) + ylab("Response Time") +
+      ylim(600,1200) + 
+      coord_trans(y="log") +
+        theme(panel.background = element_blank(), 
+              axis.text.y = element_text(size=8, family = "Times"), 
+              axis.text.x = element_blank(), 
+              axis.title.y = element_text(size=9, family = "Times"), 
+              axis.title.x = element_text(size=11, family = "Times"), 
+              axis.ticks = element_blank(), plot.title = element_blank())
+    }
+
+predictions$NAP_bu %>% 
+  mutate(NAP= round(NAP_bu,7)) %>%
+    bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
+    arrange(NAP) %>%
+    ggplot(aes(x = factor(NAP), y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =.8) +
+    scale_x_discrete(bquote(italic(NAP[bu])), breaks=NULL) +
+    ylab("Response Time") +
+    ylim(600,1200) + 
+    coord_trans(y="log") +
+    theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) 
+
+```
+
+### Experiment 3
+
+```{r resultsmodelsHeb, results = "asis"}
 
 comparison <- loo::loo_compare(x=kfold_hebrew)
 ll_matrix <- map2_dfc(kfold_hebrew, names(kfold_hebrew), ~ data.frame( .x$pointwise) %>% set_names(.y)) %>% as.matrix()
@@ -2055,8 +2430,122 @@ comparison%>%
               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
  
-     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 3)",note= "(details are same as above).")
+     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 3)",note= "(details are the same as above).")
 
+
+```
+
+(ref:SonFitAllHeb) Experiment 3: Combined sonority models fit (details same as above).
+```{r SonFitAllHeb,fig.cap = "(ref:SonFitAllHeb)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.4,.4,.4,.4,.4,.4), fig.show="hold", fig.align = "default"}
+
+predictions_heb$SSP_obs %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(SSP_obs)) %>%
+    arrange(SSP_obs) %>%
+    mutate(SSP_obs = factor(SSP_obs, levels= unique(SSP_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP_obs), aes(y = corrRT), color = "red3", alpha=.5, size =.8) +
+    xlab(bquote(italic(SSP[col]))) + ylab("Response Time") +
+        ylim(600,1000) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), 
+              axis.text.y = element_text(size=8, family = "Times"), 
+              axis.text.x = element_blank(), 
+              axis.title.y = element_text(size=9, family = "Times"), 
+              axis.title.x = element_text(size=11, family = "Times"), 
+              axis.ticks = element_blank(), plot.title = element_blank())
+   }
+
+
+predictions_heb$MSD_obs %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(MSD_obs)) %>%
+    arrange(MSD_obs) %>%
+    mutate(MSD_obs = factor(MSD_obs, levels= unique(MSD_obs)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD_obs, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD_obs), aes(y = corrRT), color = "red3", size =.8, alpha=.5) +
+    xlab(bquote(italic(MSD[col]))) + ylab("Response Time") +
+        ylim(600,1000) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) 
+     }
+
+predictions_heb$SSP %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(SSP)) %>%
+    arrange(SSP) %>%
+    mutate(SSP = factor(SSP, levels= unique(SSP)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = SSP, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,SSP), aes(y = corrRT), color = "red3", size =.8, alpha=.5) +
+    xlab(bquote(italic(SSP[exp]))) +
+       ylab("Response Time") +
+        ylim(600,1000) +
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), 
+              axis.text.y = element_text(size=8, family = "Times"), 
+              axis.text.x = element_blank(), 
+              axis.title.y = element_text(size=9, family = "Times"), 
+              axis.title.x = element_text(size=11, family = "Times"), 
+              axis.ticks = element_blank(), plot.title = element_blank())
+     }
+
+predictions_heb$MSD %>%
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+  filter(!is.na(MSD)) %>%
+    arrange(MSD) %>%
+    mutate(MSD = factor(MSD, levels= unique(MSD)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+   { ggplot(., aes(x = MSD, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,MSD), aes(y = corrRT), color = "red3", size =.8, alpha=.5) +
+    xlab(bquote(italic(MSD[exp]))) + ylab("Response Time") +
+        ylim(600,1000) + 
+        coord_trans(y="log") +
+        theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank())
+     }
+
+predictions_heb$NAP_td %>% 
+  left_join(data_RT_heb) %>%
+    ungroup() %>%
+    arrange(NAP_td) %>%
+    mutate(NAP_td = factor(NAP_td, levels= unique(NAP_td)),
+           stimulus = factor(stimulus, levels = unique(stimulus))) %>%
+  { ggplot(., aes(x = NAP_td, y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data=distinct(.,corrRT,stimulus,NAP_td), aes(y = corrRT), color = "red3", alpha=.5, size =.8)+
+  xlab(bquote(italic(NAP[td]))) + ylab("Response Time") +
+      ylim(600,1000) + 
+      coord_trans(y="log") +
+        theme(panel.background = element_blank(), 
+              axis.text.y = element_text(size=8, family = "Times"), 
+              axis.text.x = element_blank(), 
+              axis.title.y = element_text(size=9, family = "Times"), 
+              axis.title.x = element_text(size=11, family = "Times"), 
+              axis.ticks = element_blank(), plot.title = element_blank())
+    }
+
+predictions_heb$NAP_bu %>% 
+  mutate(NAP= round(NAP_bu,7)) %>%
+    bind_rows(tibble(NAP = seq(-220,-30,1)))  %>%
+    arrange(NAP) %>%
+    ggplot(aes(x = factor(NAP), y= pred) ) +
+    geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
+    geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .7, size =.8) +
+    scale_x_discrete(bquote(italic(NAP[bu])), breaks=NULL) +
+    ylab("Response Time") +
+    ylim(600,1000) + 
+    coord_trans(y="log") +
+    theme(panel.background = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), axis.title.y = element_blank(), axis.title.x = element_text(size=11, family = "Times"), plot.title = element_blank()) 
 
 ```
 
