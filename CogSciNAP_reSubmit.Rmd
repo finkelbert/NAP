@@ -463,30 +463,32 @@ if(file.exists("data_tables/RDS/kfold_german.RDS")){
     }
 ```
 
-```{r weigths-models, include=FALSE}
-    
-## ## loo::compare(x=loo_pilot)
-## loo::compare(x=kfold_german)
-## loo::compare(x=kfold_german[-1])
-## loo::compare(x=kfold_german[-1][-6])
-## loo::compare(x=kfold_german[c("MSD_obs","SSP_obs","null")])
+<!-- ```{r weigths-models, include=FALSE} -->
+
+<!-- ## ## loo::compare(x=loo_pilot) -->
+<!-- ## loo::compare(x=kfold_german) -->
+<!-- ## loo::compare(x=kfold_german[-1]) -->
+<!-- ## loo::compare(x=kfold_german[-1][-6]) -->
+<!-- ## loo::compare(x=kfold_german[c("MSD_obs","SSP_obs","null")]) -->
 
 
-## loo::loo_model_weights(x=loo_german)
-## compare(loo_german$NAP_td, loo_german$SSP_obs)
-## if(file.exists("data_tables/RDS/weights.RDS")){
-##     weights <- readRDS("data_tables/RDS/weights.RDS")
-## } else {
-    ## weights <-loo_model_weights(,kfold_german$MSD_obs)
+<!-- ## loo::loo_model_weights(x=loo_german) -->
+<!-- ## compare(loo_german$NAP_td, loo_german$SSP_obs) -->
+<!-- ## if(file.exists("data_tables/RDS/weights.RDS")){ -->
+<!-- ##     weights <- readRDS("data_tables/RDS/weights.RDS") -->
+<!-- ## } else { -->
+<!--     ## weights <-loo_model_weights(,kfold_german$MSD_obs) -->
 
-        ## xx <- ll_matrix[,c(2,3,4,5,6)]
-    ## wxx <- loo::stacking_weights(xx)
-    ## names(wxx) <-  colnames(xx)
+<!--         ## xx <- ll_matrix[,c(2,3,4,5,6)] -->
+<!--     ## wxx <- loo::stacking_weights(xx) -->
+<!--     ## names(wxx) <-  colnames(xx) -->
 
-    ## saveRDS(weights, file = "data_tables/RDS/weights.RDS")
-## }
-```
+<!--     ## saveRDS(weights, file = "data_tables/RDS/weights.RDS") -->
+<!-- ## } -->
+<!-- ``` -->
+
 ```{r loo-proc, include=FALSE}
+
 ## w_a <- model_weights(m_german$models$MSD,
 ##                    m_german$models$MSD_obs,
 ##                    m_german$models$SSP,
@@ -627,6 +629,66 @@ data_RT_heb <- data_hebrew_s %>%
 #    bind_rows(tibble(NAP = seq(0.367355,.4825569,0.01))) %>%
     filter(!is.na(stimulus))
     
+```
+
+<!-- ```{r prepareParticipants, include=FALSE, fig.show="hide"}
+require(ggplot2) -->
+
+<!-- # READ dataframe Hebrew subjects -->
+<!-- partHeb_dir_tables <- "data_tables/confirmatory_results_Heb/" -->
+<!-- files <- list.files(path=partHeb_dir_tables, pattern="subject*") -->
+<!-- subjects_dfHeb <- plyr::ldply(files, function(f){ -->
+<!--   subject <- read.csv(paste0(partHeb_dir_tables,"//",f), nrows = 1, as.is = T) -->
+<!--   subject <- subset(subject,select = c(subject_nr, subject_age, subject_gender, subject_handedness, subject_education, subject_hebrew_native, subject_other_native_lang, subject_language_other)) -->
+<!--   subject -->
+<!-- }) -->
+
+<!-- #fix one missing input -->
+<!-- subjects_dfHeb$subject_education[subjects_dfHeb$subject_education=="None"] <- 2 -->
+
+<!-- #map numerals to choices -->
+<!-- subjects_dfHeb <- mutate(group_by(subjects_dfHeb, subject_nr), -->
+<!--                       subject_age = ifelse(subject_age==1, "40-59", ifelse(subject_age==2, "30-39", ifelse(subject_age==3, "19-29", "13-18"))), -->
+<!--                       subject_gender = ifelse(subject_gender==2, "male", ifelse(subject_gender=="1", "female", "other")), -->
+<!--                       subject_handedness = ifelse(subject_handedness==0, "left-handed", "right-handed"), -->
+<!--                       subject_education = ifelse(subject_education==0, "graduate", ifelse(subject_education==1, "undergrad", ifelse(subject_education==2, "high-school", "elementry"))), -->
+<!--                       subject_hebrew_native = ifelse(subject_hebrew_native==1, "multilingual", "monolingual") -->
+<!--                       ) -->
+
+<!-- #change to factors -->
+<!-- subjects_dfHeb$subject_nr <- as.factor(subjects_dfHeb$subject_nr) -->
+<!-- subjects_dfHeb$subject_age <- as.factor(subjects_dfHeb$subject_age) -->
+<!-- subjects_dfHeb$subject_gender <- as.factor(subjects_dfHeb$subject_gender) -->
+<!-- subjects_dfHeb$subject_handedness <- as.factor(subjects_dfHeb$subject_handedness) -->
+<!-- subjects_dfHeb$subject_education <- as.factor(subjects_dfHeb$subject_education) -->
+<!-- subjects_dfHeb$subject_hebrew_native <- as.factor(subjects_dfHeb$subject_hebrew_native) -->
+
+<!-- ## Write the main data file -->
+<!-- write.csv(subjects_dfHeb, "data_tables/subjects/subjects_heb.csv") -->
+
+<!-- ``` -->
+
+<!-- participantsStuff -->
+```{r participantsRead, include=FALSE}
+
+## pilot
+subjects_pilot <- read.csv("data_tables/subjects/subjects_pilot.csv") %>% select(-X)
+
+## Ger (main)
+subjects_main <- read.csv("data_tables/subjects/subjects_main.csv") %>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
+
+subjects_main$subject_education <- as.character(subjects_main$subject_education)
+subjects_main$subject_education[subjects_main$subject_education=="undergrad"] <- "undergraduate"
+subjects_main$subject_education <- as.factor(subjects_main$subject_education)
+
+## Heb
+subjects_heb <- read.csv("data_tables/subjects/subjects_heb.csv") %>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
+
+subjects_heb$subject_education <- as.character(subjects_heb$subject_education)
+subjects_heb$subject_education[subjects_heb$subject_education=="high-school"] <- "school"
+subjects_heb$subject_education[subjects_heb$subject_education=="undergrad"] <- "undergraduate"
+subjects_heb$subject_education <- as.factor(subjects_heb$subject_education)
+
 ```
 
 
@@ -878,7 +940,7 @@ The main problem with intensity-based accounts is related to the distinction bet
 
 The acoustic signal has certain physical qualities contributing to its overall power, but they have different effects on the perceptual system of the human hearer. This discrepancy between acoustic intensity and perceived loudness is a well-known problem, playing a role at different dimensions of the mapping between acoustics and perception.
 
-The prominent points of departure between acoustic intensity and perceived loudness include different frequency bands that lead to different loudness perception [e.g. @fletcher1933loudness; @plack1995loudness; @suzuki2004equal; @moore2013anintro 134], different signal durations that have different loudness effects [e.g. @turk1996processing; @seshadri2009perceived; @olsen2010loudness; @moore2013anintro 143], and different periodic structures, where the difference between harmonic structures vs. random noise, and their respective spectral bandwidths, was also found to influence perception of loudness [e.g. @hellman1972asymmetry; @bao2010psychoacousticsk; @moore2013anintro 140].
+The prominent points of departure between acoustic intensity and perceived loudness include different frequency bands that lead to different loudness perception [e.g. @fletcher1933loudness; @plack1995loudness; @suzuki2004equal; @moore2013anintro 134], different signal durations that have different loudness effects [e.g. @turk1996processing; @seshadri2009perceived; @olsen2010loudness; @moore2013anintro 143], and different periodic structures, where the difference between harmonic structures vs. random noise, and their respective spectral bandwidths, was also found to influence perception of loudness [e.g. @hellman1972asymmetry; @stevens1972perceived; @bao2010psychoacousticsk; @moore2013anintro 140].
 
 Acoustic intensity is therefore a physical description of sound waves in space which does not consistently relate to how loud we perceive them, or to any other perceptual phenomenon for that matter.
 
@@ -889,7 +951,7 @@ The systematic differences in intensity of adjacent speech sounds imply that the
 The literature on perceived loudness supports this assumption given that speech portions with relatively low acoustic intensity, like voiceless fricatives, appear in speech next to portions with relatively high acoustic intensity, like that of a vowel.
 Our auditory system perceives the aperiodic high-mid frequencies of many obstruents as exceptionally loud compared to the periodic low-mid frequency ranges of vowel sounds, thus compensating in perception for physical differences in acoustic intensity.
 
-Given the above, we should anticipate that perceived loudness will not be a good candidate for the acoustic correlate of sonority hierarchies, as a measure of perceived loudness would bring all speech sounds closer together by diminishing the distinctions provided by acoustic intensity. Indeed, although good approximations of perceived loudness from acoustic signals are available [e.g. @seshadri2009perceived; @skovenborg2012loudnesssk; @lund2014loudnesssk; @itu2015algorithmssk], we are unaware of attempts to employ such measures for sonority. 
+Given the above, we should anticipate that perceived loudness will not be a good candidate for the acoustic correlate of sonority hierarchies, as a measure of perceived loudness would bring all speech sounds closer together by diminishing the distinctions provided by acoustic intensity. Indeed, although good approximations of perceived loudness from acoustic signals are available [e.g., @seshadri2009perceived; @skovenborg2012loudnesssk; @lund2014loudnesssk; @itu2015algorithmssk], we are unaware of attempts to employ such measures for sonority. 
 
 Instead of attempts to map acoustic intensity with perception in terms of perceived loudness, most successful endeavors that use intensity-based measures as correlates of sonority do it by essentially enhancing the intensity-loudness discrepancy, targeting certain frequency bands to---roughly speaking---discriminate against energy at the higher frequencies, that are more characteristic of obstruents, in favor of energy at low-mid ranges of the spectrum, that are more characteristic of sonorants and particularly vowels [e.g. @Pfitzinger1996syllablesk; @port1996dynamic; @fant2000source; @galves2002sonoritysk; @wang2007robust; @tilsen2013speech; @patha2016syllablesk; @nakajima2017english; @rasanen2018pre]. 
 The relative success of such metrics is not commonly motivated on perceptual grounds. However, they are often tightly linked to the perceptual quality that is identified with sonority in this work---the capacity to perceive pitch.
@@ -1105,7 +1167,7 @@ This results in five distinct sonority rise scores in *MSD~exp~* model, but only
 Unlike traditional models, the predictions of *NAP~td~* are not grouped into levels that reflect the rough angle of the sonority slope in terms of falls, rises and plateaus. The raw score of the *NAP~td~* formula is taken as reflective of the nucleus competition potential such that higher scores denote weaker competition and are thus better-formed. 
 The top-down NAP model allows scores within a range that goes from -$\mathit{3}$ for the most ill-formed syllable up to $\mathit{6}$ for the most well-formed, although a more relevant range to consider, given that glides are excluded from this set, is between -$\mathit{1}$ and $\mathit{5}$. These scores are not immediately comparable to the traditional model scores, yet some interesting departures from the traditional models can be observed in Table \@ref(tab:ordinalscores). For example, *NAP~td~* considers the onset rise in the sonorous cluster *mlV* as ill-formed as the inverse fall *lmV*, and both clusters pattern in *NAP~td~* with nasal plateaus (e.g. *nmV*), where they all receive the same relatively low value of $\mathit{1}$. At the same time, voiceless clusters pattern in *NAP~td~* with well-formed combinations (scoring $\mathit{3}$) although they may include sonority plateaus (e.g. *sfV*) or sonority falls (e.g. *spV*) in traditional model terms.
 
-###   The Bottom-Up Dynamic NAP Model {#sec:napbu}
+###   The Bottom-Up NAP Model {#sec:napbu}
 
 There are various ways to calculate an estimation of the nucleus competition potential within syllables based on the periodic energy data of the acoustic signal. The method that we present here has the advantage of not relying on segmental landmarks that are categorical abstractions of the type that is assumed in the top-down model---they are not supposed to be available in the bottom-up route.
 
@@ -1140,6 +1202,9 @@ print(monosyl_examp_1_plot)
 
 The periodic energy data that is extracted from acoustic recordings of speech is viewed in terms of a *mass*, i.e., the area under the periodic energy curve, integrating duration and power as the two linked dimensions of quantity in sound [see @turk1996processing on interactions between duration and intensity in linguistic perception contexts]. 
 This is using a summing strategy, as opposed to averaging or peak extraction, to represent the quantity of sonority.
+
+Although less commonly used compared to averaging or peak detection [see meta-analysis in @gordon2017acoustic], summing was used in @beckman1986stress to measure stress in terms of *total amplitude*. A related measurement, *total perceptual energy* is presented in @gordon2004syllable (combining normalized RMS with duration) to also account for syllabic weight.
+
 Summing takes measurements from the whole duration of a unit, allowing it to accumulate the individual measurements at each time point, and, in contrast to averaging, to consider the contribution of duration at the final calculation (rather than normalize over it).
 Summing is therefore essentially different from averaging, as well as from peak extraction, in that it is capable of uncovering the quantitative difference between two periodic sounds that have similar amplitude envelopes yet they differ in duration. 
 
@@ -1234,11 +1299,14 @@ See Appendix \@ref(appendix:a) for a list of considerations and criteria that we
 \end{center}
 \end{table}
 
-Table \@ref(tab:targetlist) presents 29 CC sequence types that reflect 16 different combinations of classes (16 unique cells in Table \@ref(tab:targetlist), excluding differences in place of articulation), of which 7-8 are considered onset falls, 3-4 are considered onset plateaus (11 total), and 5 are considered onset rises.[^cf-plateaufall] Of the 29 different clusters, only 3 clusters regularly occur in German words, /ʃp, ʃm, fl/, 6 clusters are attested to some degree in German loanwords, /sp, sf, sm, vl, zv, ml/
-<!-- ,[^cf-source],  -->
-[@van2012sonority],
-and one cluster, /ʃf/, may be considered as similar to German licit clusters with a voiced obstruent following a voiceless one (i.e., /ʃv/ and /t͡sv/). 
-Thus, the experimental set contains 19 cluster types that are unattested in German words. These unattested CC types appear in 13 of the 16 unique combinations, excluding the three rising sonority clusters with a liquid in *C*~2~, /fl, vl, ml/, that are all attested in German complex onsets to some degree (yet only marginally so in the case of /vl/ and /ml/).
+Table \@ref(tab:targetlist) presents 29 CC sequence types that reflect 16 different combinations of classes (16 unique cells in Table \@ref(tab:targetlist), excluding differences in place of articulation), of which 7-8 are considered onset falls, 3-4 are considered onset plateaus (11 total), and 5 are considered onset rises.[^cf-plateaufall] 
+
+Of the 29 different clusters, only 3 clusters regularly occur in German words, /ʃp, ʃm, fl/, 6 clusters are attested to some degree in German loanwords, /sp, sf, sm, vl, zv, ml/ [@van2012sonority], and one cluster, /ʃf/, may be considered as similar to German licit clusters with a voiced obstruent following a voiceless one (i.e., /ʃv/ and /t͡sv/).
+Thus, the experimental set contains 19 cluster types that are unattested in German words. These unattested CC types appear in 13 of the 16 unique combinations, excluding the three rising sonority clusters with a liquid in *C*~2~ (e.g., /fl, vl, ml/), that are all attested in German complex onsets to some degree (yet only marginally so in the case of /vl/ and /ml/).
+
+Out of the 29 different cluster types in Table \@ref(tab:targetlist), more clusters occur regularly in Modern Hebrew [see @asherov2019syllable]. These include all of the eight sibilant-initial clusters, /sp, ʃp, sf ʃf, sm, ʃm, zm, zv/, and the liquid-second clusters, /fl, vl/. The voiceless cluster /ft/ and the /m/-initil clusters /ml, mn/ are marginally atttested in Modern Hebrew [@asherov2019syllable 75, 86].
+Thus, the experimental set contains 16 cluster types that are unattested in Hebrew words.
+These unattested CC types appear in 12 of the 16 unique combinations in Table \@ref(tab:targetlist), excluding the three rising sonority clusters with a liquid in *C*~2~ (e.g., /fl, vl, ml/), and the *fricative*-*stop* clusters (including /ft/), although note that /ft/ and /ml/ are only marginally attested in Hebrew complex onsets.
 
 The different CC sequences were embedded within a /CCal/ word-like frame, with a recurring *-al* rime. These /CCal/ tokens were produced with a single vowel, intended to yield monosyllabic items that resemble typical content words [i.e., prosodically heavier than a single light syllable; see, e.g., @demuth1996prosodic]. Two disyllabic counterparts were prepared for each CC type---one with an epenthetic vowel, /CəCal/, and another with a prothetic vowel, /əCCal/ (a more accurate annotation should be /(ʔ)əCCal/, given that the presence of an initial glottal stop was not controlled for).
 Note that the schwa in this case is produced as a weak (unstressed) central vowel, not necessarily a schwa.
@@ -1345,75 +1413,14 @@ print(monosyl_plot_abs)
 
 ```
 
-
-<!-- participantsStuff -->
-
-```{r participants, fig.show="hide"}
-library(ggplot2)
-pie_theme <- theme_minimal() + theme(axis.title.x = element_blank(), axis.title.y = element_blank(), panel.border = element_blank(), panel.grid=element_blank(), axis.ticks = element_blank(), plot.title=element_text(size=14, face="bold"))
-
-## pilot
-subjects_pilot <- read.csv("data_tables/subjects/subjects_pilot.csv") #%>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
-
-ggplot(subjects_pilot, aes(x="",y="",fill=subject_age)) +
-  geom_bar(width = 1,stat = "identity") +
-  coord_polar("y", start = 0) + theme_void() #pie_theme 
-
-ggplot(subjects_pilot, aes(x=subject_age)) +
-  geom_histogram(binwidth = 1)
-
-pilot_mean_age <- round(mean(subjects_pilot$subject_age))
-pilot_min_age <- round(min(subjects_pilot$subject_age))
-pilot_max_age <- round(max(subjects_pilot$subject_age))
-pilot_N <- length(subjects_pilot$subject_nr)
-pilot_male <- length(which(subjects_pilot$subject_gender=="male"))
-
-## main
-subjects_main <- read.csv("data_tables/subjects/subjects_main.csv") #%>% select(-X) %>% distinct(subject_nr, .keep_all = TRUE)
-
-ggplot(subjects_main, aes(x="",y="",fill=subject_age)) + 
-  geom_bar(width = 1,stat = "identity") + 
-  coord_polar("y", start = 0) + theme_void() #pie_theme 
-
-ggplot(subjects_main, aes(x="",y="",fill=subject_gender)) + 
-  geom_bar(width = 1,stat = "identity") + 
-  coord_polar("y", start = 0) + theme_void() #pie_theme
-
-ggplot(subjects_main, aes(x="",y="",fill=subject_education)) +
-  geom_bar(width = 1,stat = "identity") +
-  coord_polar("y", start = 0) + theme_void() #pie_theme
-
-ggplot(subjects_main, aes(x="",y="",fill=subject_handedness)) +
-  geom_bar(width = 1,stat = "identity") +
-  coord_polar("y", start = 0) + theme_void() #pie_theme
-
-ggplot(subjects_main, aes(x="",y="",fill=subject_german_native)) +
-  geom_bar(width = 1,stat = "identity") +
-  coord_polar("y", start = 0) + theme_void()
-#```
-#```{r participants_plot, fig.cap = "(ref:participants)", out.width = c('50%', '50%'), fig.align = 'center', fig.show="hold"}
-# fig.cap = "(ref:participants)", dev='png', fig.ext=c('png', 'large.png'), fig.height=c(2, 2), fig.width=c(2, 2), fig.show="hold"
-
-# ggplot(subjects_main, aes(x="",y="",fill=subject_age)) +
-#   geom_bar(width = 1,stat = "identity") +
-#   coord_polar("y", start = 0) + pie_theme
-# 
-# ggplot(subjects_main, aes(x="",y="",fill=subject_gender)) +
-#   geom_bar(width = 1,stat = "identity") +
-#   coord_polar("y", start = 0) +
-#   scale_fill_brewer(palette="Dark2") + pie_theme
-
-```
-
-
-##  Overarching Design
+##  Designs
 
 The details in the following analyses address three separate experimetns: 
 (i) an exploratory pilot experiment with 12 German speaking subjects listening to stimulus set AA (Hebrew speaker), *Experiment 1*; (ii) a confirmatory experiment with 51 German speaking subjects listening to stimulus set AA, *Experiment 2*; and (iii) a confirmatory experiment with 33 Hebrew speaking subjects listening to stimulus set HN (German speaker), *Experiment 3*.
 
 
 <!-- --- -->
-### Designing the exploratory study 
+<!-- ### Designing the exploratory study  -->
 
 Given the various novelties in our proposal, the methodologies for data collection, data extraction, and model implementation were first tested on a small body of real data that we collected before finalizing our methodologies (namely the model implementations in Subsection \@ref(sec:modelimp) and the various procedural details in 
 Appendix \@ref(appendix:a)).
@@ -1424,26 +1431,160 @@ The exploratory study was administered in two versions, each with half of the fi
 <!-- [^cf-pilot]  -->
 The two different versions were evenly split between participants (each version was presented to six participants).
 
-####  Participants (Experiment 1)
+<!-- ####  Participants (Experiment 1) -->
 
-The exploratory study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Technische Hochschule Köln, who volunteered to participate in the study. The experiment was administered in a quiet room at the institute's facility in Cologne. The mean age of participants in the exploratory study was 25 (21--30).
+<!-- The exploratory study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Technische Hochschule Köln, who volunteered to participate in the study. The experiment was administered in a quiet room at the institute's facility in Cologne. The mean age of participants in the exploratory study was 25 (21--30). -->
 
-### Designing the confirmatory studies
+<!-- ### Designing the confirmatory studies -->
 
 Experiments 2 and 3 are the main confirmatory studies conducted after finalizing our hypotheses and methodologies with the data from Experiment 1. Each experimental block in Experiments 2-3 consisted of two repetitions of the target words (2 $\times$ 29 $=$ 58) and one trial of each filler word (1 $\times$ 58). The experiment consisted of two blocks with randomized trials, generating altogether four repetitions of the target words (4 $\times$ 29 $=$ 116) and two repetitions of the filler words (2 $\times$ 58 $=$ 116), yielding a total of 232 data points per subject. 
 
 The difference between Experiment 2 and 3 concerns the native language of the subjects, and, as a consequence, the stimulus set in use. Experiment 2 tested German speaking subjects on stimulus set AA (Hebrew speaker), while Experiment 3 tested Hebrew speaking subjects on stimulus set HN (German speaker).
 
-####  Participants: Experiment 2
+##  Participants 
+
+```{r participantsPil-tests, fig.show="hide"}
+
+pilot_mean_age <- round(mean(subjects_pilot$subject_age))
+pilot_min_age <- round(min(subjects_pilot$subject_age))
+pilot_max_age <- round(max(subjects_pilot$subject_age))
+pilot_N <- length(subjects_pilot$subject_nr)
+pilot_male <- length(which(subjects_pilot$subject_gender=="male"))
+
+```
+
+
+```{r participantsHeb-tests, fig.show="hide"}
+
+ggplot(subjects_heb, aes(x="", fill=subject_age)) +
+  geom_bar(stat = "count") + #color="black",
+  geom_text(aes(label = subject_age), size = 3, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Age")) +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(palette = "Blues") +
+  ggtitle("Age", subtitle = "Experiment 3 (N = 33)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold")
+        )
+
+
+# which(subjects_heb$subject_age == subject_age)
+
+```
+
+
+### Experiment 1
+
+The exploratory study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Technische Hochschule Köln, who volunteered to participate in the study. The experiment was administered in a quiet room at the institute's facility in Cologne. The mean age of participants in the exploratory study was 25 (21--30).
+
+### Experiment 2
+
+<!-- out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.4,.4,.4,.4,.4,.4), fig.show="hold", fig.align = "default"} -->
+(ref:participantsGer) Experiment 2: participants' age, gender, and education.
+```{r participantsGer, fig.cap = "(ref:participantsGer)", fig.show="hold", fig.align = "default", out.width=c("33%","33%","33%"), fig.width=c(2.3,2.3,2.3)}
+
+ggplot(subjects_main, aes(x="", fill=subject_age)) + 
+  geom_bar(stat = "count") + #color="black", 
+  geom_text(aes(label = subject_age), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Age")) +
+  coord_polar("y", start = 0.4, direction = -1) + 
+  scale_fill_brewer(palette = "Blues") +
+  ggtitle("Age", subtitle = "Experiment 2 (N = 51)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+        )
+
+ggplot(subjects_main, aes(x="", fill=subject_gender)) +
+  geom_bar(stat = "count") + #color="black",
+  geom_text(aes(label = subject_gender), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Gender")) +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(palette = "Greens") +
+  ggtitle("Gender", subtitle = "Experiment 2 (N = 51)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+        )
+
+ggplot(subjects_main, aes(x="", fill=subject_education)) +
+  geom_bar(stat = "count") + #color="black",
+  geom_text(aes(label = subject_education), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Education")) +
+  coord_polar("y", start = 0.2) +
+  scale_fill_brewer(palette = "Oranges") +
+  ggtitle("Education", subtitle = "Experiment 2 (N = 51)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+        )
+
+# ggplot(subjects_main, aes(x="", fill=subject_handedness)) +
+#   geom_bar(stat = "count") + #color="black",
+#   geom_text(aes(label = subject_handedness), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+#   guides(fill = guide_legend(title = "Handedness")) +
+#   coord_polar("y", start = 0) +
+#   scale_fill_brewer(palette = "Greys") +
+#   ggtitle("Handedness", subtitle = "Experiment 2 (N = 51)") +
+#   theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+#         )
+# 
+# ggplot(subjects_main, aes(x="", fill=subject_german_native)) +
+#   geom_bar(stat = "count") + #color="black",
+#   geom_text(aes(label = subject_german_native), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+#   guides(fill = guide_legend(title = "Language background")) +
+#   coord_polar("y", start = 0) +
+#   scale_fill_brewer(palette = "Purples") +
+#   ggtitle("Language background", subtitle = "Experiment 2 (N = 51)") +
+#   theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+#         )
+
+```
+
+(ref:participantsHeb) Experiment 3: participants' age, gender, and education.
+```{r participantsHeb, fig.cap = "(ref:participantsHeb)", fig.show="hold", fig.align = "default", out.width=c("33%","33%","33%"), fig.width=c(2.3,2.3,2.3)}
+
+ggplot(subjects_heb, aes(x="", fill=subject_age)) + 
+  geom_bar(stat = "count") + #color="black", 
+  geom_text(aes(label = subject_age), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Age")) +
+  coord_polar("y", start = 0, direction = -1) + 
+  scale_fill_brewer(palette = "Blues") +
+  ggtitle("Age", subtitle = "Experiment 3 (N = 33)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+        )
+
+ggplot(subjects_heb, aes(x="", fill=subject_gender)) +
+  geom_bar(stat = "count") + #color="black",
+  geom_text(aes(label = subject_gender), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Gender")) +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(palette = "Greens") +
+  ggtitle("Gender", subtitle = "Experiment 3 (N = 33)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+        )
+
+ggplot(subjects_heb, aes(x="", fill=subject_education)) +
+  geom_bar(stat = "count") + #color="black",
+  geom_text(aes(label = subject_education), size = 4, stat = "count", position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Education")) +
+  coord_polar("y", start = 0.5) +
+  scale_fill_brewer(palette = "Oranges") +
+  ggtitle("Education", subtitle = "Experiment 3 (N = 33)") +
+  theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold"), plot.subtitle = element_text(size=10)
+        )
+
+```
 
 Fifty-one native German speakers (29 female, 19 male, and 3 "other") participated in Experiment 2, of which 48 were monolingual (the 3 bilingual speakers had Polish, Low German, and Hebrew as their heritage language). The vast majority (30 out of 51) were between the ages 19-29. Eight participants were between 30-39, and 11 participants were between 40-59 years old. There were also two younger participants, between 13 and 18 years old. The vast majority (49 of 51 participants) were right-handed. Of the 51 participants, 34 were students at the University of Cologne who took part in the experiment at the sound attenuated booth of the phonetics laboratory. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation. 
 
 We excluded the responses from one participant who failed in our participant inclusion criterion requiring accuracy of at least 75% with bi-vocalic fillers. The bi-vocalic fillers of the forms /CəCal/ and /əCCal/ link correct responses to the disyllabic choice ("2"), and we expect relatively few monosyllabic choices ("1") in response to stimuli with two separate vowels. 
 Indeed, the overall average accuracy of all the 51 participants, when responding to bi-vocalic filler stimuli, was 96%. The excluded participant achieved a much lower accuracy score for bi-vocalic fillers, nearing chance-level with 65%.
 
-####  Participants: Experiment 3
+### Experiment 3
+<!-- TBA. -->
+<!-- test if theis, `r length(which(subjects_heb$subject_gender=="male"))`, is this: 17 -->
 
-TBA.
+Thirty-three native Hebrew speakers (`r length(which(subjects_heb$subject_gender=="female"))` female, `r length(which(subjects_heb$subject_gender=="male"))` male, and `r length(which(subjects_heb$subject_gender=="other"))` "other") participated in Experiment 3, of which `r length(which(subjects_heb$subject_hebrew_native=="monolingual"))` were monolingual (the five native bilinguals were also native speakers of English, Russian and Spanish.)
+`r length(which(subjects_heb$subject_age =="19-29"))` out of the 33 subjects in Experiment 3 were between the ages 19-29 and `r length(which(subjects_heb$subject_age =="40-59"))` participants were between 40-59 years old. `r length(which(subjects_heb$subject_age =="30-39"))` participants were between 30-39, and there were also `r length(which(subjects_heb$subject_age =="13-18"))` younger participants, between 13 and 18 years old. The vast majority (`r length(which(subjects_heb$subject_handedness =="right-handed"))` of 33 participants) were right-handed. 
+`r length(which(subjects_heb$subject_education =="school"))` of the 33 participants had no to very little academic background, `r length(which(subjects_heb$subject_education =="undergraduate"))` finished an *undergraduate* (*bachelor*) academic degree and `r length(which(subjects_heb$subject_education =="graduate"))` finished advanced *graduate* academic degrees (*master* and abve).
+<!-- Of the 33 participants, 34 were students at the University of Cologne who took part in the experiment at the sound attenuated booth of the phonetics laboratory. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation.  -->
+
+The data collection in Experiment 3 was more diverse, and, perhaps more "noisy" as a result.
+Th first phase, which took place during 2019, collected data from student volunteers in Tel Aviv University and The Hebrew University of Jerusalem. The second collection phase occurred already during the early phases of the global COVID-19 pandemic, which resulted in many ad-hoc locations and more heterogenous population in some respects. Notably, Hebrew speakers in this study tended to have a less robust understanding of the notion of the syllable such that their performance may exhibit higher degerees of misunderstanding of the the meta-linguistic task to count syllables.
 
 ## Data analysis {#sec:datanlysis}
 
@@ -1565,17 +1706,18 @@ Notice that the posterior of the effect of well-formedness, $\hat\beta$, is not 
 The results shown here reflect the final state of the models in the exploratory stage, which is the same as the state of the models in the confirmatory stage. Importantly, the results of the confirmatory studies, Experiments 2-3, which are statistically much more robust, remain consistent with those of Experiment 1, which had a relatively small number of observations. As such, Experiment 1 was not designed to distinguish between the models and it will not be shown here further in the presentation of the results. 
 
 ##  Results: Descriptive adequacy
-
 <!-- ### Experiment 2: Descriptive adequacy -->
 <!-- ### (ii) Descriptive adequacy {-} -->
 <!-- ####  Descriptive adequacy {#sec:posterior2} -->
+
+The model fits of the different models are shown in Figures \@ref(fig:NullFit)--\@ref(fig:NAPbuFit) below. The plots in these figures present the dispersion of the average response time results, depicted as red points for related CC clusters, vis-à-vis each models' predictions in the form of distributions, depicted with blue violins. The order of the stimuli, from left to right, follows from the models' scores such that predictions for better-formed clusters appear further to the right. 
+
 ### Null models
 
-The null models are shown in Figure \@ref(fig:NullFit) as baselines in the respective experiments. The slight differences in predictions for different clusters are due to individual differences in the accuracy. Recall that  we subset the response times conditional on the monosyllabic response ('1') to the forced-choice task. This means that when participants gave more monosyllabic answers for a specific  cluster, their adjusted intercept will have a greater influence on the predictions of the model for that cluster. In addition, clusters with fewer monosyllabic responses show more variability in their predictions (e.g., /lf/ vs. /fl/).
+The null models are shown in Figure \@ref(fig:NullFit) as baselines in the respective experiments. The slight differences in predictions for different clusters are due to individual differences in the accuracy. Recall that  we subset the response times conditional on the monosyllabic response ('1') to the forced-choice task. This means that when participants gave more monosyllabic answers for a specific cluster, their adjusted intercept will have a greater influence on the predictions of the model for that cluster. In addition, clusters with fewer monosyllabic responses show more variability in their predictions (e.g., /lf/ vs. /fl/ in the AA set, on the left side of Figure \@ref(fig:NullFit)).
 
-The model fit of the six sonority models is shown in Figures \@ref(fig:SSPcolFit)--\@ref(fig:NAPbuFit). The plots in these figures present the dispersion of the average response time results, depicted as red points for related CC clusters, vis-à-vis each models' predictions in the form of distributions, depicted with blue violins. The order of the stimuli, from left to right, follows from the models' scores such that predictions for better-formed clusters appear further to the right. 
-
-(ref:NullFit) Null model fit: Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in forced-ordinal scale for exposition purposes).
+(ref:NullFit) Null model fit. Observed mean log-transformed response times are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. 
+<!-- Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in a forced-ordinal scale for exposition purposes). -->
 ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
 # ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 predictions$null %>%
@@ -1587,7 +1729,7 @@ predictions$null %>%
     geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
     geom_point(data= data_RT, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .5, size =.8) +
     geom_text_repel(data= data_RT, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) + 
-    scale_x_discrete("Stimuli (Experiment 2)", breaks=NULL) +
+    scale_x_discrete("Stimuli (AA set: Experiment 2)", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
     ylab("Response Time") +
     ylim(600,1200) +
@@ -1609,7 +1751,7 @@ predictions_heb$null %>%
     geom_violin(draw_quantiles = TRUE, alpha=1, colour = "cornflowerblue", fill = "azure2") +
     geom_point(data= data_RT_heb, aes(y = corrRT, x= factor(NAP)), color = "red3", alpha = .5, size =.8) +
     geom_text_repel(data= data_RT_heb, aes(y = corrRT, x=factor(NAP), label = {gsub("al", "", stimulus)} %>% {gsub("c", "ʃ", .)}), color = "red3", alpha = 1, size =3.5, family="Charis SIL", min.segment.length=0, segment.size = .4, segment.alpha = .6) + 
-    scale_x_discrete("Stimuli (Experiment 3)", breaks=NULL) +
+    scale_x_discrete("Stimuli (HN set: Experiment 3)", breaks=NULL) +
     # scale_x_discrete(bquote(italic(NAP[bu])~scores~(ordinal)), breaks=NULL) +
     ylab("RT (Experiment 3)") +
     ylim(600,1200) +
@@ -1627,7 +1769,13 @@ predictions_heb$null %>%
 <!-- ### (ii.a) Traditional sonority models fit {-} -->
 ### SSP and MSD models {#sec:traditionalModelfit}
 
-(ref:SSPcolFit) *SSP~col~* model fit: Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness.
+We consider a good fit in the case of the ordinal models to be roughly characterized by the following three criteria:
+(i) the data is contained within the predictions, i.e., the red points appear within the respective violins;
+(ii) the data is consistent within each predicted level, i.e., the vertical dispersion of red points pattern together around the same area within each level (preferably in the middle of the distribution); and 
+(iii) the model predictors are not redundant, i.e., the violins of the different model levels show little overlap between them.
+
+(ref:SSPcolFit) *SSP~col~* model fit. Stimuli ordered from left to right according to their score in the model in ascending well-formedness (other details are the same as above).
+<!-- Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. -->
 ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
 # ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
@@ -1840,24 +1988,33 @@ predictions_heb$MSD %>%
 
 ```
 
+A quick observation at the four plots of Experiment 2, on the left side of Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) reveals a common failure of all the traditional sonority models with respect to the German speaking subjects, to contain the nasal plateaus (/mn/ and more so /nm/) within their predicted distribution alongside all the other plateaus ('0' model score in all these figures). Furthermore, the data within the '0' plateau levels appears to be widely dispersed for the German-speaking subjects in Experiment 2 (plots on the left side) but quite well centered for the Hebrew-speaking subjects in Experiment 3 (right plots).
 
-We consider a good fit in the case of the ordinal models to be roughly characterized by the following three criteria:
-(i) the data is contained within the predictions, i.e., the red points appear within the respective violins;
-(ii) the data is consistent within each predicted level, i.e., the vertical dispersion of red points pattern together around the same area within each level (preferably in the middle of the distribution), and;
-(iii) the model predictors are not redundant, i.e., the violins of the different model levels show little overlap between them.
+A comparison of the left-most violin in all the plots in Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) highlights some differences between the two sonority hierarchies---*H~col~* (*SSP/MSD~col~*) and *H~exp~* (*SSP/MSD~exp~*).
+The left-most violins reflect the onset fall levels, of these SSP and MSD models.
+For the Hebrew-speaking subjects in Experiment 3 (right plots), there was no big difference between the two sonority hierarchies and a similiar wide distribution appears in all fits of sonority falls. In contrast, the German-speaking subjects in Experiment 2 exhibit a bimodal distribution in the falling onsets of sonority models that use the *H~exp~* hierarchy (*SSP/MSD~exp~*), whereby *fricative-stop* clusters /ʃp, sp, ft/ are considered to be highly ill-formed onset falls.
 
-A quick observation at the four Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) reveals a common failure of all the traditional sonority models to contain the nasal plateaus (/mn/ and more so /nm/) within their predicted distribution alongside all the other plateaus ('0' model score in all these figures). Furthermore, the data within the plateau level appears to be widely dispersed. 
+<!-- A closer observation at the two left-most columns of all the plots in Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit), which reflect the onset fall and onset plateau levels, presents a comparison between the two sonority hierarchies---*H~col~* (*SSP/MSD~col~*) and *H~exp~* (*SSP/MSD~exp~*). The difference between these two sonority hierarchies results in different allocation of the fricative-stop clusters /ʃp, sp, ft/, as plateaus in the *H~col~* hierarchy ('0' in Figures \@ref(fig:SSPcolFit) and \@ref(fig:MSDcolFit)) and as falls in the *H~exp~* hierarchy ('-1' in Figures \@ref(fig:SSPexpFit) and \@ref(fig:MSDexpFit)). The latter case of the *H~exp~* hierarchy, whereby the fricative-stop clusters are treated alongside the most ill-formed onset falls, leads to two distinct patterns in the vertical dispersion of data at the left-most column of onset falls (Figures \@ref(fig:SSPexpFit) and \@ref(fig:MSDexpFit)).  -->
+This suggests that the *H~col~* hierarchy (where all obstruents are grouped into one class on the sonority hierarchy such that fricative-stop clusters are considered plateaus) is better than the *H~exp~* hierarchy in treating fricative-stop clusters, as reflected in the better model fits for onset falls and plateaus when the *H~col~* hierarchy is applied (*SSP/MSD~col~* vs. *SSP/MSD~exp~*). However, the two sonority hierarchies also lead to differences in the grouping of onset rises when the MSD models are taken into account, as we observe next.
 
-A closer observation at the two left-most columns in Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit), which reflect the onset fall and onset plateau levels, presents a comparison between the two sonority hierarchies---*col* (*SSP/MSD~col~*) and *exp* (*SSP/MSD~exp~*). The difference between these two sonority hierarchies results in different allocation of the fricative-stop clusters /ʃp, sp, ft/, as plateaus in the *col* hierarchy ('0' in Figures \@ref(fig:SSPcolFit) and \@ref(fig:MSDcolFit)) and as falls in the *exp* hierarchy ('-1' in Figures \@ref(fig:SSPexpFit) and \@ref(fig:MSDexpFit)). The latter case of the *exp* hierarchy, whereby the fricative-stop clusters are treated alongside the most ill-formed onset falls, leads to two distinct patterns in the vertical dispersion of data at the left-most column of onset falls (Figures \@ref(fig:SSPexpFit) and \@ref(fig:MSDexpFit)). 
-This suggests that the *col* hierarchy (where all obstruents are grouped into one class on the sonority hierarchy such that fricative-stop clusters are considered plateaus) is better than the *exp* hierarchy in treating fricative-stop clusters, as reflected in the better model fits for onset falls and plateaus when the *col* hierarchy is applied (*SSP/MSD~col~* vs. *SSP/MSD~exp~*). However, the two sonority hierarchies also lead to differences in the grouping of onset rises when the MSD models are taken into account, as we observe next.
+The right side of these plots, i.e., the violins that reflect well-formed onset rises with positive model scores, present three types of grouping across the four models. The two SSP models (*SSP~col/exp~*) make identical predictions with respect to onset rises, lumping all rises into one category ('1' in Figures \@ref(fig:SSPcolFit)--\@ref(fig:SSPexpFit)). 
+This, again, results in a wider distribution for the German-speaking subjects in Experiment 2 (left plots) compared to the Hebrew-speaking subjects in Experiment 3 (right plots).
 
-The right side of these plots, i.e., the columns that reflect well-formed onset rises with positive model scores, present three types of grouping across the four models. The two SSP models (*SSP~col/exp~*) make identical predictions with respect to onset rises, lumping all rises into one category ('1' in Figures \@ref(fig:SSPcolFit)--\@ref(fig:SSPexpFit)). The vertical dispersion of data in the right-most column of the SSP models appears very wide, with voiced-initial clusters like /ml, vn, vl/ appearing to pattern separately from voiceless-initial clusters like /ʃm, sm, fl/.
-In contrast, the MSD models present multiple levels of well-formedness for onset rises. *MSD~col~* exhibits two levels of rises ('1--2' in Figure \@ref(fig:MSDcolFit)) while *MSD~exp~* exhibits four levels of rises ('1--4' in Figure \@ref(fig:MSDexpFit)). The grouping in *MSD~col~* appears to result in a relatively high overlap between the distributions of the three right-most columns (including onset plateaus), suggesting redundancy in the model. In comparison, the grouping in *MSD~exp~* seems to capture the distinct patterns of onset rises more accurately, with more levels yet less overlap. Therefore, it appears that the combination of the *exp* hierarchy with the MSD (*MSD~exp~*) has the best fit with respect to onset rises.
+The MSD models present multiple levels of well-formedness for onset rises. *MSD~col~* exhibits two levels of rises ('1--2' in Figure \@ref(fig:MSDcolFit)) while *MSD~exp~* exhibits four levels of rises ('1--4' in Figure \@ref(fig:MSDexpFit)).
+This elaboration seems to be beneficial in fitting the scores of the German-speaking subjects to the 4 rise levels of *MSD~exp~*, but less so for *MSD~col~*. Furthermore, the additional levels of the MSD are redundant, or even worse, for the fits of the scores of the Hebrew-speaking subjects in Experiment 3 (right plots).
 
-To conclude, an observation of the model fit of the four traditional sonority models brings up a mixed picture: the *col* hierarchy (*SSP/MSD~col~*) appears to result in a better fit with onset falls and plateaus, while *MSD~exp~* seems to have the best fit with onset rises. The advantage of *col* with respect to onset falls and plateaus is related to the treatment of voiceless fricative-stop clusters as better-formed (onset plateau rather than of onset fall). The advantage of *MSD~exp~* with respect to onset rises is related to its ability to separate the voiceless-initial from the voiced-initial onset rises, such that voiceless-initial rises are better-formed. These selective and partial advantages, as we detail next, are built-in into the logic of the NAP models.
+<!-- The vertical dispersion of data in the right-most column of the SSP models appears very wide, with voiced-initial clusters like /ml, vn, vl/ appearing to pattern separately from voiceless-initial clusters like /ʃm, sm, fl/. -->
+<!-- In contrast, the MSD models present multiple levels of well-formedness for onset rises. *MSD~col~* exhibits two levels of rises ('1--2' in Figure \@ref(fig:MSDcolFit)) while *MSD~exp~* exhibits four levels of rises ('1--4' in Figure \@ref(fig:MSDexpFit)). The grouping in *MSD~col~* appears to result in a relatively high overlap between the distributions of the three right-most columns (including onset plateaus), suggesting redundancy in the model. In comparison, the grouping in *MSD~exp~* seems to capture the distinct patterns of onset rises more accurately, with more levels yet less overlap. Therefore, it appears that the combination of the *H~exp~* hierarchy with the MSD (*MSD~exp~*) has the best fit with respect to onset rises. -->
+
+To conclude, an observation of the model fits of the four traditional sonority models in the two confirmatory studies brings up a mixed picture: the *H~col~* hierarchy (*SSP/MSD~col~*) appears to result in a better fit with onset falls and plateaus, especially for the German-speaking subjects.
+The competing *H~exp~* hierarchy appears to be advantageous when fitting the scores of the rising onset slopes, but mostly with the MSD (i.e., *MSD~exp~*), and only for the German-speaking subjects in Experiment 2, where sonority falls exhibit an undesirable bimodal distribution (as explained above).
+
+<!-- while *MSD~exp~* seems to have the best fit with onset rises. The advantage of *H~col~* with respect to onset falls and plateaus is related to the treatment of voiceless fricative-stop clusters as better-formed (onset plateau rather than of onset fall). The advantage of *MSD~exp~* with respect to onset rises is related to its ability to separate the voiceless-initial from the voiced-initial onset rises, such that voiceless-initial rises are better-formed. These selective and partial advantages, as we detail next, are built-in into the logic of the NAP models. -->
 
 <!-- ### (ii.b) NAP~td~ model fit {-} -->
 ### NAP models {#sec:NAPtdModelfit}
+
+Although *NAP~td~* is an ordinal model like all the traditional sonority models, it follows a different rationale (see Subsection \@ref(sec:naptdmodel)), whereby the scores of the model estimate nucleus competition to reflect well-formedness. 
 
 (ref:NAPtdFit) *NAP~td~* model fit (plot details are the same as above).
 ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
@@ -1909,10 +2066,9 @@ predictions_heb$NAP_td %>%
 
 ```
 
-Although *NAP~td~* is an ordinal model like all the traditional sonority models, it follows a different rationale (see Subsection \@ref(sec:naptdmodel)), whereby the distinct categories of the model estimate nucleus competition to reflect well-formedness. Figure \@ref(fig:NAPtdFit) shows that *NAP~td~* succeeds in containing all the data (points) within the respective predictions (blue violins). 
-A comparison with Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) shows that *NAP~td~* is the only model to achieve this.
-
-However, *NAP~td~* appears to exhibit some redundancy, as suggested by the large degree of overlap between some of the predictive distributions of the model. This is apparent from the overlap between violins in the two right-most columns (3, 5) as well as the three left-most columns (-1, 0, 1) in Figure \@ref(fig:NAPtdFit).
+Figure \@ref(fig:NAPtdFit) shows that *NAP~td~* succeeds in containing all the data (points) within the respective predictions (blue violins) in both experiments, making *NAP~td~* the only model to achieve that coverage among the fits of Experiment 2. 
+<!-- A comparison with Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) shows that *NAP~td~* is the only model to achieve this. -->
+*NAP~td~* appears to exhibit some redundancy, as suggested by the relatively large degrees of overlap between some of the predictive distributions of the model. This is apparent from the overlap between violins in the left side (worse-formed) of the model fit with Eperiment 2 (left plot), and between violins in the right side (better-formed) of the model fit with Eperiment 3 (right plot) in Figure \@ref(fig:NAPtdFit).
 
 <!-- ### (ii.c) NAP~bu~ model fit {-} -->
 <!-- ### NAP~bu~ models {#sec:NAPbuModelfit} -->
@@ -1962,22 +2118,19 @@ predictions_heb$NAP_bu %>%
 
 ```
 
-*NAP~bu~* is different from all the other models in that it presents scores that are specific to each token in a continuous rather than ordinal scale (i.e., the distances between scores in the model are also predicted). See Figure \@ref(fig:NAPbuFit) where the expected negative correlation between response time and well-formedness appears to generally hold for both the predictions and the data of the model fit of *NAP~bu~*.
-Our criteria for goodness of fit based on the plots (see opening Subsection 
-\@ref(sec:results2)) (iia)
-<!-- \@ref(sec:traditionalModelfit))  -->
-are not all valid when evaluating *NAP~bu~* since we have no classes and no vertical dispersion of data (points) within levels, and since the horizontal overlap of predictions (violins) between levels requires different interpretation. However, the criterion for inclusion of data within the model's predictions naturally also holds for the *NAP~bu~* fit, which fails to include the data for the nasal plateaus /nm/ and /mn/ within their respective predictive distribution (a failure that is shared by the traditional models; Subsection 
-\@ref(sec:results2)) (iia).
-<!-- \@ref(sec:traditionalModelfit)).  -->
-Furthermore, *NAP~bu~* also fails to include the /z/-initial clusters---/zm/ and /zv/---within their respective predictive distribution.
+*NAP~bu~* is different from all the other models in that it presents scores that are specific to each token in a continuous ratio scale, rather than an ordinal scale (i.e., the distances between scores in the model are also predicted). See Figure \@ref(fig:NAPbuFit) where the expected positive correlation between response time and ill-formedness appears to generally hold for both the predictions and the data of the model fit of *NAP~bu~*.
 
+Our criteria for goodness of fit based on the plot analyses (see opening Subsection 
+\@ref(sec:traditionalModelfit)) are not all valid when evaluating *NAP~bu~* since we have no classes and no vertical dispersion of data (points) within levels, and since the horizontal overlap of predictions (violins) between levels requires different interpretation. However, the criterion for inclusion of data points within the violins of the models' predictions naturally also holds for the *NAP~bu~* fit, which fails to include the data for the nasal plateaus /nm/ and /mn/ within the respective predictive distribution in Experiment 2 (a failure that is shared also by all the traditional models in Experiment 2; see Subsection \@ref(sec:traditionalModelfit)). Furthermore, in Experiment 2 *NAP~bu~* also fails to include the /z/-initial clusters---/zm/ and /zv/---within their respective predictive distribution.
 
-
-
-The failures in the fit of the *NAP~bu~* model can be split into two types:
+The failures in the fit of the *NAP~bu~* model with german-speaking subjects in Experiment 2 can be split into two types:
 (i) nasal-initial clusters---*nval*, *nmal*, and *mnal*---which received results on a par with the slowest responses in the data, reflecting an overestimation of well-formedness by the model, and;
-(ii) syllables beginning with a voiced sibilant---*zval* and *zmal*---which received results that pattern with faster responses, reflecting well-formedness underestimation by the model. 
-These results may be taken to suggest that the distinctive high-frequency aperiodic energy of sibilants has a top-down repeller effect on the nucleus, despite additional periodic energy, while nasals, that can attract the nucleus in German (syllabic nasals occur in German), have a top-down attraction effect on the nucleus.[^cf-td]  
+(ii) syllables beginning with a voiced sibilant---*zval* and *zmal*---which received results that pattern with faster responses, reflecting well-formedness underestimation by the model.
+
+These results may be taken to suggest language-specific top-down effects of German, in which sibilants are regularly unvoiced/devoiced at edges of clusters, and nasals, on the other hand, can be syllabic. In that sense, German-speaking listeners maybe more skewed to consider marginal sibilance as a voiceless nucleus repeller, while nasality, for German-speakers, is a potential nucleus attractor.
+Compare this with Hebrew, which is the native language of the subjects in Experiment 3, in which nasals cannot be syllabic and voiced sibilants are common in marginal cluster edges. 
+
+<!-- These results may be taken to suggest that the distinctive high-frequency aperiodic energy of sibilants has a top-down repeller effect on the nucleus, despite additional periodic energy, while nasals, that can attract the nucleus in German (syllabic nasals occur in German), have a top-down attraction effect on the nucleus.[^cf-td]   -->
 
 ##  Results: Model comparison
 <!-- ### Experiment 2: Model comparison -->
@@ -1988,11 +2141,14 @@ While the model fits give us an insight into the behavior of each model with res
 
 ### Experiment 2
 
-Results of the model comparisons (see Table \@ref(tab:resultsmodels)) reveal a very clear advantage of *NAP~td~*
-over all the other models. 
-The difference in elpd scores from the next three models---*SSP/MSD~col~* and *NAP~bu~*---is around -90, which is about 6 times larger in absolute terms than the difference in standard errors of these three models, which is about 15. This is interpreted as a very robust lead for *NAP~td~*. 
-The small differences between the next three models (*SSP/MSD~col~* and *NAP~bu~*) make them indistinguishable in second place.
-The two traditional models that are based on the *exp* hierarchy---*SSP/MSD~exp~*---are similar to each other at the third place, only marginally better than the null model.
+A bird's eye view of all the six models in Experiment 2 is availale in Figure \@ref(fig:SonFitAll). The results of the model comparison in Experiment 2 are available in Table \@ref(tab:resultsmodels). It reveals a very clear advantage of *NAP~td~* over all the other models. 
+The difference in elpd scores from the next three models---*SSP/MSD~col~* and *NAP~bu~*---is about 6 standrd errors (considering that the difference is around 90 elpd and the corresponding standard error is around 15), a very robust lead for *NAP~td~*. 
+The small differences between the next three models (*SSP/MSD~col~* and *NAP~bu~*) make them all indistinguishable in the second place.
+The two traditional models that are based on the *H~exp~* hierarchy---*SSP/MSD~exp~*---are similar to each other at the last place, only marginally better than the null model.
+
+The right-most column in Table \@ref(tab:resultsmodels), *weight*, shows model averaging via stacking of predictive distributions. Stacking maximizes the potential elpd score by pulling the predictions of all the different models together. The values under the *weight* column represent the relative contribution of each model to this combined optimal model.
+*NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%. This is notable as both NAP models are essentially based on the same principle, lending support to the idea top-down and bottom-uo lead to two complementary models.
+The other traditional models contribute 8% (*SSP~col~*) and 3% (*MSD~col~*) to this picture, less than the 9% that the null model manages to contribute.
 
 ```{r resultsmodels, results = "asis"}
 
@@ -2013,11 +2169,11 @@ comparison%>%
               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
  
-     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 2)",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.")
+     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison: Experiment 2",note= "The table is ordered by the expected log-predictive density (elpd) score of the models, with a higher score indicating better predictive accuracy. The highest scored model is used as a baseline for the difference in elpd and the difference standard error (SE). The column weight represents the weights of the individual models that maximize the total elpd score of all the models.")
 
 ```
 
-(ref:SonFitAll) Experiment 2: Combined sonority models fit (small reduced versions, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. 
+(ref:SonFitAll) Experiment 2: all sonority model fits (unspecified cluster types, see detailed versions above). Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli are ordered from left to right according to their score in a given model in ascending well-formedness. 
 ```{r SonFitAll,fig.cap = "(ref:SonFitAll)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.4,.4,.4,.4,.4,.4), fig.show="hold", fig.align = "default"}
 
 predictions$SSP_obs %>%
@@ -2133,6 +2289,15 @@ predictions$NAP_bu %>%
 
 ### Experiment 3
 
+A bird's eye view of all the six models in Experiment 3 is availale in Figure \@ref(fig:SonFitAllHeb). 
+The results of the model comparison of Experiment 3 (see Table \@ref(tab:resultsmodelsHeb)) reveal a borderline advantage of *NAP~td~* over all the other models.
+The difference in elpd scores from the next two models---*MSD~col~* and *NAP~bu~*---is only about 2 standrd errors (considering the difference at around 10 elpd and the corresponding standard error at around 5),
+
+*SSP~col~* is more clearly distinguishable from *NAP~td~*, with a difference that is almost 3 standard errors (about 20:7). *MSD~col~* and *NAP~bu~* are therefore only barely distinguishable from *SSP~col~* below them, and from *NAP~td~* above them. The two traditional models that are based on the *H~exp~* hierarchy---*SSP/MSD~exp~*---are, again, very clearly the worst in the comparison.
+
+The *weight* values of Experiment 3 in Table \@ref(tab:resultsmodelsHeb) show, again, that *NAP~td~* alone provides the biggest relative contribution to a combined optimal model, with 61%. *MSD~col~* covers almost the entire remaining space with 37%, leaving *NAP~bu~* and all the other traditional models with zero additional contribution. 
+
+
 ```{r resultsmodelsHeb, results = "asis"}
 
 comparison <- loo::loo_compare(x=kfold_hebrew)
@@ -2152,12 +2317,12 @@ comparison%>%
               mutate(weight = round(weight,2) %>% {ifelse(.==0,"$\\approx$ 0", as.character(.))})) %>%
         mutate(model = recode(model, "NAP_bu" = "$NAP_{bu}$", "NAP_td"= "$NAP_{td}$", "SSP_obs" = "$SSP_{col}$", "MSD_obs"= "$MSD_{col}$" , "SSP"= "$SSP_{exp}$", "null" = "Null", "MSD"="$MSD_{exp}$")) %>%
  
-     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison (Experiment 3)",note= "(details are the same as above).")
+     apa_table(escape = FALSE, caption ="(\\#tab:modelstacking) All models comparison: Experiment 3",note= "(details are the same as above).")
 
 
 ```
 
-(ref:SonFitAllHeb) Experiment 3: Combined sonority models fit (details same as above).
+(ref:SonFitAllHeb) Experiment 3: all sonority model fits (plot details are the same as above).
 ```{r SonFitAllHeb,fig.cap = "(ref:SonFitAllHeb)", warning=FALSE, out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.4,.4,.4,.4,.4,.4), fig.show="hold", fig.align = "default"}
 
 predictions_heb$SSP_obs %>%
@@ -2271,32 +2436,34 @@ predictions_heb$NAP_bu %>%
 
 ```
 
-The right-most column in Table \@ref(tab:resultsmodels), *weight*, shows model averaging via stacking of predictive distributions. Stacking maximizes the potential elpd score by pulling the predictions of all the different models together. The values under the *weight* column represent the relative contribution of each model to this combined optimal model.
-*NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%.
-All the other traditional models together contribute only 11% to this picture.
+<!-- The right-most column in Table \@ref(tab:resultsmodels), *weight*, shows model averaging via stacking of predictive distributions. Stacking maximizes the potential elpd score by pulling the predictions of all the different models together. The values under the *weight* column represent the relative contribution of each model to this combined optimal model. -->
+<!-- *NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%. -->
+<!-- All the other traditional models together contribute only 11% to this picture. -->
 
-Model weights can be informative with respect to complementarity vs. redundancy because the ability to contribute to the maximized score entails some uniqueness. This can explain why the two *exp*-based models, *SSP/MSD~exp~*, did not contribute at all with zero weight. Looking at the model fits in Subsection 
-\@ref(sec:results2) (ii), 
-<!-- \@ref(sec:posterior2),  -->
-it stands to reason that the main apparent advantage of the *exp* sonority hierarchy over the *col* sonority hierarchy in predicting onset rises is already subsumed by *NAP~td~*'s predictions, such that *SSP/MSD~exp~* had no unique contribution to add when stacked alongside superior *SSP/MSD~col~* and *NAP~td~* together.
+<!-- Model weights can be informative with respect to complementarity vs. redundancy because the ability to contribute to the maximized score entails some uniqueness. This can explain why the two *H~exp~*-based models, *SSP/MSD~exp~*, did not contribute at all with zero weight. Looking at the model fits in Subsection  -->
+<!-- \@ref(sec:results2) (ii),  -->
+<!-- <!-- \@ref(sec:posterior2),  --> 
+<!-- it stands to reason that the main apparent advantage of the *H~exp~* sonority hierarchy over the *H~col~* sonority hierarchy in predicting onset rises is already subsumed by *NAP~td~*'s predictions, such that *SSP/MSD~exp~* had no unique contribution to add when stacked alongside superior *SSP/MSD~col~* and *NAP~td~* together. -->
 
-The fact that the highest ranked NAP model in this comparison, *NAP~td~*, did not completely neutralize the contribution of *NAP~bu~* is telling, especially given that *NAP~td~* subsumed more of the traditional models, although it is more similar to *NAP~bu~* in principle. This is evident from Table \@ref(tab:resultsmodelsohnenapbu), in which we took *NAP~bu~* out of the equation, resulting in 88% contribution by *NAP~td~* and only 3%  contribution by *SSP~col~*.
+<!-- The fact that the highest ranked NAP model in this comparison, *NAP~td~*, did not completely neutralize the contribution of *NAP~bu~* is telling, especially given that *NAP~td~* subsumed more of the traditional models, although it is more similar to *NAP~bu~* in principle. This is evident from Table \@ref(tab:resultsmodelsohnenapbu), in which we took *NAP~bu~* out of the equation, resulting in 88% contribution by *NAP~td~* and only 3%  contribution by *SSP~col~*. -->
 
 
 ### Discussion {#sec:discussion2} 
 
-The results of the confirmatory study (Experiment 2) can be summarized as follows: 
-(i) all of the sonority models we tested are capable of explaining the response time data for different consonant clusters to some extent; 
+The results of the confirmatory studies, Experiments 2-3, can be summarized as follows: 
+(i) all of the sonority models we tested are capable of explaining the response time data for different consonant clusters to some good extent; 
 (ii) the symbolic top-down NAP model, *NAP~td~*, outperforms all the the other models;
-(iii) some interesting differences between *col* and *exp* sonority hierarchies were observed, where the advantages of the minimal *col* sonority hierarchy proved to be more effective; 
-(iv) the traditional sonority models appear to be largely subsumed by the symbolic *NAP~td~* model; 
-(v) the combined contribution of the top-down and bottom-up NAP-based models (*NAP~td/bu~*) appears to be complementary to some degree.
+(iii) some interesting differences between *H~col~* and *H~exp~* sonority hierarchies were observed, where the advantages of the minimal *H~col~* sonority hierarchy proved to be more effective.
+
+As a novel measurement of the acoustic signal, *NAP~bu~*'s partial success is, in fact, quite impressive: it still has a big room for improvement and it is already as good as the best traditional models. *NAP~bu~* can directly enjoy from improvements in extraction of periodic energy in digital signal processing, from improvements in the conception of competition, and in the formulas used to estimate or simulate it.
+<!-- (iv) the traditional sonority models appear to be largely subsumed by the symbolic *NAP~td~* model;  -->
+<!-- (v) the combined contribution of the top-down and bottom-up NAP-based models (*NAP~td/bu~*) appears to be complementary to some degree. -->
 
 The success of our NAP models relative to the traditional models in predicting the data can be mainly attributed to the following traits of NAP:
 (i) all the voiceless-initial onset clusters, including onset falls and plateaus (e.g., /sp/ and /sf/), are relatively well-formed in NAP, correctly predicting the patterning together of such data at the low-right parts of the plots (faster response times);
 (ii) onset rises like /ml/, nasal plateaus (/nm/ and /mn/), and onset falls like /lm/ pattern together as similar and relatively ill-formed in NAP, correctly predicting the data, whereby sonorant-initial plateaus and rises do not pattern with (better-formed) obstruent-initial plateaus and rises.
 
-A simplified generalization that may illustrate this state of affairs in symbolic terms would be to claim that the sonority intercept of onset clusters appears to be more impactful than the sonority slope in determining syllabic well-formedness (i.e., the starting level of the cluster is more predictive of well-formedness than the angle of the cluster's slope).
+A simplified generalization that may illustrate this state of affairs in symbolic terms would be to claim that the sonority intercept of onset clusters appears to be not less impactful than the sonority slope in determining syllabic well-formedness (i.e., the starting level of the onset cluster is not less predictive of well-formedness than the angle of the cluster's slope).
 
 #		General discussion {#sec:genDiscussion}
 
@@ -2388,7 +2555,7 @@ Lastly, this study also provides compelling motivations and strong evidence that
 
 [^cf-sstop]: The term */s/-stop cluster* is used here to refer to voiceless sequences of a sibilant, namely /s/ or /ʃ/, that precedes an oral stop, e.g., /p,t,k/.
 
-[^cf-td]: Note that language-specific top-down biases, such as the question of syllabic consonants in a given language, are not covered by our top-down model, *NAP~td~*, which is limited to the universal aspects of NAP. That said, *NAP~td~* succeeded in fitting the data for /z/-initial and nasal-initial clusters within its predictions.
+<!-- [^cf-td]: Note that language-specific top-down biases, such as the question of syllabic consonants in a given language, are not covered by our top-down model, *NAP~td~*, which is limited to the universal aspects of NAP. That said, *NAP~td~* succeeded in fitting the data for /z/-initial and nasal-initial clusters within its predictions. -->
 
 
 \newpage

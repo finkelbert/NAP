@@ -1,0 +1,34 @@
+"","subject_nr","subject_age","subject_gender","subject_handedness","subject_education","subject_hebrew_native","subject_other_native_lang","subject_language_other"
+"1","1","19-29","male","right-handed","high-school","multilingual","english",NA
+"2","10","40-59","male","right-handed","graduate","monolingual",NA,"english"
+"3","11","40-59","male","right-handed","graduate","multilingual","Russian, English","Spanish, French"
+"4","12","19-29","female","right-handed","undergrad","monolingual",NA,"english"
+"5","13","40-59","male","right-handed","graduate","monolingual",NA,"english"
+"6","14","19-29","female","right-handed","graduate","monolingual",NA,"english"
+"7","15","19-29","male","right-handed","high-school","multilingual","english",NA
+"8","16","19-29","female","right-handed","high-school","monolingual",NA," English"
+"9","17","40-59","male","right-handed","graduate","monolingual",NA,"english"
+"10","18","30-39","male","left-handed","graduate","monolingual",NA,"english"
+"11","19","19-29","female","right-handed","graduate","monolingual",NA,"english"
+"12","2","19-29","female","right-handed","high-school","monolingual",NA,"english, arabic"
+"13","20","40-59","male","right-handed","high-school","monolingual",NA,"english"
+"14","21","40-59","male","left-handed","undergrad","monolingual",NA,"English"
+"15","22","40-59","female","right-handed","graduate","monolingual",NA,"english"
+"16","23","40-59","male","right-handed","undergrad","multilingual","Spanish","English"
+"17","24","19-29","male","right-handed","high-school","monolingual",NA,"english"
+"18","25","13-18","female","left-handed","high-school","monolingual",NA,"english"
+"19","26","19-29","female","right-handed","high-school","monolingual",NA,"english"
+"20","28","40-59","male","right-handed","high-school","monolingual",NA,"english"
+"21","29","40-59","female","right-handed","high-school","monolingual",NA,"english"
+"22","3","19-29","female","left-handed","high-school","monolingual",NA,NA
+"23","30","13-18","male","right-handed","high-school","monolingual",NA,NA
+"24","31","13-18","female","right-handed","high-school","monolingual",NA,NA
+"25","32","40-59","male","right-handed","undergrad","monolingual",NA,"english"
+"26","33","30-39","female","right-handed","undergrad","monolingual",NA," English; German"
+"27","34","40-59","male","right-handed","high-school","monolingual",NA,"german und english"
+"28","4","19-29","female","left-handed","high-school","monolingual",NA,"english"
+"29","5","19-29","female","right-handed","high-school","monolingual",NA,"english"
+"30","6","19-29","male","right-handed","high-school","multilingual"," russian",NA
+"31","7","30-39","male","right-handed","high-school","monolingual",NA,NA
+"32","8","19-29","female","right-handed","undergrad","monolingual",NA,"English"
+"33","9","30-39","other","right-handed","high-school","monolingual",NA," English, hearing"
