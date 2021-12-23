@@ -1,7 +1,8 @@
 \label{appendix:b}
 
 ## Complete output of the Bayesian models  {-}
-The complete results of the exploratory (Experiment 1) and confirmatory models (Experiment 2) are presented in Tables \@ref(tab:exploratory-NAPbu)-\@ref(tab:confirmatory-NAPtd). 
+The complete results of the exploratory (Experiment 1) and confirmatory models (Experiment 2-3) are presented in Tables B1--B21.
+<!-- \@ref(tab:exploratory-NAPbu)-\@ref(tab:confirmatory-NAPtd).  -->
 
 Notice that the parameters are not entirely comparable accross models: (i) The intercept, $\alpha$, represents the mean log-RT of the first category for the ordinal models, but it is the grand mean for the  continuous model, $NAP_{bu}$. (ii) The size of the effect of well-formedness, $\beta$, represents the distance between two adjacent categories had they been equidistant for the ordinal models but it is the increase in log-scale for one unit in the well-formedness scale for the continuous model, $NAP_{bu}$.  (iii) The parameter vector, $\zeta$, (present only in ordinal models) represents the normalized distances between consecutive predictor categories, so that the distance between the first and last category is $1$. (iv) For all models, the variance components are comparable: $\sigma$ represents the scale of the log-normal likelihood (or standard deviation of the distribution on the log scale), $\sigma_\alpha$ and $\sigma_\beta$ represent the by-participant adjustment to the intercept and slope respectively, and $\rho_{\alpha,\beta}$ represents the correlation between by-participant intercept and slope. 
 
