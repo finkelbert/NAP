@@ -35,12 +35,12 @@ str_detect(Parameter,"sd.*?") ~"$\\hat\\sigma_{\\beta}$",
 str_detect(Parameter, "cor.*?") ~ "$\\hat\\rho_{\\alpha,\\beta}$",
                           TRUE ~ "$\\hat\\beta$")) %>%
   papaja::apa_table(escape= FALSE,
-                     caption = paste0("Results from the ",type," model examining the results of the $",model_names[.y],"$ model. ",label= label, note= "See text for the interpretation of the parameters and column names."))}
+                     caption = paste0("Results from ",type," model examining the results of the $",model_names[.y],"$ model. ",label= label, note= "See text for the interpretation of the parameters and column names."))}
 ) %>% 
   paste(collapse = "\n")
 }
 
-knitr::raw_latex(model_tab(m_pilot$models,"exploratory"))
-knitr::raw_latex(model_tab(m_german$models,"confirmatory"))
-
+knitr::raw_latex(model_tab(m_pilot$models,"the exploratory"))
+knitr::raw_latex(model_tab(m_german$models,"Experiment 2"))
+knitr::raw_latex(model_tab(m_hebrew$models,"Experiment 3"))
 ```
