@@ -698,7 +698,7 @@ subjects_heb$subject_education <- as.factor(subjects_heb$subject_education)
 # Introduction
 
 <!-- ## tmp {-} -->
-The following work models the contribution of *sonority* to phonology in a manner that attempts to be compatible with general auditory perception and cognition, as well as with lingustic theory. This is in contrast to many of the traditional formal principles in linguistic theory that do not tend to specify how they interact with general systems of human capacity, such as auditory perception or sensorimotor control. Traditional linguistic principles are mostly generalizations that explain linguistic typologies as they have been depicted in symbolic writing systems. 
+The following work models the contribution of *sonority* to phonology in a manner that attempts to be compatible with general auditory perception and cognition, as well as with linguistic theory. This is in contrast to many of the traditional formal principles in linguistic theory that do not tend to specify how they interact with general systems of human capacity, such as auditory perception or sensorimotor control. Traditional linguistic principles are mostly generalizations that explain linguistic typologies as they have been depicted in symbolic writing systems. 
 
 The prevailing sonority-related principles such as the *Sonority Sequencing Principle* (SSP) and its derivatives are, indeed, generalizations of the latter type.
 Our novel proposals in this study achieve a better empirical coverage compared to different versions of the SSP that we test in a set of perception tasks, while, at the same time, provide a more comprehensive explanation than common formal linguistic principles to the notion of sonority in phonology and phonetics.
@@ -1027,7 +1027,7 @@ In the following sections we elaborate on the methods for obtaining well-formedn
 The implementation of the continuous model, *NAP~bu~* follows in Subsection \@ref(sec:napbu). 
 <!-- Finally, this chapter is concluded with a short overview of some of the key advantages of NAP over traditional sonority models (Section \@ref(sec:advantages)). -->
 
-It is very important to note that the implemetations of NAP in the following subsections present procedures for estimated results, based on the rationale of NAP. These procedures are not, in and of themselves, supposed to stand for any perceptual or cognitive mechanism, neither top-down nor bottom-up.
+It is very important to note that the implementations of NAP in the following subsections present procedures for estimated results, based on the rationale of NAP. These procedures are not, in and of themselves, supposed to stand for any perceptual or cognitive mechanism, neither top-down nor bottom-up.
 
 ### Traditional sonority models {#sec:traditionalmodels}
 
@@ -1050,7 +1050,7 @@ Thus, the ratio between periodic and aperiodic components in speech sounds readi
 \ex \emph{Voiceless Obstruents} $<$ \emph{Voiced Obstruents} $<$ \emph{Sonorants}  \label{ex:napscale}
 \end{exe}
 
-A further distinction in NAP's sonority hierarchy is based on the general presence or absence of articulatory contact, which can be referred to as the distinction beteen *contoids* and *vocoids* [@pike1943phonetics].
+A further distinction in NAP's sonority hierarchy is based on the general presence or absence of articulatory contact, which can be referred to as the distinction between *contoids* and *vocoids* [@pike1943phonetics].
 A free and open vocal tract contributes to a potentially stronger and longer vocalic signal that can qualitatively enhance the potential periodic energy mass.
 This distinction effectively separates the sonorants into *sonorant vocoids* (glides and vowels) and *sonorant contoids* (nasals and liquids).
 <!-- [^cfrhotics]  -->
@@ -1239,7 +1239,7 @@ Only the single-vowel productions were considered as targets, and an accurate re
 By focusing on the response time of "correct" responses to the target words we, in fact, measure the time it took participants to decide that a given single-vowel stimulus is monosyllabic. 
 We can therefore interpret the reaction times of monosyllabic responses to single-vowel targets as reflective of the processing cost of assigning one nucleus to a given target stimulus with one vowel.
 
-As detailed below, the experiments were designed as syllable count tasks, i.e., a meta-linguistic forced-choice task. We assume that this design activates top-down inferences which urge subjects to think about possible syllables in their language. However, since we want to also tap into subjects' bottom-up inferences we present these nonce words as real words in another unkown language, uttered by a native speaker of that foreign language. For that matter, the German-speaking subjects listened to a stimuli set that was comprised of recordings of a native Hebrew-speaking speaker, AA (the first author). Likewise, the Hebrew-speaking subjects listened to a stimuli set that was comprised of recordings of a native German-speaking speaker, HN (a phonetically trained volunteer).
+As detailed below, the experiments were designed as syllable count tasks, i.e., a meta-linguistic forced-choice task. We assume that this design activates top-down inferences which urge subjects to think about possible syllables in their language. However, since we want to also tap into subjects' bottom-up inferences we present these nonce words as real words in another unknown language, uttered by a native speaker of that foreign language. For that matter, the German-speaking subjects listened to a stimuli set that was comprised of recordings of a native Hebrew-speaking speaker, AA (the first author). Likewise, the Hebrew-speaking subjects listened to a stimuli set that was comprised of recordings of a native German-speaking speaker, HN (a phonetically trained volunteer).
 
 Since the bottom-up predictions of NAP are derived via measurements of acoustic signals of particular productions rather than from fixed symbolic predictions, the assumption that all things other than the controlled variable are equal in the experimental stimuli should hold also for a large degree of variation that occurs in natural speech. Thus, if a certain segment in one item is slightly longer, shorter, louder or softer than in other comparable tokens, bottom-up NAP is designed to directly account for this variation, while the other symbol-based ordinal models essentially assume that such variation is mostly negligible as it cannot survive the abstraction into phonemes. This allows us to opt for a slightly more ecologically valid experimental paradigm, by using natural speech recordings that were designed and selected to sound as similar as possible, rather than using synthesized speech, which would have allowed a higher degree of similarity between tokens.
 
@@ -1289,13 +1289,13 @@ Table \@ref(tab:targetlist) presents 29 CC sequence types that reflect 16 differ
 Of the 29 different clusters, only 3 clusters regularly occur in German words, /ʃp, ʃm, fl/, 6 clusters are attested to some degree in German loanwords, /sp, sf, sm, vl, zv, ml/ [@van2012sonority], and one cluster, /ʃf/, may be considered as similar to German licit clusters with a voiced obstruent following a voiceless one (i.e., /ʃv/ and /t͡sv/).
 Thus, the experimental set contains 19 cluster types that are unattested in German words. These unattested CC types appear in 13 of the 16 unique combinations, excluding the three rising sonority clusters with a liquid in *C*~2~ (e.g., /fl, vl, ml/), that are all attested in German complex onsets to some degree (yet only marginally so in the case of /vl/ and /ml/).
 
-Out of the 29 different cluster types in Table \@ref(tab:targetlist), more clusters occur regularly in Modern Hebrew [see @asherov2019syllable]. These include all of the eight sibilant-initial clusters, /sp, ʃp, sf ʃf, sm, ʃm, zm, zv/, and the liquid-second clusters, /fl, vl/. The voiceless cluster /ft/ and the /m/-initil clusters /ml, mn/ are marginally atttested in Modern Hebrew [@asherov2019syllable 75, 86].
+Out of the 29 different cluster types in Table \@ref(tab:targetlist), more clusters occur regularly in Modern Hebrew [see @asherov2019syllable]. These include all of the eight sibilant-initial clusters, /sp, ʃp, sf ʃf, sm, ʃm, zm, zv/, and the liquid-second clusters, /fl, vl/. The voiceless cluster /ft/ and the /m/-initial clusters /ml, mn/ are marginally attested in Modern Hebrew [@asherov2019syllable 75, 86].
 Thus, the experimental set contains 16 cluster types that are unattested in Hebrew words.
 These unattested CC types appear in 12 of the 16 unique combinations in Table \@ref(tab:targetlist), excluding the three rising sonority clusters with a liquid in *C*~2~ (e.g., /fl, vl, ml/), and the *fricative*-*stop* clusters (including /ft/), although note that /ft/ and /ml/ are only marginally attested in Hebrew complex onsets.
 
 The different CC sequences were embedded within a /CCal/ word-like frame, with a recurring *-al* rime. These /CCal/ tokens were produced with a single vowel, intended to yield monosyllabic items that resemble typical content words [i.e., prosodically heavier than a single light syllable; see, e.g., @demuth1996prosodic]. Two disyllabic counterparts were prepared for each CC type---one with an epenthetic vowel, /CəCal/, and another with a prothetic vowel, /əCCal/ (a more accurate annotation should be /(ʔ)əCCal/, given that the presence of an initial glottal stop was not controlled for).
 Note that the schwa in this case is produced as a weak (unstressed) central vowel, not necessarily a schwa.
-The entire word set therefore includes 29 single-vowel target types and 58 associated bi-vocalic filler types, adding uo to 87 different word-like stimuli.
+The entire word set therefore includes 29 single-vowel target types and 58 associated bi-vocalic filler types, adding up to 87 different word-like stimuli.
 
 ##		Predictions {#sec:predictions}
 
@@ -1342,9 +1342,9 @@ The entire word set therefore includes 29 single-vowel target types and 58 assoc
 \end{center}
 \end{table}
 
-The full set of predictions for the 29 experimental targets is presented for all the symbol-based ordinal models (2$\times$SSP, 2$\times$MSD, and *NAP~td~*) in Table \@ref(tab:OrdinalTargetPreds), and for the signal-based continuous model (*NAP~bu~*) in Figure \@ref(fig:com-monosyl). Note that the scores of *NAP~bu~* are presented on a continuous ratio scale, with specific predictions for each token and consequential intervals between scores. The scores in *NAP~bu~* are not a generalization, rather, they are extracted from the specific set of recordings we measured, and they are expected to vary to some extents when measuring different tokens. We present the *NAP~bu~* scores for the two sets of stimuli used in the experimens: (i) A set spoken by a native Hebrew speaker (first author; see Figure \@ref(fig:com-monosyl)) and a set spoken by a native German speaker who is a trained phonetician (see Figure \@ref(fig:com-monosylHeb)).
+The full set of predictions for the 29 experimental targets is presented for all the symbol-based ordinal models (2$\times$SSP, 2$\times$MSD, and *NAP~td~*) in Table \@ref(tab:OrdinalTargetPreds), and for the signal-based continuous model (*NAP~bu~*) in Figure \@ref(fig:com-monosyl). Note that the scores of *NAP~bu~* are presented on a continuous ratio scale, with specific predictions for each token and consequential intervals between scores. The scores in *NAP~bu~* are not a generalization, rather, they are extracted from the specific set of recordings we measured, and they are expected to vary to some extents when measuring different tokens. We present the *NAP~bu~* scores for the two sets of stimuli used in the experiments: (i) A set spoken by a native Hebrew speaker (first author; see Figure \@ref(fig:com-monosyl)) and a set spoken by a native German speaker who is a trained phonetician (see Figure \@ref(fig:com-monosylHeb)).
 
-(ref:com-monosyl) AA set (Hebrew speaker). Well-formedness scores in the continuous *NAP~bu~* model shown in terms of the distance betweeen the center of mass of the entire syllable, *CoM~syllable~* (red vertical lines), and the center of mass of the left portion, *CoM~onset~* (blue vertical lines). Periodic energy is represented by the black curve. Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). Items are oredered by score (from worse- to better-formed), going from left-to-right and from top-to-bottom.
+(ref:com-monosyl) AA set (Hebrew speaker). Well-formedness scores in the continuous *NAP~bu~* model shown in terms of the distance between the center of mass of the entire syllable, *CoM~syllable~* (red vertical lines), and the center of mass of the left portion, *CoM~onset~* (blue vertical lines). Periodic energy is represented by the black curve. Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). Items are ordered by score (from worse- to better-formed), going from left-to-right and from top-to-bottom.
 ```{r com-monosyl, fig.cap = "(ref:com-monosyl)", fig.width=7, fig.asp=.8, warning=FALSE, dev="cairo_pdf"}
 # pdf.options(encoding = 'ISOLatin2')
 ordered_syl_abs <- unique(monosyl_info_AA[order(monosyl_info_AA$NAP_bu),]$syl)
@@ -2072,7 +2072,7 @@ predictions_heb$NAP_td %>%
 
 Figure \@ref(fig:NAPtdFit) shows that *NAP~td~* succeeds in containing all the data (points) within the respective predictions (blue violins) in both experiments, making *NAP~td~* the only model to achieve that coverage among the fits of Experiment 2. 
 <!-- A comparison with Figures \@ref(fig:SSPcolFit)--\@ref(fig:MSDexpFit) shows that *NAP~td~* is the only model to achieve this. -->
-*NAP~td~* appears to exhibit some redundancy, as suggested by the relatively large degrees of overlap between some of the predictive distributions of the model. This is apparent from the overlap between violins in the left side (worse-formed) of the model fit with Eperiment 2 (left plot), and between violins in the right side (better-formed) of the model fit with Eperiment 3 (right plot) in Figure \@ref(fig:NAPtdFit).
+*NAP~td~* appears to exhibit some redundancy, as suggested by the relatively large degrees of overlap between some of the predictive distributions of the model. This is apparent from the overlap between violins in the left side (worse-formed) of the model fit with Experiment 2 (left plot), and between violins in the right side (better-formed) of the model fit with Experiment 3 (right plot) in Figure \@ref(fig:NAPtdFit).
 
 <!-- ### (ii.c) NAP~bu~ model fit {-} -->
 <!-- ### NAP~bu~ models {#sec:NAPbuModelfit} -->
@@ -2129,7 +2129,7 @@ Our criteria for goodness of fit based on the plot analyses (see opening Subsect
 
 #### Model fits discussion {#sec:discussionFits} 
 
-The failures in the fit of the *NAP~bu~* model with german-speaking subjects in Experiment 2 can be split into two types:
+The failures in the fit of the *NAP~bu~* model with German-speaking subjects in Experiment 2 can be split into two types:
 (i) nasal-initial clusters---*nval*, *nmal*, and *mnal*---which received results on a par with the slowest responses in the data, reflecting an overestimation of well-formedness by the model, and;
 (ii) syllables beginning with a voiced sibilant---*zval* and *zmal*---which received results that pattern with faster responses, reflecting well-formedness underestimation by the model.
 
@@ -2148,13 +2148,13 @@ While the model fits give us an insight into the behavior of each model with res
 
 #### Experiment 2
 
-A bird's eye view of all the six model fits in Experiment 2 is availale in Figure \@ref(fig:SonFitAll). The results of the model comparison from Experiment 2 are available in Table \@ref(tab:resultsmodels). It reveals a very clear advantage of *NAP~td~* over all the other models. 
+A bird's eye view of all the six model fits in Experiment 2 is available in Figure \@ref(fig:SonFitAll). The results of the model comparison from Experiment 2 are available in Table \@ref(tab:resultsmodels). It reveals a very clear advantage of *NAP~td~* over all the other models. 
 The difference in elpd scores from the next three models---*SSP/MSD~col~* and *NAP~bu~*---is about 6 standard errors (considering that the difference is around 90 elpd and the corresponding standard error is around 15), a very robust lead for *NAP~td~*. 
 The small differences between the next three models (*SSP/MSD~col~* and *NAP~bu~*) make them all indistinguishable in the second place.
 The two traditional models that are based on the *H~exp~* hierarchy---*SSP/MSD~exp~*---are similar to each other at the last place, only marginally better than the null model.
 
 The right-most column in Table \@ref(tab:resultsmodels), *weight*, shows model averaging via stacking of predictive distributions. Stacking maximizes the potential elpd score by pulling the predictions of all the different models together. The values under the *weight* column represent the relative contribution of each model to this combined optimal model.
-*NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%. This is notable as both NAP models are essentially based on the same principle, lending support to the idea top-down and bottom-uo lead to two complementary models.
+*NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%. This is notable as both NAP models are essentially based on the same principle, lending support to the idea top-down and bottom-up lead to two complementary models.
 The other traditional models contribute 8% (*SSP~col~*) and 3% (*MSD~col~*) to this picture, less than the 9% that the null model manages to contribute.
 
 ```{r resultsmodels, results = "asis"}
@@ -2296,7 +2296,7 @@ predictions$NAP_bu %>%
 
 #### Experiment 3
 
-A bird's eye view of all the six model fits in Experiment 3 is availale in Figure \@ref(fig:SonFitAllHeb). 
+A bird's eye view of all the six model fits in Experiment 3 is available in Figure \@ref(fig:SonFitAllHeb). 
 The results of the model comparison from Experiment 3 (see Table \@ref(tab:resultsmodelsHeb)) reveal a borderline advantage of *NAP~td~* over all the other models.
 The difference in elpd scores from the next two models---*MSD~col~* and *NAP~bu~*---is only about 2 standard errors (considering the difference at around 10 elpd and the corresponding standard error at around 5).
 
@@ -2462,13 +2462,13 @@ The results of the confirmatory studies, Experiments 2-3, can be summarized as f
 (ii) the symbolic top-down NAP model, *NAP~td~*, outperforms all the the other models;
 (iii) some interesting differences between *H~col~* and *H~exp~* sonority hierarchies were observed, where the advantages of the minimal *H~col~* sonority hierarchy proved to be more effective.
 
-Experiment 3 exhibits most of the general trends found in Experiment 2, albeit in a less compelling way. One path of explanation for these discrepancies can be found in the differences between the ambient languages. We expect language-specific differences to account for some of the differences between the experimets, as was mentioned in Subsection \@ref(sec:designs). Specifically, the differences between the nasals in Hebrew and German was suggested as explanatory in Subsection \@ref(sec:discussionFits).
+Experiment 3 exhibits most of the general trends found in Experiment 2, albeit in a less compelling way. One path of explanation for these discrepancies can be found in the differences between the ambient languages. We expect language-specific differences to account for some of the differences between the experiments, as was mentioned in Subsection \@ref(sec:designs). Specifically, the differences between the nasals in Hebrew and German was suggested as explanatory in Subsection \@ref(sec:discussionFits).
 
-On top of that, we suspect that differences beween the experiments were also due to the various sources of noise that were introduced in the process. These include the smaller group of participants and the diverse physical locations in which Expeiment 3 was administered (see Subsection \@ref(sec:participants3)). 
+On top of that, we suspect that differences between the experiments were also due to the various sources of noise that were introduced in the process. These include the smaller group of participants and the diverse physical locations in which Experiment 3 was administered (see Subsection \@ref(sec:participants3)). 
 <!-- The results confirm this with a wider standard error for the intercepts of the different subjects in the statistical models in Experiment 3.  -->
 The results may be taken to support this with a larger standard deviation for the by-subject adjustments to the intercept for the models of Experiment 3 in comparison with Experiment 2 (e.g., $\hat\sigma_\alpha = 0.32~[0.25, 0.41]$ in Experiment 3 vs. $\hat\sigma_\alpha = 0.21~[0.17, 0.26]$ in Experiment 2, when comparing the null models).
 
-Furthermore, it was the impression of the experimenter (the first author) that Hebrew speakers in this study tended to have a less robust understanding of the notion of the syllable such that their performance may exhibit higher degerees of misunderstanding of the the meta-linguistic syllable count task. This impression seems consistent with the overall smaller range of response times in Experiment 3, whereby Hebrew speakers tended to respond relatively fast to ill-formed structures. 
+Furthermore, it was the impression of the experimenter (the first author) that Hebrew speakers in this study tended to have a less robust understanding of the notion of the syllable such that their performance may exhibit higher degrees of misunderstanding of the the meta-linguistic syllable count task. This impression seems consistent with the overall smaller range of response times in Experiment 3, whereby Hebrew speakers tended to respond relatively fast to ill-formed structures. 
 
 The success of our NAP models relative to the traditional models in predicting the data can be mainly attributed to the following traits of NAP:
 (i) all the voiceless-initial onset clusters, including onset falls and plateaus (e.g., /sp/ and /sf/), are relatively well-formed in NAP, correctly predicting the patterning together of such data at the low-right parts of the plots (faster response times);
@@ -2513,7 +2513,7 @@ This may suffice to explain why */s/-stop* clusters are tolerated, but not why t
 
 First, there are various reasons to assume that *fricative-stop* clusters are better-formed than *stop-stop* clusters. This generalization is traditionally captured in abstract formal phonological constraints like the *Obligatory Contour Principle* [OCP; going back to @leben1973suprasegmental; and @goldsmith1976autosegmental], which acts as a general dissimilatory requirement banning two successive units of the same type. The OCP in this case may be the reflection of an articulatory disadvantage of the *stop-stop* configuration since it should be harder to coordinate two successive closure and release gestures, whereby air pressure is built twice within the span of a complex onset.
 
-Note that this also leads to a disadvantage of *stop-stop* from a perceptual point of view, since the first stop in a *stop-stop* configuration is released into the closure phase of the following stop [see @surprenant1998perception]. The release of a stop burst into a silent closure phase of another stop, rather than the periodic signal of a vowel, means that many of the acoustic cues to the identitiy of the first stop consonant are severely attenuated [see @fujimura1978perception]. 
+Note that this also leads to a disadvantage of *stop-stop* from a perceptual point of view, since the first stop in a *stop-stop* configuration is released into the closure phase of the following stop [see @surprenant1998perception]. The release of a stop burst into a silent closure phase of another stop, rather than the periodic signal of a vowel, means that many of the acoustic cues to the identity of the first stop consonant are severely attenuated [see @fujimura1978perception]. 
 
 The last explanation is essentially based on perceptual *cue robustness* [@wright2004review], which is not directly relevant to syllabic organization in any abstract form as much as it is based on adjacency between speech sounds and their chances of being recovered given transitions between them. As @kawasaki1997alternativessk [361] concluded, rather than sonority and syllabicity, it is "the degree of salience of modulations created by segmental transitions", which is the determinant factor of many phonotactics.
 
@@ -2537,7 +2537,7 @@ The *connectionist* program in cognitive psychology [e.g., @rumelhart1986paralle
 
 It should be noted, though, that the main focus of connectionist models is not so much the symbols in the system as much as it is the classic processes of symbol manipulation. Connectionist models present alternatives to traditional symbol manipulation rules, like the linear rules in generative phonology [@chomsky1968spesk]. The latter are practical in terms of the descriptive notation, but they cannot (and mostly do not) attempt to reflect the cognitive functions of the brain.
 
-In the context of the present work, connectionist models can be effective in modeling the phonology of speech percetion in a top-down model, which represents processes that start and end with discrete symbols. However, we assume that there is a functional source for linguistic distinctions in perception, which shoud be searched for in the bottom-up route, where processes must begin with continuous events in real time.
+In the context of the present work, connectionist models can be effective in modeling the phonology of speech perception in a top-down model, which represents processes that start and end with discrete symbols. However, we assume that there is a functional source for linguistic distinctions in perception, which should be searched for in the bottom-up route, where processes must begin with continuous events in real time.
 
 ###    Dynamical systems {#sec:synthesis}
 
@@ -2586,7 +2586,7 @@ This work suggests a synergy of novel theoretical and methodological approaches 
 The novelties that are proposed here for models of sonority, and more generally, for  perception-based models in phonology, will need to amass more supporting evidence from multiple sources in order to be more widely considered, and further developed. 
 We hope that in this paper we laid the foundations for such potential long-term contributions. 
 
-In a related work, Anonymous (in press) tests sonority models on diachronic corpus data of Modern Hebrew, which uses general phonemic trascriptions. In such common cases, when lingustic data is already abstracted into stable forms, only the symbolic NAP model is of relevance, and, once again, *NAP~td~* outperformed traditional SSP-based accounts.  
+In a related work, Anonymous (in press) tests sonority models on diachronic corpus data of Modern Hebrew, which uses general phonemic transcriptions. In such common cases, when linguistic data is already abstracted into stable forms, only the symbolic NAP model is of relevance, and, once again, *NAP~td~* outperformed traditional SSP-based accounts.  
 In these works, we demonstrated how our set of proposals results in a model of sonority that can account for some of the most persistent problems in phonological theory. 
 Our NAP-based models not only present advantages over traditional sonority models in terms of empirical coverage, they also provide functional explanations as to the source and cause of sonority phenomena, linking sonority to pitch intelligibility at the level of the syllable. 
 Furthermore, our dual-route modeling strategy (see Subsection \@ref(sec:complementary)) 
