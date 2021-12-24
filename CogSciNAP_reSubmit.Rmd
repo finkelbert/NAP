@@ -716,9 +716,11 @@ designed in order to test our two NAP-based models (applying NAP with bottom-up 
 
 We use a Bayesian data analysis approach to test and compare the six different sonority models. Whereas all the different models are found to be capable of predicting the experimental results to a good extent, the symbolic top-down version of NAP is shown to be the superior model. The bottom-up model of NAP comes in second alongside a few of the traditional models. Interestingly, some of the results suggest a relatively high degree of complementarity between the two NAP models, even though they represent the same principle. This is a desirable result for our framework, which advocates the need for two complementary models, both dynamic and symbolic.
 
-Our synergy of proposals has many advantages over traditional sonority accounts, including methodological aspects, theoretical perspectives, and, essentially, a better empirical coverage. In Subsection \@ref(sec:discussionResults) we interpret the results of the main confirmatory experiments and in Section \@ref(sec:genDiscussion) we address some relevant implications, where we discuss the division of labor between sonority and other phonotactic factors, demonstrated with a holistic account of the phenomenon of /s/-stop clusters (Subsection \@ref(sec:division)). Finally, we also discuss the debate about the universality of sonority in light of our work (Subsection \@ref(sec:projection)), before we present our conclusions in Section \@ref(sec:conclusions).
+Our set of proposals has many advantages over traditional sonority accounts, including methodological aspects, theoretical perspectives, and, essentially, a better empirical coverage. In Subsection \@ref(sec:discussionResults) we interpret the results of the  confirmatory experiments and in Section \@ref(sec:genDiscussion) we address some relevant implications, where we discuss the division of labor between sonority and other phonotactic factors, demonstrated with a holistic account of the phenomenon of /s/-stop clusters (Subsection \@ref(sec:division)). 
+We also discuss the contribution of this work with relation to previous theoretical efforts to incorporate continuous entities in phonology (Subsection \@ref(sec:lingMod)).
+Finally, we also discuss the debate about the universality of sonority in light of our work (Subsection \@ref(sec:projection)), before we present our conclusions in Section \@ref(sec:conclusions).
 
-In the remainder of this Introduction, we briefly present the relevant background on traditional sonority hierarchies and sonority principles, to cover the basics of their rationale and common application (Subsection \@ref(sec:sonback)).
+In the remainder of this Introduction, we briefly present the relevant background on traditional sonority hierarchies and principles, to cover the basics of their rationale and common application.
 <!-- , and on the tension between discrete and symbolic entities on the one hand, and continous dynamic events on the other hand, in liguistic models of phonology (Subsection \@ref(sec:lingMod)). -->
 
 <!-- emphasizing their rationale, their application, and their inherent flaws (Subsections \@ref(sec:hierarchies)-\@ref(sec:failures)).  -->
@@ -737,8 +739,7 @@ Although there are many different proposals for sonority hierarchies [@parker200
 \ex \emph{Obstruents} $<$ \emph{Nasals} $<$ \emph{Liquids} $<$ \emph{Glides} $<$ \emph{Vowels}  \label{ex:scale} 
 \end{exe} 
 
-The ordering of different speech sounds along the sonority hierarchy is assumed to be universal,
-in line with the common assumption that sonority has a phonetic basis in perception and/or articulation, yet the patterning of segmental classes as distinct groups along the scale is considered to be language-specific, i.e., based on phonological categorization. 
+The ordering of different speech sounds along the sonority hierarchy is assumed to be universal, in line with the common assumption that sonority has a phonetic basis in perception and/or articulation, yet the patterning of segmental classes as distinct groups along the scale is considered to be language-specific, i.e., based on phonological categorization. 
 For example, voiceless stops may be considered universally lower than voiced fricatives on the sonority hierarchy, yet for some languages and analyses they may constitute a single level of *obstruents*. Classes along the sonority hierarchy are most commonly modeled as a series of integers (often referred to as sonority indices) reflecting the ordinal nature of phonological interpretations of the sonority hierarchy. 
 
 (ref:hierarchy-caption) (\#tab:hierarchy) Traditional phonological sonority hierarchies
@@ -1010,7 +1011,7 @@ This choice allows the presentation of a top-down model with a stronger explanat
 
 Moreover, since a top-down model in this framework is based on the distributional patterns of recognizable symbols, these distributions are, in fact, "blind" to their various bottom-up sources, which include a host of universal and idiosyncratic phonotactic pressures. A true top-down statistical learner is thus inherently "contaminated" by all the different sources that contribute to phonotactics in a given system, without a clear distinction between sonority and other factors. Thus, it remains an open question whether top-down inferences that target only sonority-based phonotactics can be modeled in a more direct and principled way than the one presented here with the symbolic model of NAP.
 
-Finally, the symbolic NAP model is necessary for the application of NAP in typological, diachronic, and many traditional and current studies, where speech data is transcribed into strings of discrete symbols. 
+Finally, the symbolic NAP model is necessary for the application of NAP in typological, diachronic, and many traditional and current studies, where speech data is transcribed into strings of discrete symbols (see Anonymous, in press). 
 
 ##     Model Implementations in Dynamic and Symbolic Terms {#sec:modelimpOLD}
 
@@ -2586,14 +2587,15 @@ This work suggests a synergy of novel theoretical and methodological approaches 
 The novelties that are proposed here for models of sonority, and more generally, for  perception-based models in phonology, will need to amass more supporting evidence from multiple sources in order to be more widely considered, and further developed. 
 We hope that in this paper we laid the foundations for such potential long-term contributions. 
 
-In a related work, Anonymous (in press) tests sonority models on diachronic corpus data of Modern Hebrew, which uses general phonemic transcriptions. In such common cases, when linguistic data is already abstracted into stable forms, only the symbolic NAP model is of relevance, and, once again, *NAP~td~* outperformed traditional SSP-based accounts.  
+In a related work, Anonymous (in press) tests sonority models on a diachronic corpus data of Modern Hebrew, which uses general phonemic transcriptions. In such common cases, when linguistic data is already abstracted into stable forms, only the symbolic NAP model is of relevance, and, once again, *NAP~td~* outperformed traditional SSP-based accounts.
 In these works, we demonstrated how our set of proposals results in a model of sonority that can account for some of the most persistent problems in phonological theory. 
 Our NAP-based models not only present advantages over traditional sonority models in terms of empirical coverage, they also provide functional explanations as to the source and cause of sonority phenomena, linking sonority to pitch intelligibility at the level of the syllable. 
+
 Furthermore, our dual-route modeling strategy (see Subsection \@ref(sec:complementary)) 
 makes the important distinction between (bottom-up) signal-based inferences and (top-down) symbol-based inferences, thus appropriately predicting the complementary contribution of these two essentially different inference routes of the same linguistic phenomena.
 
-The smaller success of the continuous *NAP~bu~* model is, in fact, still quite impressive. *NAP~bu~*, as it was implemented here, analyzing well-formedness directly from the continuous acoustic signal, is already as good as the best traditional models, and it still has many potential paths for improvement. For example, 
-*NAP~bu~* can directly enjoy from independent improvements in extraction of periodic energy in digital signal processing, or from improvements in the conception of competition, and the formulas used to estimate or simulate it. We therefore interpret the results of *NAP~bu~* as very promising.
+The smaller success of the continuous *NAP~bu~* model compared to its symbolic version, *NAP~td~*, is, in fact, still quite impressive. *NAP~bu~*, as it was implemented here, analyzing well-formedness directly from the continuous acoustic signal, is already as good as the best traditional models, and it still has many potential paths for improvement. 
+For example, *NAP~bu~* can directly benefit from independent improvements in extraction of periodic energy in digital signal processing, or from improvements in the conception of competition, and the formulas used to estimate or simulate it. We therefore interpret the results of *NAP~bu~* as very promising.
 
 Lastly, this study also provides compelling motivations and strong evidence that support our proposal to link the notion of sonority with periodic energy in the acoustic signal. This proposal entails that the role of periodic energy is of great importance to linguistic analysis of speech, beyond the scope of the current proposal. A partial list of relevant topics includes the following:
 (i) acoustic descriptions of prosodic *weight* and prosodic *prominence* in terms of periodic energy mass;
