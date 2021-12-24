@@ -22,7 +22,10 @@ The following list summarizes concerns that were taken into consideration when c
 
 ## Audio Recordings {-}
 <!-- {#sec:audio} -->
-Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker, AA (the first author), and a phonetically trained native German speaker, HN, in a sound attenuated booth at the phonetics laboratory of the University of Cologne. Speech was recorded via head-mounted headset condenser microphone (AKG C420), capturing mono digital files at a resolution of 44.1kHz sample-rate and 24 bit depth with a Metric Halo MIO 2882 audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with Goodhertz Good Dither dithering to be used in the perception task running on OpenSesame 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the APP Detector (see *Obtaining Periodic Energy Data* below) was also downgraded in sample-rate to 16kHz. Finally all audio takes, at all resolutions, were normalized to the same RMS target of -20dBFS.
+Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker, AA (the first author), and a phonetically trained native German speaker, HN, in a sound attenuated booth at the phonetics laboratory of the 
+first author's university.
+<!-- University of Cologne.  -->
+Speech was recorded via head-mounted headset condenser microphone (AKG C420), capturing mono digital files at a resolution of 44.1kHz sample-rate and 24 bit depth with a Metric Halo MIO 2882 audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with Goodhertz Good Dither dithering to be used in the perception task running on OpenSesame 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the APP Detector (see *Obtaining Periodic Energy Data* below) was also downgraded in sample-rate to 16kHz. Finally all audio takes, at all resolutions, were normalized to the same RMS target of -20dBFS.
 
 \begin{exe}
 \ex \textbf{/ze maʁˈgiʃ \emph{CCal} kaˈʁe.ga/} (Hebrew: ʼit feels (like) \emph{CCal} at the momentʼ) \label{ex:sentence1}
@@ -53,7 +56,8 @@ Participants were seated in a quiet room in front of a laptop computer (a MacBoo
 A training session of ten trials preceded the experimental trials, allowing the participants to familiarize with the task, and allowing the experimenter to adjust listening volume and monitor potential problems and misunderstandings regarding the task.
 
 <!-- [^cf-helsinki]:  -->
-Informed consent from the participants was obtained before each experimental session. The experiment complied with the June 1964 Declaration of Helsinki (carried out by the World Medical Association and entitled “Ethical Principles for Medical Research Involving Human Subjects”), as last revised. In accordance with German Research Foundation (DFG) guidelines for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice).
+Informed consent from the participants was obtained before each experimental session. The experiment complied with the June 1964 Declaration of Helsinki (carried out by the World Medical Association and entitled “Ethical Principles for Medical Research Involving Human Subjects”), as last revised. 
+<!-- In accordance with German Research Foundation (DFG) guidelines for experiments with unimpaired adult populations, the ethics approval is required by the Principal Investigator (in this case, Prof. Dr. Martine Grice). -->
 
 ## Supplementary Data  {-}
 Supplementary data to this article can be found online on *Open Science Framework* (OSF) at <https://tinyurl.com/5jxmjntx>.
