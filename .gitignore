@@ -8,6 +8,9 @@
 appendix*.tex
 *NAP*.tex
 
+# BackUps
+BU/
+
 # Temporary alternative files
 nonshared/
 
