@@ -29,14 +29,22 @@ model_tab <- function(models, type) {
   select(-Est.Error) %>%
     rename_all(~ str_replace_all(., "%","\\\\%")) %>% 
         rename_all(~ str_replace_all(., "_"," ")) %>% 
-  mutate(Parameter = case_when(Parameter=="Intercept" ~ "$\\hat\\alpha$",
+  mutate(Parameter = case_when(Parameter=="Intercept" ~ "$\\alpha$",
                           str_detect(Parameter,".*?\\[.\\]") ~ 
-str_replace_all(Parameter,c(".*?\\[" = "$\\\\hat\\\\zeta_{","\\]" = "}$" )),
-Parameter=="sigma" ~ "$\\hat\\sigma$",
-Parameter =="sd(Intercept)" ~"$\\hat\\sigma_{\\alpha}$",
-str_detect(Parameter,"sd.*?") ~"$\\hat\\sigma_{\\beta}$",
-str_detect(Parameter, "cor.*?") ~ "$\\hat\\rho_{\\alpha,\\beta}$",
-                          TRUE ~ "$\\hat\\beta$")) %>%
+str_replace_all(Parameter,c(".*?\\[" = "$\\\\zeta_{","\\]" = "}$" )),
+Parameter=="sigma" ~ "$\\sigma$",
+Parameter =="sd(Intercept)" ~"$\\sigma_{\\alpha}$",
+str_detect(Parameter,"sd.*?") ~"$\\sigma_{\\beta}$",
+str_detect(Parameter, "cor.*?") ~ "$\\rho_{\\alpha,\\beta}$",
+                          TRUE ~ "$\\beta$")) %>%
+#   mutate(Parameter = case_when(Parameter=="Intercept" ~ "$\\hat\\alpha$",
+#                           str_detect(Parameter,".*?\\[.\\]") ~ 
+# str_replace_all(Parameter,c(".*?\\[" = "$\\\\hat\\\\zeta_{","\\]" = "}$" )),
+# Parameter=="sigma" ~ "$\\hat\\sigma$",
+# Parameter =="sd(Intercept)" ~"$\\hat\\sigma_{\\alpha}$",
+# str_detect(Parameter,"sd.*?") ~"$\\hat\\sigma_{\\beta}$",
+# str_detect(Parameter, "cor.*?") ~ "$\\hat\\rho_{\\alpha,\\beta}$",
+#                           TRUE ~ "$\\hat\\beta$")) %>%
   papaja::apa_table(escape= FALSE,
                      caption = paste0("Results from ",type," model examining the results of the $",model_names[.y],"$ model. ",label= label, note= "See text for the interpretation of the parameters and column names."))}
 ) %>% 
