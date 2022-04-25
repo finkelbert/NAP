@@ -1,5 +1,5 @@
 ---
-title             : "Modeling sonority in terms of pitch intelligibility with top-down and bottom-up versions of the Nucleus Attraction Principle"
+title             : "Modeling sonority in terms of pitch intelligibility with the Nucleus Attraction Principle"
 shorttitle        : "Modeling sonority with the Nucleus Attraction Principle"
 
 author: 
@@ -57,6 +57,7 @@ library("papaja")
 
 <!-- The double life of language systems: Modeling sonority with complementary symbol and signal based models -->
 <!-- modeling sonority with complementary models -->
+<!-- "Modeling sonority in terms of pitch intelligibility with top-down and bottom-up implementations of the Nucleus Attraction Principle" -->
 
 ```{r knitush, cache=FALSE,include=FALSE}
 # global chunk options
@@ -726,7 +727,7 @@ lexical *tone* in tone languages or the post-lexical *tune* in intonation system
 <!-- in all the known human languages.  -->
 We hypothesize that sonority is related to the strength and clarity of pitch perception, serving as a measure of *pitch intelligibility* that acts as a universal drive to optimize the pitch-bearing ability of syllabic units (see Section \@ref(sec:sonPitch)). 
 
-We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we propose a novel principle, the *Nucleus Attraction Principle* (NAP), that accounts for syllabic well-formedness based on general principles of competition in real-time (considering the extent to which the different portions of the speech signal are good candidates for the syllabic nucleus). 
+We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we propose a novel principle, the *Nucleus Attraction Principle* (NAP), that accounts for syllabic well-formedness based on general principles of competition in real-time (that is, the extent to which the different portions of the speech signal are good candidates for the syllabic nucleus). 
 We implement NAP with two complementary models (see Section \@ref(sec:modelimp)): (i) a bottom-up model that directly analyzes continuous acoustic signals; and (ii) a top-down model that is based on discrete units of consonants and vowels. 
 
 We present a series of syllable count tasks in Section \@ref(sec:experiments), 
