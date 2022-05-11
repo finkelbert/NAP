@@ -3,13 +3,24 @@ title             : "Modeling sonority in terms of pitch intelligibility with th
 shorttitle        : "Modeling sonority with the Nucleus Attraction Principle"
 
 author: 
-  - name          : "Anonymous"
+  - name          : "Aviad Albert"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Department of Linguistics---Phonetics, University of Cologne, Herbert-Lewin-Straße 6, 50931 Cologne, Germany"
+    email         : "a.albert@uni-koeln.de"
+  - name          : "Bruno Nicenboim"
+    affiliation   : "2,3"
 
 affiliation:
-  - institution   : "Affiliation"
+  - id            : "1"
+    institution   : "Department of Linguistics -- Phonetics, University of Cologne"
+  - id            : "2"
+    institution   : "Department of Cognitive Science and Artificial Intelligence, Tilburg University"
+  - id            : "3"
+    institution   : "Department of Linguistics, University of Potsdam"
 
 authornote: |
-  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were made available during the review process and will remain available (see anonymized link: https://tinyurl.com/5jxmjntx).
+  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were made available during the review process and will remain available (see link: https://osf.io/y477r/).
 
 abstract: |
   *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and 
@@ -829,7 +840,7 @@ Sequencing principles can be understood as a mapping scheme between the ranks of
 Modern formulations of such principles, which use the ordinal sonority hierarchy to generalize over the phonotactics of consonantal sequences in terms of *sonority slopes* were developed mainly throughout the 1970s and 1980s in seminal works such as @hooper1976introduction; @steriade1982greek; @selkirk1984majorsk; @harris1983syllablesk; @mohanan1986theory, and @clements1990role.
 <!-- [^cf-sequencingclassics] -->
 
-(ref:slopes-pl-lp) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *lpV*. The red line denotes the sonority slope of the onset cluster (i.e., the two onset consonants), while the grey line denotes the slope between the second consonant and the vowel at the nucleus position (always a rise in these cases). The angle of the red lines reflects the well-formed rising sonority slope of the onset cluster in *plV* and the ill-formed falling sonority slope of the onset cluster in *lpv*. Image taken from Anonymous (in press).
+(ref:slopes-pl-lp) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *lpV*. The red line denotes the sonority slope of the onset cluster (i.e., the two onset consonants), while the grey line denotes the slope between the second consonant and the vowel at the nucleus position (always a rise in these cases). The angle of the red lines reflects the well-formed rising sonority slope of the onset cluster in *plV* and the ill-formed falling sonority slope of the onset cluster in *lpv*. Image taken from @albertIPsonoritysk.
 ```{r slopes-pl-lp, fig.cap = "(ref:slopes-pl-lp)", fig.asp = .45, out.width = '100%', dev="cairo_pdf"}
 seg_type = c("Vowels","Glides","Liquids","Nasals","Voiced Fricatives","Voiced Stop", "Voiceless Fricatives","Voiceless Stops")
 seg_token = c("p","l","V","l","p","V") 
@@ -890,7 +901,7 @@ The *Minimum Sonority Distance* [MSD; @steriade1982greek; @selkirk1984majorsk] i
 
 [^cf-sdp]: The *Sonority Dispersion Principle* [SDP; @clements1990role; @clements1992sonority] is a slightly different yet related principle that prefers onset rises with a large distance and an equal dispersion of sonority index values across the consonantal sequence and the following vowel. The results of the SDP are highly contingent on the given sonority hierarchy and it is not very clear how to apply the SDP with onset sonority falls [among other problems listed in @parker2002quantifying 22--24]. The SDP is therefore not comparable as a model that can generate the full set of well-formedness predictions for onset clusters. Indeed, the SDP is mostly invoked in relation to the status of the onset versus the coda (not directly related to consonantal clusters), where it is used to highlight the assumption that onsets prefer to maximize sonority distance from the following nucleus while codas prefer to minimize sonority distance from the preceding nucleus.
 
-(ref:slopes-pl-bn) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *bnV* (the red solid line denotes the sonority slope of the onset clusters). The angle of the red lines reflects a steeper rise for *plV* (left) compared with *bnV* (right), due to the larger sonority distance between the consonants in *plV*. Image taken from Anonymous (in press).
+(ref:slopes-pl-bn) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *bnV* (the red solid line denotes the sonority slope of the onset clusters). The angle of the red lines reflects a steeper rise for *plV* (left) compared with *bnV* (right), due to the larger sonority distance between the consonants in *plV*. Image taken from @albertIPsonoritysk.
 ```{r slopes-pl-bn, fig.cap = "(ref:slopes-pl-bn)", fig.asp = .4, out.width = '100%', dev="cairo_pdf"}
 seg_type = c("Vowels","Glides","Liquids","Nasals","Voiced Fricatives","Voiced Stop", "Voiceless Fricatives","Voiceless Stops")
 seg_token = c("p","l","V","b","n","V") 
@@ -1050,7 +1061,7 @@ Nucleus competition, much like sonority slopes, has a limited impact on syllable
 
 ###     Schematic NAP sketches {#sec:NAPsketch}
 
-(ref:nap-depictions) Schematic depictions of competition scenarios with symbolic CCV structures. Nucleus competition can be understood as the competition between the blue and the purple areas under the sonority curve. The two examples in the top row---*plV* and *lpV*---suggest a replication of successful traditional predictions, while the three examples in the bottom row---*spV*, *sfV* and *nmV*---suggest a divergence from SSP-type models (see text for more details). Image taken from Anonymous (in press).
+(ref:nap-depictions) Schematic depictions of competition scenarios with symbolic CCV structures. Nucleus competition can be understood as the competition between the blue and the purple areas under the sonority curve. The two examples in the top row---*plV* and *lpV*---suggest a replication of successful traditional predictions, while the three examples in the bottom row---*spV*, *sfV* and *nmV*---suggest a divergence from SSP-type models (see text for more details). Image taken from @albertIPsonoritysk.
 ```{r nap-depictions, fig.cap = "(ref:nap-depictions)", out.width = '100%', fig.align = 'center'}
 
 knitr::include_graphics(rep(c("external_figures/napComb150.png")))
@@ -1613,8 +1624,8 @@ ggplot(subjects_heb, aes(x="", fill=subject_age)) +
 
 
 The exploratory pilot study consisted of 12 subjects (two males and ten females), all native German-speaking students from 
-a major German
-<!-- the Cologne  -->
+<!-- a major German -->
+the Cologne
 University of Applied Sciences, who volunteered to participate in the study. The experiment was administered in a quiet room at one of the campus buildings of the institution. The mean age of participants in the pilot study was 25 (21--30 range).
 
 ### Experiment 2
@@ -1658,7 +1669,10 @@ ggplot(subjects_main, aes(x="", fill=subject_education)) +
 
 Fifty-one native German speakers (who did not participate in the exploratory pilot study) participated in Experiment 2, of which `r length(which(subjects_main$subject_german_native=="monolingual"))` were monolingual (the `r length(which(subjects_main$subject_german_native=="multilingual"))` bilingual speakers had either Polish, Low German, or Hebrew as their heritage language). `r length(which(subjects_main$subject_handedness =="right-handed"))` participants were right-handed. See more details on age, gender and education of participants in Figure \@ref(fig:participantsGer).
 
-Of the 51 participants, 34 were students at a major German university who took part in the experiment at the sound-attenuated booth of the phonetics laboratory of the university. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation. 
+Of the 51 participants, 34 were students of 
+<!-- a major German university  -->
+the University of Cologne
+who took part in the experiment at the sound-attenuated booth of the phonetics laboratory of the university. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation. 
 
 We excluded the responses from one participant who failed in our participant inclusion criterion requiring accuracy of at least 75% with bi-vocalic fillers. The bi-vocalic fillers of the forms /CəCal/ and /əCCal/ link correct responses to the disyllabic choice ($'2'$), and we expect relatively few monosyllabic choices ($'1'$) in response to stimuli with two separate vowels. 
 Indeed, the overall average accuracy of all 51 participants, when responding to bi-vocalic filler stimuli, was 96%. The excluded participant achieved a much lower accuracy score for bi-vocalic fillers, almost approaching chance-level with 65%.
@@ -2734,18 +2748,18 @@ Lastly, this study also provides compelling motivations and strong evidence that
 (i) acoustic descriptions of prosodic weight and prosodic *prominence* in terms of periodic energy mass;
 (ii) automatic syllabification procedures based on the smoothed fluctuation rates of the periodic energy curve [useful for a myriad of tasks, including speech rhythmicity studies; see, e.g., @galves2002sonoritysk; @tilsen2013speech; @rasanen2018pre; @lin2020hit]; and
 (iii) improved visualization and analysis of pitch contours in intonation research based on the interaction of the periodic energy and the F0 trajectories 
-(see Anonymous 2018; Anonymous 2019; and Anonymous 2020 for continuous visualization and quantification procedures in intonational phonology using periodic energy).
-<!-- [see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy]. -->
+<!-- (see Anonymous 2018; Anonymous 2019; and Anonymous 2020 for continuous visualization and quantification procedures in intonational phonology using periodic energy). -->
+[see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy].
 
 <!-- Given the above, we believe that the new approaches presented in this paper will be able to deliver many more valuable insights into old and new problems in phonology and linguistic theory. -->
 
 <!-- --- -->
 
-<!-- # CRediT authorship contribution statement {-} -->
-<!-- **AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization.  -->
+# CRediT authorship contribution statement {-}
+**AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization.
 
-<!-- # Acknowledgements {-} -->
-<!-- This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language". -->
+# Acknowledgements {-}
+This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language" at the University of Cologne.
 
 <!-- # Note {-} -->
 <!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at -->

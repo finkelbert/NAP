@@ -76,11 +76,11 @@ Participants were instructed to respond quickly and accurately whether they hear
 A training session of ten trials preceded the experimental blocks, allowing the participants to familiarize themselves with the task, and allowing the experimenter to adjust listening volume and monitor potential problems and misunderstandings regarding the task.
 
 This study was carried out in accordance with the recommendations of the Local Ethics Committee 
-<!-- of the University of Cologne  -->
+of the University of Cologne
 with written informed consent from all subjects. The experiments complied with the June 1964 Declaration of Helsinki (carried out by the World Medical Association and entitled “Ethical Principles for Medical Research Involving Human Subjects”), as last revised.
-<!-- The ethics approval was obtained by the Principal Investigator (Prof. Dr. Martine Grice). -->
+The ethics approval was obtained by the Principal Investigator (Prof. Dr. Martine Grice).
 
 ## Supplementary Data  {-}
-Supplementary data to this article can be found online on *Open Science Framework* (OSF) at <https://tinyurl.com/5jxmjntx>.
+Supplementary data to this article can be found online on *Open Science Framework* (OSF) at <https://osf.io/y477r/>.
 
 ## References {-}
