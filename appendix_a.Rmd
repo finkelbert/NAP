@@ -1,9 +1,6 @@
-<!-- ## Complete output of the Bayesian models  {-} -->
-<!-- # Methods {#sec:methods} -->
 \label{appendix:a}
 
 ## Stimulus Considerations {-} 
-<!-- {#sec:considerationlist} -->
 
 The following list summarizes concerns that were taken into consideration when constructing the stimulus set (see full set in Table \@ref(tab:targetlist)):
 
@@ -22,16 +19,14 @@ Furthermore, note that all the stop-initial clusters (with the exclusion of *sto
 clusters while banning /ʃf/.
 
 ## Audio Recordings {-}
-<!-- {#sec:audio} -->
 
-Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker, AA, and a phonetically trained native German speaker, HN, in a sound-attenuated booth at the phonetics
-laboratory of the first author's university.
-<!-- University of Cologne.  -->
+Audio stimuli for the experiment were recorded by a phonetically trained native Hebrew speaker, AA, and a phonetically trained native German speaker, HN, in a sound-attenuated booth at the phonetics laboratory of the 
+<!-- first author's university. -->
+University of Cologne.
 Speech was recorded via a head-mounted headset condenser microphone (AKG C420), capturing mono digital audio files at a resolution of 44.1k Hz sample-rate and 24 bit depth with a *Metric Halo MIO 2882* audio interface. Selected audio takes were treated in the original high resolution for DC offset correction and compression of ultra low frequencies under 52 Hz (to compensate for some room reverberation effects). Audio was then downgraded from 24 to 16 bit depth with dithering (*Goodhertz Good Dither*) to be used in the perception task running on *OpenSesame* 3.1.9 [@mathot2012opensesame]. The audio that was submitted to analyses by the *APP Detector* (see *Obtaining Periodic Energy Data* below) was also downgraded in sample-rate to 16k Hz. Finally, all audio takes, at all resolutions, were normalized to the same RMS target of -20 dBFS (*dB Full Scale*).
 
 To record the stimuli, the combined 87 word-like stimuli (29 targets and 58 fillers) were embedded within carrier sentences in non-final position and produced with default declarative intonation in order to maintain consistent prosody. Carrier sentences were also designed to minimize potential effects of resyllabification as well as co-articulation by controlling the segmental makeup immediately preceding and following target words (see examples in (\@ref(ex:sentence1)--\@ref(ex:sentence2))). 
-The original sentence elicitation lists are available at the OSF repository in mixed Hebrew, German and phonemic transcripts in the form of slide presentations that were used in this self-paced task
-(see *Supplementary Data* below).
+The original sentence elicitation lists are available at the OSF repository in mixed Hebrew, German and phonemic transcripts in the form of slide presentations that were used in this self-paced task (see *Supplementary Data* below).
 
 \begin{exe}
 \ex \textbf{/ze maʁˈgiʃ \emph{CCal} kaˈʁe.ga/} (Hebrew: ʼit feels (like) \emph{CCal} at the momentʼ) \label{ex:sentence1}
@@ -39,7 +34,6 @@ The original sentence elicitation lists are available at the OSF repository in m
 \end{exe}
 
 ## Obtaining Periodic Energy Data {-}
-<!-- {#sec:obtaining} -->
 
 Continuous measurements of periodic energy from acoustic signals were extracted for the experiments using the *Aperiodicity, Periodicity and Pitch (APP) Detector*, a computer code that was introduced in @deshmukh2003detectionsk and developed in subsequent publications [@deshmukh2005use; @vishnubhotla2007detection]. 
 The APP Detector has the ability to measure the spectral distribution of periodic energy from digital audio files with a 16k Hz sample-rate, effectively measuring periodic energy up to 8k Hz.
@@ -61,15 +55,11 @@ Note that the periodic energy curve is smoothed further with Local Polynomial Re
 The codes of all the above processes are available in the OSF repository (see *Supplementary Data* below).
 
 ## Perception Task Details {-}
-<!-- {#sec:ptask} -->
 
 Recall that the experiments were designed as a forced-choice 2-alternative perception task, where accuracy and response time information were collected.
 To normalize response times, the countdown in each trial started in the middle of the transition from C~2~ to /a/, illustrated with the location of the dash in *(ə)C~1~(ə)**C~2~--a**l*. This zero time point was determined individually for each one of the 87 stimuli, capitalizing on the fact that all stimuli share the rime *al*, which is fully predictable in the context of the experiment, in contrast to the unpredictability of preceding material (the predictability of the *al* rime was assumed to become evident already in the training phase, before any data were collected for analysis). Manual segmentations conducted by the first author were used to determine this point for each target. Eventually, response times shorter than 100 ms (i.e., 100 ms after the zero point between C~2~ and /a/) were considered as too fast to be valid and were therefore excluded. This threshold led to only one observation being excluded from Experiment 2.
 
 Participants were seated in a quiet room in front of a laptop computer (a MacBook Air 13-inch, Early 2014) running the experiment on OpenSesame 3.1.9 [@mathot2012opensesame], where they listened to the stimuli through a set of closed headphones (Sennheiser HD 201), fed directly from the laptop's internal audio interface. After verifying that participants shared a standard understanding of the notion of the syllable with a few German or Hebrew examples of words with one and two syllables (e.g, German *See*, *Spaß*, *Quark*, *Angst* vs. *Schu-le*, *Kin-der*, *Bre-zel*, *Pflau-men*), they were instructed to listen to nonce words in an "unknown" foreign language. 
-<!-- Nonce words were used and a foreign language was mentioned in order to increase reliance on bottom-up processing in the task as much as possible. -->
-<!-- The meta-linguistic task may otherwise strongly have favoured top-down inferences. -->
-<!-- To that end, it was important to use recordings of a speaker with a foreign native language compared to the participants' L1. -->
 The German-speaking listeners in Experiments 1--2 heard speech recording of a native Hebrew speaker and the Hebrew-speaking listeners in Experiment 3 heard speech recording of a native German speaker in order to promote bottom-up inferences (see Subsection \@ref(sec:rationale)).
 
 Participants were instructed to respond quickly and accurately whether they heard one or two syllables by using their left and right index fingers to choose '1' or '2' at the location of the ‘F' (for '1') and ‘J' (for '2') keys on a QWERTY keyboard layout (relevant keys were covered with salient red-on-white ‘1' and ‘2' stickers).

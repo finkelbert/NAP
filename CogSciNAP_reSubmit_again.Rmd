@@ -66,10 +66,6 @@ keep_tex: yes
 library("papaja")
 ```
 
-<!-- The double life of language systems: Modeling sonority with complementary symbol and signal based models -->
-<!-- modeling sonority with complementary models -->
-<!-- "Modeling sonority in terms of pitch intelligibility with top-down and bottom-up implementations of the Nucleus Attraction Principle" -->
-
 ```{r knitush, cache=FALSE,include=FALSE}
 # global chunk options
 knitr::opts_chunk$set(cache=TRUE, autodep=TRUE,fig.path='figure/graphics-', fig.align='center')#, dev="cairo_pdf")
@@ -197,9 +193,6 @@ monosyl_info_AA <- filter(syl_info,
                        speaker == "AA")
 
 monosyl_info_AA$text[which(monosyl_info_AA$text=="c")] <- "ʃ"
-# monosyl_info_AA$text[which(monosyl_info_AA$text=="c")] <- "U+0283"
-# monosyl_info_AA$text[which(monosyl_info_AA$text=="c")] <- "\textesh"
-
 
 monosyl_info_AA$syl <- as.factor(monosyl_info_AA$syl)
 monosyl_info_AA <- mutate(group_by(monosyl_info_AA,syl),
@@ -228,9 +221,6 @@ monosyl_info_HN <- filter(syl_info,
                        speaker == "HN")
 
 monosyl_info_HN$text[which(monosyl_info_HN$text=="c")] <- "ʃ"
-# monosyl_info_HN$text[which(monosyl_info_HN$text=="c")] <- "U+0283"
-# monosyl_info_HN$text[which(monosyl_info_HN$text=="c")] <- "\textesh"
-
 
 monosyl_info_HN$syl <- as.factor(monosyl_info_HN$syl)
 monosyl_info_HN <- mutate(group_by(monosyl_info_HN,syl),
@@ -251,7 +241,6 @@ monosyl_info_HN <- mutate(group_by(monosyl_info_HN, syl),
                        x_com_syl = ifelse(t==round(com_syl,-1)&t<lead(t), com_syl, NA))
 
 ```
-
 
 <!-- ## Data analysis {#sec:datanlysis} -->
 
@@ -470,7 +459,7 @@ if(file.exists("data_tables/RDS/m_german.RDS")){
      m_german <- run_brms(data_german, iter=4000, warmup=2000)
      saveRDS(m_german, file = "data_tables/RDS//m_german.RDS")
  }
-# 
+ 
 ```
 
 ```{r loo-models, include=FALSE}
@@ -607,7 +596,7 @@ if(file.exists("data_tables/RDS/m_hebrew.RDS")){
      m_hebrew <- run_brms(data_hebrew, iter=4000, warmup=2000)
      saveRDS(m_hebrew, file = "data_tables/RDS//m_hebrew.RDS")
  }
-# 
+ 
 ```
 
 ```{r loo-models-heb, include=FALSE}
@@ -651,43 +640,6 @@ data_RT_heb <- data_hebrew_s %>%
     
 ```
 
-<!-- ```{r prepareParticipants, include=FALSE, fig.show="hide"}
-require(ggplot2) -->
-
-<!-- # READ dataframe Hebrew subjects -->
-<!-- partHeb_dir_tables <- "data_tables/confirmatory_results_Heb/" -->
-<!-- files <- list.files(path=partHeb_dir_tables, pattern="subject*") -->
-<!-- subjects_dfHeb <- plyr::ldply(files, function(f){ -->
-<!--   subject <- read.csv(paste0(partHeb_dir_tables,"//",f), nrows = 1, as.is = T) -->
-<!--   subject <- subset(subject,select = c(subject_nr, subject_age, subject_gender, subject_handedness, subject_education, subject_hebrew_native, subject_other_native_lang, subject_language_other)) -->
-<!--   subject -->
-<!-- }) -->
-
-<!-- #fix one missing input -->
-<!-- subjects_dfHeb$subject_education[subjects_dfHeb$subject_education=="None"] <- 2 -->
-
-<!-- #map numerals to choices -->
-<!-- subjects_dfHeb <- mutate(group_by(subjects_dfHeb, subject_nr), -->
-<!--                       subject_age = ifelse(subject_age==1, "40-59", ifelse(subject_age==2, "30-39", ifelse(subject_age==3, "19-29", "13-18"))), -->
-<!--                       subject_gender = ifelse(subject_gender==2, "male", ifelse(subject_gender=="1", "female", "other")), -->
-<!--                       subject_handedness = ifelse(subject_handedness==0, "left-handed", "right-handed"), -->
-<!--                       subject_education = ifelse(subject_education==0, "graduate", ifelse(subject_education==1, "undergrad", ifelse(subject_education==2, "high-school", "elementry"))), -->
-<!--                       subject_hebrew_native = ifelse(subject_hebrew_native==1, "multilingual", "monolingual") -->
-<!--                       ) -->
-
-<!-- #change to factors -->
-<!-- subjects_dfHeb$subject_nr <- as.factor(subjects_dfHeb$subject_nr) -->
-<!-- subjects_dfHeb$subject_age <- as.factor(subjects_dfHeb$subject_age) -->
-<!-- subjects_dfHeb$subject_gender <- as.factor(subjects_dfHeb$subject_gender) -->
-<!-- subjects_dfHeb$subject_handedness <- as.factor(subjects_dfHeb$subject_handedness) -->
-<!-- subjects_dfHeb$subject_education <- as.factor(subjects_dfHeb$subject_education) -->
-<!-- subjects_dfHeb$subject_hebrew_native <- as.factor(subjects_dfHeb$subject_hebrew_native) -->
-
-<!-- ## Write the main data file -->
-<!-- write.csv(subjects_dfHeb, "data_tables/subjects/subjects_heb.csv") -->
-
-<!-- ``` -->
-
 <!-- participantsStuff -->
 ```{r participantsRead, include=FALSE}
 
@@ -711,31 +663,16 @@ subjects_heb$subject_education <- as.factor(subjects_heb$subject_education)
 
 ```
 
-
 # Introduction
 
-<!-- ## tmp {-} -->
 The following work models the contribution of *sonority* to phonology in a manner that attempts to be compatible with general auditory perception and cognition, as well as with linguistic theory. This is in contrast to many of the traditional formal principles in linguistic theory that do not tend to specify how they interact with general systems of human capacity, such as auditory perception or sensorimotor control. Traditional linguistic principles are mostly generalizations that explain linguistic typologies as they have been depicted in writing systems. 
 
 The prevailing sonority-related principles such as the *Sonority Sequencing Principle* (SSP) and its derivatives are, indeed, generalizations of the latter type.
 Our novel proposals in this study achieve a better empirical coverage compared to different versions of the SSP that we test in a set of perception tasks, while, at the same time, provide a more comprehensive explanation than common formal linguistic principles to the notion of sonority in phonology and phonetics.
 
-We assume here that a proper model of speech perception involves a bottom-up route and a related, yet separate, top-down route. While both inference routes are capable of selecting between discrete alternatives 
-<!-- as the goal of their process  -->
-(e.g., selecting different consonants or syllabic parses), they arrive there in two very different ways: bottom-up processes are based on continuous events and top-down processes are based on existing sets of symbolic entities. In that sense, top-down models are more reminiscent of traditional formal principles in phonology that, more often than not, cover processes that start and end with discrete symbols.
+We assume here that a proper model of speech perception involves a bottom-up route and a related, yet separate, top-down route. While both inference routes are capable of selecting between discrete alternatives (e.g., selecting different consonants or syllabic parses), they arrive there in two very different ways: bottom-up processes are based on continuous events and top-down processes are based on existing sets of symbolic entities. In that sense, top-down models are more reminiscent of traditional formal principles in phonology that, more often than not, cover processes that start and end with discrete symbols.
 
-<!-- This needs to MOVE -->
-<!-- As two complementary inference routes, the top-down and bottom-up modes should not be considered equal. The bottom-up route is the source of learned linguistic distinctions, it is functionally motivated by the laws of physics and the limitations of the perceptual and cognitive systems of the communicating agents. In contrast, the top-down route is based on linguistic experience and superficial inferences that reflect the history of the symbols in the system (i.e., the distributional probabilities of recurring patterns). In other words, top-down inferences reflect functionally motivated behaviors only indirectly, as the outcome of learning the superficial expressions of functionally-motivated (bottom-up) dynamics. -->
-<!-- UP TO HERE -->
-
-Sonority in our account is strongly related to pitch perception and the major role of pitch in all language systems.
-Pitch in speech is
-mediated by syllable-size units, 
-regardless of
-its role as the
-<!-- whether it is  -->
-lexical *tone* in tone languages or the post-lexical *tune* in intonation systems. 
-<!-- in all the known human languages.  -->
+Sonority in our account is strongly related to pitch perception and the major role of pitch in all language systems. Pitch in speech is mediated by syllable-size units, regardless of its role as the lexical *tone* in tone languages or the post-lexical *tune* in intonation systems. 
 We hypothesize that sonority is related to the strength and clarity of pitch perception, serving as a measure of *pitch intelligibility* that acts as a universal drive to optimize the pitch-bearing ability of syllabic units (see Section \@ref(sec:sonPitch)). 
 
 We suggest a measurable acoustic correlate for sonority in terms of *periodic energy*, and we propose a novel principle, the *Nucleus Attraction Principle* (NAP), that accounts for syllabic well-formedness based on general principles of competition in real-time (that is, the extent to which the different portions of the speech signal are good candidates for the syllabic nucleus). 
@@ -745,21 +682,15 @@ We present a series of syllable count tasks in Section \@ref(sec:experiments),
 designed in order to test our two NAP-based models (applying NAP with bottom-up and top-down approaches) against four traditional sonority models, considering two types of common sonority hierarchies combined with two types of common sonority principles---the *Sonority Sequencing Principle* (SSP) and the *Minimum Sonority Distance* (MSD).
 
 We use a Bayesian data analysis approach to test and compare the six different sonority models. Whereas all the different models are found to be capable of predicting the experimental results to a good extent, the symbolic top-down version of NAP is shown to be the superior model. The bottom-up model of NAP comes in second alongside a few of the traditional models. 
-We consider this to be a very good performance of the bottom-up model, which is based solely on continuous acoustic signals and still has many potential paths for improvement 
-(e.g., better digital signal processing and improved procedures to estimate competition).
-<!-- (e.g., by changing the digital signal processing used to analyze periodic energy and/or by improving the procedures used to estimate well-formedness). -->
+We consider this to be a very good performance of the bottom-up model, which is based solely on continuous acoustic signals and still has many potential paths for improvement (e.g., better digital signal processing and improved procedures to estimate competition).
 Interestingly, some of the results suggest a relatively high degree of complementarity between the two NAP models, even though they represent the same principle. This is a desirable result for our framework, which advocates the need for two complementary models to account for both dynamic and symbolic processes.
 
 Our set of proposals has many advantages over traditional sonority accounts, including methodological aspects, theoretical perspectives, and, essentially, a better empirical coverage (see Subsection \@ref(sec:discussionResults) for a summary of the experimental results). 
-<!-- In Subsection \@ref(sec:discussionResults) we interpret the results of the confirmatory experiments and in -->
 Some of the major implications of this study are adderessed in Section \@ref(sec:genDiscussion), where we discuss the division of labor between sonority and other phonotactic factors, demonstrated with a holistic account of the phenomenon of */s/-stop clusters* (Subsection \@ref(sec:division)). 
 We also discuss the contribution of this work to previous theoretical efforts to incorporate continuous entities in phonology (Subsection \@ref(sec:lingMod)).
 Finally, we discuss the debate on the universality of sonority in light of our work (Subsection \@ref(sec:projection)), before we present our conclusions in Section \@ref(sec:conclusions).
 
 In the remainder of this Introduction, we briefly present the relevant background on traditional sonority hierarchies and principles, to cover the basics of their rationale and common application.
-<!-- , and on the tension between discrete and symbolic entities on the one hand, and continous dynamic events on the other hand, in liguistic models of phonology (Subsection \@ref(sec:lingMod)). -->
-
-<!-- emphasizing their rationale, their application, and their inherent flaws (Subsections \@ref(sec:hierarchies)-\@ref(sec:failures)).  -->
 
 ## Sonority Background {#sec:sonback}
 
@@ -770,16 +701,12 @@ While the phonetic basis of sonority hierarchies remains controversial, phonolog
 the relatively high frequency of stop-liquid sequences in the onset of complex syllables (e.g., /kl/ in the English word ***cl**ean*) 
 as well as the opposite liquid-stop sequences in the mirror-image coda position of complex syllables (e.g., /lk/ in the English word *mi**lk***),
 against the very low frequency of the opposite scenarios, which posit /lk/ in complex onsets and /kl/ in complex codas.
-<!-- the relatively high frequency of stop-liquid sequences in the onset of complex syllables (e.g., /kl/ in the English word ***cl**ean*)  -->
-<!-- against -->
-<!-- the rarity of the opposite liquid-stop sequences in onset positions, but not in the mirror-image coda position of syllables (e.g., /lk/ in the English word *mi**lk***).  -->
 
 [^cf-debrosses]: @ohala1992alternatives goes even further back to @debrosses1765traite.
 
 Although there are many different proposals for sonority hierarchies [@parker2002quantifying found more than 100 distinct sonority hierarchies in the literature], a very basic hierarchy that seems to reach a considerable consensus, and is often cited in relation to Clements's [-@clements1990role] seminal paper is given in (\@ref(ex:scale)).[^cf-liquid]
 
 [^cf-liquid]: The group of *liquids* is the most loosely defined, as it includes both lateral *approximants* (namely /l/) and various types of rhotics such as *trills* (/r,ʀ,ʁ/), *taps* (namely /ɾ/), and alveolar and retroflex approximants (/ɹ,ɻ/). 
-<!-- In this paper we only consider the lateral approximant /l/ as the relatively more stable and common token of this varied liquid type. -->
 
 \begin{exe} 
 \ex \emph{Obstruents} $<$ \emph{Nasals} $<$ \emph{Liquids} $<$ \emph{Glides} $<$ \emph{Vowels}  \label{ex:scale} 
@@ -787,11 +714,6 @@ Although there are many different proposals for sonority hierarchies [@parker200
 
 The ordering of different speech sounds along the sonority hierarchy is assumed to be universal, in line with the common assumption that sonority has a phonetic basis in perception and/or articulation, yet the patterning of segmental classes as distinct groups along the scale is considered to be language-specific, i.e., based on phonological categorization. 
 For example, voiceless *stops* may be considered universally lower than voiced *fricatives* on the sonority hierarchy, yet for some languages and analyses the relevant patterning of stpos and fricatives along the sonority hierarchy may consider them together as belonging to the same general class of *obstruents*.
-<!-- they may  -->
-<!-- belong to the same general -->
-<!-- <!-- constitute a single  --> 
-<!-- level of *obstruents* -->
-<!-- in how they pattern along the sonority scale.  -->
 Classes along the sonority hierarchy are most commonly modeled as a series of integers (often referred to as sonority indices) reflecting the ordinal nature of phonological interpretations of the sonority hierarchy. 
 
 (ref:hierarchy-caption) (\#tab:hierarchy) Traditional phonological sonority hierarchies
@@ -827,10 +749,7 @@ Classes along the sonority hierarchy are most commonly modeled as a series of in
 The main differences that result from variation of the basic hierarchy in (\@ref(ex:scale)) concern the class of obstruents, which may contain voiced and voiceless variants of stops and fricatives (to mention just the most prominent distinctions).
 Note that vowels are often also commonly divided into subgroups along the sonority hierarchy [see @gordon2012sonority], but these distinctions will be irrelevant in the context of this paper.
 It is therefore not uncommon to expand the class of obstruents, whereby stops are lower than fricatives and voiceless consonants are lower than voiced ones.
-<!-- [^cf-ranking] -->
-<!-- [^cf-ranking]:  -->
-Also note that the ranking of voiceless fricatives in relation to voiced stops may be disputed, 
-depending on whether manner distinctions or voicing distinctions take precedence. The version we adopt here is in line with @parker2008sound in suggesting that voicing distinctions take precedence. In any case, these differences are not assumed to bear any crucial consequences on the results of this study.
+Also note that the ranking of voiceless fricatives in relation to voiced stops may be disputed, depending on whether manner distinctions or voicing distinctions take precedence. The version we adopt here is in line with @parker2008sound in suggesting that voicing distinctions take precedence. In any case, these differences are not assumed to bear any crucial consequences on the results of this study.
 
 The two variants of the sonority index values given in Table \@ref(tab:hierarchy) reflect two ends of a spectrum of common sonority hierarchies, ranging from hierarchies that collapse all obstruents together into a single class (resulting in the same sonority index value for all obstruents), to hierarchies that expand the class of obstruents by employing voicing distinctions as well as distinctions between stops and fricatives (resulting in multiple sonority index values within the class of obstruents). In what follows we will refer to these two versions of the sonority hierarchy as *H~col~* for the sonority hierarchy with a single collapsed class of obstruents, and *H~exp~* for the sonority hierarchy that exhibits multiple subclasses based on the  expanded class of obstruents.
 
@@ -838,7 +757,6 @@ The two variants of the sonority index values given in Table \@ref(tab:hierarchy
 
 Sequencing principles can be understood as a mapping scheme between the ranks of a sonority hierarchy and the linear order of symbolic speech segments.
 Modern formulations of such principles, which use the ordinal sonority hierarchy to generalize over the phonotactics of consonantal sequences in terms of *sonority slopes* were developed mainly throughout the 1970s and 1980s in seminal works such as @hooper1976introduction; @steriade1982greek; @selkirk1984majorsk; @harris1983syllablesk; @mohanan1986theory, and @clements1990role.
-<!-- [^cf-sequencingclassics] -->
 
 (ref:slopes-pl-lp) Schematic depiction of the sonority slopes of two onset clusters, *plV* and *lpV*. The red line denotes the sonority slope of the onset cluster (i.e., the two onset consonants), while the grey line denotes the slope between the second consonant and the vowel at the nucleus position (always a rise in these cases). The angle of the red lines reflects the well-formed rising sonority slope of the onset cluster in *plV* and the ill-formed falling sonority slope of the onset cluster in *lpv*. Image taken from @albertIPsonoritysk.
 ```{r slopes-pl-lp, fig.cap = "(ref:slopes-pl-lp)", fig.asp = .45, out.width = '100%', dev="cairo_pdf"}
@@ -883,18 +801,8 @@ tribble(~x , ~y, ~line,
   slopes_plot()
 ```
 
-The most basic and widely used sonority-based principle that employs sonority slopes to derive phonotactic predictions in terms of syllabic well-formedness is the *Sonority Sequencing Principle* (SSP). The SSP is a simple yet powerful generalization that has been used in countless theoretical accounts. 
-The SSP assumes that sequences of segments within syllables preferably rise towards the nucleus of the syllable, 
-where sonority is expected to reach the local maximum.
-<!-- where the sonority maxima  -->
-<!-- where the peak  -->
-<!-- which contains the local peak of maximum sonority. -->
-<!-- The SSP identifies three distinct types of sonority slopes---*rises*, *falls*, and *plateaus*--- -->
-<!-- and assumes that  -->
-<!-- such that  -->
-<!-- Thus,  -->
-Consequently,
-sequences of segments should preferably rise in sonority from the consonant(s) in the syllabic onset to the syllable's nucleus (most often a vowel) and fall from the nucleus to the consonant(s) in the syllabic coda. 
+The most basic and widely used sonority-based principle that employs sonority slopes to derive phonotactic predictions in terms of syllabic well-formedness is the *Sonority Sequencing Principle* (SSP). The SSP is a simple yet powerful generalization that has been used in countless theoretical accounts. The SSP assumes that sequences of segments within syllables preferably rise towards the nucleus of the syllable, where sonority is expected to reach the local maximum.
+Consequently, sequences of segments should preferably rise in sonority from the consonant(s) in the syllabic onset to the syllable's nucleus (most often a vowel) and fall from the nucleus to the consonant(s) in the syllabic coda. 
 In this paper we focus on syllable-initial onset consonant clusters that precede a vowel, whereby a rising sonority slope (e.g., *plV*) is considered well-formed and a falling sonority slope (e.g., *lpV*) is considered ill-formed. Sonority plateaus (e.g., *pkV*) fare in between, giving way to various interpretations depending on the language and analysis. As such, plateaus may be considered as ill- or well-formed [e.g., @blevins1995syllable], although they are generally interpreted as denoting a third, mid-level of well-formedness.
 
 The *Minimum Sonority Distance* [MSD; @steriade1982greek; @selkirk1984majorsk] is a well-known elaboration on the preferred angle of sonority slopes compared to basic applications of the SSP, given that the SSP makes no distinction between different angles of rising or falling slopes. The MSD was designed to prefer onset rises with steep slopes over onset rises with shallow slopes, under the assumption that consonantal sequences in the onset are preferred with a larger sonority distance between them. For instance, *plV* has a steeper rise compared to *bnV* and it is therefore better-formed according to the MSD (see Figure \@ref(fig:slopes-pl-bn)).[^cf-sdp] 
@@ -948,13 +856,9 @@ The observation that sonority summarizes an essential quality that is related to
 
 [^cf-list]: A partial list of some prominent examples includes @sigurd1955rank; @jakobson1956fundamentals; @chomsky1968spesk; @foley1972rule; @ladefoged1971preliminaries; @allen1973accentsk; @fujimura1975syllable; @Donegan1978onthenatural; @ultan1978typological; @price1980sonority; @lindblom1983production; @anderson1986suprasegmental; @vennemann1988preferencesk; @levitt1991syllable; @pierrehumbert1992lenition; @fujimura1997acoustic; @stemberger1997handbook; @boersma1998functional; @zhang2001effects; @howe2004harmonic; @clements2009does; @sharma2018significance.
 
-Pitch is an indispensable communicative dimension of all linguistic sound systems [@pike1945intonationsk; @bolinger1978intonation; @house1990tonal; @cutler1997prosody], 
-<!-- @roettger2019tune -->
-whether it is lexically determined as in linguistic tone, 
+Pitch is an indispensable communicative dimension of all linguistic sound systems [@pike1945intonationsk; @bolinger1978intonation; @house1990tonal; @cutler1997prosody], whether it is lexically determined as in linguistic tone, 
 or post-lexically employed to convey intonation, i.e., the linguistic tune [see typological accounts of prosodic systems in @jun2005prosodicsk; @jun2015prosodicsk]. 
-Tones are used to distinguish lexical items while tunes are used to demarcate units,
-<!-- as well as  -->
-to modulate semantics (e.g., information structure and sentence modality) and to
+Tones are used to distinguish lexical items while tunes are used to demarcate units, to modulate semantics (e.g., information structure and sentence modality) and to
 express a vast array of non-propositional meanings (e.g., discourse-pragmatic intention, emotional state, socio-indexical identity, and attitudinal stance). The importance of pitch to human communication cannot be overstated [or in the words of @pike1945intonationsk 20: "There are no pitchless sentences"].
 
 Crucially, linguistic pitch events are known to target syllable-sized units as their "docking site", regardless of the type of pitch event, whether they are lexical tones or post-lexical tunes. 
@@ -979,31 +883,24 @@ Using acoustics to cover auditory psychophysical phenomena is not a straightforw
 This task is potentially complicated further with a complex phenomenon like pitch, which is sensitive to various aspects of the rich acoustic signal as well as to our top-down expectations with regards to learned regularities of pitch behavior [e.g., @houtsma1995pitch; @shepard2001pitch; @moore2013anintro 203-243; @mcpherson2018diversity].  
 
 Fortunately, there are strong links between pitch and acoustic markers given the important role of periodicity in pitch. This is well-known from the extensive use of acoustic F0 measurements to estimate perceived pitch height, based on periodicities in the signal, using techniques such as autocorrelation  [e.g., @boersma1993accurate]. 
-<!-- Furthermore, pitch estimations from F0 measurements can become more reliable when dealing with specific types of audio such as speech, as in this case the bulk of pitch information comes from a single source (i.e., one speaker) within a limited range of fundamental frequencies (mostly between 75--400 Hz, rarely below 50Hz or above 600Hz). -->
 To estimate perceived pitch intelligibility from acoustic signals, we need to obtain a measure of periodic energy, which is a measurement of the acoustic power of periodic components in the signal. It may be helpful to think of this as a measurement of general intensity that excludes the contribution of aperiodic noise and transient bursts.
-<!-- Measurements of periodic energy are not very different from widely-used F0 measurements that are commonly based on the ability to detect periodic components in the complex signal. Roughly speaking, rather than resolving the harmonic denominator of detected periodic components in order to estimate F0, a periodic energy meter needs to sum over their power. -->
 
 To conclude, our ability to detect periodicity in acoustic signals allows us to extract good estimates of F0 and periodic energy from speech data. We stand on firm grounds when we map these acoustic markers to perception in terms of pitch height and pitch intelligibility (respectively).
 Given a causal link between perceived pitch height and linguistic tone and intonation contours, it is reasonable and, indeed, commonplace, to assume by transitivity that acoustic F0 maintains a causal link to linguistic tone and intonation.
 Likewise, given a causal link between perceived pitch intelligibility and linguistic sonority, it should be reasonable to assume by transitivity that acoustic periodic energy maintains a causal link with the linguistic notion of sonority.  
 
 ##   The Problem of Intensity-Based Accounts {#sec:correlusions}
-<!-- ##   Sonority "correlusions"  {#sec:correlusions} -->
 
 Although no strong consensus has ever been reached with respect to the phonetic basis of sonority, acoustic *intensity* is perhaps the most widely assumed correlate of linguistic sonority. This is evident from the many influential studies on sonority that consider acoustic intensity as its phonetic correlate [e.g., @sievers1893grundzugesk; @heffner1969generalsk; @ladefoged1975acourse; @clements1990role; @blevins1995syllable; @parker2008sound; and @gordon2012sonority, to name just a few prominent examples].[^cf-parkerIntensity]
 
 [^cf-parkerIntensity]: In his overview of existing literature, @parker2002quantifying found close to 100 different proposals for correlates of sonority in the literature, and he tested five leading proposals in laboratory conditions: *intensity*, *intraoral air pressure*, *F~1~ frequency*, *total air flow*, and *duration*. In his study, the tightest correlations with sonority classes were obtained for acoustic intensity measurements, a conclusion that was repeated and elaborated upon in @parker2008sound. 
 
 The main problem with intensity-based accounts is related to the distinction between causation and correlation. 
-<!-- It is possible to find acoustic markers that correlate with some linguistic phenomenon. A discovery of this kind is valuable, but to advance our knowledge further we would also need to know if the correlation between the linguistic phenomenon and our acoustic marker of choice can be characterized in terms of causation.  -->
-Establishing causation from acoustic signals necessitates a theory that can reliably map acoustic markers to operations or processes in sensorimotor speech articulation and/or auditory speech perception. The problem with accounts that are based on acoustic intensity is that 
-causation cannot be established given that
-the physical intensity of the acoustic signal does not consistently map to any aspect of human auditory perception, not even perceived loudness. 
+Establishing causation from acoustic signals necessitates a theory that can reliably map acoustic markers to operations or processes in sensorimotor speech articulation and/or auditory speech perception. The problem with accounts that are based on acoustic intensity is that causation cannot be established given that the physical intensity of the acoustic signal does not consistently map to any aspect of human auditory perception, not even perceived loudness. 
 
 ###  Acoustic intensity $≠$ perceived loudness {#sec:intensity}
 
-The acoustic signal has certain physical qualities contributing to its overall power, but they have different effects on the perceptual system of the human hearer. This discrepancy between acoustic intensity and perceived loudness is a well-known problem, playing a role at different dimensions of the mapping between acoustics and perception.
-The prominent points of departure between acoustic intensity and perceived loudness include
+The acoustic signal has certain physical qualities contributing to its overall power, but they have different effects on the perceptual system of the human hearer. This discrepancy between acoustic intensity and perceived loudness is a well-known problem, playing a role at different dimensions of the mapping between acoustics and perception. The prominent points of departure between acoustic intensity and perceived loudness include
 the following:
 (i) loudness perception differs for sine waves with the same intensity level at different frequencies [e.g., @fletcher1933loudness; @plack1995loudness; @suzuki2004equal];
 (ii) loudness perception differs for comparable sounds at different durations [e.g., @turk1996processing; @seshadri2009perceived; @olsen2010loudness; @moore2013anintro 143];
@@ -1019,21 +916,13 @@ The systematic differences in intensity of adjacent speech sounds imply that the
 The literature on perceived loudness supports this assumption given that speech portions with relatively low acoustic intensity, like voiceless fricatives, appear in speech next to portions with relatively high acoustic intensity, like vowels.
 Our auditory system perceives the aperiodic high-mid frequencies of many obstruents as exceptionally loud compared to the periodic low-mid frequency ranges of vowel sounds, thus compensating in perception for physical differences in acoustic intensity.
 
-Given the above, we should anticipate that perceived loudness will not be a good candidate for the acoustic correlate of sonority hierarchies, as a measure of perceived loudness would bring 
-the different speech sounds closer together on its scale, essentially diminishing the distinctions provided by the differences in acoustic intensity (which is typically stronger for vocalic speech sounds).
-<!-- all speech sounds closer together by diminishing the distinctions provided by acoustic intensity.  -->
+Given the above, we should anticipate that perceived loudness will not be a good candidate for the acoustic correlate of sonority hierarchies, as a measure of perceived loudness would bring the different speech sounds closer together on its scale, essentially diminishing the distinctions provided by the differences in acoustic intensity (which is typically stronger for vocalic speech sounds).
 Indeed, although good approximations of perceived loudness from acoustic signals are available [e.g., @seshadri2009perceived; @skovenborg2012loudnesssk; @lund2014loudnesssk; @itu2015algorithmssk], we are not aware of any attempts to employ such measures for sonority.[^cf-equal]
 
 [^cf-equal]: Note that terms like "loudness" may be used to mean different things by different authors. For example, @arrabothu2015usingsk extracts acoustic measurements that are designed to reflect the "impulse-like excitation" of voiced speech sounds (following @seshadri2009perceived). @arrabothu2015usingsk refers to these measurements as "loudness of speech" under the assumption that vowels are louder than voiceless sounds, an assumption which is derived in large part from the classic literature on sonority.
-<!-- An anonymous reviewer noted the work of @arrabothu2015usingsk, which extracts acoustic measurements that are designed to reflect the "impulse-like excitation" of voiced speech sounds [following @seshadri2009perceived]. The author in this work refers to these measurements as "loudness of speech" under the assumption that vowels are louder than voiceless sounds, an assumption which is derived in large part from the classic literature on sonority.  -->
-<!-- [^cf-equal]: An anonymous reviewer noted the work of @arrabothu2015usingsk, which follows @seshadri2009perceived in extracting acoustic measurements that are designed to reflect the "impulse-like excitation" of voiced speech sounds. The authors in these works refer to perceived loudness of speech under the assumption that differences in speech loudness are most apparent at voclaic portions [@seshadri2009perceived], or that vowels are louder than voiceless sounds, as the literature on sonority has been often claiming [@arrabothu2015usingsk].  -->
 
 Rather than attempting to map acoustic intensity to perception in terms of perceived loudness, prominent studies that successfully use intensity-based measures as correlates of sonority and syllabicity [e.g., @Pfitzinger1996syllablesk; @fant2000source; @tilsen2013speech; @rasanen2018pre] tend to enhance the discrepancy between intensity and loudness by dicriminating in favor of low frequency bands (where most of the energy of vocalic elements is found) and against high-mid bands (where most of the energy of obstruents is found). 
-<!-- Instead of attempts to map acoustic intensity to perception in terms of perceived loudness, most successful endeavors that use intensity-based measures as correlates of sonority do so by essentially enhancing the intensity-loudness discrepancy. Certain frequency bands are targeted to---roughly speaking---discriminate against energy at the higher frequencies (which are more characteristic of obstruents) in favor of energy at low-mid ranges of the spectrum (which are more characteristic of sonorants and particularly vowels).[^cf-discriminators]  -->
-<!-- [e.g., @Pfitzinger1996syllablesk; @port1996dynamic; @fant2000source; @galves2002sonoritysk; @wang2007robust; @tilsen2013speech; @patha2016syllablesk; @nakajima2017english; @rasanen2018pre].  -->
 The signal manipulation behind such metrics is not typically based on grounds of general auditory perception. However, they are often tightly linked to the perceptual quality that is identified with sonority in this work---the capacity to perceive pitch.
-
-<!-- [^cf-discriminators]: For example, @Pfitzinger1996syllablesk; @port1996dynamic; @fant2000source; @galves2002sonoritysk; @wang2007robust; @tilsen2013speech; @patha2016syllablesk; @nakajima2017english; and @rasanen2018pre. -->
 
 ##      The Nucleus Attraction Principle {#sec:nap}
 
@@ -1045,7 +934,6 @@ In fact, by modeling the link between sonority and the syllabic nucleus in dynam
 [^cf-attraction]: This notion of prosodic *attraction* is, in fact, well-established in phonological theory, with descriptions of *weight sensitivity* in the stress systems of many unrelated languages, in which the stress is said to be attracted to heavy syllables.
 Heaviness is mainly the product of a longer vowel in the nucleus, and in some languages heaviness may also result from a (preferably sonorant) consonant in the coda [e.g., @mccarthy1979formalsk; @hayes1980metrical; @prince1990quantitative; @gordon2006syllableweight]. There are also analyses in which vowel qualities that are considered more sonorous can contribute to heaviness and attract the stress [@zec1995sonority; @zec2003prosodic; @kenstowicz1997quality; @delacy2002formal; @gordon2012sonority].
 Viewed with NAP in mind, attraction of stress in weight sensitive systems is simply the special case of a regular procedure, whereby weight---i.e., sonority---attracts syllabic nuclei. 
-<!-- Crucially, NAP treats the postulated link between sonority peaks and syllabic nuclei as the result of a perceptual-cognitive process in real time, rather than describing a geometric state of affairs with symbolic discrete tools.  -->
 
 It is important to note that the informativeness of NAP-based models is not derived from identifying the winner of the nucleus competition, but from quantifying the degree of competition within different portions of speech that stand for potential syllabic parses. 
 NAP-based models can analyze speech parts that are parsed together as a single syllabic unit in order to estimate the degree of competition they give rise to when they compete for a single nucleus. 
@@ -1054,9 +942,6 @@ Either way, the higher the degree of internal competition, the more ill-formed a
 To simplify this further with respect to the subset of instances discussed in this work (i.e., syllables with complex consonantal onset clusters), it is possible to say that the winner of the nucleus competition is always the only vowel in the structure. The determination of ill-formedness in these cases is based on quantifying the amount of competition that the winning vowel has to withstand given different consonantal clusters in the onset of the same syllable.
 
 It should be also useful to note that we do not expect serious competition to arise from a consonant adjacent to the vowel in the same syllable.
-<!-- , such that in a C~1~C~2~V syllable only C~1~ is considered to be the potential competitor to V. The consonant in C~2~ position has a crucial impact on the competing potential of C~1~ but it is not, in and of itself, a competitor in the data presented in this study (we should mostly expect glides to be able to compete for the nucleus from the vowel-adjacent C~2~ position). -->
-<!-- To elucidate this point, consider the case of simple CV syllables. Here, sonority levels are expected to rise from C to V continuously, with no competition for the nucleus. -->
-<!-- , with no discontinuities between them, such that no competition for the nucleus transpires. -->
 Nucleus competition, much like sonority slopes, has a limited impact on syllables with simple onsets or codas, **C**V(C) or (C)V**C**. Principles like SSP and NAP play a role chiefly when sequences of consonants are syllabified within a single syllable as complex onset or coda clusters, **CC**V(C) or (C)V**CC**. The phonotactics of these possible consonantal sequences are determined to a large extent by sonority principles. We interpret this aspect of cluster phonotactics such that sequences within syllables are avoided the more they increase the potential competition for the nucleus in the process of syllabifying/parsing the stream of speech.
 
 ###     Schematic NAP sketches {#sec:NAPsketch}
@@ -1076,76 +961,52 @@ Consider for example the pair *plV* and *lpV*, with schematic NAP-related depict
 Likewise, a consonantal onset cluster with an ill-formed falling sonority slope like *lpV* should be also considered ill-formed under NAP due to the strong potential for competition between the marginal sonorous onset consonant /l/ and the non-adjacent vowel, especially given the intervening /p/ that leads to discontinuity in the sonority trajectory between /l/ and V, which contributes to the formation of a bimodal distribution of energy with two clear (competing) peaks.
 
 Unlike the examples above, where the rationale of NAP is expected to replicate successful predictions of the SSP with cases like *plV* and *lpV*, NAP is expected to diverge from traditional sonority sequencing principles in 
-some cases, as illustrated by
-<!-- those cases where traditional principles consistently fail.  -->
-<!-- Consider -->
-the examples in the bottom row of Figure \@ref(fig:nap-depictions). Under NAP, neither */s/-stop* clusters with an ill-formed falling sonority like *spV* nor voiceless obstruent plateaus like *sfV* are expected to incur a strong competition syllable-internally (hence, they are in fact well-formed) due to the low potential for competition between the minimally-sonorous onset consonant /s/ and the non-adjacent vowel that wins the competition. Here, the intervening voiceless obstruents /p,f/ retain a minimally sonorous trajectory throughout the whole onset, which contributes to the formation of only low-level peaks, or *shelves* (see blue portions), that are barely enough to compete with a vowel (purple portions).
+some cases, as illustrated by the examples in the bottom row of Figure \@ref(fig:nap-depictions). Under NAP, neither */s/-stop* clusters with an ill-formed falling sonority like *spV* nor voiceless obstruent plateaus like *sfV* are expected to incur a strong competition syllable-internally (hence, they are in fact well-formed) due to the low potential for competition between the minimally-sonorous onset consonant /s/ and the non-adjacent vowel that wins the competition. Here, the intervening voiceless obstruents /p,f/ retain a minimally sonorous trajectory throughout the whole onset, which contributes to the formation of only low-level peaks, or *shelves* (see blue portions), that are barely enough to compete with a vowel (purple portions).
 At the same time, a relatively strong competition potential (i.e., worse-formed syllable) is predicted under NAP for nasal plateaus like *nmV* when compared to obstruent plateaus like *sfV*. This should be expected given the strong potential for competition between the sonorous marginal onset consonant /n/ and the non-adjacent winning vowel. Here, the intervening nasal /m/ retains a relatively level sonorous trajectory, which contributes to the formation of a sonorous shelf throughout the onset.
 Importantly, such differences in the well-formedness of different plateau types cannot be covered by SSP-based accounts since they treat all plateaus as incurring the same violation.
 
 In Section \@ref(sec:modelimp) we show how the impressionistic descriptions of NAP that were provided thus far can be implemented within formal models that atttempt to capture the essence of NAP with estimations of its effects on either continuous acoustic signals or symbolic consonant and vowel classes.
-
-<!-- The impressionistic descriptions of NAP, as provided in this section, are implemented within formal models that we describe in detail in Section \@ref(sec:modelimp). -->
 
 #     NAP Implementations {#sec:modelimp}
 
 ##      Complementary NAP Models {#sec:complementary}
 
 NAP essentially describes a bottom-up process, illustrating the parsing of the stream of speech into syllables as the end point of a process that starts in perception.
-<!-- As such, NAP is designed to agree with the laws of physics and the biases of the human auditory system in order to shed light on linguistic processing. -->
 A bottom-up perspective on modeling NAP is therefore relatively straightforward as it requires a similar approach to the process NAP describes by analyzing continuous acoustic data at the input to derive well-formedness predictions at the output.
 A bottom-up approach for NAP models has no capacity to exploit the power of abstraction, so it essentially has no "memory". It is a mechanistic dynamic model 
 that describes syllabic parsing.
-<!-- that contains discrete symbolic entities only as the linguistic target of the task, at the end of the process determining syllabic well-formedness. -->
 This means that a bottom-up model can be only designed to analyze concrete speech tokens. Unlike models of traditional sonority principles, a bottom-up model of NAP cannot determine the well-formedness of an abstract syllable as it is depicted in symbolic form. It will therefore give slightly different scores to different renditions of the same syllable, even by the same speaker.
 
 A NAP-based model operating on abstracted symbolic units is used as a separate, complementary top-down model.
 Top-down inferences are based on learned regularities and categorical abstractions that reflect linguistic experience. To that end, knowledge about consonantal inventories and the probabilities of consonantal co-occurrence and distribution with respect to position in the syllable is assumed to be acquired and then stored in abstract symbolic forms which are available for top-down inferences. In that sense, top-down inferences in perception are based on the distributional probability of recognized symbols.
 
-The above description of top-down inferences, which are detached from the functional aspects of the bottom-up route, echo models of the language user as a *statistical learner* [see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing]
-and, more specifically, they are very much in line with models of *phonotactic learners* [see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @jarosz2017inputsk; @mayer2019phonotacticsk].
+The above description of top-down inferences, which are detached from the functional aspects of the bottom-up route, echo models of the language user as a *statistical learner* [see, e.g., @christiansen1999power; @frisch2001psychologicalsk; @tremblay2013processing] and, more specifically, they are very much in line with models of *phonotactic learners* [see, e.g., @coleman1997stochastic; @vitevitch2004webbasedsk; @bailey2001determinants; @hayes2008maximum; @hayes2011interpreting; @albright2009feature; @daland2011explaining; @jarosz2017inputsk; @mayer2019phonotacticsk].
 
 That said, the current project does not explore the statistical nature of top-down inferences. Instead, it operationalizes the rationale behind NAP with symbolic machinery to present the symbolic model of NAP which is used here to estimate top-down inferences. 
 This choice allows the presentation of a top-down model with a stronger explanatory value with regards to NAP as it uses a similar architecture to that of standard sonority principles, helping to elucidate NAP's core ideas while using a familiar vocabulary (see Subsection \@ref(sec:naptdmodel)). 
 The symbolic NAP model is also necessary for the application of NAP in typological, diachronic, and many traditional and current studies, where speech data is transcribed into strings of discrete symbols (see Anonymous, in press). 
 
-Moreover, it should be noted that 
-<!-- since a cognitively plausible top-down architecture in this framework is based on  -->
-the distributional patterns of recognizable symbols
-in a cognitively plausible top-down architecture
-<!-- , these distributions  -->
-are
-<!-- should be  -->
-<!-- "blind"  -->
-not informative with respect
-to their various sources, which include a host of universal and idiosyncratic phonotactic pressures. A true top-down statistical learner is thus inherently "contaminated" by all the different sources that contribute to phonotactics in a given system, without a clear distinction between sonority and other factors. Thus, it remains an open question whether top-down inferences that target only sonority-based phonotactics can be modeled in a more direct and principled way than the one presented here with the symbolic model of NAP.
+Moreover, it should be noted that the distributional patterns of recognizable symbols in a cognitively plausible top-down architecture are not informative with respect to their various sources, which include a host of universal and idiosyncratic phonotactic pressures. A true top-down statistical learner is thus inherently "contaminated" by all the different sources that contribute to phonotactics in a given system, without a clear distinction between sonority and other factors. Thus, it remains an open question whether top-down inferences that target only sonority-based phonotactics can be modeled in a more direct and principled way than the one presented here with the symbolic model of NAP.
 
 As two complementary inference routes, the top-down and bottom-up models should not be considered equal. The bottom-up route is the source of learned linguistic distinctions and it is functionally motivated by the laws of physics and the limitations of the perceptual and cognitive systems.
 In contrast, the top-down route is based on linguistic experience and superficial inferences that reflect the history of the symbols in the system (i.e., the distributional probabilities of recognizable recurring patterns and their extensions by analogy). In other words, top-down inferences reflect functionally motivated behaviors only indirectly, as the outcome of learning the superficial expressions of functionally-motivated (bottom-up) dynamics.
 
-<!-- Finally, note that the symbolic NAP model is necessary for the application of NAP in typological, diachronic, and many traditional and current studies, where speech data is transcribed into strings of discrete symbols (see Anonymous, in press).  -->
-
-<!-- insert sons here -->
-
 @durvasula2015illusory; @wilson2013bayesian; @wilson2014effects and @daland2018on present different yet comparable approaches, in that both bottom-up ("phonetic") and top-down ("phonological") streams of speech are considered in order to account for perception patterns of non-native consonantal clusters [see also @berent2009listeners; @berent2012language]. 
-@daland2018on even suggest a Bayesian approach to integrate of the two streams. 
-Independent support for such dual-route modeling in language processing can be also found in neurolinguistic studies like @hickok2007cortical and @poeppel2014current.
+@daland2018on even suggest a Bayesian approach to integrate of the two streams. Independent support for such dual-route modeling in language processing can be also found in neurolinguistic studies like @hickok2007cortical and @poeppel2014current.
 Our analysis differs from the above-mentioned studies in various ways. Importantly, we do not attempt to integrate the top-down and bottom-up inference routes in this work (see discussion in Subsection \@ref(sec:compofmind)) and we focus on modeling the bottom-up route with a continuous entity that remains (quasi-)continuous in the model (the periodic energy time-series), under the assumption that it retains a reliable and consistent link to either perception or articulation (targeting pitch intelligibility in perception) as well as linguistic processing (i.e., sonority). 
 
 ##     Model Implementations in Dynamic and Symbolic Terms {#sec:modelimpOLD}
 
 In order to compare the different proposals, four types of traditional sonority models are considered alongside the two NAP models.
-For traditional models we use the two types of sonority hierarchies that were presented in Subsection \@ref(sec:hierarchies), where the class of obstruents is either collapsed into a single level (*H~col~*) or expanded to include distinctions between voiced and voiceless obstruents, and between stops and fricatives (*H~exp~*). 
-Both hierarchies are applied with each of the two main variants of traditional sonority principles, the SSP and the MSD (see Subsection \@ref(sec:principles)). 
+For traditional models we use the two types of sonority hierarchies that were presented in Subsection \@ref(sec:hierarchies), where the class of obstruents is either collapsed into a single level (*H~col~*) or expanded to include distinctions between voiced and voiceless obstruents, and between stops and fricatives (*H~exp~*).
+Both hierarchies are applied with each of the two main variants of traditional sonority principles, the SSP and the MSD (see Subsection \@ref(sec:principles)).
 The four traditional sonority models under discussion are therefore a combination of a sonority principle (either SSP or MSD) and a sonority hierarchy (either *H~col~* or *H~exp~*). Accordingly, they are referred to as *SSP~col~* , *SSP~exp~*, *MSD~col~*, and *MSD~exp~*.
 
 The two NAP models use periodic energy as the correlate of sonority, and periodic energy is applied either continuously through acoustics (bottom-up model), or in a discrete manner using symbols (top-down model). These two NAP models are referred to as *NAP~td~* for the top-down model and *NAP~bu~* for the bottom-up one.
 
 To demonstrate the different sonority models, this study focuses on complex onset clusters of the general form CCV, where C denotes consonants in onset position and V denotes a vowel in nucleus position. Traditional sonority models inspect the sonority slope of the onset cluster to determine well-formedness of CCV syllables, while NAP-based models apply the notion of competition to determine well-formedness.
 
-In the following subsections, we will elaborate on the methods for obtaining well-formedness scores, starting with the ordinal scores obtained from the four traditional sonority models (Subsection \@ref(sec:traditionalmodels)), and the symbolic NAP model *NAP~td~* (Subsection \@ref(sec:naptdmodel)). 
-The implementation of the continuous model *NAP~bu~* follows in Subsection \@ref(sec:napbu). 
-<!-- Finally, this chapter concludes with a short overview of key advantages of NAP over traditional sonority principles (Section \@ref(sec:advantages)). -->
+In the following subsections, we will elaborate on the methods for obtaining well-formedness scores, starting with the ordinal scores obtained from the four traditional sonority models (Subsection \@ref(sec:traditionalmodels)), and the symbolic NAP model *NAP~td~* (Subsection \@ref(sec:naptdmodel)). The implementation of the continuous model *NAP~bu~* follows in Subsection \@ref(sec:napbu). 
 
 It is important to note that the implementations of NAP in the following subsections present procedures for estimated results, based on the rationale of NAP and the study materials (i.e., syllables with a CCV structure). These procedures are not general and they are not supposed to simulate any perceptual or cognitive mechanism, neither top-down nor bottom-up.
 
@@ -1217,22 +1078,13 @@ Assessing this relationship between C~1~ and V given C~2~ can be achieved by the
 (i) a calculation of the difference between C~1~ and the non-adjacent vowel, to reflect the potential strength of C~1~ in terms of the intercept relative to the nucleus; and
 (ii) a calculation of the slope between adjacent C~1~ and C~2~, as in SSP-based models, to reflect the trajectories of fluctuating energy towards the peak. 
 This can be summarized with the formula in \@ref(eq:naptdeq), see examples in Table (\@ref(tab:ordinalscores)).
-<!-- [^cf-angle] -->
 
 \begin{equation}
   (V - C_1) + (C_2 - C_1)  \label{eq:naptdeq}
 \end{equation}
 
-<!-- [^cf-angle]:  -->
-A somewhat similar formula can be found in Fullwood's [-@fullwood2014perceptualsk] *Sonority Angle*, which builds on Flemming's [-@flemming2008asymmetriessk] *Sonority Rise* [see also @fleischhacker2002cluster].[^cf-thnk] 
-@flemming2008asymmetriessk and @fullwood2014perceptualsk combine measurements of C~1~C~2~ and C~1~V slopes to analyze the distance between alternatives with and without a vowel epenthesis (C~1~C~2~ vs. C~1~**V**C~2~). 
-By incorporating the sonority distance between consonants in C~1~ and vowels, these formulas are capable of mitigating some of the problems that the standard SSP formula has in accounting for either 
-<!-- the relative well-formedness of  -->
-putatively ill-formed sonority slopes with an overall low sonority (e.g., /s/-stop clustrs) or putatively well-formed sonority slopes with an overall high sonority (e.g., sonorant plateaus and rises).
-<!-- . For example, these proposals manage to explain why  -->
-<!-- The formulas they use therefore share mostly a superficial similarity with the formula in \@ref(eq:naptdeq), but they essentially incorporate the  -->
-<!-- compute sonority  -->
-<!-- This narrower goal differs from our  -->
+A somewhat similar formula can be found in Fullwood's [-@fullwood2014perceptualsk] *Sonority Angle*, which builds on Flemming's [-@flemming2008asymmetriessk] *Sonority Rise* [see also @fleischhacker2002cluster].[^cf-thnk] @flemming2008asymmetriessk and @fullwood2014perceptualsk combine measurements of C~1~C~2~ and C~1~V slopes to analyze the distance between alternatives with and without a vowel epenthesis (C~1~C~2~ vs. C~1~**V**C~2~). 
+By incorporating the sonority distance between consonants in C~1~ and vowels, these formulas are capable of mitigating some of the problems that the standard SSP formula has in accounting for either putatively ill-formed sonority slopes with an overall low sonority (e.g., /s/-stop clustrs) or putatively well-formed sonority slopes with an overall high sonority (e.g., sonorant plateaus and rises).
 
 [^cf-thnk]: We thank an anonymous reviewer for noting these works.
 
@@ -1241,7 +1093,6 @@ putatively ill-formed sonority slopes with an overall low sonority (e.g., /s/-st
 Table \@ref(tab:ordinalscores) demonstrates and compares the scores of the five ordinal models (2$\times$SSP, 2$\times$MSD and *NAP~td~*) 
 with different CCV cluster types. It shows that the main difference between the two sonority hierarchies, *H~exp~* and *H~col~*, concerns fricative-stop clusters like the */s/-stop* cluster *spV*, which are considered as either an onset fall (with the *H~exp~* hierarchy) or an onset plateau (with the *H~col~* hierarchy). When the MSD is applied, the two sonority hierarchies also show differences in ranking within onset rises, given their different treatment of obstruents. In models that use the *H~exp~* hierarchy there are four levels of obstruents (voiced and voiceless stops and fricatives) which are collapsed into one level in models that use the *H~col~* hierarchy. 
 This results in five distinct sonority rise scores in the *MSD~exp~* model, but only two in the *MSD~col~* model (where some of the trends also differ, e.g., *smV* vs. *vlV* in the two MSD-based models).
-
 
 (ref:ordinalscores-caption) (\#tab:ordinalscores) Ordinal sonority scores
 (ref:ordinalscores-caption2) Well-formedness scores with ordinal models. The table demonstrates the predictions we obtain using the two traditional sonority hierarchies, *H~col~* and *H~exp~*, with each of the two traditional sonority principles, SSP and MSD. Numbers in brackets next to "Rise" reflect MSD's ranking of onset rises by distance---higher values indicate better-formed rises. The scores derived from *NAP~td~* on the right column are taken to directly reflect the nucleus competition potential, where higher scores are better-formed.
@@ -1288,10 +1139,7 @@ The top-down NAP model allows scores within a range that goes from -$\mathit{3}$
 
 ###   The bottom-up NAP model {#sec:napbu}
 
-There are various ways to calculate an estimation of the nucleus competition potential within syllables based on the periodic energy in the acoustic signal. The method we present here has the advantage of not relying on segmental landmarks that are categorical abstractions of the type that is not assumed 
-to be available in the bottom-up route.
-<!-- , not the bottom-up. -->
-<!-- in the top-down model---such abstractions are considered to be unavailable in the bottom-up route. -->
+There are various ways to calculate an estimation of the nucleus competition potential within syllables based on the periodic energy in the acoustic signal. The method we present here has the advantage of not relying on segmental landmarks that are categorical abstractions of the type that is not assumed to be available in the bottom-up route.
 
 (ref:com-4examples-1) Smoothed periodic energy measurement (black curve), taken from four recordings of the syllables *lpal*, *nmal*, *vlal*, and *smal* in the AA stimuli set. The red vertical line denotes the center of periodic mass of the entire syllable (*CoM~syllable~*), the blue vertical line denotes the center of periodic mass of the left portion (*CoM~onset~*). Grey dotted vertical lines and annotated text denote segmental intervals by manual segmentation (for exposition purposes only). The distance between the two CoM landmarks is indicative of the energy displacement away from the syllabic center, reflecting the nucleus competition potential within the syllable (see text for details).
 ```{r com-4examples-1, fig.cap = "(ref:com-4examples-1)", fig.width=7, fig.asp=.6, warning=FALSE, dev="cairo_pdf"}
@@ -1325,15 +1173,10 @@ print(monosyl_examp_1_plot)
 The periodic energy data that was extracted from acoustic recordings of speech is viewed in terms of a mass, i.e., the area under the periodic energy curve, integrating duration and power as the two linked dimensions of quantity in sound [see @turk1996processing on interactions between duration and intensity in linguistic perception contexts]. 
 Summing is essentially different from averaging, as well as from peak extraction, 
 in how much strength is assigned to the dimension of duration in the abstract measurement of quantity (duration is absent from peak extraction, it is normalized in averages, and it is strongly influencing the sum).
-<!-- in the strength of the contribution of duration to the abstract measurement of quantity (duration is absent from peak extraction, it is normalized in averages, and it is strongly influencing the sum). -->
-<!-- in how much power the duration contributes to the measurement of quantity -->
-<!-- in the central role it allows duration to play in the measurement of quantity. -->
 Importantly, only summing strategies are capable of uncovering the quantitative difference between two sounds that have similar amplitude envelopes yet differ in duration. 
 
 The contribution of duration to sonority was convincingly illustrated in the seminal work of @price1980sonority. Price showed that disyllabic English words like *polite* /pəlʌɪt/ were perceived when the duration of the sonorant /l/ in the superficially related monosyllabic word *plight* /plʌɪt/ was manipulated. Thus, an increase in the duration of the sonorant essentially leads to the perception of another syllable. 
 More supporting evidence on the interaction between duration and syllabic parsing can be found in @dupoux1999epentheticsk, who showed differences in perception between Japanese and French speakers, and in @berent2007we as well as @wilson2014effects, who analyzed patterns of misperception of Russian onset clusters by English speakers.
-
-<!-- Importantly, the periodic energy mass, which is the integral of power and duration, is the only measurement of the three basic alternatives for continuous curve measurement---sum, average or peak---that is capable of accounting for the data in @price1980sonority. -->
 
 It is therefore useful to locate the *center of mass* within regions of interest as a measurement that is sensitive to the two axes of periodic energy mass---duration (x-axis) and power (y-axis). The center of mass can be viewed as the point in time in which the area under the curve is split into two equal parts. The location of the center of mass in time (x-axis) is attracted to the peak of the curve (on the y-axis), where it is expected to be found given a perfectly symmetrical shape. However, the center of mass most often diverges from the peak of rise-fall curves so as to reflect asymmetries in the overall distribution of mass. Identification of the center of mass of the periodic energy curve (henceforth CoM) follows a methodology that was introduced with the *Tonal Center of Gravity* [@barnes2012tonal], in calculating a weighted average time point that uses a continuous time series as the weighting term. The equation in \@ref(eq:com) is used to locate the average point in time (*t*), weighted by continuous periodic energy (*per*) at discrete time points:
 
@@ -1358,12 +1201,7 @@ In what follows we present three experiments:
 and *Experiment 3* is a confirmatory study with 33 Hebrew-speaking subjects. 
 
 This section starts by describing the rationale of the experimental design (Subsection \@ref(sec:rationale)) before presenting the linguistic and acoustic materials used in the experiments (Subsection \@ref(sec:materials)). 
-<!-- and the perception task procedures (Section \@ref(sec:percproc)).  -->
 The predictions of the different models are then summarized in Subsection \@ref(sec:predictions), followed by descriptions of the experimental design (Subsection \@ref(sec:designs)), participants (Subsection \@ref(sec:participants)) and our data analysis strategies (Subsection \@ref(sec:datanlysis)). The results and related discussions follow in Subsection \@ref(sec:results).
-<!-- to anticipate the presentation of results and related discussions concerning the exploratory pilot study and the ensuing confirmatory studies (Section \@ref(sec:results)). -->
-
-<!-- Note that all the media and original code that was used in this study are available at the following link on *Open Science Framework*: https://tinyurl.com/y3l4avap. -->
-<!-- (anonymized link): https://tinyurl.com/y4gvobyp  -->
 
 ##		Rationale {#sec:rationale}
 
@@ -1371,34 +1209,20 @@ The goal of the experimental procedure is to tap into the cognitive cost of syll
 
 This design uses nonce words to test specific consonantal combinations in structures that either feature two vowels and no initial consonantal sequences (typically considered to be disyllabic forms) or one vowel with a word-initial sequence (more likely to be considered as monosyllabic forms).
 This experimental design is reminiscent of many experiments on sonority effects that Iris Berent and her colleagues have published, starting with the seminal @berent2007we.[^cf-berents] 
-The premise of many of the tasks that Berent et al. test
-<!-- in the context of traditional sonority principles has a slightly different rationale than the one used for NAP, although with very similar predictions:  -->
-is that
-<!-- For Berent et al.,  -->
-an ill-formed sonority onset fall, as in the monosyllable *lbV*, is more likely to be confused with disyllabic *lə.bV* when compared with well-formed monosyllable *blV* and its disyllabic counterpart, *bə.lV* (the schwa /ə/ in these examples denotes a generic epenthetic weak vowel). This misperception and confusion between alternatives is expected to be systematically greater with worse-formed sonority clusters, which leads to a drop in categorical accuracy, accompanied by a scalar increase in response time (we return to Berent's work in the general discussion, in Subsection \@ref(sec:projection)).
+The premise of many of the tasks that Berent et al. test is that an ill-formed sonority onset fall, as in the monosyllable *lbV*, is more likely to be confused with disyllabic *lə.bV* when compared with well-formed monosyllable *blV* and its disyllabic counterpart, *bə.lV* (the schwa /ə/ in these examples denotes a generic epenthetic weak vowel). This misperception and confusion between alternatives is expected to be systematically greater with worse-formed sonority clusters, which leads to a drop in categorical accuracy, accompanied by a scalar increase in response time (we return to Berent's work in the general discussion, in Subsection \@ref(sec:projection)).
 
-<!-- insert sons here -->
 Comparable experimental assumptions regarding misperception of consonantal clusters can be found in related works on perception of non-native clusters such as @dupoux1999epentheticsk and @davidson2012sources, including also tasks that utilized the production of such clusters [e.g., @davidson2010phoneticsk; @wilson2014effects].
 
 [^cf-berents]: Examples of further publications by Berent et al. with various experimental settings that test sonority effects in perception with behavioral data include: @berent2008language; @berent2010phonological; @berent2011syllable; @berent2012language; @berent2013phnological; @tamasi2014sensitivity; @zhao2015universalsk; @lennertz2015onthesonority. The following examples also include neurological data: @berent2014languagesk; @gomez2014language; @berent2015role. 
 
-To test the different predictions of the six sonority models 
-<!-- (*SSP~col~*, *SSP~exp~*, *MSD~col~*, *MSD~exp~*, *NAP~td~* and *NAP~bu~*),  -->
-(2$\times$NAP, 2$\times$SSP, 2$\times$MSD),
-we designed a perception task that prompts meta-linguistic syllable count judgement with 29 experimental target items. 
+To test the different predictions of the six sonority models (2$\times$NAP, 2$\times$SSP, 2$\times$MSD), we designed a perception task that prompts meta-linguistic syllable count judgement with 29 experimental target items. 
 Participants were presented with a collection of speech items that were systematically produced with one or two vowels for each combination of consonants in our set. 
 Only the single-vowel productions were considered as targets, and an accurate response to our targets is always the monosyllabic option (note that the term "accuracy" is used here to describe participants' responses with respect to predictions).
 By focusing on the response time of "correct" responses to the target words we essentially measure the time it took participants to decide that a given single-vowel stimulus is monosyllabic. 
 We can therefore interpret the reaction times of monosyllabic responses to single-vowel targets as reflective of the processing cost of assigning one nucleus to a given target stimulus with one vowel.
 
-<!-- A NAP-based model assumes that this processing cost is tightly related to the nucleus competition between different portions of a syllable, such that response times will reflect the degree of nucleus competition within syllables (more competition = slower responses = worse-formed sequence). Traditional sonority models interpret the processing cost as related to well-formedness in terms of sonority slopes, such that worse-formed clusters are more likely to be misperceived and take longer to process [e.g., @berent2007we; @berent2008language; @berent2009listeners; @berent2012language; @lennertz2010people; @maionchi2015sonoritysk; @sung2016perceptionsk; @young2017markednesssk].  -->
-
-<!-- The SSP derives a ternary ordinal hierarchy of complex onset well-formedness scores, onset rise $>$ onset plateau $>$ onset fall. This essentially predicts that response times will pattern into three groups, in line with the sonority slope of the onset clusters. MSD models derive a slightly more elaborate ordinal hierarchy, where onset rises with a small sonority distance pattern below onset rises with a larger sonority distance. The latter are predicted to evoke the fastest responses in MSD models. -->
-
 We assume that the meta-linguistic task in our experimental design activates top-down inferences which urge subjects to base their reponses on their language experience. Since we want to also tap into subjects' bottom-up inferences, we present these nonce words as real words in another "unknown" language, uttered by a native speaker of that foreign language. For that matter, the German-speaking subjects listened to a stimuli set that featured recordings of a native Hebrew speaker. 
 Likewise, the Hebrew-speaking subjects listened to a stimuli set that featured recordings of a native German speaker. Both speakers were trained phoneticians, capable of uttering the full set of stimuli (only the German speaker was naive with respect to the ensuing perception task).
-
-<!-- Note that since the bottom-up predictions of NAP are derived via measurements of acoustic signals of particular productions rather than from fixed symbolic predictions, the assumption that all things other than the controlled variable are equal in the experimental stimuli should hold also for a large degree of variation that occurs in natural speech. Thus, if a certain segment in one item is slightly longer, shorter, louder or softer than in other comparable tokens, bottom-up NAP is designed to directly account for this variation, while the other symbol-based ordinal models essentially assume that such variation is mostly negligible. This allows us to opt for a slightly more ecologically valid experimental paradigm, by using natural speech recordings that were designed and selected to sound as similar as possible, rather than using synthesized speech, which would have allowed a higher degree of similarity between tokens. -->
 
 ##		Materials {#sec:materials}
 
@@ -1445,7 +1269,6 @@ Table \@ref(tab:targetlist) presents the 29 CC types in the experimental set, re
 
 [^cf-plateaufall]: Depending on whether fricatives are considered higher or similar in sonority to stops, clusters of the type *fricative-stop* may be considered as either an onset fall or an onset plateau.
 
-<!-- Since the following experiments collect responses from native German-speaking subjects, it is important to note that of  -->
 Of the 29 different clusters, only 3 clusters regularly occur in German words (/ʃp, ʃm, fl/), while 6 clusters are attested to some degree in German loanwords [/sp, sf, sm, vl, zv, ml/; see @van2012sonority],
 and one cluster (/ʃf/) may be considered as similar to German licit clusters with a voiced obstruent following a voiceless one (i.e., /ʃv/ and /t͡sv/).
 Thus, the experimental set contains 19 clusters that are unattested in German words. These unattested clusters appear in 13 of the 16 unique cluster types. 
@@ -1573,21 +1396,10 @@ We also used the exploratory pilot study to verify that the number of participan
 The exploratory pilot study was conducted in two versions, each with half of the fillers and all of the targets in one block, yielding a total of 58 data points per subject (29 fillers + 29 targets, no repetitions).
 The two different versions were evenly split between participants (each version was presented to six participants).
 
-<!-- ####  Participants (Experiment 1) -->
-
-<!-- The exploratory study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Technische Hochschule Köln, who volunteered to participate in the study. The experiment was administered in a quiet room at the institute's facility in Cologne. The mean age of participants in the exploratory study was 25 (21--30). -->
-
-<!-- ### Designing the confirmatory studies -->
-
 Experiments 2 and 3 are the main confirmatory studies conducted after finalizing our hypotheses and methodologies with the data from Experiment 1. 
 The difference between Experiments 2 and 3 concerns the native language of the subjects, and, as a consequence, the stimulus set in use. 
 Experiment 2 tested German-speaking subjects on stimulus set AA, featuring a Hebrew speaker, while Experiment 3 tested Hebrew-speaking subjects on stimulus set HN, featuring a German speaker (see explanation in Subsection \@ref(sec:rationale)). 
 Each experimental block in Experiments 2-3 consisted of two repetitions of the target words (2 $\times$ 29 $=$ 58) and one trial of each filler word (1 $\times$ 58). The experiment consisted of two blocks with randomized trials, generating altogether four repetitions of the target words (4 $\times$ 29 $=$ 116) and two repetitions of the filler words (2 $\times$ 58 $=$ 116), yielding a total of 232 data points per subject. 
-
-<!-- The difference between Experiments 2 and 3 concerns the native language of the subjects, and, as a consequence, the stimulus set in use.  -->
-<!-- Experiment 2 tested German-speaking subjects on stimulus set AA, featuring a Hebrew speaker, while Experiment 3 tested Hebrew-speaking subjects on stimulus set HN, featuring a German speaker (see explanation in Subsection \@ref(sec:rationale)).  -->
-<!-- In theory, we assume that speakers of any language will exhibit the general trends that are predicted by sonority-based models. We therefore assume that small differences between the groups should be reflective mostly of their language-specific experience, which is related to their overall top-down phonotactic knowledge (not necessarily to sonority per se). -->
-
 
 ##  Participants {#sec:participants}
 
@@ -1614,7 +1426,6 @@ ggplot(subjects_heb, aes(x="", fill=subject_age)) +
   theme(legend.position="none", panel.background = element_blank(), axis.title = element_blank(), axis.text = element_blank(), panel.border = element_blank(), panel.grid = element_blank(), axis.ticks = element_blank(), plot.title = element_text(size=14, face="bold")
         )
 
-
 # which(subjects_heb$subject_age == subject_age)
 
 ```
@@ -1630,7 +1441,6 @@ University of Applied Sciences, who volunteered to participate in the study. The
 
 ### Experiment 2
 
-<!-- out.width=c("50%","50%","50%","50%","50%","50%"), fig.width=c(3.5,3.5,3.5,3.5,3.2,3.2), fig.asp=c(.4,.4,.4,.4,.4,.4), fig.show="hold", fig.align = "default"} -->
 (ref:participantsGer) Participants in Experiment 2 (n = 51). Education categories refer to academic achievements ("school" = academic degree not yet acquired).
 ```{r participantsGer, fig.cap = "(ref:participantsGer)", fig.show="hold", fig.align = "default", out.width=c("33%","33%","33%"), fig.width=c(2.3,2.3,2.3)}
 
@@ -1743,7 +1553,6 @@ For model comparison, we examine the out-of-sample predictive accuracy of the di
 ##  Results {#sec:results}
 
 ###  Estimations
-<!-- ###  Results: Estimations -->
 
 ```{r}
 results_txt <- function(fitbrms, pred) {
@@ -1793,7 +1602,6 @@ est_NAP_bu <- results_txt(m_german$models$NAP_bu, "sNAP_bu")
 
 ```
 
-<!-- ### Experiment 3: Estimation {#sec:results3} -->
 
 ```{r}
 estHeb_SSP_exp <- results_txt(m_hebrew$models$SSP, "moSSP")
@@ -1804,12 +1612,10 @@ estHeb_NAP_td <- results_txt(m_hebrew$models$NAP_td, "moNAP_td")
 estHeb_NAP_bu <- results_txt(m_hebrew$models$NAP_bu, "sNAP_bu")
 ```
 
-<!-- #### Estimation {#sec:estimation1} -->
 For all the models, the well-formedness score shows a clear effect on response times, with lower scores yielding longer log-transformed response times:
 
 **Experiment 1**
 
-<!-- ### Experiment 1 {-} -->
 * For *SSP~col~*: `r est_SSP_col_pil`.
 * For *SSP~exp~*: `r est_SSP_exp_pil`.
 * For *MSD~col~*: `r est_MSD_col_pil`.
@@ -1819,7 +1625,6 @@ For all the models, the well-formedness score shows a clear effect on response t
 
 **Experiment 2**
 
-<!-- ### Experiment 2 {-} -->
 * For *SSP~col~*: `r est_SSP_col`.
 * For *SSP~exp~*: `r est_SSP_exp`.
 * For *MSD~col~*: `r est_MSD_col`.
@@ -1829,7 +1634,6 @@ For all the models, the well-formedness score shows a clear effect on response t
 
 **Experiment 3**
 
-<!-- ### Experiment 3 {-} -->
 * For *SSP~col~*: `r estHeb_SSP_col`.
 * For *SSP~exp~*: `r estHeb_SSP_exp`.
 * For *MSD~col~*: `r estHeb_MSD_col`.
@@ -1837,17 +1641,11 @@ For all the models, the well-formedness score shows a clear effect on response t
 * For *NAP~td~*: `r estHeb_NAP_td`.
 * For *NAP~bu~*: `r estHeb_NAP_bu`.
 
-
-
 Notice that the posterior of the effect of well-formedness, $\hat\beta$, is not comparable across models. For the ordinal models, it represents  the average increase (or decrease) in the dependent variable associated with two neighboring factor levels, or in other words, $\hat\beta$ multiplied by the number of categories minus one represents the increase in log-scale between the first and the last category. This means that it is highly affected by the number of categories. For the continuous bottom-up model, $NAP_{bu}$, $\beta$ represents, the increase in log-scale for one unit in the well-formedness scale. To give some concrete examples from set AA, there are `r lkal_nap -lpal_nap` units (since their NAP scores are `r lkal_nap` and `r lpal_nap`, respectively) between /lpal/ and /lkal/; and there are `r spal_nap  -lkal_nap` units between /lkal/ and /spal/ (`r spal_nap` and `r lkal_nap`, respectively). However, for all the models, $\hat\beta$ is negative, indicating that well-formedness is associated with faster responses. See Appendix \@ref(appendix:b) for the complete output of the models.
 
 The results shown here reflect the final state of the models in the exploratory stage, which is the same as the state of the models in the confirmatory stage. Importantly, the results of the confirmatory studies, Experiments 2--3, which are statistically much more robust, remain consistent with those of Experiment 1, which had a relatively small number of observations. As such, Experiment 1 was not designed to distinguish between the models and it will not be considered in the further presentation of results. 
 
 ###  Descriptive adequacy
-<!-- ##  Results: Descriptive adequacy -->
-<!-- ### Experiment 2: Descriptive adequacy -->
-<!-- ### (ii) Descriptive adequacy {-} -->
-<!-- ####  Descriptive adequacy {#sec:posterior2} -->
 
 The model fits of the different models are shown in Figures \@ref(fig:NullFit)--\@ref(fig:NAPbuFit). The plots in these figures present the dispersion of the average response time results, depicted as red points for related CC clusters, vis-à-vis each models' predictions in the form of distributions, depicted with blue violins. The order of the stimuli, from left to right, follows from the models' scores such that predictions for better-formed clusters appear further to the right. Recall that scores in the *NAP~bu~* model yield slightly different predictions for each stimulus set (AA vs. HN).
 
@@ -1856,7 +1654,6 @@ The model fits of the different models are shown in Figures \@ref(fig:NullFit)--
 The null models are shown in Figure \@ref(fig:NullFit) as baselines in the respective experiments (the order of stimuli along the x-axis follows the *NAP~bu~* scores, but in a forced ordinal scale, with equidistant intervals). The slight differences in predictions for different clusters are due to individual differences in the accuracy. Recall that we subset the response times conditional on the monosyllabic response ($'1'$) to the forced-choice task. This means that when participants give more monosyllabic answers for a specific cluster, their adjusted intercept will have a greater influence on the predictions of the model for that cluster. In addition, clusters with fewer monosyllabic responses show more variability in their predictions (e.g., /lf/ vs. /fl/ in the AA set, on the left side of Figure \@ref(fig:NullFit)).
 
 (ref:NullFit) Null model fit. Observed mean log-transformed response times of accurate responses are depicted with red points, distribution of simulated means based on the null model are depicted with blue violins. 
-<!-- Stimuli ordered from left to right according to their ascending well-formedness score in *NAP~bu~* (here in a forced-ordinal scale for exposition purposes). -->
 ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
 # ```{r NullFit,fig.cap = "(ref:NullFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 predictions$null %>%
@@ -1905,7 +1702,6 @@ predictions_heb$null %>%
 
 ```
 
-<!-- ### (ii.a) Traditional sonority models fit {-} -->
 #### SSP and MSD models {#sec:traditionalModelfit}
 
 We consider a good fit in the case of the ordinal models to be roughly characterized by the following three criteria:
@@ -1914,9 +1710,7 @@ We consider a good fit in the case of the ordinal models to be roughly character
 (iii) the model predictors are not redundant, i.e., the violins of the different model levels show little overlap between them.
 
 (ref:SSPcolFit) *SSP~col~* model fit. Stimuli ordered from left to right according to their score in the model in ascending well-formedness (other details are the same as above).
-<!-- Observed mean log-transformed response times are depicted with red points; distribution of simulated means based on the model are depicted with blue violins. Stimuli ordered from left to right according to their score in the model in ascending well-formedness. -->
 ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
-# ```{r SSPcolFit,fig.cap = "(ref:SSPcolFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$SSP_obs %>%
   left_join(data_RT) %>%
@@ -1968,7 +1762,6 @@ predictions_heb$SSP_obs %>%
 
 (ref:SSPexpFit) *SSP~exp~* model fit (plot details are the same as above).
 ```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
-# ```{r SSPexpFit,fig.cap = "(ref:SSPexpFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$SSP %>%
   left_join(data_RT) %>%
@@ -2019,8 +1812,6 @@ predictions_heb$SSP %>%
    }
 
 ```
-
-<!-- ### MSD models {#sec:MSDModelfit} -->
 
 (ref:MSDcolFit) *MSD~col~* model fit (plot details are the same as above).
 ```{r MSDcolFit,fig.cap = "(ref:MSDcolFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
@@ -2145,14 +1936,12 @@ This elaboration seems to be beneficial in fitting the scores of the German-spea
 To conclude, an observation of the model fits of the four traditional sonority models in the two confirmatory studies reveals a mixed picture. The *H~col~* hierarchy (in models *SSP/MSD~col~*) appears to result in a better fit with onset falls and plateaus, especially for the German-speaking subjects.
 The competing *H~exp~* hierarchy appears to be advantageous when fitting the scores of rising onset slopes, but mostly with *MSD~exp~* and only for the German-speaking subjects in Experiment 2, where sonority falls exhibit an undesirable bimodal distribution.
 
-<!-- ### (ii.b) NAP~td~ model fit {-} -->
 #### NAP models {#sec:NAPtdModelfit}
 
 Although *NAP~td~* is an ordinal model like all the traditional sonority models, it follows a different rationale (see Subsection \@ref(sec:naptdmodel)), whereby the scores of the model estimate nucleus competition to reflect well-formedness. 
 
 (ref:NAPtdFit) *NAP~td~* model fit (plot details are the same as above).
 ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
-# ```{r NAPtdFit,fig.cap = "(ref:NAPtdFit)", warning=FALSE, fig.width=8, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$NAP_td %>% 
   left_join(data_RT) %>%
@@ -2203,11 +1992,8 @@ predictions_heb$NAP_td %>%
 Figure \@ref(fig:NAPtdFit) shows that *NAP~td~* succeeds in containing all the data (points) within the respective predictions (blue violins) in both experiments, making *NAP~td~* the only model to achieve such coverage.
 *NAP~td~* appears to exhibit some redundancy, as suggested by the relatively large degrees of overlap between some of the predictive distributions of the model. This is apparent from the overlap between violins in the left side (worse-formed) of the model fit with Experiment 2 (left panel), and between violins in the right side (better-formed) of the model fit with Experiment 3 (right panel) in Figure \@ref(fig:NAPtdFit).
 
-<!-- ### (ii.c) NAP~bu~ model fit {-} -->
-<!-- ### NAP~bu~ models {#sec:NAPbuModelfit} -->
 (ref:NAPbuFit) *NAP~bu~* model fit (plot details are the same as above).
 ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, out.width=c("50%","50%"), fig.width=c(3.5,3.5), fig.asp=c(.5,.5), fig.show="hold", fig.align = "default", dev="cairo_pdf"}
-# ```{r NAPbuFit,fig.cap = "(ref:NAPbuFit)", warning=FALSE, fig.width=7, fig.asp=.28, fig.show="hold", dev="cairo_pdf"}
 
 predictions$NAP_bu %>% 
   mutate(NAP= round(NAP_bu,7)) %>%
@@ -2257,8 +2043,6 @@ Importantly, the expected correlation between response time and ill-formedness a
 Our criteria for goodness of fit based on the plot analyses (see Subsection 
 \@ref(sec:traditionalModelfit)) are not all valid when evaluating *NAP~bu~* since we have no classes and no vertical dispersion of data (points) within levels, and since the horizontal overlap of predictions (violins) between levels requires a different interpretation. However, the criterion for inclusion of data points within the violins of the models' predictions naturally also holds for the *NAP~bu~* fit, which fails to include the data for the nasal plateaus /nm/ and /mn/ within the respective predictive distribution in Experiment 2 (a failure that is shared by all the traditional models in Experiment 2; see Subsection \@ref(sec:traditionalModelfit)). Furthermore, in Experiment 2 *NAP~bu~* also fails to include the /z/-initial clusters---/zm/ and /zv/---within their respective predictive distribution.
 
-<!-- #### Model fits discussion {#sec:discussionFits}  -->
-
 The failures in the fit of the *NAP~bu~* model with German-speaking subjects in Experiment 2 can be split into two types:
 (i) nasal-initial clusters---*nval*, *nmal*, and *mnal*---which received results on a par with the slowest responses in the data, reflecting an overestimation of well-formedness by the model; and
 (ii) syllables beginning with a voiced sibilant---*zval* and *zmal*---which received results that pattern with faster responses, reflecting an underestimation of well-formedness by the model
@@ -2267,10 +2051,6 @@ These results may be taken to suggest language-specific top-down effects of Germ
 Compare this with Hebrew (the native language of the subjects in Experiment 3), in which nasals cannot be syllabic and voiced sibilants are common in marginal cluster edges. 
 
 ###  Model comparison
-<!-- ##  Results: Model comparison -->
-<!-- ### Experiment 2: Model comparison -->
-<!-- ### (iii) Model comparison {-} -->
-<!-- #### Model comparison {#sec:ModelComparison2} -->
 
 While the model fits give us an insight into the behavior of each model with respect to the data, they are not well-suited to a comparison of different models against a consistent criterion. To do this, we ran out-of-sample predictions using cross-validation, thereby testing the ability of each model to predict unseen items.
 
@@ -2284,9 +2064,7 @@ The small differences between the next three models (*SSP~col~*, *MSD~col~* and 
 The two traditional models that are based on the *H~exp~* hierarchy---*SSP/MSD~exp~*---are similar to each other in last place and only marginally better than the null model.
 
 The right-most column in Table \@ref(tab:resultsmodels), *weight*, shows model averaging via stacking of predictive distributions. Stacking maximizes the potential elpd score by pulling the predictions of all the different models together. The values under the weight column represent the relative contribution of each model to this combined optimal model.
-*NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%. This is notable as both NAP models are essentially based on the same principle, lending support to the 
-idea that the two models are essentially complementary.
-<!-- idea top-down and bottom-up lead to two complementary models. -->
+*NAP~td~* alone contributes the lion's share with 65% and *NAP~bu~* comes second with 14%. This is notable as both NAP models are essentially based on the same principle, lending support to the idea that the two models are essentially complementary.
 The other traditional models contribute 8% (*SSP~col~*) and 3% (*MSD~col~*) to this picture, less than the 9% that the null model manages to contribute.
 
 ```{r resultsmodels, results = "asis"}
@@ -2580,22 +2358,15 @@ predictions_heb$NAP_bu %>%
 The results of the confirmatory studies, Experiments 2--3, can be summarized as follows: 
 (i) all of the sonority models we tested are capable of explaining the response time data for different consonant clusters to a reasonable extent; 
 (ii) the symbolic top-down NAP model, *NAP~td~*, outperforms all the the other models; 
-(iii) the dynamic bottom-up NAP model, *NAP~bu~* 
-<!-- did very well using a novel and unique underlying architecture; -->
-performed relatively well considering that it is based on a unique architecture that does not require  prior segmentation of the acoustic signal;
+(iii) the dynamic bottom-up NAP model, *NAP~bu~* performed relatively well considering that it is based on a unique architecture that does not require  prior segmentation of the acoustic signal;
 and (iv) some interesting differences between the *H~col~* and *H~exp~* sonority hierarchies were observed and the advantages of the minimal *H~col~* sonority hierarchy proved to be more effective.
 
 Experiment 3 exhibits most of the general trends found in Experiment 2, albeit in a less compelling way. One path of explanation for these discrepancies can be found in the differences between the native languages of the subjects. We expect language-specific differences to account for some of the differences between the experiments, as was mentioned in Subsection \@ref(sec:designs). Specifically, the difference between nasals in Hebrew and German was suggested as explanatory in Subsection \@ref(sec:NAPtdModelfit).
 
 On top of that, we suspect that differences between the experiments were also due to the various sources of noise that were introduced in the process. These include the smaller group of participants and the diverse physical locations in which Experiment 3 was administered (see Subsection \@ref(sec:participants3)). 
-<!-- The results confirm this with a wider standard error for the intercepts of the different subjects in the statistical models in Experiment 3.  -->
 The results may be taken to support this with a larger standard deviation for the by-subject adjustments to the intercept for the models of Experiment 3 in comparison with Experiment 2. 
 A larger standard deviation of the group-level effect indicates larger differences between participants in their response times.
 For example, see $\hat\sigma_\alpha = 0.32~[0.25, 0.41]$ in Experiment 3 vs. $\hat\sigma_\alpha = 0.21~[0.17, 0.26]$ in Experiment 2, when comparing the null models (see the full models in Appendix \@ref(appendix:b)).
-
-<!-- Furthermore, it was the impression of the experimenter (the first author) that Hebrew speakers in this study tended to have a less uniform understanding of the notion of the syllable such that their performance may exhibit a broader range of interpretations of the meta-linguistic syllable count task. This impression  -->
-<!-- may help in explaining -->
-<!-- the overall smaller range of response times in Experiment 3, whereby Hebrew speakers tended to respond relatively fast to ill-formed structures.  -->
 
 The success of our NAP models relative to the traditional models in predicting the data can be mainly attributed to the following traits of NAP:
 (i) all the voiceless-initial onset clusters, including onset falls and plateaus (e.g., /sp/ and /sf/), are relatively well-formed in NAP, correctly predicting the patterning together of such data with faster response times (at the low-right parts of the plots);
@@ -2609,8 +2380,6 @@ Our experimental results provide strong support for our synergy of proposals, in
 (i) in  Subsection \@ref(sec:division) we discuss a potential phonotactic division of labor, demonstrated with a more holistic account of /s/-stop clusters;
 (ii) in Subsection \@ref(sec:lingMod) we discusses the current contribution in the context of the tension between discrete and continous in models of phonology; and
 (iii) in Subsection \@ref(sec:projection) we discuss the universality of sonority, with special attention to the body of works by Iris Berent and her colleagues.
-<!-- , as well as to the works of the physicist and theoretical biologist, Howard Pattee  -->
-<!-- (Subsection \@ref(sec:compofmind)). -->
 
 ##		Phonotactic Division of Labor {#sec:division} 
 
@@ -2619,8 +2388,7 @@ As we shall see below, */s/-stop* clusters make a good case in point.
 
 ###   /s/-stop clusters in traditional accounts
 
-One rather well-known and well-studied consistent problem in the empirical coverage of all traditional sonority principles concerns sequences that are often termed */s/-stop clusters*, referring to cases where a sibilant fricative---most often /s/---precedes a stop consonant, like in the English words ***st**op*, ***sk**y* and ***sp**ort* 
-[see, e.g., @fudge1969syllables; @yavacs2008sonority; @vaux2009append; @goad2011representation; @goad2016sonority]. 
+One rather well-known and well-studied consistent problem in the empirical coverage of all traditional sonority principles concerns sequences that are often termed */s/-stop clusters*, referring to cases where a sibilant fricative---most often /s/---precedes a stop consonant, like in the English words ***st**op*, ***sk**y* and ***sp**ort* [see, e.g., @fudge1969syllables; @yavacs2008sonority; @vaux2009append; @goad2011representation; @goad2016sonority]. 
 The sonority slope of */s/-stop* clusters is either an onset fall or an onset plateau, depending on the given sonority hierarchy. When fricatives and stops are assigned to two distinct classes on a given sonority hierarchy, */s/-stop* clusters exhibit onset sonority fall. If, on the other hand, stops and fricatives are grouped together, */s/-stop* clusters are considered plateaus.
 Thus, although */s/-stop* clusters are relatively common in languages that tolerate sequences and should therefore be considered as relatively well-formed [@morelli2003relative; @steriade1999alternativessk], such clusters are predicted to be rare, or even extremely rare, due to their ill-formed sonority slopes.
 
@@ -2629,7 +2397,6 @@ The main type of exception that is used to explain sibilant-initial clusters is 
 A slightly different theoretical solution with similar results is to assert that */s/-stop* clusters are, in fact, a single complex segment [see, e.g., @fudge1969syllables; @weijer1996segmental] such that, again, there simply is no cluster to account for in theoretical accounts [for an overview, see @goad2016sonority].
 
 Those theoretical tweaks are not without merit as they follow a strong intuition that marginal sibilants are somehow "outside" the scope of syllabic processes. This intuition is supported by evidence of some unique behaviors of marginal sibilants, such as the articulatory kinematic data presented in @hermes2013phonologysk, which finds unique coordination patterns in the articulation of sibilant-initial consonantal gestures in Italian (suggesting that the sibilant is outside the syllable). 
-<!-- We do not have enough data on the subject to make any determination yet, but  -->
 These findings are however not inconsistent with NAP-based accounts. Periodic energy has 
 prosodic roles to play in carrying the pitch and the overall prosodic strength at the nucleus of the syllable. 
 Marginal voiceless elements can therefore be timed with different considerations in NAP-based accounts. For example, it may be beneficial to prolong duration of marginal voiceless elements to increase their recoverability without the risk of increased nucleus competition. 
@@ -2657,7 +2424,6 @@ The three phonotactic perspectives are complementary, and although they do not r
 stops in C~2~ can be released into a vowel to optimize the effect of the burst in the release phase, while sibilants retain strong cues to their identity thanks to their unique spectral profile.
 
 ##     Reshuffling Dichotomies in Linguistic Models {#sec:lingMod}
-<!-- ##     Linguistic Models: Between Discreteness and Continuity {#sec:lingMod} -->
 
 The study of the sound system of human languages has been one of the longest-standing intersections of symbol-based categorical analyses on the one hand, and signal-based continuous descriptions on the other. These two different types of analysis stand at the core of the distinction many researchers make between phonetics and phonology, where the former addresses continuous and measurable aspects of the speech signal (namely, sensorimotor aspects of articulation, acoustic signals and neurological patterns in perception), while the latter addresses categorical aspects of the speech signal using discrete and symbolic units like consonants, vowels and phonemes [see overviews in @harris2007representation; @ladd2011phonetics].
 
@@ -2668,8 +2434,6 @@ The incompatibility between the continuous and the discrete types of description
 The connectionist program in cognitive psychology [e.g., @rumelhart1986parallel1; @rumelhart1986parallel2; @bates1993counectionism] was set to change that classic view with the introduction of connectionist models to phonology [e.g., @goldsmith1992local; @laks1995connectionistsk; @joanisse2000connectionist; @smolensky2006harmonic; @tupper2012sonoritysk]. These models replaced classic symbolic models with *neuromimetic* models [@laks1995connectionistsk 52] that attempt to improve the cognitive plausibility of language models with architectures that resemble neurobiological systems.
 
 It should be noted, however, that the main focus of connectionist models is not so much on the symbols in the system as on the classic processes of symbol manipulation. Connectionist models present alternatives to the notion of rules of symbol manipulation that directly transform symbols [see @harnad1990symbol]. 
-<!-- It should be noted, though, that the main focus of connectionist models is not so much the symbols in the system as much as it is the classic processes of symbol manipulation. Connectionist models present alternatives to traditional symbol manipulation rules, like the linear rules in generative phonology [@chomsky1968spesk].  -->
-<!-- The latter are practical in terms of the descriptive notation, but they cannot (and mostly do not) attempt to reflect the cognitive functions of the brain. -->
 In the context of the present work, connectionist models can be effective in modeling the phonology of speech perception in a top-down model, which represents processes that start and end with discrete symbols. However, we assume here that there is a functional source for linguistic distinctions in perception, which has to be accounted for via the bottom-up route, originating from continuous events in real time.
 
 ###    Dynamical systems {#sec:synthesis}
@@ -2677,9 +2441,7 @@ In the context of the present work, connectionist models can be effective in mod
 The introduction of dynamical systems to phonology [see @haken1985theoretical; @browman1992articulatorysk; @goldstein2009coupled; @nam2009self] made it possible to model the interactions between continuous aspects of the speech signal itself (e.g., motor gestures in articulation) and the discrete symbolic categories that linguists assume. One way to achieve this is via attractor landscape models, where discrete categorical units can be modeled as attractor basins [see @haken1990synergeticssk]. In this type of models, various continuous events can contribute more or less to the (partial) activation of different, often competing, attractors.
 Good examples for application of attractor landscapes in such manners can be found in @tuller1994nonlinear; @case1995evaluation; @raczaszek1999categorization; @gafosbenus2006dynamics; @roessig2019modeling; and @roessig2019dynamics.
 
-Attractor landscape models are therefore an essential component of 
-models concerned with the interaction between continuous and discrete entities in a language system.
-<!-- a language model that needs to represent the interaction between continuous events and discrete entities.  -->
+Attractor landscape models are therefore an essential component of models concerned with the interaction between continuous and discrete entities in a language system.
 However, much like the connectionist models in phonology, attractor landscapes explicate the process by which a discrete alternative can be (partially) activated, but they have little to say about the components of the system otherwise.
 For example, attractor models cannot explain or predict the shape and behavior of the attractor landscape itself (e.g., universal and idiosyncratic language categories), they cannot address the limitations on dynamic events that the system can reliably detect (e.g., selecting the relevant effects in auditory perception), and they pose no restrictions on what a valid symbol is in a natural language system [the "symbol grounding problem"; @harnad1990symbol]. 
 
@@ -2695,10 +2457,7 @@ It is therefore pertinent to understand symbols in language systems with respect
 ##		The Universality of Sonority {#sec:projection}
 
 A consistent interest within theoretical phonology concerns the universality of sonority-based principles. An impressive volume of publications devoted to this question can be found in the works of Iris Berent and her colleagues, starting with @berent2007we, and followed by many subsequent studies [e.g., @berent2008language; @berent2012language; @berent2014languagesk; @gomez2014language; @berent2017origins].
-<!-- [^cf-berentslist]  -->
 Berent et al. collected mostly behavioral data from perception tasks, where subjects of various different language backgrounds were found to adhere to the SSP, even when presented with combinations that are not attested in their language. The patterns under Berent's consistent scrutiny are usually limited to a set of initial clusters with an onset rise (e.g., *blif*), an onset plateau (e.g., *bdif*) and an onset fall (e.g., *lbif*). Since /s/-clusters and sonorant plateaus are absent from these studies, Berent's experimental results with SSP-based models are largely compatible with NAP, as the hierarchy *blif* ($\mathit{3}$) $>$ *bdif* ($\mathit{2}$) $>$ *lbif* ($\mathit{0}$) is maintained in the top-down version of NAP (*NAP~td~* model scores in brackets).[^cf-napbucant] 
-
-<!-- [^cf-berentslist]: For example, @berent2008language; @berent2011syllable; @berent2012language; @berent2012universalsk; @berent2013phnological; @berent2014languagesk; @gomez2014language; @zhao2015universalsk; @berent2015role; @lennertz2015onthesonority; @berent2017origins.  -->
 
 [^cf-napbucant]: The bottom-up version of NAP (*NAP~bu~*) cannot make such determinations based on symbolic representations, but it should be expected to generally follow the same trends in the vast majority of cases.
 
@@ -2708,20 +2467,13 @@ The universality of sonority principles thus implies innate knowledge of ordinal
 The interpretation of Berent's findings has been a matter of interest in the literature. Some responses, like @daland2011explaining and @hayes2011interpreting, have argued that the universal phonotactic behaviors that Berent et al. present can be shown to result from speakers' ability to generalize categories and distributions from the attested lexicon, and use analogy and probabilities to predict unattested forms. 
 Such models can successfully apply statistical learning methods based on the lexicon, without a requirement for prior formal knowledge of sonority [e.g., @jurafsky2009speech; @coleman1997stochastic; @vitevitch2004webbasedsk; @hayes2008maximum; @hayes2011interpreting; @bailey2001determinants; @albright2009feature; @futrell2017generative; @jarosz2017inputsk; @mayer2019phonotacticsk; and @mirea2019usingsk]. 
 
-While it is relatively clear that statistical learners reflect top-down inferences, it is perhaps less obvious that 
-<!-- Interestingly,  -->
-connectionist models, such as @goldsmith1992local, @laks1995connectionistsk @smolensky2014optimization and @tupper2012sonoritysk, also seem to be quite compatible with what is considered here as 
-top-down phonology.
-<!-- the symbolic version of NAP.  -->
+While it is relatively clear that statistical learners reflect top-down inferences, it is perhaps less obvious that connectionist models, such as @goldsmith1992local, @laks1995connectionistsk @smolensky2014optimization and @tupper2012sonoritysk, also seem to be quite compatible with what is considered here as top-down phonology.
 Connectionist models can be historically related to an opposition to the classic symbol-based models (see Subsection \@ref(sec:connectionism)). However, the inputs and outputs of these models are expressed in discrete symbols and they are designed to capture generalizations in terms of the weights of connections in the system, which may serve as a good mechanistic description of top-down operations. 
-<!-- Likewise, many other models that successfully describe phonotactic knowledge with statistical machinery, such as the Bayesian models in @wilson2013bayesian; and @wilson2014effects, essentially describe what is considered here to be the top-down mode of the system.  -->
-<!-- which is somewhat removed from the physical and perceptual sources of phonotactic phenomena. -->
 
 In contrast to traditional sonority principles, NAP was designed to be compatible with general cognitive processes and auditory perception, such that no unique assumptions are required for postulating an innate formal knowledge of sonority. 
 Sonority-based patterns in NAP arise from the general cognitive process that underlies the parsing of the speech stream into syllables with a pitch-bearing nucleus (i.e., nucleus competition). This requirement for pitch-bearing units may be explained in evolutionary timescales as the inevitable result of the important role of pitch in speech communication [@pike1945intonationsk; @bolinger1978intonation; @house1990tonal; @cutler1997prosody] and the observation that tune-text integration occurs with syllable-sized units [e.g., @goldsmith1976autosegmental; @liberman1975intonationalsk; @pierrehumbert1980phoneticssk; @ladd2008intonational; @roettger2019tune]. 
 
 The NAP approach appears capable of synthesizing the different views on the origins of universal sonority. The bottom-up model of NAP can explain the universality of sonority as the natural development of communication systems that exploit pitch perception as they shape language systems. The top-down model of NAP is, at the same time, very much in line with statistical phonotactic learners, in which the regularities of language can be deduced from the symbolic abstractions that reflect the speakers' knowledge in stable forms. 
-<!-- Top-down inferences reflect the history of the distribution of recognized symbols as they appear in the lexicon of the ambient language. They only indirectly express the functional aspects that we see in the bottom-up route since they reflect the surface manifestations of the functionally-motivated (bottom-up) dynamics. -->
 
 To conclude, bottom-up NAP combines the innateness claims for formal sonority universals with a more general explanation that is based on the workings of the perceptual and cognitive systems and the evolution of languages as pitch-bearing communication systems. At the same time, top-down NAP is in line with the rationale of statistical learners and the mechanics of connectionist models. These explanations require symbolic interpretation of the signal that abstract from variable dynamic events into stable forms (e.g., consonants, vowels, phonological features) in order to learn and generalize over their distributions.
 
@@ -2731,12 +2483,8 @@ This work suggests a synergy of novel theoretical and methodological approaches 
 The novelties that are proposed here for models of sonority, and more generally, for perception-based models in phonology, will need to amass more supporting evidence from multiple sources in order to be more widely considered, and further developed. 
 We hope that in this paper we laid the foundations for such potential long-term contributions. 
 
-<!-- In a related work, Anonymous (in press) tests sonority models on a diachronic corpus data of Modern Hebrew, which uses general phonemic transcriptions. In such common cases, when linguistic data is already abstracted into stable forms, only the symbolic NAP model is of relevance, and, once again, *NAP~td~* outperformed traditional SSP-based accounts. -->
 We demonstrated how our set of proposals results in a model of sonority that can account for some of the most persistent problems in phonological theory.
-<!-- [^cf-MH]  -->
 Our NAP-based models not only present advantages over traditional sonority models in terms of empirical coverage, they also provide functional explanations as to the source and cause of sonority phenomena, linking sonority to pitch intelligibility at the level of the syllable. 
-
-<!-- [^cf-MH]: In a related work, Anonymous (in press) tested sonority models on a corpus of Modern Hebrew, which uses general phonemic transcriptions. *NAP~td~* was found once again to outperform traditional SSP-based accounts. -->
 
 Furthermore, our dual-route modeling strategy (see Subsection \@ref(sec:complementary)) 
 makes the important distinction between (bottom-up) signal-based inferences and (top-down) symbol-based inferences, thus appropriately predicting the complementary contribution of these two essentially different inference routes of the same linguistic phenomena.
@@ -2751,8 +2499,6 @@ Lastly, this study also provides compelling motivations and strong evidence that
 <!-- (see Anonymous 2018; Anonymous 2019; and Anonymous 2020 for continuous visualization and quantification procedures in intonational phonology using periodic energy). -->
 [see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy].
 
-<!-- Given the above, we believe that the new approaches presented in this paper will be able to deliver many more valuable insights into old and new problems in phonology and linguistic theory. -->
-
 <!-- --- -->
 
 # CRediT authorship contribution statement {-}
@@ -2762,9 +2508,7 @@ Lastly, this study also provides compelling motivations and strong evidence that
 This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language" at the University of Cologne.
 
 <!-- # Note {-} -->
-<!-- All materials associated with the current article are available on *Open Science Framework* (OSF) at -->
-<!-- https://tinyurl.com/5jxmjntx -->
-
+<!-- All the materials associated with this study are available on *Open Science Framework* (OSF) at <https://osf.io/y477r/> -->
 
 
 \newpage
