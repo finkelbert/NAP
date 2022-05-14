@@ -6,7 +6,7 @@ author:
   - name          : "Aviad Albert"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
-    address       : "Department of Linguistics---Phonetics, University of Cologne, Herbert-Lewin-Straße 6, 50931 Cologne, Germany"
+    address       : "Department of Linguistics -- Phonetics, University of Cologne, Herbert-Lewin-Straße 6, 50931 Cologne, Germany"
     email         : "a.albert@uni-koeln.de"
   - name          : "Bruno Nicenboim"
     affiliation   : "2,3"
@@ -20,7 +20,7 @@ affiliation:
     institution   : "Department of Linguistics, University of Potsdam"
 
 authornote: |
-  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were made available during the review process and will remain available (see link: https://osf.io/y477r/).
+  Author Note: In accordance with the Peer Reviewers' Openness Initiative (opennessinitiative.org), all materials and scripts associated with this manuscript were made available during the review process and will remain available at the following OSF repository: https://osf.io/y477r/.
 
 abstract: |
   *Sonority* is a fundamental notion in phonetics and phonology, central to many descriptions of the syllable and 
@@ -36,7 +36,7 @@ abstract: |
   (ii) the incorporation of continuous entities in phonological models of perception; and 
   (iii) the dual-model strategy that separately analyzes symbol-based top-down processes and signal-based bottom-up processes in speech perception.
 
-keywords          : "Sonority; Pitch intelligibility; Periodic energy; Bayesian data analysis; Phonetics and Phonology"
+keywords          : "Sonority; Pitch intelligibility; Periodic energy; Bayesian data analysis; Speech perception; Phonetics and Phonology"
 wordcount         : "X"
 
 bibliography      : ["bibs/r-references.bib", "bibs/methods.bib", "bibs/phon.bib", "bibs/phon_sk.bib"]
@@ -69,6 +69,8 @@ library("papaja")
 ```{r knitush, cache=FALSE,include=FALSE}
 # global chunk options
 knitr::opts_chunk$set(cache=TRUE, autodep=TRUE,fig.path='figure/graphics-', fig.align='center')#, dev="cairo_pdf")
+
+# options(tinytex.clean=TRUE)
 ```
 
 ```{r libraries, message = FALSE}
@@ -1434,10 +1436,7 @@ ggplot(subjects_heb, aes(x="", fill=subject_age)) +
 ### Experiment 1
 
 
-The exploratory pilot study consisted of 12 subjects (two males and ten females), all native German-speaking students from 
-<!-- a major German -->
-the Cologne
-University of Applied Sciences, who volunteered to participate in the study. The experiment was administered in a quiet room at one of the campus buildings of the institution. The mean age of participants in the pilot study was 25 (21--30 range).
+The exploratory pilot study consisted of 12 subjects (two males and ten females), all native German-speaking students from the Cologne University of Applied Sciences, who volunteered to participate in the study. The experiment was administered in a quiet room at one of the campus buildings of the institution. The mean age of participants in the pilot study was 25 (21--30 range).
 
 ### Experiment 2
 
@@ -1479,10 +1478,7 @@ ggplot(subjects_main, aes(x="", fill=subject_education)) +
 
 Fifty-one native German speakers (who did not participate in the exploratory pilot study) participated in Experiment 2, of which `r length(which(subjects_main$subject_german_native=="monolingual"))` were monolingual (the `r length(which(subjects_main$subject_german_native=="multilingual"))` bilingual speakers had either Polish, Low German, or Hebrew as their heritage language). `r length(which(subjects_main$subject_handedness =="right-handed"))` participants were right-handed. See more details on age, gender and education of participants in Figure \@ref(fig:participantsGer).
 
-Of the 51 participants, 34 were students of 
-<!-- a major German university  -->
-the University of Cologne
-who took part in the experiment at the sound-attenuated booth of the phonetics laboratory of the university. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation. 
+Of the 51 participants, 34 were students of the University of Cologne who took part in the experiment at the sound-attenuated booth of the phonetics laboratory of the university. The other 17 participants took part in the experiment at three different locations---all small quiet rooms within private apartments. All subjects were paid five Euros for their participation. 
 
 We excluded the responses from one participant who failed in our participant inclusion criterion requiring accuracy of at least 75% with bi-vocalic fillers. The bi-vocalic fillers of the forms /CəCal/ and /əCCal/ link correct responses to the disyllabic choice ($'2'$), and we expect relatively few monosyllabic choices ($'1'$) in response to stimuli with two separate vowels. 
 Indeed, the overall average accuracy of all 51 participants, when responding to bi-vocalic filler stimuli, was 96%. The excluded participant achieved a much lower accuracy score for bi-vocalic fillers, almost approaching chance-level with 65%.
@@ -2397,8 +2393,7 @@ The main type of exception that is used to explain sibilant-initial clusters is 
 A slightly different theoretical solution with similar results is to assert that */s/-stop* clusters are, in fact, a single complex segment [see, e.g., @fudge1969syllables; @weijer1996segmental] such that, again, there simply is no cluster to account for in theoretical accounts [for an overview, see @goad2016sonority].
 
 Those theoretical tweaks are not without merit as they follow a strong intuition that marginal sibilants are somehow "outside" the scope of syllabic processes. This intuition is supported by evidence of some unique behaviors of marginal sibilants, such as the articulatory kinematic data presented in @hermes2013phonologysk, which finds unique coordination patterns in the articulation of sibilant-initial consonantal gestures in Italian (suggesting that the sibilant is outside the syllable). 
-These findings are however not inconsistent with NAP-based accounts. Periodic energy has 
-prosodic roles to play in carrying the pitch and the overall prosodic strength at the nucleus of the syllable. 
+These findings are however not inconsistent with NAP-based accounts. Periodic energy has prosodic roles to play in carrying the pitch and the overall prosodic strength at the nucleus of the syllable. 
 Marginal voiceless elements can therefore be timed with different considerations in NAP-based accounts. For example, it may be beneficial to prolong duration of marginal voiceless elements to increase their recoverability without the risk of increased nucleus competition. 
 This would, indeed, result in some unique timing patterns of marginal sibilants in complex onsets while still fitting comfortably with the rationale of NAP.
 
@@ -2496,20 +2491,18 @@ Lastly, this study also provides compelling motivations and strong evidence that
 (i) acoustic descriptions of prosodic weight and prosodic *prominence* in terms of periodic energy mass;
 (ii) automatic syllabification procedures based on the smoothed fluctuation rates of the periodic energy curve [useful for a myriad of tasks, including speech rhythmicity studies; see, e.g., @galves2002sonoritysk; @tilsen2013speech; @rasanen2018pre; @lin2020hit]; and
 (iii) improved visualization and analysis of pitch contours in intonation research based on the interaction of the periodic energy and the F0 trajectories 
-<!-- (see Anonymous 2018; Anonymous 2019; and Anonymous 2020 for continuous visualization and quantification procedures in intonational phonology using periodic energy). -->
 [see @albert2018using; @cangemi2019modellingsk; and @albert2020propersk for continuous visualization and quantification procedures in intonational phonology using periodic energy].
 
 <!-- --- -->
 
 # CRediT authorship contribution statement {-}
-**AA**: Conceptualization, Methodology, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision. **BN**: Conceptualization, Methodology, Formal Analysis, Writing - Review & Editing, Visualization.
+**AA**: Conceptualization, Data Curation, Investigation, Methodology, Visualization, Writing - Original Draft, Writing - Review & Editing. **BN**: Conceptualization, Formal Analysis, Methodology, Visualization, Writing - Review & Editing.
 
 # Acknowledgements {-}
-This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language" at the University of Cologne.
+This work was supported by the DAAD (German Academic Exchange Service) and SFB 1252 Collaborative Research Center “Prominence in Language" at the University of Cologne. We thank Carol Espy-Wilson and her colleagues for sharing the APP Detector code with us, and we thank Yair Lakretz and Doron Veltzer for their related technical support. We are also very grateful to Martine Grice, Doris Mücke, Timo B. Roettger, Francesco Cangemi, Simon Wehrle, Evan Gary Cohen, Joanna Rączaszek-Leonardi, Mauricio Milchberg, and two anonymous reviewers for their many insightful comments on earlier drafts of this work.
 
-<!-- # Note {-} -->
-<!-- All the materials associated with this study are available on *Open Science Framework* (OSF) at <https://osf.io/y477r/> -->
-
+# Conflict of Interest {-}
+The authors declare no conflict of interest.
 
 \newpage
 
